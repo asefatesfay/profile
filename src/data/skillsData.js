@@ -884,26 +884,297 @@ export const skillsData = {
       level: 'beginner',
       status: 'in-progress',
       description: 'ML algorithms, model training, AI integration into applications',
-      yearsOfExperience: 1,
+      yearsOfExperience: 0,
       position: { x: 620, y: 650 },
+      learningRoadmap: {
+        totalTopics: 25,
+        completedTopics: 0,
+        currentPhase: 'Introduction',
+        phases: [
+          {
+            id: 'introduction',
+            title: 'Introduction',
+            status: 'planned',
+            estimatedWeeks: 2,
+            topics: [
+              {
+                id: 'what-is-ml-engineer',
+                title: 'What is an ML Engineer',
+                completed: false,
+                resources: ['Articles', 'YouTube videos', 'Job descriptions analysis'],
+                estimatedHours: 4
+              },
+              {
+                id: 'ml-vs-ai-engineer', 
+                title: 'ML Engineer vs AI Engineer',
+                completed: false,
+                resources: ['Comparison articles', 'Career path guides'],
+                estimatedHours: 3
+              },
+              {
+                id: 'skills-responsibilities',
+                title: 'Skills and Responsibilities',
+                completed: false,
+                resources: ['Industry reports', 'Job market analysis'],
+                estimatedHours: 5
+              }
+            ]
+          },
+          {
+            id: 'mathematical-foundations',
+            title: 'Mathematical Foundations',
+            status: 'planned',
+            estimatedWeeks: 8,
+            topics: [
+              {
+                id: 'linear-algebra',
+                title: 'Linear Algebra',
+                completed: false,
+                subtopics: [
+                  'Vectors and vector operations',
+                  'Matrices and matrix operations',
+                  'Eigenvalues and eigenvectors',
+                  'Singular Value Decomposition (SVD)',
+                  'Principal Component Analysis (PCA)'
+                ],
+                resources: ['Khan Academy', '3Blue1Brown videos', 'Linear Algebra textbook'],
+                estimatedHours: 40
+              },
+              {
+                id: 'statistics-probability',
+                title: 'Statistics and Probability',
+                completed: false,
+                subtopics: [
+                  'Descriptive statistics',
+                  'Probability distributions',
+                  'Bayes theorem',
+                  'Hypothesis testing',
+                  'Confidence intervals'
+                ],
+                resources: ['Statistics courses', 'Probability textbooks'],
+                estimatedHours: 35
+              },
+              {
+                id: 'calculus',
+                title: 'Calculus',
+                completed: false,
+                subtopics: [
+                  'Derivatives and partial derivatives',
+                  'Chain rule',
+                  'Gradients and optimization',
+                  'Multivariate calculus'
+                ],
+                resources: ['Calculus courses', 'Khan Academy'],
+                estimatedHours: 30
+              }
+            ]
+          },
+          {
+            id: 'programming-fundamentals',
+            title: 'Programming Fundamentals',
+            status: 'planned',
+            estimatedWeeks: 6,
+            topics: [
+              {
+                id: 'python-basics',
+                title: 'Python for ML',
+                completed: false,
+                subtopics: [
+                  'Python syntax and data structures',
+                  'Object-oriented programming',
+                  'File handling and APIs',
+                  'Error handling and debugging'
+                ],
+                resources: ['Python.org tutorial', 'Real Python', 'Python courses'],
+                estimatedHours: 50
+              },
+              {
+                id: 'data-manipulation',
+                title: 'Data Manipulation Libraries',
+                completed: false,
+                subtopics: [
+                  'NumPy for numerical computing',
+                  'Pandas for data manipulation',
+                  'Matplotlib/Seaborn for visualization',
+                  'Data cleaning and preprocessing'
+                ],
+                resources: ['Pandas documentation', 'NumPy tutorials'],
+                estimatedHours: 40
+              }
+            ]
+          },
+          {
+            id: 'ml-fundamentals',
+            title: 'Machine Learning Fundamentals',
+            status: 'planned',
+            estimatedWeeks: 10,
+            topics: [
+              {
+                id: 'ml-types',
+                title: 'Types of Machine Learning',
+                completed: false,
+                subtopics: [
+                  'Supervised learning',
+                  'Unsupervised learning',
+                  'Reinforcement learning',
+                  'Semi-supervised learning'
+                ],
+                resources: ['ML textbooks', 'Online courses'],
+                estimatedHours: 15
+              },
+              {
+                id: 'supervised-learning',
+                title: 'Supervised Learning Algorithms',
+                completed: false,
+                subtopics: [
+                  'Linear/Logistic regression',
+                  'Decision trees and random forests',
+                  'Support Vector Machines',
+                  'Naive Bayes',
+                  'K-Nearest Neighbors'
+                ],
+                resources: ['Scikit-learn documentation', 'ML courses'],
+                estimatedHours: 60
+              },
+              {
+                id: 'unsupervised-learning',
+                title: 'Unsupervised Learning',
+                completed: false,
+                subtopics: [
+                  'K-means clustering',
+                  'Hierarchical clustering',
+                  'DBSCAN',
+                  'Principal Component Analysis',
+                  'Association rules'
+                ],
+                resources: ['ML textbooks', 'Clustering tutorials'],
+                estimatedHours: 40
+              }
+            ]
+          },
+          {
+            id: 'deep-learning',
+            title: 'Deep Learning',
+            status: 'planned',
+            estimatedWeeks: 12,
+            topics: [
+              {
+                id: 'neural-networks',
+                title: 'Neural Network Fundamentals',
+                completed: false,
+                subtopics: [
+                  'Perceptrons and multilayer networks',
+                  'Backpropagation algorithm',
+                  'Activation functions',
+                  'Loss functions and optimization'
+                ],
+                resources: ['Deep Learning by Ian Goodfellow', 'Neural Networks courses'],
+                estimatedHours: 50
+              },
+              {
+                id: 'cnn',
+                title: 'Convolutional Neural Networks',
+                completed: false,
+                subtopics: [
+                  'Convolution and pooling layers',
+                  'CNN architectures (LeNet, AlexNet, VGG, ResNet)',
+                  'Image classification and object detection',
+                  'Transfer learning'
+                ],
+                resources: ['CNN tutorials', 'Computer Vision courses'],
+                estimatedHours: 45
+              },
+              {
+                id: 'rnn',
+                title: 'Recurrent Neural Networks',
+                completed: false,
+                subtopics: [
+                  'Vanilla RNNs and LSTM',
+                  'GRU networks',
+                  'Sequence-to-sequence models',
+                  'Attention mechanisms'
+                ],
+                resources: ['RNN tutorials', 'NLP courses'],
+                estimatedHours: 40
+              }
+            ]
+          },
+          {
+            id: 'mlops-deployment',
+            title: 'MLOps and Deployment',
+            status: 'planned',
+            estimatedWeeks: 8,
+            topics: [
+              {
+                id: 'model-deployment',
+                title: 'Model Deployment',
+                completed: false,
+                subtopics: [
+                  'REST APIs for ML models',
+                  'Containerization with Docker',
+                  'Cloud deployment (AWS, GCP, Azure)',
+                  'Model serving frameworks'
+                ],
+                resources: ['MLOps courses', 'Deployment tutorials'],
+                estimatedHours: 40
+              },
+              {
+                id: 'monitoring-maintenance',
+                title: 'Model Monitoring and Maintenance',
+                completed: false,
+                subtopics: [
+                  'Model performance monitoring',
+                  'Data drift detection',
+                  'Model versioning',
+                  'A/B testing for models',
+                  'Automated retraining pipelines'
+                ],
+                resources: ['MLOps best practices', 'Monitoring tools documentation'],
+                estimatedHours: 35
+              }
+            ]
+          }
+        ],
+        milestones: [
+          {
+            id: 'first-model',
+            title: 'Build First ML Model',
+            description: 'Complete a simple classification project end-to-end',
+            targetPhase: 'ml-fundamentals',
+            completed: false
+          },
+          {
+            id: 'deep-learning-project',
+            title: 'Deep Learning Project',
+            description: 'Build and train a neural network for image classification',
+            targetPhase: 'deep-learning',
+            completed: false
+          },
+          {
+            id: 'production-deployment',
+            title: 'Deploy Model to Production',
+            description: 'Deploy an ML model with proper monitoring and maintenance',
+            targetPhase: 'mlops-deployment', 
+            completed: false
+          }
+        ],
+        weeklyGoal: {
+          hoursPerWeek: 10,
+          currentWeekHours: 0,
+          targetDate: '2025-12-31'
+        }
+      },
       detailedAccomplishments: [
-        'Built recommendation system using collaborative filtering',
-        'Implemented classification models with scikit-learn',
-        'Created data preprocessing pipelines for ML workflows',
-        'Built REST APIs for model serving and inference',
-        'Implemented model evaluation and validation frameworks',
-        'Created feature engineering pipelines for structured data',
-        'Built MLOps practices with model versioning and monitoring',
-        'Implemented A/B testing for ML model performance',
-        'Created automated model retraining pipelines',
-        'Built integration between ML models and production applications'
+        'Starting ML journey - building foundational knowledge',
+        'Setting up learning environment and tools',
+        'Exploring ML career paths and opportunities'
       ],
-      technologies: ['Python', 'scikit-learn', 'TensorFlow', 'Pandas', 'NumPy', 'MLflow', 'Docker', 'FastAPI'],
+      technologies: ['Python', 'Jupyter Notebooks', 'Git'],
       keyMetrics: [
-        '5+ ML models deployed to production',
-        '20% improvement in recommendation accuracy',
-        '95% model uptime in production',
-        '3+ automated ML pipelines built'
+        '0 models built (goal: 5 by end of year)',
+        '0% of roadmap completed',
+        '10 hours/week study commitment',
+        'Target completion: December 2025'
       ]
     },
 

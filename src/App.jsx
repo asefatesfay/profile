@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Roadmap from './components/Roadmap';
+import LearningRoadmap from './components/LearningRoadmap';
 import { skillsData, personalInfo } from './data/skillsData';
-import { BarChart3, Map, User, Eye, EyeOff } from 'lucide-react';
+import { BarChart3, Map, User, Eye, EyeOff, BookOpen } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState('roadmap');
   const [showStats, setShowStats] = useState(true);
+  const [selectedSkillForRoadmap, setSelectedSkillForRoadmap] = useState(null);
+
+  // Find the Machine Learning skill
+  const mlSkill = skillsData.skills.find(skill => skill.id === 'machine-learning');
 
   const getSkillStats = () => {
     const total = skillsData.skills.length;
@@ -73,6 +78,20 @@ function App() {
             >
               <User size={18} />
               Profile Overview
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('ml-roadmap')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'ml-roadmap' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <BookOpen size={18} />
+              ML Roadmap
             </motion.button>
           </div>
           
@@ -302,6 +321,19 @@ function App() {
                   </div>
                 </div>
               </div>
+            </motion.div>
+          )}
+
+          {currentView === 'ml-roadmap' && mlSkill && (
+            <motion.div
+              key="ml-roadmap"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+              className="p-6"
+            >
+              <LearningRoadmap skill={mlSkill} />
             </motion.div>
           )}
         </AnimatePresence>

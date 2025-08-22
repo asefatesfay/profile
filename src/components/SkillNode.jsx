@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Handle, Position } from 'reactflow';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Clock, Circle, Star, Award, TrendingUp, Users, Code } from 'lucide-react';
+import { CheckCircle, Clock, Circle, Award, TrendingUp, Users, Code, BookOpen } from 'lucide-react';
 
 const SkillNode = ({ data }) => {
   const { skill, activeTooltip, setActiveTooltip } = data;
@@ -143,8 +143,7 @@ const SkillNode = ({ data }) => {
           </div>
           {skill.yearsOfExperience > 0 && (
             <div className="flex items-center gap-1">
-              <Star className="w-3 h-3 text-yellow-500" />
-              <span className="text-xs text-gray-600">{skill.yearsOfExperience}y</span>
+              <span className="text-xs text-gray-600">{skill.yearsOfExperience}y exp</span>
             </div>
           )}
         </div>
@@ -152,6 +151,12 @@ const SkillNode = ({ data }) => {
         {/* Skill Title */}
         <div className="font-semibold text-gray-800 text-sm mb-2">
           {skill.title}
+          {skill.learningRoadmap && (
+            <div className="flex items-center gap-1 mt-1">
+              <BookOpen className="w-3 h-3 text-blue-500" />
+              <span className="text-xs text-blue-500 font-medium">Learning Roadmap Available</span>
+            </div>
+          )}
         </div>
         
         {/* Description (truncated) */}
