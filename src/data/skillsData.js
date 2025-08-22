@@ -92,31 +92,51 @@ export const skillsData = {
           title: 'React Official Documentation',
           url: 'https://react.dev/',
           type: 'documentation',
-          description: 'The best starting point - comprehensive and up-to-date'
+          description: 'The best starting point - comprehensive and up-to-date',
+          difficulty: 'beginner',
+          timeToComplete: '3-4 hours',
+          rating: 4.9,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'React Course by Corey Schafer',
           url: 'https://www.youtube.com/playlist?list=PL-osiE80TeTBb0w4k4GowjuOJWa5R5Z9l',
           type: 'youtube',
-          description: 'Excellent beginner to advanced React tutorials'
+          description: 'Excellent beginner to advanced React tutorials',
+          difficulty: 'beginner',
+          timeToComplete: '8-10 hours',
+          rating: 4.7,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'freeCodeCamp React Course',
           url: 'https://www.youtube.com/watch?v=4UZrsTqkcW4',
           type: 'youtube',
-          description: '10+ hour comprehensive React course'
+          description: '10+ hour comprehensive React course',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '12 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'React Hooks by Ben Awad',
           url: 'https://www.youtube.com/playlist?list=PLN3n1USn4xlmyw3ebYuZmGp60mcENitdM',
           type: 'youtube',
-          description: 'Deep dive into React Hooks'
+          description: 'Deep dive into React Hooks',
+          difficulty: 'intermediate',
+          timeToComplete: '4-5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-09-30'
         },
         {
           title: 'Epic React by Kent C. Dodds (Free Articles)',
           url: 'https://kentcdodds.com/blog/?q=react',
           type: 'blog',
-          description: 'High-quality React articles and patterns'
+          description: 'High-quality React articles and patterns',
+          difficulty: 'advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.9,
+          lastUpdated: '2024-12-10'
         }
       ]
     },
@@ -153,31 +173,51 @@ export const skillsData = {
           title: 'Next.js Official Documentation',
           url: 'https://nextjs.org/docs',
           type: 'documentation',
-          description: 'Comprehensive docs with examples and best practices'
+          description: 'Comprehensive docs with examples and best practices',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Next.js by Traversy Media',
           url: 'https://www.youtube.com/watch?v=mTz0GXj8NN0',
           type: 'youtube',
-          description: 'Complete Next.js crash course'
+          description: 'Complete Next.js crash course',
+          difficulty: 'beginner',
+          timeToComplete: '1.5 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Next.js Tutorial by The Net Ninja',
           url: 'https://www.youtube.com/playlist?list=PL4cUxeGkcC9g9gP2onazU5-2M-AzA8eBw',
           type: 'youtube',
-          description: 'Step-by-step Next.js tutorial series'
+          description: 'Step-by-step Next.js tutorial series',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-20'
         },
         {
           title: 'Next.js Examples Repository',
           url: 'https://github.com/vercel/next.js/tree/canary/examples',
           type: 'github',
-          description: 'Official examples for every Next.js feature'
+          description: 'Official examples for every Next.js feature',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.5,
+          lastUpdated: '2024-12-10'
         },
         {
           title: 'Next.js Learn Course',
           url: 'https://nextjs.org/learn',
           type: 'course',
-          description: 'Free interactive course by Vercel'
+          description: 'Free interactive course by Vercel',
+          difficulty: 'beginner',
+          timeToComplete: '8-10 hours',
+          rating: 4.9,
+          lastUpdated: '2024-11-30'
         }
       ]
     },
@@ -214,31 +254,51 @@ export const skillsData = {
           title: 'TypeScript Official Handbook',
           url: 'https://www.typescriptlang.org/docs/',
           type: 'documentation',
-          description: 'The definitive guide to TypeScript'
+          description: 'The definitive guide to TypeScript',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.9,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'TypeScript Course by Maximilian Schwarzmüller',
           url: 'https://www.youtube.com/watch?v=BwuLxPH8IDs',
           type: 'youtube',
-          description: 'Complete TypeScript course from basics to advanced'
+          description: 'Complete TypeScript course from basics to advanced',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '3 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'TypeScript Deep Dive',
           url: 'https://basarat.gitbook.io/typescript/',
           type: 'book',
-          description: 'Free online book covering TypeScript in depth'
+          description: 'Free online book covering TypeScript in depth',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '10-12 hours',
+          rating: 4.8,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'Execute Program TypeScript Course',
           url: 'https://www.executeprogram.com/courses/typescript',
           type: 'course',
-          description: 'Interactive TypeScript exercises (free tier available)'
+          description: 'Interactive TypeScript exercises (free tier available)',
+          difficulty: 'intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Type Challenges',
           url: 'https://github.com/type-challenges/type-challenges',
           type: 'github',
-          description: 'Collection of TypeScript type challenges'
+          description: 'Collection of TypeScript type challenges',
+          difficulty: 'advanced',
+          timeToComplete: '15-20 hours',
+          rating: 4.5,
+          lastUpdated: '2024-12-05'
         }
       ]
     },
@@ -277,37 +337,61 @@ export const skillsData = {
           title: 'Node.js Official Documentation',
           url: 'https://nodejs.org/docs/',
           type: 'documentation',
-          description: 'Comprehensive official docs with API references and guides'
+          description: 'Comprehensive official docs with API references and guides',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '5-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Node.js with TypeScript Tutorial by Academind',
           url: 'https://www.youtube.com/watch?v=1UcLoS0gUO0',
           type: 'youtube',
-          description: 'Complete Node.js + TypeScript setup and development guide'
+          description: 'Complete Node.js + TypeScript setup and development guide',
+          difficulty: 'intermediate',
+          timeToComplete: '2 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Express.js + TypeScript Tutorial by Ben Awad',
           url: 'https://www.youtube.com/watch?v=H91aqUHn8sE',
           type: 'youtube',
-          description: 'Building REST APIs with Express.js and TypeScript'
+          description: 'Building REST APIs with Express.js and TypeScript',
+          difficulty: 'intermediate',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-20'
         },
         {
           title: 'Node.js TypeScript Starter by Microsoft',
           url: 'https://github.com/microsoft/TypeScript-Node-Starter',
           type: 'github',
-          description: 'Production-ready Node.js + TypeScript starter template'
+          description: 'Production-ready Node.js + TypeScript starter template',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Node.js Best Practices by Yoni Goldberg',
           url: 'https://github.com/goldbergyoni/nodebestpractices',
           type: 'github',
-          description: 'Comprehensive Node.js best practices guide (80+ practices)'
+          description: 'Comprehensive Node.js best practices guide (80+ practices)',
+          difficulty: 'advanced',
+          timeToComplete: '8-10 hours',
+          rating: 4.9,
+          lastUpdated: '2024-12-10'
         },
         {
           title: 'Fastify TypeScript Documentation',
           url: 'https://www.fastify.io/docs/latest/TypeScript/',
           type: 'documentation',
-          description: 'Fast Node.js framework with first-class TypeScript support'
+          description: 'Fast Node.js framework with first-class TypeScript support',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         }
       ]
     },
@@ -344,25 +428,41 @@ export const skillsData = {
           title: 'Python Official Documentation',
           url: 'https://docs.python.org/3/',
           type: 'documentation',
-          description: 'Comprehensive Python documentation and tutorial'
+          description: 'Comprehensive Python documentation and tutorial',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Python Tutorial by Corey Schafer',
           url: 'https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU',
           type: 'youtube',
-          description: 'Complete Python tutorial series covering all aspects'
+          description: 'Complete Python tutorial series covering all aspects',
+          difficulty: 'beginner',
+          timeToComplete: '12-15 hours',
+          rating: 4.9,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Automate the Boring Stuff with Python',
           url: 'https://automatetheboringstuff.com/',
           type: 'tutorial',
-          description: 'Free online book for practical Python programming'
+          description: 'Free online book for practical Python programming',
+          difficulty: 'beginner',
+          timeToComplete: '10-12 hours',
+          rating: 4.7,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Python for Everybody by University of Michigan',
           url: 'https://www.youtube.com/playlist?list=PLlRFEj9H3Oj7Bp8-DfGpOZPiJ0YGTBb_k',
           type: 'youtube',
-          description: 'University-level Python course for beginners'
+          description: 'University-level Python course for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '15-20 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Real Python Tutorials',
@@ -405,37 +505,61 @@ export const skillsData = {
           title: 'Go Official Documentation',
           url: 'https://go.dev/doc/',
           type: 'documentation',
-          description: 'Official Go documentation and language specification'
+          description: 'Official Go documentation and language specification',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Go Web Development by TechWorld with Nana',
           url: 'https://www.youtube.com/watch?v=yyUHQIec83I',
           type: 'youtube',
-          description: 'Building web applications with Go'
+          description: 'Building web applications with Go',
+          difficulty: 'intermediate',
+          timeToComplete: '2.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Gin Web Framework Tutorial',
           url: 'https://gin-gonic.com/docs/',
           type: 'documentation',
-          description: 'Official Gin framework documentation and examples'
+          description: 'Official Gin framework documentation and examples',
+          difficulty: 'intermediate',
+          timeToComplete: '4-5 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Go Fiber Framework Tutorial by TutorialEdge',
           url: 'https://tutorialedge.net/golang/basic-rest-api-go-fiber/',
           type: 'tutorial',
-          description: 'Building REST APIs with Go Fiber framework'
+          description: 'Building REST APIs with Go Fiber framework',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-25'
         },
         {
           title: 'gRPC with Go Tutorial by TutorialEdge',
           url: 'https://tutorialedge.net/golang/go-grpc-beginners-tutorial/',
           type: 'tutorial',
-          description: 'Building gRPC services with Go'
+          description: 'Building gRPC services with Go',
+          difficulty: 'advanced',
+          timeToComplete: '5-6 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Go Concurrency Patterns by Google',
           url: 'https://www.youtube.com/watch?v=f6kdp27TYZs',
           type: 'youtube',
-          description: 'Advanced Go concurrency patterns and best practices'
+          description: 'Advanced Go concurrency patterns and best practices',
+          difficulty: 'advanced',
+          timeToComplete: '1 hour',
+          rating: 4.8,
+          lastUpdated: '2024-09-30'
         }
       ]
     },
@@ -472,37 +596,61 @@ export const skillsData = {
           title: 'Spring Boot Official Documentation',
           url: 'https://spring.io/projects/spring-boot',
           type: 'documentation',
-          description: 'Official Spring Boot documentation and guides'
+          description: 'Official Spring Boot documentation and guides',
+          difficulty: 'intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Spring Boot Tutorial by Java Brains',
           url: 'https://www.youtube.com/playlist?list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x',
           type: 'youtube',
-          description: 'Comprehensive Spring Boot tutorial series'
+          description: 'Comprehensive Spring Boot tutorial series',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Spring WebFlux Tutorial by Dan Vega',
           url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
           type: 'youtube',
-          description: 'Reactive programming with Spring WebFlux'
+          description: 'Reactive programming with Spring WebFlux',
+          difficulty: 'advanced',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Spring Security Tutorial by Java Brains',
           url: 'https://www.youtube.com/playlist?list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE',
           type: 'youtube',
-          description: 'Complete Spring Security tutorial series'
+          description: 'Complete Spring Security tutorial series',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Spring Boot Microservices by Programming Techie',
           url: 'https://www.youtube.com/playlist?list=PLSVW22jAG8pBnhAdq9S8BpLnZ0_jVBj0c',
           type: 'youtube',
-          description: 'Building microservices with Spring Boot'
+          description: 'Building microservices with Spring Boot',
+          difficulty: 'advanced',
+          timeToComplete: '10-12 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Spring Data JPA Tutorial by Amigoscode',
           url: 'https://www.youtube.com/watch?v=8SGI_XS5OPw',
           type: 'youtube',
-          description: 'Complete Spring Data JPA and Hibernate tutorial'
+          description: 'Complete Spring Data JPA and Hibernate tutorial',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-20'
         }
       ]
     },
@@ -539,31 +687,51 @@ export const skillsData = {
           title: 'Microsoft C# Documentation',
           url: 'https://docs.microsoft.com/en-us/dotnet/csharp/',
           type: 'documentation',
-          description: 'Official C# and .NET documentation'
+          description: 'Official C# and .NET documentation',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'C# Tutorial by Mosh Hamedani',
           url: 'https://www.youtube.com/watch?v=gfkTfcpWqAY',
           type: 'youtube',
-          description: 'Complete C# tutorial for beginners'
+          description: 'Complete C# tutorial for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '6 hours',
+          rating: 4.7,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'ASP.NET Core Tutorial by kudvenkat',
           url: 'https://www.youtube.com/playlist?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU',
           type: 'youtube',
-          description: 'Comprehensive ASP.NET Core tutorial series'
+          description: 'Comprehensive ASP.NET Core tutorial series',
+          difficulty: 'intermediate',
+          timeToComplete: '12-15 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Microsoft Learn - C#',
           url: 'https://docs.microsoft.com/en-us/learn/paths/csharp-first-steps/',
           type: 'tutorial',
-          description: 'Interactive C# learning path by Microsoft'
+          description: 'Interactive C# learning path by Microsoft',
+          difficulty: 'beginner',
+          timeToComplete: '10-12 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'freeCodeCamp C# Course',
           url: 'https://www.youtube.com/watch?v=GhQdlIFylQ8',
           type: 'youtube',
-          description: '4-hour comprehensive C# tutorial'
+          description: '4-hour comprehensive C# tutorial',
+          difficulty: 'beginner',
+          timeToComplete: '4 hours',
+          rating: 4.5,
+          lastUpdated: '2024-09-30'
         }
       ]
     },
@@ -600,37 +768,61 @@ export const skillsData = {
           title: 'Spring WebFlux Official Documentation',
           url: 'https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html',
           type: 'documentation',
-          description: 'Official Spring WebFlux documentation and guides'
+          description: 'Official Spring WebFlux documentation and guides',
+          difficulty: 'advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Reactive Programming with Spring WebFlux by Dan Vega',
           url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
           type: 'youtube',
-          description: 'Complete reactive programming tutorial with Spring WebFlux'
+          description: 'Complete reactive programming tutorial with Spring WebFlux',
+          difficulty: 'advanced',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Project Reactor Documentation',
           url: 'https://projectreactor.io/learn',
           type: 'documentation',
-          description: 'Reactive streams library documentation and examples'
+          description: 'Reactive streams library documentation and examples',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '8-10 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Spring Boot WebFlux Tutorial by Amigoscode',
           url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
           type: 'youtube',
-          description: 'Building reactive REST APIs with Spring Boot and WebFlux'
+          description: 'Building reactive REST APIs with Spring Boot and WebFlux',
+          difficulty: 'advanced',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'Reactive Programming Patterns',
           url: 'https://github.com/reactor/reactor-core/tree/main/docs',
           type: 'github',
-          description: 'Reactive programming patterns and best practices'
+          description: 'Reactive programming patterns and best practices',
+          difficulty: 'advanced',
+          timeToComplete: '4-5 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'R2DBC Tutorial by Spring',
           url: 'https://spring.io/guides/gs/accessing-data-r2dbc/',
           type: 'tutorial',
-          description: 'Reactive database access with R2DBC'
+          description: 'Reactive database access with R2DBC',
+          difficulty: 'advanced',
+          timeToComplete: '2-3 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         }
       ]
     },
@@ -669,31 +861,51 @@ export const skillsData = {
           title: 'High Scalability Blog',
           url: 'http://highscalability.com/',
           type: 'blog',
-          description: 'Real-world system design case studies and patterns'
+          description: 'Real-world system design case studies and patterns',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '10-15 hours',
+          rating: 4.7,
+          lastUpdated: '2024-12-10'
         },
         {
           title: 'System Design Interview by Gaurav Sen',
           url: 'https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX',
           type: 'youtube',
-          description: 'System design concepts and interview preparation'
+          description: 'System design concepts and interview preparation',
+          difficulty: 'intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Designing Data-Intensive Applications',
           url: 'https://dataintensive.net/',
           type: 'book',
-          description: 'Free chapters on distributed systems concepts'
+          description: 'Free chapters on distributed systems concepts',
+          difficulty: 'advanced',
+          timeToComplete: '20-25 hours',
+          rating: 4.9,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'AWS Architecture Center',
           url: 'https://aws.amazon.com/architecture/',
           type: 'documentation',
-          description: 'Cloud architecture patterns and best practices'
+          description: 'Cloud architecture patterns and best practices',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.5,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'System Design Primer',
           url: 'https://github.com/donnemartin/system-design-primer',
           type: 'github',
-          description: 'Comprehensive system design resource on GitHub'
+          description: 'Comprehensive system design resource on GitHub',
+          difficulty: 'intermediate',
+          timeToComplete: '15-20 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-30'
         }
       ]
     },
@@ -854,37 +1066,61 @@ export const skillsData = {
           title: 'AWS Official Documentation',
           url: 'https://docs.aws.amazon.com/',
           type: 'documentation',
-          description: 'Comprehensive AWS service documentation and guides'
+          description: 'Comprehensive AWS service documentation and guides',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '10-15 hours',
+          rating: 4.7,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'AWS Free Tier Tutorial by freeCodeCamp',
           url: 'https://www.youtube.com/watch?v=3hLmDS179YE',
           type: 'youtube',
-          description: '4-hour AWS tutorial covering essential services'
+          description: '4-hour AWS tutorial covering essential services',
+          difficulty: 'beginner',
+          timeToComplete: '4 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'AWS Solutions Architect by Stephane Maarek',
           url: 'https://www.youtube.com/playlist?list=PLt1SIbA8guusxiHz9bveV7EAr4l-SJnRy',
           type: 'youtube',
-          description: 'Complete AWS certification course (free parts)'
+          description: 'Complete AWS certification course (free parts)',
+          difficulty: 'intermediate',
+          timeToComplete: '15-20 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'AWS Serverless Tutorial by Complete Coding',
           url: 'https://www.youtube.com/watch?v=71cd5XerKss',
           type: 'youtube',
-          description: 'Building serverless applications with AWS Lambda'
+          description: 'Building serverless applications with AWS Lambda',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-20'
         },
         {
           title: 'AWS Workshop Studio',
           url: 'https://catalog.workshops.aws/',
           type: 'workshop',
-          description: 'Free hands-on AWS workshops and tutorials'
+          description: 'Free hands-on AWS workshops and tutorials',
+          difficulty: 'intermediate',
+          timeToComplete: '2-4 hours each',
+          rating: 4.7,
+          lastUpdated: '2024-12-05'
         },
         {
           title: 'AWS Architecture Patterns',
           url: 'https://aws.amazon.com/architecture/',
           type: 'documentation',
-          description: 'Real-world AWS architecture patterns and case studies'
+          description: 'Real-world AWS architecture patterns and case studies',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-30'
         }
       ]
     },
@@ -921,37 +1157,61 @@ export const skillsData = {
           title: 'Terraform Official Documentation',
           url: 'https://developer.hashicorp.com/terraform/docs',
           type: 'documentation',
-          description: 'Official Terraform documentation and tutorials'
+          description: 'Official Terraform documentation and tutorials',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Terraform Course by freeCodeCamp',
           url: 'https://www.youtube.com/watch?v=SLB_c_ayRMo',
           type: 'youtube',
-          description: 'Complete Terraform course for beginners'
+          description: 'Complete Terraform course for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '3 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Terraform AWS Tutorial by TechWorld with Nana',
           url: 'https://www.youtube.com/watch?v=iRaai1IBlB0',
           type: 'youtube',
-          description: 'Practical Terraform with AWS tutorial'
+          description: 'Practical Terraform with AWS tutorial',
+          difficulty: 'intermediate',
+          timeToComplete: '2.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Terraform Best Practices by Anton Babenko',
           url: 'https://www.terraform-best-practices.com/',
           type: 'website',
-          description: 'Comprehensive Terraform best practices guide'
+          description: 'Comprehensive Terraform best practices guide',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '4-5 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Terraform Weekly Newsletter Archive',
           url: 'https://www.terraform.io/community/newsletter',
           type: 'newsletter',
-          description: 'Weekly Terraform tips, tutorials, and news'
+          description: 'Weekly Terraform tips, tutorials, and news',
+          difficulty: 'intermediate',
+          timeToComplete: '1 hour/week',
+          rating: 4.4,
+          lastUpdated: '2024-12-10'
         },
         {
           title: 'Terraform Module Examples',
           url: 'https://github.com/terraform-aws-modules',
           type: 'github',
-          description: 'Production-ready Terraform modules for AWS'
+          description: 'Production-ready Terraform modules for AWS',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '6-8 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-30'
         }
       ]
     },
@@ -990,31 +1250,51 @@ export const skillsData = {
           title: 'Docker Official Documentation',
           url: 'https://docs.docker.com/',
           type: 'documentation',
-          description: 'Comprehensive Docker documentation and guides'
+          description: 'Comprehensive Docker documentation and guides',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Docker Tutorial by Programming with Mosh',
           url: 'https://www.youtube.com/watch?v=pTFZFxd4hOI',
           type: 'youtube',
-          description: 'Complete Docker tutorial for beginners'
+          description: 'Complete Docker tutorial for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '1 hour',
+          rating: 4.7,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'Docker Crash Course by Traversy Media',
           url: 'https://www.youtube.com/watch?v=fqMOX6JJhGo',
           type: 'youtube',
-          description: 'Docker fundamentals and practical examples'
+          description: 'Docker fundamentals and practical examples',
+          difficulty: 'beginner',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'Play with Docker',
           url: 'https://labs.play-with-docker.com/',
           type: 'tutorial',
-          description: 'Free online Docker playground and tutorials'
+          description: 'Free online Docker playground and tutorials',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Docker Best Practices by Docker',
           url: 'https://docs.docker.com/develop/dev-best-practices/',
           type: 'documentation',
-          description: 'Official Docker development best practices'
+          description: 'Official Docker development best practices',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         }
       ]
     },
