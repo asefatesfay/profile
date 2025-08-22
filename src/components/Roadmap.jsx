@@ -156,11 +156,12 @@ const Roadmap = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
+      style={{ paddingTop: '80px' }}
     >
       {/* Tab Navigation */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl">
+      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl mb-4">
         <motion.div 
-          className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200"
+          className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200 mb-4"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -277,7 +278,8 @@ const Roadmap = () => {
         </motion.div>
       </div>
 
-      <ReactFlow
+      <div className="h-full">
+        <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -296,6 +298,7 @@ const Roadmap = () => {
         maxZoom={1.5}
         defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
         className="bg-transparent"
+        style={{ height: 'calc(100vh - 80px)' }}
         proOptions={{ hideAttribution: true }}
         key={activeTab} // Force re-render and fit view on tab change
       >
@@ -325,6 +328,7 @@ const Roadmap = () => {
           maskColor="rgba(255, 255, 255, 0.2)"
         />
       </ReactFlow>
+      </div>
     </motion.div>
   );
 };
