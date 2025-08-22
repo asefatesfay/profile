@@ -3,8 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Roadmap from './components/Roadmap';
 import LearningRoadmap from './components/LearningRoadmap';
+import Projects from './components/Projects';
+import Timeline from './components/Timeline';
+import SkillsAssessment from './components/SkillsAssessment';
+import ResourceHub from './components/ResourceHub';
+import Achievements from './components/Achievements';
+import Goals from './components/Goals';
 import { skillsData, personalInfo } from './data/skillsData';
-import { BarChart3, Map, User, Eye, EyeOff, BookOpen } from 'lucide-react';
+import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState('roadmap');
@@ -92,6 +98,90 @@ function App() {
             >
               <BookOpen size={18} />
               ML Roadmap
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('projects')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'projects' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Code size={18} />
+              Projects
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('timeline')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'timeline' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Clock size={18} />
+              Timeline
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('assessment')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'assessment' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Target size={18} />
+              Assessment
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('resources')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'resources' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Bookmark size={18} />
+              Resources
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('achievements')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'achievements' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Trophy size={18} />
+              Achievements
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('goals')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'goals' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Crosshair size={18} />
+              Goals
             </motion.button>
           </div>
           
@@ -334,6 +424,78 @@ function App() {
               className="p-6"
             >
               <LearningRoadmap skill={mlSkill} />
+            </motion.div>
+          )}
+
+          {currentView === 'projects' && (
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Projects />
+            </motion.div>
+          )}
+
+          {currentView === 'timeline' && (
+            <motion.div
+              key="timeline"
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Timeline />
+            </motion.div>
+          )}
+
+          {currentView === 'assessment' && (
+            <motion.div
+              key="assessment"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+            >
+              <SkillsAssessment />
+            </motion.div>
+          )}
+
+          {currentView === 'resources' && (
+            <motion.div
+              key="resources"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ResourceHub />
+            </motion.div>
+          )}
+
+          {currentView === 'achievements' && (
+            <motion.div
+              key="achievements"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Achievements />
+            </motion.div>
+          )}
+
+          {currentView === 'goals' && (
+            <motion.div
+              key="goals"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Goals />
             </motion.div>
           )}
         </AnimatePresence>

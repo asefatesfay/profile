@@ -2,12 +2,23 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Handle, Position } from 'reactflow';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Clock, Circle, Award, TrendingUp, Users, Code, BookOpen } from 'lucide-react';
+import { CheckCircle, Clock, Circle, Award, TrendingUp, Users, Code, BookOpen, ExternalLink } from 'lucide-react';
+import { skillsData } from '../data/skillsData';
 
 const SkillNode = ({ data }) => {
   const { skill, activeTooltip, setActiveTooltip } = data;
   const tooltipRef = useRef(null);
   const showDetailedTooltip = activeTooltip === skill.id;
+  
+  // Get related projects for this skill
+  const getRelatedProjects = () => {
+    if (!skillsData.projects) return [];
+    return skillsData.projects.filter(project => 
+      project.skillsUsed.includes(skill.id)
+    ).slice(0, 3); // Show max 3 related projects
+  };
+  
+  const relatedProjects = getRelatedProjects();
   
   // Debug logging
   React.useEffect(() => {
@@ -292,7 +303,7 @@ const SkillNode = ({ data }) => {
 
                 {/* Key Metrics */}
                 {skill.keyMetrics && (
-                  <div>
+                  <div className="mb-5">
                     <div className="flex items-center gap-2 mb-3">
                       <Users className="w-4 h-4 text-purple-400 flex-shrink-0" />
                       <span className="font-semibold text-sm">Impact & Metrics</span>
@@ -305,6 +316,83 @@ const SkillNode = ({ data }) => {
                         </li>
                       ))}
                     </ul>
+                  </div>
+                )}
+
+                {/* Related Projects */}
+                {relatedProjects.length > 0 && (
+                  <div className="mb-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <BookOpen className="w-4 h-4 text-orange-400 flex-shrink-0" />
+                      <span className="font-semibold text-sm">Related Projects</span>
+                    </div>
+                    <div className="space-y-2">
+                      {relatedProjects.map((project, index) => (
+                        <div key={index} className="bg-gray-800/50 rounded-lg p-3 border border-gray-700/50">
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <h4 className="text-sm font-medium text-orange-300">{project.title}</h4>
+                            <div className="flex gap-1">
+                              {project.githubUrl && (
+                                <a
+                                  href={project.githubUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-gray-400 hover:text-white transition-colors"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <ExternalLink className="w-3 h-3" />
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-400 mb-2 line-clamp-2">{project.description}</p>
+                          <div className="flex items-center gap-2 text-xs text-gray-500">
+                            <span className="bg-orange-600/20 text-orange-300 px-2 py-0.5 rounded border border-orange-600/30">
+                              {project.difficulty}
+                            </span>
+                            <span>{project.duration}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Free Learning Resources */}
+                {skill.freeResources && skill.freeResources.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <BookOpen className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      <span className="font-semibold text-sm">Free Learning Resources</span>
+                    </div>
+                    <div className="space-y-2">
+                      {skill.freeResources.map((resource, index) => (
+                        <a
+                          key={index}
+                          href={resource.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block bg-gray-800/50 rounded-lg p-3 border border-gray-700/50 hover:border-emerald-600/50 hover:bg-gray-800/70 transition-all cursor-pointer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-2">
+                            <h4 className="text-sm font-medium text-emerald-300 hover:text-emerald-200 transition-colors">
+                              {resource.title}
+                            </h4>
+                            <div className="flex gap-1">
+                              <ExternalLink className="w-3 h-3 text-gray-400 hover:text-emerald-300 transition-colors flex-shrink-0" />
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-400 mb-2">{resource.description}</p>
+                          <div className="flex items-center gap-2 text-xs">
+                            <span className="bg-emerald-600/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-600/30 capitalize">
+                              {resource.type}
+                            </span>
+                            <span className="text-emerald-400 font-medium">FREE</span>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -327,6 +415,11 @@ const SkillNode = ({ data }) => {
                 <div className="text-gray-300 mt-1">{skill.description}</div>
                 {skill.yearsOfExperience > 0 && (
                   <div className="text-yellow-300 mt-1">{skill.yearsOfExperience} years experience</div>
+                )}
+                {skill.freeResources && skill.freeResources.length > 0 && (
+                  <div className="text-emerald-300 mt-1">
+                    🎓 {skill.freeResources.length} free learning resources available
+                  </div>
                 )}
               </div>
               <div className={tooltipPositions.arrowClass}></div>

@@ -86,6 +86,38 @@ export const skillsData = {
         '60% code duplication reduction',
         '40% bundle size optimization',
         '99.9% component test coverage'
+      ],
+      freeResources: [
+        {
+          title: 'React Official Documentation',
+          url: 'https://react.dev/',
+          type: 'documentation',
+          description: 'The best starting point - comprehensive and up-to-date'
+        },
+        {
+          title: 'React Course by Corey Schafer',
+          url: 'https://www.youtube.com/playlist?list=PL-osiE80TeTBb0w4k4GowjuOJWa5R5Z9l',
+          type: 'youtube',
+          description: 'Excellent beginner to advanced React tutorials'
+        },
+        {
+          title: 'freeCodeCamp React Course',
+          url: 'https://www.youtube.com/watch?v=4UZrsTqkcW4',
+          type: 'youtube',
+          description: '10+ hour comprehensive React course'
+        },
+        {
+          title: 'React Hooks by Ben Awad',
+          url: 'https://www.youtube.com/playlist?list=PLN3n1USn4xlmyw3ebYuZmGp60mcENitdM',
+          type: 'youtube',
+          description: 'Deep dive into React Hooks'
+        },
+        {
+          title: 'Epic React by Kent C. Dodds (Free Articles)',
+          url: 'https://kentcdodds.com/blog/?q=react',
+          type: 'blog',
+          description: 'High-quality React articles and patterns'
+        }
       ]
     },
     {
@@ -115,6 +147,38 @@ export const skillsData = {
         '95+ Lighthouse performance score',
         '10K+ API requests per minute',
         '12 languages supported'
+      ],
+      freeResources: [
+        {
+          title: 'Next.js Official Documentation',
+          url: 'https://nextjs.org/docs',
+          type: 'documentation',
+          description: 'Comprehensive docs with examples and best practices'
+        },
+        {
+          title: 'Next.js by Traversy Media',
+          url: 'https://www.youtube.com/watch?v=mTz0GXj8NN0',
+          type: 'youtube',
+          description: 'Complete Next.js crash course'
+        },
+        {
+          title: 'Next.js Tutorial by The Net Ninja',
+          url: 'https://www.youtube.com/playlist?list=PL4cUxeGkcC9g9gP2onazU5-2M-AzA8eBw',
+          type: 'youtube',
+          description: 'Step-by-step Next.js tutorial series'
+        },
+        {
+          title: 'Next.js Examples Repository',
+          url: 'https://github.com/vercel/next.js/tree/canary/examples',
+          type: 'github',
+          description: 'Official examples for every Next.js feature'
+        },
+        {
+          title: 'Next.js Learn Course',
+          url: 'https://nextjs.org/learn',
+          type: 'course',
+          description: 'Free interactive course by Vercel'
+        }
       ]
     },
     {
@@ -144,6 +208,38 @@ export const skillsData = {
         '50% boilerplate reduction',
         '90% reduction in type-related bugs',
         '15+ microservices with strict typing'
+      ],
+      freeResources: [
+        {
+          title: 'TypeScript Official Handbook',
+          url: 'https://www.typescriptlang.org/docs/',
+          type: 'documentation',
+          description: 'The definitive guide to TypeScript'
+        },
+        {
+          title: 'TypeScript Course by Maximilian Schwarzmüller',
+          url: 'https://www.youtube.com/watch?v=BwuLxPH8IDs',
+          type: 'youtube',
+          description: 'Complete TypeScript course from basics to advanced'
+        },
+        {
+          title: 'TypeScript Deep Dive',
+          url: 'https://basarat.gitbook.io/typescript/',
+          type: 'book',
+          description: 'Free online book covering TypeScript in depth'
+        },
+        {
+          title: 'Execute Program TypeScript Course',
+          url: 'https://www.executeprogram.com/courses/typescript',
+          type: 'course',
+          description: 'Interactive TypeScript exercises (free tier available)'
+        },
+        {
+          title: 'Type Challenges',
+          url: 'https://github.com/type-challenges/type-challenges',
+          type: 'github',
+          description: 'Collection of TypeScript type challenges'
+        }
       ]
     },
 
@@ -175,6 +271,44 @@ export const skillsData = {
         '99.9% API uptime',
         'Sub-100ms average response time',
         '20+ production Node.js services'
+      ],
+      freeResources: [
+        {
+          title: 'Node.js Official Documentation',
+          url: 'https://nodejs.org/docs/',
+          type: 'documentation',
+          description: 'Comprehensive official docs with API references and guides'
+        },
+        {
+          title: 'Node.js with TypeScript Tutorial by Academind',
+          url: 'https://www.youtube.com/watch?v=1UcLoS0gUO0',
+          type: 'youtube',
+          description: 'Complete Node.js + TypeScript setup and development guide'
+        },
+        {
+          title: 'Express.js + TypeScript Tutorial by Ben Awad',
+          url: 'https://www.youtube.com/watch?v=H91aqUHn8sE',
+          type: 'youtube',
+          description: 'Building REST APIs with Express.js and TypeScript'
+        },
+        {
+          title: 'Node.js TypeScript Starter by Microsoft',
+          url: 'https://github.com/microsoft/TypeScript-Node-Starter',
+          type: 'github',
+          description: 'Production-ready Node.js + TypeScript starter template'
+        },
+        {
+          title: 'Node.js Best Practices by Yoni Goldberg',
+          url: 'https://github.com/goldbergyoni/nodebestpractices',
+          type: 'github',
+          description: 'Comprehensive Node.js best practices guide (80+ practices)'
+        },
+        {
+          title: 'Fastify TypeScript Documentation',
+          url: 'https://www.fastify.io/docs/latest/TypeScript/',
+          type: 'documentation',
+          description: 'Fast Node.js framework with first-class TypeScript support'
+        }
       ]
     },
     {
@@ -204,6 +338,38 @@ export const skillsData = {
         '80% reduction in manual tasks',
         '50+ automation scripts deployed',
         '99.5% uptime for Python services'
+      ],
+      freeResources: [
+        {
+          title: 'Python Official Documentation',
+          url: 'https://docs.python.org/3/',
+          type: 'documentation',
+          description: 'Comprehensive Python documentation and tutorial'
+        },
+        {
+          title: 'Python Tutorial by Corey Schafer',
+          url: 'https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU',
+          type: 'youtube',
+          description: 'Complete Python tutorial series covering all aspects'
+        },
+        {
+          title: 'Automate the Boring Stuff with Python',
+          url: 'https://automatetheboringstuff.com/',
+          type: 'tutorial',
+          description: 'Free online book for practical Python programming'
+        },
+        {
+          title: 'Python for Everybody by University of Michigan',
+          url: 'https://www.youtube.com/playlist?list=PLlRFEj9H3Oj7Bp8-DfGpOZPiJ0YGTBb_k',
+          type: 'youtube',
+          description: 'University-level Python course for beginners'
+        },
+        {
+          title: 'Real Python Tutorials',
+          url: 'https://realpython.com/',
+          type: 'tutorial',
+          description: 'High-quality Python tutorials and articles (many free)'
+        }
       ]
     },
     {
@@ -233,6 +399,44 @@ export const skillsData = {
         'Sub-millisecond API response times',
         '40% GC overhead reduction',
         '10+ production microservices built'
+      ],
+      freeResources: [
+        {
+          title: 'Go Official Documentation',
+          url: 'https://go.dev/doc/',
+          type: 'documentation',
+          description: 'Official Go documentation and language specification'
+        },
+        {
+          title: 'Go Web Development by TechWorld with Nana',
+          url: 'https://www.youtube.com/watch?v=yyUHQIec83I',
+          type: 'youtube',
+          description: 'Building web applications with Go'
+        },
+        {
+          title: 'Gin Web Framework Tutorial',
+          url: 'https://gin-gonic.com/docs/',
+          type: 'documentation',
+          description: 'Official Gin framework documentation and examples'
+        },
+        {
+          title: 'Go Fiber Framework Tutorial by TutorialEdge',
+          url: 'https://tutorialedge.net/golang/basic-rest-api-go-fiber/',
+          type: 'tutorial',
+          description: 'Building REST APIs with Go Fiber framework'
+        },
+        {
+          title: 'gRPC with Go Tutorial by TutorialEdge',
+          url: 'https://tutorialedge.net/golang/go-grpc-beginners-tutorial/',
+          type: 'tutorial',
+          description: 'Building gRPC services with Go'
+        },
+        {
+          title: 'Go Concurrency Patterns by Google',
+          url: 'https://www.youtube.com/watch?v=f6kdp27TYZs',
+          type: 'youtube',
+          description: 'Advanced Go concurrency patterns and best practices'
+        }
       ]
     },
     {
@@ -262,6 +466,44 @@ export const skillsData = {
         'Achieved 99.9% uptime for critical services',
         'Reduced build and deployment times by 30%',
         'Improved code quality with 80% test coverage'
+      ],
+      freeResources: [
+        {
+          title: 'Spring Boot Official Documentation',
+          url: 'https://spring.io/projects/spring-boot',
+          type: 'documentation',
+          description: 'Official Spring Boot documentation and guides'
+        },
+        {
+          title: 'Spring Boot Tutorial by Java Brains',
+          url: 'https://www.youtube.com/playlist?list=PLqq-6Pq4lTTbx8p2oCgcAQGQyqN8XeA1x',
+          type: 'youtube',
+          description: 'Comprehensive Spring Boot tutorial series'
+        },
+        {
+          title: 'Spring WebFlux Tutorial by Dan Vega',
+          url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
+          type: 'youtube',
+          description: 'Reactive programming with Spring WebFlux'
+        },
+        {
+          title: 'Spring Security Tutorial by Java Brains',
+          url: 'https://www.youtube.com/playlist?list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE',
+          type: 'youtube',
+          description: 'Complete Spring Security tutorial series'
+        },
+        {
+          title: 'Spring Boot Microservices by Programming Techie',
+          url: 'https://www.youtube.com/playlist?list=PLSVW22jAG8pBnhAdq9S8BpLnZ0_jVBj0c',
+          type: 'youtube',
+          description: 'Building microservices with Spring Boot'
+        },
+        {
+          title: 'Spring Data JPA Tutorial by Amigoscode',
+          url: 'https://www.youtube.com/watch?v=8SGI_XS5OPw',
+          type: 'youtube',
+          description: 'Complete Spring Data JPA and Hibernate tutorial'
+        }
       ]
     },
     {
@@ -291,6 +533,105 @@ export const skillsData = {
         'Achieved 99.8% uptime for production services',
         'Reduced application response time by 40%',
         'Improved deployment frequency with automated pipelines'
+      ],
+      freeResources: [
+        {
+          title: 'Microsoft C# Documentation',
+          url: 'https://docs.microsoft.com/en-us/dotnet/csharp/',
+          type: 'documentation',
+          description: 'Official C# and .NET documentation'
+        },
+        {
+          title: 'C# Tutorial by Mosh Hamedani',
+          url: 'https://www.youtube.com/watch?v=gfkTfcpWqAY',
+          type: 'youtube',
+          description: 'Complete C# tutorial for beginners'
+        },
+        {
+          title: 'ASP.NET Core Tutorial by kudvenkat',
+          url: 'https://www.youtube.com/playlist?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU',
+          type: 'youtube',
+          description: 'Comprehensive ASP.NET Core tutorial series'
+        },
+        {
+          title: 'Microsoft Learn - C#',
+          url: 'https://docs.microsoft.com/en-us/learn/paths/csharp-first-steps/',
+          type: 'tutorial',
+          description: 'Interactive C# learning path by Microsoft'
+        },
+        {
+          title: 'freeCodeCamp C# Course',
+          url: 'https://www.youtube.com/watch?v=GhQdlIFylQ8',
+          type: 'youtube',
+          description: '4-hour comprehensive C# tutorial'
+        }
+      ]
+    },
+    {
+      id: 'spring-webflux',
+      title: 'Spring WebFlux',
+      category: 'backend',
+      level: 'advanced',
+      status: 'completed',
+      description: 'Reactive programming with Spring WebFlux, non-blocking I/O, and reactive streams',
+      yearsOfExperience: 2,
+      position: { x: 950, y: 230 }, // Backend category, second row
+      detailedAccomplishments: [
+        'Built reactive REST APIs handling 50K+ concurrent requests',
+        'Implemented reactive data access with R2DBC and MongoDB Reactive',
+        'Created streaming endpoints with Server-Sent Events (SSE)',
+        'Built reactive microservices with Spring Cloud Gateway',
+        'Implemented backpressure handling for high-throughput systems',
+        'Created reactive security with Spring Security WebFlux',
+        'Built reactive testing with WebTestClient and StepVerifier',
+        'Optimized memory usage with reactive streams and operators',
+        'Implemented reactive circuit breakers and retry mechanisms',
+        'Created reactive messaging with Spring Cloud Stream'
+      ],
+      technologies: ['Spring WebFlux', 'Project Reactor', 'R2DBC', 'MongoDB Reactive', 'Netty', 'Spring Security WebFlux'],
+      keyMetrics: [
+        '50K+ concurrent requests handled',
+        '70% reduction in memory usage vs traditional Spring MVC',
+        '90% improvement in throughput for I/O-intensive operations',
+        'Sub-10ms response times for non-blocking operations'
+      ],
+      freeResources: [
+        {
+          title: 'Spring WebFlux Official Documentation',
+          url: 'https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html',
+          type: 'documentation',
+          description: 'Official Spring WebFlux documentation and guides'
+        },
+        {
+          title: 'Reactive Programming with Spring WebFlux by Dan Vega',
+          url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
+          type: 'youtube',
+          description: 'Complete reactive programming tutorial with Spring WebFlux'
+        },
+        {
+          title: 'Project Reactor Documentation',
+          url: 'https://projectreactor.io/learn',
+          type: 'documentation',
+          description: 'Reactive streams library documentation and examples'
+        },
+        {
+          title: 'Spring Boot WebFlux Tutorial by Amigoscode',
+          url: 'https://www.youtube.com/watch?v=M3jNn3HMeWg',
+          type: 'youtube',
+          description: 'Building reactive REST APIs with Spring Boot and WebFlux'
+        },
+        {
+          title: 'Reactive Programming Patterns',
+          url: 'https://github.com/reactor/reactor-core/tree/main/docs',
+          type: 'github',
+          description: 'Reactive programming patterns and best practices'
+        },
+        {
+          title: 'R2DBC Tutorial by Spring',
+          url: 'https://spring.io/guides/gs/accessing-data-r2dbc/',
+          type: 'tutorial',
+          description: 'Reactive database access with R2DBC'
+        }
       ]
     },
 
@@ -322,6 +663,38 @@ export const skillsData = {
         '60% latency reduction achieved',
         '99.95% system availability',
         '15min disaster recovery time'
+      ],
+      freeResources: [
+        {
+          title: 'High Scalability Blog',
+          url: 'http://highscalability.com/',
+          type: 'blog',
+          description: 'Real-world system design case studies and patterns'
+        },
+        {
+          title: 'System Design Interview by Gaurav Sen',
+          url: 'https://www.youtube.com/playlist?list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX',
+          type: 'youtube',
+          description: 'System design concepts and interview preparation'
+        },
+        {
+          title: 'Designing Data-Intensive Applications',
+          url: 'https://dataintensive.net/',
+          type: 'book',
+          description: 'Free chapters on distributed systems concepts'
+        },
+        {
+          title: 'AWS Architecture Center',
+          url: 'https://aws.amazon.com/architecture/',
+          type: 'documentation',
+          description: 'Cloud architecture patterns and best practices'
+        },
+        {
+          title: 'System Design Primer',
+          url: 'https://github.com/donnemartin/system-design-primer',
+          type: 'github',
+          description: 'Comprehensive system design resource on GitHub'
+        }
       ]
     },
     {
@@ -351,6 +724,38 @@ export const skillsData = {
         '99.9% service availability',
         '70% faster feature delivery',
         '5x independent deployment frequency'
+      ],
+      freeResources: [
+        {
+          title: 'Microservices Patterns by Chris Richardson',
+          url: 'https://microservices.io/',
+          type: 'website',
+          description: 'Comprehensive patterns and practices for microservices'
+        },
+        {
+          title: 'Microservices by Martin Fowler',
+          url: 'https://martinfowler.com/articles/microservices.html',
+          type: 'article',
+          description: 'Foundational article on microservices architecture'
+        },
+        {
+          title: 'Microservices Tutorial by Tech Primers',
+          url: 'https://www.youtube.com/playlist?list=PLTyWtrsGknYdKTppVQDjqy8YrYYAYjH-a',
+          type: 'youtube',
+          description: 'Complete microservices tutorial series'
+        },
+        {
+          title: 'Building Microservices by Sam Newman',
+          url: 'https://samnewman.io/books/building_microservices/',
+          type: 'book',
+          description: 'Essential book on microservices (free chapters available)'
+        },
+        {
+          title: 'Microservices with Spring Boot',
+          url: 'https://www.youtube.com/watch?v=BLlEgtp2_i8',
+          type: 'youtube',
+          description: 'Practical microservices implementation guide'
+        }
       ]
     },
     {
@@ -380,6 +785,38 @@ export const skillsData = {
         '99.9% API uptime across production services',
         '50ms average response time optimization',
         '100+ API endpoints documented and versioned'
+      ],
+      freeResources: [
+        {
+          title: 'RESTful API Design Best Practices',
+          url: 'https://restfulapi.net/',
+          type: 'website',
+          description: 'Comprehensive guide to REST API design principles'
+        },
+        {
+          title: 'OpenAPI Specification',
+          url: 'https://swagger.io/specification/',
+          type: 'documentation',
+          description: 'Official OpenAPI specification and examples'
+        },
+        {
+          title: 'GraphQL Tutorial by The Net Ninja',
+          url: 'https://www.youtube.com/playlist?list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f',
+          type: 'youtube',
+          description: 'Complete GraphQL tutorial series'
+        },
+        {
+          title: 'API Design Patterns by Google',
+          url: 'https://cloud.google.com/apis/design',
+          type: 'documentation',
+          description: 'Google Cloud API design guide and best practices'
+        },
+        {
+          title: 'Building APIs with Node.js',
+          url: 'https://www.youtube.com/watch?v=pKd0Rpw7O48',
+          type: 'youtube',
+          description: 'Practical API development tutorial'
+        }
       ]
     },
 
@@ -411,6 +848,44 @@ export const skillsData = {
         '99.9% uptime across all services',
         '15+ production AWS accounts managed',
         '50+ Lambda functions deployed'
+      ],
+      freeResources: [
+        {
+          title: 'AWS Official Documentation',
+          url: 'https://docs.aws.amazon.com/',
+          type: 'documentation',
+          description: 'Comprehensive AWS service documentation and guides'
+        },
+        {
+          title: 'AWS Free Tier Tutorial by freeCodeCamp',
+          url: 'https://www.youtube.com/watch?v=3hLmDS179YE',
+          type: 'youtube',
+          description: '4-hour AWS tutorial covering essential services'
+        },
+        {
+          title: 'AWS Solutions Architect by Stephane Maarek',
+          url: 'https://www.youtube.com/playlist?list=PLt1SIbA8guusxiHz9bveV7EAr4l-SJnRy',
+          type: 'youtube',
+          description: 'Complete AWS certification course (free parts)'
+        },
+        {
+          title: 'AWS Serverless Tutorial by Complete Coding',
+          url: 'https://www.youtube.com/watch?v=71cd5XerKss',
+          type: 'youtube',
+          description: 'Building serverless applications with AWS Lambda'
+        },
+        {
+          title: 'AWS Workshop Studio',
+          url: 'https://catalog.workshops.aws/',
+          type: 'workshop',
+          description: 'Free hands-on AWS workshops and tutorials'
+        },
+        {
+          title: 'AWS Architecture Patterns',
+          url: 'https://aws.amazon.com/architecture/',
+          type: 'documentation',
+          description: 'Real-world AWS architecture patterns and case studies'
+        }
       ]
     },
     {
@@ -440,6 +915,44 @@ export const skillsData = {
         '70% deployment time reduction',
         '95% reduction in manual errors',
         '100% infrastructure as code coverage'
+      ],
+      freeResources: [
+        {
+          title: 'Terraform Official Documentation',
+          url: 'https://developer.hashicorp.com/terraform/docs',
+          type: 'documentation',
+          description: 'Official Terraform documentation and tutorials'
+        },
+        {
+          title: 'Terraform Course by freeCodeCamp',
+          url: 'https://www.youtube.com/watch?v=SLB_c_ayRMo',
+          type: 'youtube',
+          description: 'Complete Terraform course for beginners'
+        },
+        {
+          title: 'Terraform AWS Tutorial by TechWorld with Nana',
+          url: 'https://www.youtube.com/watch?v=iRaai1IBlB0',
+          type: 'youtube',
+          description: 'Practical Terraform with AWS tutorial'
+        },
+        {
+          title: 'Terraform Best Practices by Anton Babenko',
+          url: 'https://www.terraform-best-practices.com/',
+          type: 'website',
+          description: 'Comprehensive Terraform best practices guide'
+        },
+        {
+          title: 'Terraform Weekly Newsletter Archive',
+          url: 'https://www.terraform.io/community/newsletter',
+          type: 'newsletter',
+          description: 'Weekly Terraform tips, tutorials, and news'
+        },
+        {
+          title: 'Terraform Module Examples',
+          url: 'https://github.com/terraform-aws-modules',
+          type: 'github',
+          description: 'Production-ready Terraform modules for AWS'
+        }
       ]
     },
 
@@ -471,6 +984,38 @@ export const skillsData = {
         '70% container image size reduction',
         '80% deployment complexity reduction',
         '99.5% container uptime'
+      ],
+      freeResources: [
+        {
+          title: 'Docker Official Documentation',
+          url: 'https://docs.docker.com/',
+          type: 'documentation',
+          description: 'Comprehensive Docker documentation and guides'
+        },
+        {
+          title: 'Docker Tutorial by Programming with Mosh',
+          url: 'https://www.youtube.com/watch?v=pTFZFxd4hOI',
+          type: 'youtube',
+          description: 'Complete Docker tutorial for beginners'
+        },
+        {
+          title: 'Docker Crash Course by Traversy Media',
+          url: 'https://www.youtube.com/watch?v=fqMOX6JJhGo',
+          type: 'youtube',
+          description: 'Docker fundamentals and practical examples'
+        },
+        {
+          title: 'Play with Docker',
+          url: 'https://labs.play-with-docker.com/',
+          type: 'tutorial',
+          description: 'Free online Docker playground and tutorials'
+        },
+        {
+          title: 'Docker Best Practices by Docker',
+          url: 'https://docs.docker.com/develop/dev-best-practices/',
+          type: 'documentation',
+          description: 'Official Docker development best practices'
+        }
       ]
     },
     {
@@ -500,6 +1045,38 @@ export const skillsData = {
         '30% infrastructure cost reduction',
         '99.9% cluster uptime',
         '5-second average pod startup time'
+      ],
+      freeResources: [
+        {
+          title: 'Kubernetes Official Documentation',
+          url: 'https://kubernetes.io/docs/',
+          type: 'documentation',
+          description: 'Comprehensive Kubernetes documentation and tutorials'
+        },
+        {
+          title: 'Kubernetes Tutorial by TechWorld with Nana',
+          url: 'https://www.youtube.com/watch?v=X48VuDVv0do',
+          type: 'youtube',
+          description: 'Complete Kubernetes tutorial for beginners'
+        },
+        {
+          title: 'Kubernetes Crash Course by freeCodeCamp',
+          url: 'https://www.youtube.com/watch?v=d6WC5n9G_sM',
+          type: 'youtube',
+          description: '4-hour comprehensive Kubernetes course'
+        },
+        {
+          title: 'Play with Kubernetes',
+          url: 'https://labs.play-with-k8s.com/',
+          type: 'tutorial',
+          description: 'Free online Kubernetes playground'
+        },
+        {
+          title: 'Kubernetes the Hard Way',
+          url: 'https://github.com/kelseyhightower/kubernetes-the-hard-way',
+          type: 'github',
+          description: 'Deep dive into Kubernetes fundamentals'
+        }
       ]
     },
     {
@@ -529,6 +1106,38 @@ export const skillsData = {
         '60% build time reduction',
         '95% deployment success rate',
         '10 deployments per day average'
+      ],
+      freeResources: [
+        {
+          title: 'GitHub Actions Documentation',
+          url: 'https://docs.github.com/en/actions',
+          type: 'documentation',
+          description: 'Complete guide to GitHub Actions CI/CD'
+        },
+        {
+          title: 'CI/CD Tutorial by TechWorld with Nana',
+          url: 'https://www.youtube.com/watch?v=1er2cjUq1UI',
+          type: 'youtube',
+          description: 'Complete CI/CD pipeline tutorial'
+        },
+        {
+          title: 'Jenkins Tutorial by edureka!',
+          url: 'https://www.youtube.com/watch?v=FX322RVNGj4',
+          type: 'youtube',
+          description: 'Comprehensive Jenkins CI/CD tutorial'
+        },
+        {
+          title: 'GitLab CI/CD Documentation',
+          url: 'https://docs.gitlab.com/ee/ci/',
+          type: 'documentation',
+          description: 'GitLab CI/CD configuration and best practices'
+        },
+        {
+          title: 'DevOps CI/CD Pipeline Tutorial',
+          url: 'https://www.youtube.com/watch?v=scEDHsr3APg',
+          type: 'youtube',
+          description: 'End-to-end CI/CD pipeline setup'
+        }
       ]
     },
 
@@ -560,6 +1169,38 @@ export const skillsData = {
         '50% improvement in delivery speed',
         '80% mentee promotion rate',
         '45% reduction in incident MTTR'
+      ],
+      freeResources: [
+        {
+          title: 'The Manager\'s Path by Camille Fournier',
+          url: 'https://www.youtube.com/watch?v=9VBnai2rKWY',
+          type: 'youtube',
+          description: 'Engineering management principles and practices'
+        },
+        {
+          title: 'Harvard Business Review Leadership',
+          url: 'https://hbr.org/topic/leadership',
+          type: 'articles',
+          description: 'Free leadership articles and insights'
+        },
+        {
+          title: 'Coursera Leadership Courses',
+          url: 'https://www.coursera.org/courses?query=leadership',
+          type: 'course',
+          description: 'Free leadership courses (audit mode)'
+        },
+        {
+          title: 'MIT Leadership Resources',
+          url: 'https://web.mit.edu/leadership/',
+          type: 'website',
+          description: 'MIT leadership development resources'
+        },
+        {
+          title: 'Engineering Management Handbook',
+          url: 'https://github.com/ryanburgess/engineer-manager',
+          type: 'github',
+          description: 'Open source engineering management resources'
+        }
       ]
     },
     {
@@ -589,6 +1230,38 @@ export const skillsData = {
         '$2M+ project budget managed',
         '95% stakeholder satisfaction',
         '30% improvement in delivery speed'
+      ],
+      freeResources: [
+        {
+          title: 'Project Management Institute Resources',
+          url: 'https://www.pmi.org/learning/training-development/free-content',
+          type: 'website',
+          description: 'Free project management training and resources'
+        },
+        {
+          title: 'Agile and Scrum Tutorial by edureka!',
+          url: 'https://www.youtube.com/watch?v=9TycLR0TqFA',
+          type: 'youtube',
+          description: 'Complete Agile and Scrum methodology tutorial'
+        },
+        {
+          title: 'Google Project Management Certificate',
+          url: 'https://www.coursera.org/professional-certificates/google-project-management',
+          type: 'course',
+          description: 'Free project management course (audit mode)'
+        },
+        {
+          title: 'Atlassian Agile Coach',
+          url: 'https://www.atlassian.com/agile',
+          type: 'tutorial',
+          description: 'Free Agile methodologies and best practices'
+        },
+        {
+          title: 'Scrum.org Learning Resources',
+          url: 'https://www.scrum.org/learning-series',
+          type: 'website',
+          description: 'Free Scrum training and certification info'
+        }
       ]
     },
 
@@ -873,6 +1546,38 @@ export const skillsData = {
         '90% query performance improvement',
         'Sub-second response times for 95% of queries',
         'Zero data loss across 5 years of operations'
+      ],
+      freeResources: [
+        {
+          title: 'W3Schools SQL Tutorial',
+          url: 'https://www.w3schools.com/sql/',
+          type: 'tutorial',
+          description: 'Comprehensive SQL tutorial with interactive examples'
+        },
+        {
+          title: 'PostgreSQL Tutorial by Derek Banas',
+          url: 'https://www.youtube.com/watch?v=qw--VYLpxG4',
+          type: 'youtube',
+          description: 'Complete PostgreSQL tutorial in one video'
+        },
+        {
+          title: 'SQL Tutorial by Programming with Mosh',
+          url: 'https://www.youtube.com/watch?v=7S_tz1z_5bA',
+          type: 'youtube',
+          description: '3-hour comprehensive MySQL tutorial'
+        },
+        {
+          title: 'SQLite Tutorial',
+          url: 'https://www.sqlitetutorial.net/',
+          type: 'tutorial',
+          description: 'Complete SQLite tutorial with practical examples'
+        },
+        {
+          title: 'SQL Practice on HackerRank',
+          url: 'https://www.hackerrank.com/domains/sql',
+          type: 'practice',
+          description: 'Free SQL coding challenges and practice problems'
+        }
       ]
     },
     {
@@ -902,6 +1607,38 @@ export const skillsData = {
         '200+ business users enabled with self-service BI',
         '80% reduction in manual reporting effort',
         '$5M+ investment decisions influenced by data presentations'
+      ],
+      freeResources: [
+        {
+          title: 'D3.js Official Documentation',
+          url: 'https://d3js.org/',
+          type: 'documentation',
+          description: 'Official D3.js documentation with examples'
+        },
+        {
+          title: 'Data Visualization Course by Curran Kelleher',
+          url: 'https://www.youtube.com/playlist?list=PL9yYRbwpkykuK6LSMLH3bAaPpXaDUXcLV',
+          type: 'youtube',
+          description: 'Complete data visualization course with D3.js'
+        },
+        {
+          title: 'Chart.js Documentation',
+          url: 'https://www.chartjs.org/docs/',
+          type: 'documentation',
+          description: 'Simple yet flexible JavaScript charting library'
+        },
+        {
+          title: 'Observable Tutorials',
+          url: 'https://observablehq.com/@observablehq/tutorial',
+          type: 'tutorial',
+          description: 'Interactive data visualization tutorials'
+        },
+        {
+          title: 'Plotly Python Tutorial',
+          url: 'https://www.youtube.com/watch?v=GGL6U0k8WYA',
+          type: 'youtube',
+          description: 'Data visualization with Python and Plotly'
+        }
       ]
     },
     {
@@ -931,6 +1668,38 @@ export const skillsData = {
         '99.9% pipeline reliability',
         '60% reduction in data storage costs',
         'Sub-hour data freshness for critical business metrics'
+      ],
+      freeResources: [
+        {
+          title: 'Apache Spark Documentation',
+          url: 'https://spark.apache.org/docs/latest/',
+          type: 'documentation',
+          description: 'Official Apache Spark documentation and tutorials'
+        },
+        {
+          title: 'Data Engineering Course by Seattle Data Guy',
+          url: 'https://www.youtube.com/playlist?list=PL-mGpK6Ck6G5F1DPdOCvjsXtgr8tUY_Eo',
+          type: 'youtube',
+          description: 'Complete data engineering course'
+        },
+        {
+          title: 'Apache Airflow Tutorial',
+          url: 'https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html',
+          type: 'tutorial',
+          description: 'Official Apache Airflow tutorial and documentation'
+        },
+        {
+          title: 'Kafka Tutorial by Confluent',
+          url: 'https://kafka.apache.org/quickstart',
+          type: 'tutorial',
+          description: 'Apache Kafka quickstart and learning resources'
+        },
+        {
+          title: 'dbt Tutorial',
+          url: 'https://docs.getdbt.com/docs/get-started/getting-started-dbt-core',
+          type: 'tutorial',
+          description: 'Getting started with dbt for data transformation'
+        }
       ]
     },
     {
@@ -960,6 +1729,38 @@ export const skillsData = {
         '30+ statistical models built and deployed',
         '40% improvement in customer segmentation accuracy',
         '25% reduction in customer churn through predictive modeling'
+      ],
+      freeResources: [
+        {
+          title: 'Pandas Official Documentation',
+          url: 'https://pandas.pydata.org/docs/',
+          type: 'documentation',
+          description: 'Comprehensive Pandas documentation and tutorials'
+        },
+        {
+          title: 'Python Data Analysis by Keith Galli',
+          url: 'https://www.youtube.com/playlist?list=PLFCB5Dp81iNVmuoGIqcT5oF4K-7kTI5vp',
+          type: 'youtube',
+          description: 'Complete Python data analysis tutorial series'
+        },
+        {
+          title: 'Scikit-learn Documentation',
+          url: 'https://scikit-learn.org/stable/tutorial/index.html',
+          type: 'documentation',
+          description: 'Machine learning library tutorials and examples'
+        },
+        {
+          title: 'Python for Data Science Course by freeCodeCamp',
+          url: 'https://www.youtube.com/watch?v=r-uOLxNrNk8',
+          type: 'youtube',
+          description: '12-hour comprehensive data science course'
+        },
+        {
+          title: 'Kaggle Learn Data Science',
+          url: 'https://www.kaggle.com/learn/overview',
+          type: 'course',
+          description: 'Free micro-courses on data science topics'
+        }
       ]
     },
 
@@ -991,6 +1792,38 @@ export const skillsData = {
         '100+ developers trained',
         '95% code review compliance',
         '99.9% version control uptime'
+      ],
+      freeResources: [
+        {
+          title: 'Git Official Documentation',
+          url: 'https://git-scm.com/docs',
+          type: 'documentation',
+          description: 'Comprehensive Git documentation and reference'
+        },
+        {
+          title: 'Git Tutorial by Traversy Media',
+          url: 'https://www.youtube.com/watch?v=SWYqp7iY_Tc',
+          type: 'youtube',
+          description: 'Git crash course for beginners'
+        },
+        {
+          title: 'Learn Git Branching',
+          url: 'https://learngitbranching.js.org/',
+          type: 'interactive',
+          description: 'Interactive Git tutorial with visualizations'
+        },
+        {
+          title: 'Pro Git Book',
+          url: 'https://git-scm.com/book',
+          type: 'book',
+          description: 'Free comprehensive Git book by Scott Chacon'
+        },
+        {
+          title: 'Atlassian Git Tutorials',
+          url: 'https://www.atlassian.com/git/tutorials',
+          type: 'tutorial',
+          description: 'Comprehensive Git tutorials and best practices'
+        }
       ]
     },
     {
@@ -1020,6 +1853,38 @@ export const skillsData = {
         '90% bug reduction in production',
         '80% faster bug detection',
         '100+ test suites automated'
+      ],
+      freeResources: [
+        {
+          title: 'Jest Official Documentation',
+          url: 'https://jestjs.io/docs/getting-started',
+          type: 'documentation',
+          description: 'Complete Jest testing framework documentation'
+        },
+        {
+          title: 'Testing JavaScript with Kent C. Dodds',
+          url: 'https://www.youtube.com/playlist?list=PLV5CVI1eNcJgCrPH_e6d57KRUTiDZgs0u',
+          type: 'youtube',
+          description: 'Comprehensive JavaScript testing tutorial series'
+        },
+        {
+          title: 'Cypress Documentation',
+          url: 'https://docs.cypress.io/',
+          type: 'documentation',
+          description: 'End-to-end testing framework documentation'
+        },
+        {
+          title: 'Test-Driven Development Tutorial',
+          url: 'https://www.youtube.com/watch?v=Jv2uxzhPFl4',
+          type: 'youtube',
+          description: 'TDD principles and practical implementation'
+        },
+        {
+          title: 'The Art of Unit Testing',
+          url: 'https://github.com/artofunittesting',
+          type: 'github',
+          description: 'Free unit testing resources and examples'
+        }
       ]
     },
     {
@@ -1049,6 +1914,38 @@ export const skillsData = {
         '90% reduction in security vulnerabilities',
         '100% compliance audit success',
         'Zero security incidents in production'
+      ],
+      freeResources: [
+        {
+          title: 'OWASP Top 10',
+          url: 'https://owasp.org/www-project-top-ten/',
+          type: 'documentation',
+          description: 'Top 10 web application security risks'
+        },
+        {
+          title: 'Cybersecurity Course by freeCodeCamp',
+          url: 'https://www.youtube.com/watch?v=U_P23SqJaDc',
+          type: 'youtube',
+          description: 'Complete cybersecurity course for beginners'
+        },
+        {
+          title: 'OWASP WebGoat',
+          url: 'https://owasp.org/www-project-webgoat/',
+          type: 'tutorial',
+          description: 'Hands-on security vulnerability learning platform'
+        },
+        {
+          title: 'Security Headers Scanner',
+          url: 'https://securityheaders.com/',
+          type: 'tool',
+          description: 'Free security headers analysis tool'
+        },
+        {
+          title: 'OAuth 2.0 Tutorial',
+          url: 'https://www.youtube.com/watch?v=996OiexHze0',
+          type: 'youtube',
+          description: 'Complete OAuth 2.0 explanation and implementation'
+        }
       ]
     },
     {
@@ -1078,6 +1975,38 @@ export const skillsData = {
         '90% database query optimization',
         '95+ Lighthouse performance scores',
         '99.9% application availability'
+      ],
+      freeResources: [
+        {
+          title: 'Web.dev Performance',
+          url: 'https://web.dev/performance/',
+          type: 'website',
+          description: 'Google\'s comprehensive web performance guides'
+        },
+        {
+          title: 'Performance Optimization by Kyle Simpson',
+          url: 'https://www.youtube.com/watch?v=65-RbBwZQdU',
+          type: 'youtube',
+          description: 'Deep dive into JavaScript performance optimization'
+        },
+        {
+          title: 'Chrome DevTools Performance',
+          url: 'https://developers.google.com/web/tools/chrome-devtools/performance',
+          type: 'documentation',
+          description: 'Official Chrome DevTools performance documentation'
+        },
+        {
+          title: 'Redis Documentation',
+          url: 'https://redis.io/documentation',
+          type: 'documentation',
+          description: 'Redis caching and performance optimization guide'
+        },
+        {
+          title: 'Lighthouse Documentation',
+          url: 'https://developers.google.com/web/tools/lighthouse',
+          type: 'documentation',
+          description: 'Web performance auditing tool documentation'
+        }
       ]
     }
   ],
@@ -1150,7 +2079,289 @@ export const skillsData = {
     { source: 'microservices', target: 'event-driven', type: 'utilizes' },
     { source: 'spring-webflux', target: 'performance', type: 'improves' },
     { source: 'serverless', target: 'performance', type: 'scales' }
-  ]
+  ],
+
+  // Projects showcasing skills and expertise
+  projects: [
+    {
+      id: 'realtime-chat-platform',
+      title: 'Real-time Chat Platform',
+      description: 'Scalable chat application with real-time messaging, file sharing, and video calls',
+      technologies: ['React', 'TypeScript', 'Node.js', 'Socket.io', 'Redis', 'PostgreSQL', 'Docker'],
+      skillsUsed: ['react', 'typescript', 'nodejs', 'postgresql', 'redis', 'docker'],
+      category: 'Full-Stack',
+      status: 'completed',
+      difficulty: 'intermediate',
+      duration: '6 weeks',
+      features: [
+        'Real-time messaging with Socket.io',
+        'File and image sharing with cloud storage',
+        'Video calling integration',
+        'User authentication and authorization',
+        'Message history and search',
+        'Responsive design for mobile and desktop'
+      ],
+      learningOutcomes: [
+        'WebSocket implementation and management',
+        'Real-time state synchronization',
+        'File upload and media handling',
+        'Authentication flows and security',
+        'Database optimization for chat history'
+      ],
+      githubUrl: 'https://github.com/yourusername/chat-platform',
+      liveUrl: 'https://chat-platform-demo.com',
+      estimatedHours: 120
+    },
+    {
+      id: 'microservices-ecommerce',
+      title: 'Microservices E-commerce Platform',
+      description: 'Distributed e-commerce system with microservices architecture',
+      technologies: ['Go', 'Docker', 'Kubernetes', 'PostgreSQL', 'Redis', 'RabbitMQ', 'React'],
+      skillsUsed: ['golang', 'docker', 'kubernetes', 'postgresql', 'redis', 'microservices', 'react'],
+      category: 'Backend/DevOps',
+      status: 'completed',
+      difficulty: 'advanced',
+      duration: '10 weeks',
+      features: [
+        'User service with authentication',
+        'Product catalog service',
+        'Order processing service',
+        'Payment integration service',
+        'Inventory management service',
+        'API Gateway with rate limiting',
+        'Event-driven communication between services'
+      ],
+      learningOutcomes: [
+        'Microservices design patterns',
+        'Service discovery and load balancing',
+        'Event-driven architecture',
+        'Container orchestration',
+        'Distributed system challenges',
+        'API design and versioning'
+      ],
+      githubUrl: 'https://github.com/yourusername/microservices-ecommerce',
+      estimatedHours: 200
+    },
+    {
+      id: 'data-analytics-dashboard',
+      title: 'Data Analytics Dashboard',
+      description: 'Interactive dashboard for data visualization and analytics',
+      technologies: ['Python', 'FastAPI', 'React', 'D3.js', 'PostgreSQL', 'Pandas', 'NumPy'],
+      skillsUsed: ['python', 'react', 'postgresql', 'data-analytics'],
+      category: 'Data/Frontend',
+      status: 'completed',
+      difficulty: 'intermediate',
+      duration: '4 weeks',
+      features: [
+        'Interactive charts and graphs',
+        'Real-time data updates',
+        'Custom filtering and aggregation',
+        'Export to PDF/Excel',
+        'User-defined dashboards',
+        'Data source connectors'
+      ],
+      learningOutcomes: [
+        'Data visualization best practices',
+        'Real-time data streaming',
+        'Complex data aggregations',
+        'Interactive UI components',
+        'API design for analytics'
+      ],
+      githubUrl: 'https://github.com/yourusername/analytics-dashboard',
+      liveUrl: 'https://analytics-dashboard-demo.com',
+      estimatedHours: 80
+    },
+    {
+      id: 'ml-recommendation-engine',
+      title: 'ML Recommendation Engine',
+      description: 'Machine learning system for product recommendations',
+      technologies: ['Python', 'TensorFlow', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker'],
+      skillsUsed: ['python', 'machine-learning', 'postgresql', 'redis', 'docker'],
+      category: 'Machine Learning',
+      status: 'in-progress',
+      difficulty: 'advanced',
+      duration: '8 weeks',
+      features: [
+        'Collaborative filtering algorithm',
+        'Content-based recommendations',
+        'A/B testing framework',
+        'Real-time inference API',
+        'Model training pipeline',
+        'Performance monitoring'
+      ],
+      learningOutcomes: [
+        'Recommendation system algorithms',
+        'Model training and evaluation',
+        'Production ML deployment',
+        'A/B testing for ML systems',
+        'Feature engineering',
+        'Model monitoring and updates'
+      ],
+      githubUrl: 'https://github.com/yourusername/ml-recommendations',
+      estimatedHours: 160
+    },
+    {
+      id: 'cloud-infrastructure-automation',
+      title: 'Cloud Infrastructure Automation',
+      description: 'Infrastructure as Code for AWS cloud deployment',
+      technologies: ['Terraform', 'AWS', 'Docker', 'GitHub Actions', 'Kubernetes'],
+      skillsUsed: ['terraform', 'aws', 'docker', 'kubernetes', 'cicd'],
+      category: 'DevOps/Cloud',
+      status: 'completed',
+      difficulty: 'advanced',
+      duration: '5 weeks',
+      features: [
+        'Multi-environment infrastructure',
+        'Auto-scaling configurations',
+        'Security groups and IAM policies',
+        'Monitoring and alerting setup',
+        'Backup and disaster recovery',
+        'Cost optimization strategies'
+      ],
+      learningOutcomes: [
+        'Infrastructure as Code principles',
+        'Cloud architecture patterns',
+        'Security best practices',
+        'Cost optimization techniques',
+        'Monitoring and observability',
+        'Disaster recovery planning'
+      ],
+      githubUrl: 'https://github.com/yourusername/cloud-infrastructure',
+      estimatedHours: 100
+    },
+    {
+      id: 'progressive-web-app',
+      title: 'Progressive Web Application',
+      description: 'PWA with offline capabilities and native app features',
+      technologies: ['React', 'TypeScript', 'Service Workers', 'IndexedDB', 'Workbox'],
+      skillsUsed: ['react', 'typescript', 'pwa'],
+      category: 'Frontend',
+      status: 'completed',
+      difficulty: 'intermediate',
+      duration: '3 weeks',
+      features: [
+        'Offline functionality',
+        'Push notifications',
+        'App-like navigation',
+        'Background sync',
+        'Installable on mobile/desktop',
+        'Responsive design'
+      ],
+      learningOutcomes: [
+        'Service Worker implementation',
+        'Offline-first architecture',
+        'PWA best practices',
+        'Performance optimization',
+        'Mobile user experience',
+        'Caching strategies'
+      ],
+      githubUrl: 'https://github.com/yourusername/progressive-web-app',
+      liveUrl: 'https://pwa-demo.com',
+      estimatedHours: 60
+    },
+    {
+      id: 'event-driven-system',
+      title: 'Event-Driven Processing System',
+      description: 'Scalable event processing system with message queues',
+      technologies: ['Go', 'Apache Kafka', 'Redis', 'PostgreSQL', 'Docker', 'Prometheus'],
+      skillsUsed: ['golang', 'event-driven', 'redis', 'postgresql', 'docker', 'monitoring'],
+      category: 'Backend/Architecture',
+      status: 'completed',
+      difficulty: 'advanced',
+      duration: '7 weeks',
+      features: [
+        'Event sourcing pattern',
+        'CQRS implementation',
+        'Message routing and filtering',
+        'Dead letter queue handling',
+        'Event replay capabilities',
+        'Monitoring and metrics'
+      ],
+      learningOutcomes: [
+        'Event-driven architecture patterns',
+        'Message queue implementation',
+        'System resilience and fault tolerance',
+        'Performance monitoring',
+        'Scalability considerations',
+        'Data consistency in distributed systems'
+      ],
+      githubUrl: 'https://github.com/yourusername/event-system',
+      estimatedHours: 140
+    }
+  ],
+
+  // Learning resources for skills
+  learningResources: {
+    'react': [
+      {
+        id: 'react-docs',
+        title: 'Official React Documentation',
+        type: 'documentation',
+        url: 'https://react.dev',
+        difficulty: 'beginner',
+        estimatedHours: 20,
+        description: 'Complete guide to React fundamentals and advanced concepts'
+      },
+      {
+        id: 'react-course',
+        title: 'React - The Complete Guide (Hooks, Router, Redux)',
+        type: 'course',
+        url: 'https://www.udemy.com/course/react-the-complete-guide-incl-redux/',
+        difficulty: 'intermediate',
+        estimatedHours: 40,
+        description: 'Comprehensive React course covering all major concepts'
+      },
+      {
+        id: 'react-patterns',
+        title: 'React Patterns',
+        type: 'tutorial',
+        url: 'https://reactpatterns.com/',
+        difficulty: 'advanced',
+        estimatedHours: 10,
+        description: 'Advanced React patterns and best practices'
+      }
+    ],
+    'typescript': [
+      {
+        id: 'ts-handbook',
+        title: 'TypeScript Handbook',
+        type: 'documentation',
+        url: 'https://www.typescriptlang.org/docs/',
+        difficulty: 'beginner',
+        estimatedHours: 15,
+        description: 'Official TypeScript documentation and handbook'
+      },
+      {
+        id: 'ts-deepdive',
+        title: 'TypeScript Deep Dive',
+        type: 'book',
+        url: 'https://basarat.gitbook.io/typescript/',
+        difficulty: 'intermediate',
+        estimatedHours: 25,
+        description: 'Deep dive into TypeScript concepts and patterns'
+      }
+    ],
+    'machine-learning': [
+      {
+        id: 'ml-coursera',
+        title: 'Machine Learning Course by Andrew Ng',
+        type: 'course',
+        url: 'https://www.coursera.org/learn/machine-learning',
+        difficulty: 'beginner',
+        estimatedHours: 60,
+        description: 'Stanford\'s famous ML course covering fundamentals'
+      },
+      {
+        id: 'ml-python',
+        title: 'Python Machine Learning',
+        type: 'book',
+        url: 'https://www.packtpub.com/product/python-machine-learning-third-edition/',
+        difficulty: 'intermediate',
+        estimatedHours: 40,
+        description: 'Practical ML with Python, scikit-learn, and TensorFlow'
+      }
+    ]
+  },
 };
 
 export const personalInfo = {
