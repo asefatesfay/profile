@@ -12,7 +12,8 @@ import {
   ChevronDown,
   ChevronRight,
   Play,
-  Check
+  Check,
+  ExternalLink
 } from 'lucide-react';
 
 const LearningRoadmap = ({ skill }) => {
@@ -20,6 +21,11 @@ const LearningRoadmap = ({ skill }) => {
   const [completedTopics, setCompletedTopics] = useState(() => {
     // Load progress from localStorage
     const saved = localStorage.getItem('ml-roadmap-progress');
+    return saved ? new Set(JSON.parse(saved)) : new Set();
+  });
+  const [completedResources, setCompletedResources] = useState(() => {
+    // Load resource completion from localStorage
+    const saved = localStorage.getItem('ml-roadmap-resources');
     return saved ? new Set(JSON.parse(saved)) : new Set();
   });
 
@@ -43,6 +49,11 @@ const LearningRoadmap = ({ skill }) => {
     localStorage.setItem('ml-roadmap-progress', JSON.stringify([...completedTopics]));
   }, [completedTopics]);
 
+  // Save resource completion to localStorage whenever completedResources changes
+  useEffect(() => {
+    localStorage.setItem('ml-roadmap-resources', JSON.stringify([...completedResources]));
+  }, [completedResources]);
+
   const togglePhase = (phaseId) => {
     const newExpanded = new Set(expandedPhases);
     if (newExpanded.has(phaseId)) {
@@ -61,6 +72,36 @@ const LearningRoadmap = ({ skill }) => {
       newCompleted.add(topicId);
     }
     setCompletedTopics(newCompleted);
+  };
+
+  const toggleResource = (resourceId) => {
+    const newCompleted = new Set(completedResources);
+    if (newCompleted.has(resourceId)) {
+      newCompleted.delete(resourceId);
+    } else {
+      newCompleted.add(resourceId);
+    }
+    setCompletedResources(newCompleted);
+  };
+
+  const parseResource = (resourceString, topicId, index) => {
+    const colonIndex = resourceString.indexOf(':');
+    if (colonIndex !== -1 && resourceString.includes('http')) {
+      const name = resourceString.substring(0, colonIndex).trim();
+      const url = resourceString.substring(colonIndex + 1).trim();
+      return {
+        id: `${topicId}-resource-${index}`,
+        name,
+        url,
+        original: resourceString
+      };
+    }
+    return {
+      id: `${topicId}-resource-${index}`,
+      name: resourceString,
+      url: null,
+      original: resourceString
+    };
   };
 
   const getPhaseProgress = (phase) => {
@@ -167,7 +208,9 @@ const LearningRoadmap = ({ skill }) => {
             onClick={() => {
               if (window.confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
                 setCompletedTopics(new Set());
+                setCompletedResources(new Set());
                 localStorage.removeItem('ml-roadmap-progress');
+                localStorage.removeItem('ml-roadmap-resources');
               }
             }}
             className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
@@ -178,6 +221,7 @@ const LearningRoadmap = ({ skill }) => {
             onClick={() => {
               const data = {
                 completedTopics: [...completedTopics],
+                completedResources: [...completedResources],
                 progress: getOverallProgress(),
                 exportDate: new Date().toISOString()
               };
@@ -312,20 +356,91 @@ const LearningRoadmap = ({ skill }) => {
                                     <BookOpen className="w-3 h-3" />
                                     {topic.resources.length} resources
                                   </div>
+                                  {topic.resources && topic.resources.length > 0 && (
+                                    <div className="flex items-center gap-1">
+                                      <Check className="w-3 h-3" />
+                                      {topic.resources.filter((_, index) => 
+                                        completedResources.has(`${topic.id}-resource-${index}`)
+                                      ).length}/{topic.resources.length} completed
+                                    </div>
+                                  )}
                                 </div>
                                 
                                 {topic.resources && (
-                                  <div className="mt-2">
-                                    <div className="text-xs text-gray-500 mb-1">Resources:</div>
-                                    <div className="flex flex-wrap gap-2">
-                                      {topic.resources.map((resource, resIndex) => (
-                                        <span 
-                                          key={resIndex}
-                                          className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded"
-                                        >
-                                          {resource}
-                                        </span>
-                                      ))}
+                                  <div className="mt-4">
+                                    <div className="text-sm font-medium text-gray-700 mb-2">Learning Resources:</div>
+                                    <div className="space-y-2">
+                                      {topic.resources.map((resource, resIndex) => {
+                                        const parsedResource = parseResource(resource, topic.id, resIndex);
+                                        const isResourceCompleted = completedResources.has(parsedResource.id);
+                                        
+                                        return (
+                                          <div 
+                                            key={parsedResource.id}
+                                            className="flex items-start gap-2 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                                          >
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleResource(parsedResource.id);
+                                              }}
+                                              className="mt-0.5 flex-shrink-0"
+                                            >
+                                              {isResourceCompleted ? (
+                                                <CheckCircle className="w-4 h-4 text-green-600" />
+                                              ) : (
+                                                <Circle className="w-4 h-4 text-gray-400" />
+                                              )}
+                                            </button>
+                                            
+                                            <div className="flex-1 min-w-0">
+                                              {parsedResource.url ? (
+                                                <a
+                                                  href={parsedResource.url}
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  onClick={(e) => e.stopPropagation()}
+                                                  className={`text-sm font-medium hover:underline flex items-center gap-1 ${
+                                                    isResourceCompleted 
+                                                      ? 'text-green-700 line-through' 
+                                                      : 'text-blue-600'
+                                                  }`}
+                                                >
+                                                  {parsedResource.name}
+                                                  <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                                                </a>
+                                              ) : (
+                                                <span className={`text-sm ${
+                                                  isResourceCompleted 
+                                                    ? 'text-green-700 line-through' 
+                                                    : 'text-gray-700'
+                                                }`}>
+                                                  {parsedResource.name}
+                                                </span>
+                                              )}
+                                            </div>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                    
+                                    {/* Resource completion summary */}
+                                    <div className="mt-3 flex items-center gap-2">
+                                      <span className="text-xs text-gray-500">
+                                        {topic.resources.filter((_, index) => 
+                                          completedResources.has(`${topic.id}-resource-${index}`)
+                                        ).length} of {topic.resources.length} resources completed
+                                      </span>
+                                      <div className="flex-1 bg-gray-200 rounded-full h-1.5">
+                                        <div 
+                                          className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
+                                          style={{ 
+                                            width: `${Math.round((topic.resources.filter((_, index) => 
+                                              completedResources.has(`${topic.id}-resource-${index}`)
+                                            ).length / topic.resources.length) * 100)}%` 
+                                          }}
+                                        />
+                                      </div>
                                     </div>
                                   </div>
                                 )}

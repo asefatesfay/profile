@@ -623,7 +623,12 @@ export const skillsData = {
                 title: 'ML Fundamentals',
                 description: 'Understanding supervised, unsupervised, and reinforcement learning',
                 estimatedHours: 8,
-                resources: ['Coursera ML Course', 'Python ML Handbook'],
+                resources: [
+                  'Andrew Ng ML Course (YouTube): https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN',
+                  'StatQuest ML Fundamentals: https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF',
+                  'MIT 6.034 AI Course: https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi',
+                  'freeCodeCamp ML Course: https://www.youtube.com/watch?v=NWONeJKn6kc'
+                ],
                 priority: 'high'
               },
               {
@@ -631,7 +636,12 @@ export const skillsData = {
                 title: 'Python ML Environment',
                 description: 'Set up Jupyter, Anaconda, and essential libraries',
                 estimatedHours: 4,
-                resources: ['Anaconda Documentation', 'Jupyter Tutorials'],
+                resources: [
+                  'Anaconda Installation Guide: https://www.youtube.com/watch?v=YJC6ldI3hWk',
+                  'Jupyter Notebook Tutorial: https://www.youtube.com/watch?v=HW29067qVWk',
+                  'Python for Data Science Setup: https://www.youtube.com/watch?v=WcDaZ67TVRo',
+                  'Conda Environment Management: https://www.youtube.com/watch?v=1VVCd0eSkYc'
+                ],
                 priority: 'high'
               },
               {
@@ -639,7 +649,12 @@ export const skillsData = {
                 title: 'Data Fundamentals',
                 description: 'Understanding datasets, features, and data preprocessing',
                 estimatedHours: 6,
-                resources: ['Pandas Documentation', 'Data Cleaning Tutorials'],
+                resources: [
+                  'Pandas Tutorial by Corey Schafer: https://www.youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS',
+                  'Data Cleaning with Python: https://www.youtube.com/watch?v=ZOX18HfLHGQ',
+                  'Kaggle Learn Data Cleaning: https://www.kaggle.com/learn/data-cleaning',
+                  'Data Analysis with Python: https://www.youtube.com/watch?v=r-uOLxNrNk8'
+                ],
                 priority: 'medium'
               }
             ]
@@ -656,7 +671,12 @@ export const skillsData = {
                 title: 'Linear Regression',
                 description: 'Understanding linear relationships and regression analysis',
                 estimatedHours: 10,
-                resources: ['StatQuest Videos', 'Scikit-learn Documentation'],
+                resources: [
+                  'StatQuest Linear Regression: https://www.youtube.com/watch?v=nk2CQITm_eo',
+                  'Linear Regression with Python: https://www.youtube.com/watch?v=1BYu65vLKdA',
+                  'Khan Academy Linear Regression: https://www.youtube.com/watch?v=coQAAN4eY5s',
+                  'Scikit-learn Linear Regression: https://www.youtube.com/watch?v=R15LjD8aCzc'
+                ],
                 priority: 'high'
               },
               {
@@ -664,7 +684,12 @@ export const skillsData = {
                 title: 'Classification Algorithms',
                 description: 'Decision trees, random forests, logistic regression',
                 estimatedHours: 12,
-                resources: ['Hands-On ML Book', 'Kaggle Learn'],
+                resources: [
+                  'Decision Trees Explained: https://www.youtube.com/watch?v=7VeUPuFGJHk',
+                  'Random Forest Algorithm: https://www.youtube.com/watch?v=J4Wdy0Wc_xQ',
+                  'Logistic Regression StatQuest: https://www.youtube.com/watch?v=yIYKR4sgzI8',
+                  'Classification with Python: https://www.youtube.com/watch?v=VtK56UQn_5w'
+                ],
                 priority: 'high'
               },
               {
@@ -672,7 +697,12 @@ export const skillsData = {
                 title: 'Clustering',
                 description: 'K-means, hierarchical clustering, DBSCAN',
                 estimatedHours: 8,
-                resources: ['Scikit-learn Clustering Guide'],
+                resources: [
+                  'K-Means Clustering Explained: https://www.youtube.com/watch?v=4b5d3muPQmA',
+                  'Hierarchical Clustering: https://www.youtube.com/watch?v=7xHsRkOdVwo',
+                  'DBSCAN Algorithm: https://www.youtube.com/watch?v=RDZUdRSDOok',
+                  'Clustering with Python: https://www.youtube.com/watch?v=ijSM23xGcmU'
+                ],
                 priority: 'medium'
               }
             ]
@@ -689,7 +719,12 @@ export const skillsData = {
                 title: 'Neural Networks',
                 description: 'Fundamentals of neural networks and backpropagation',
                 estimatedHours: 15,
-                resources: ['Deep Learning Specialization', 'TensorFlow Tutorials'],
+                resources: [
+                  '3Blue1Brown Neural Networks: https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi',
+                  'Neural Networks from Scratch: https://www.youtube.com/playlist?list=PLQVvvaa0QuDcjD5BAw2DxE6OF2tius3V3',
+                  'Deep Learning Fundamentals: https://www.youtube.com/watch?v=aircAruvnKk',
+                  'TensorFlow Beginner Tutorial: https://www.youtube.com/watch?v=tPYj3fFJGjk'
+                ],
                 priority: 'high'
               },
               {
@@ -697,7 +732,12 @@ export const skillsData = {
                 title: 'Convolutional Neural Networks',
                 description: 'Image processing and computer vision',
                 estimatedHours: 12,
-                resources: ['CS231n Course', 'Keras Documentation'],
+                resources: [
+                  'CNNs Explained by 3Blue1Brown: https://www.youtube.com/watch?v=KuXjwB4LzSA',
+                  'CS231n Stanford CNN Course: https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv',
+                  'CNN with TensorFlow: https://www.youtube.com/watch?v=WvoLTXIjBYU',
+                  'Image Classification Tutorial: https://www.youtube.com/watch?v=jztwpsIzEGc'
+                ],
                 priority: 'medium'
               },
               {
@@ -705,7 +745,12 @@ export const skillsData = {
                 title: 'Natural Language Processing',
                 description: 'Text processing and language models',
                 estimatedHours: 10,
-                resources: ['NLTK Book', 'Hugging Face Tutorials'],
+                resources: [
+                  'NLP with Python Playlist: https://www.youtube.com/playlist?list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL',
+                  'Transformers Explained: https://www.youtube.com/watch?v=SZorAJ4I-sA',
+                  'NLTK Tutorial: https://www.youtube.com/watch?v=FLZvOKSCkxY',
+                  'Hugging Face Course: https://www.youtube.com/watch?v=00GKzGyWFEs'
+                ],
                 priority: 'medium'
               }
             ]
@@ -722,7 +767,12 @@ export const skillsData = {
                 title: 'MLOps Fundamentals',
                 description: 'CI/CD for ML, model versioning, monitoring',
                 estimatedHours: 12,
-                resources: ['MLOps Course', 'MLflow Documentation'],
+                resources: [
+                  'MLOps Explained: https://www.youtube.com/watch?v=9BgIDqAzfuA',
+                  'MLflow Tutorial: https://www.youtube.com/watch?v=859OxXrt_TI',
+                  'Made with ML MLOps: https://www.youtube.com/watch?v=JR3LGwihTH4',
+                  'DVC Data Versioning: https://www.youtube.com/watch?v=kLKBcPonMYw'
+                ],
                 priority: 'high'
               },
               {
@@ -730,7 +780,12 @@ export const skillsData = {
                 title: 'Model Deployment',
                 description: 'Deploy models with Flask, FastAPI, cloud services',
                 estimatedHours: 10,
-                resources: ['FastAPI Docs', 'AWS SageMaker Tutorials'],
+                resources: [
+                  'Deploy ML with Flask: https://www.youtube.com/watch?v=UbCWoMf80PY',
+                  'FastAPI ML Deployment: https://www.youtube.com/watch?v=1zMQBe0l1bM',
+                  'Docker for ML: https://www.youtube.com/watch?v=h5wLuVDr0oc',
+                  'AWS SageMaker Tutorial: https://www.youtube.com/watch?v=KFuc2KWrTHs'
+                ],
                 priority: 'high'
               },
               {
@@ -738,7 +793,12 @@ export const skillsData = {
                 title: 'Model Monitoring',
                 description: 'Track model performance and data drift',
                 estimatedHours: 8,
-                resources: ['Evidently AI', 'MLflow Tracking'],
+                resources: [
+                  'ML Model Monitoring: https://www.youtube.com/watch?v=QcevzK9ZuDg',
+                  'Data Drift Detection: https://www.youtube.com/watch?v=NI7gRnvhtSs',
+                  'Evidently AI Tutorial: https://www.youtube.com/watch?v=czOlnCYqHrE',
+                  'MLflow Model Registry: https://www.youtube.com/watch?v=1ykg4YmbFVA'
+                ],
                 priority: 'medium'
               }
             ]
