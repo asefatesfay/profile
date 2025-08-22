@@ -21,7 +21,13 @@ const nodeTypes = {
 
 const Roadmap = () => {
   const [activeTooltip, setActiveTooltip] = useState(null);
+  const [activeTab, setActiveTab] = useState('all');
   
+  // Get available categories for tabs
+  const categories = useMemo(() => {
+    return Object.values(skillsData.categories);
+  }, []);
+
   // Create base nodes from data (only once)
   const baseNodes = useMemo(() => {
     const categoryNodes = Object.values(skillsData.categories).map(category => ({
@@ -43,9 +49,43 @@ const Roadmap = () => {
     return [...categoryNodes, ...skillNodes];
   }, []);
 
-  // Create edges from connections
-  const initialEdges = useMemo(() => {
-    return skillsData.connections.map((connection, index) => ({
+  // Filter nodes based on active tab and include tooltip state
+  const filteredNodes = useMemo(() => {
+    let nodes;
+    if (activeTab === 'all') {
+      nodes = baseNodes;
+    } else {
+      // Include category node and skills from selected category
+      const categoryNode = baseNodes.filter(node => 
+        node.type === 'categoryNode' && node.id === activeTab
+      );
+      
+      const skillNodes = baseNodes.filter(node => 
+        node.type === 'skillNode' && node.data.skill.category === activeTab
+      );
+      
+      nodes = [...categoryNode, ...skillNodes];
+    }
+    
+    // Add tooltip state to skill nodes
+    return nodes.map(node => {
+      if (node.type === 'skillNode') {
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            activeTooltip,
+            setActiveTooltip
+          }
+        };
+      }
+      return node;
+    });
+  }, [baseNodes, activeTab, activeTooltip, setActiveTooltip]);
+
+  // Create edges from connections, filtered by active tab
+  const filteredEdges = useMemo(() => {
+    const allEdges = skillsData.connections.map((connection, index) => ({
       id: `edge-${index}`,
       source: connection.source,
       target: connection.target,
@@ -68,29 +108,26 @@ const Roadmap = () => {
         fillOpacity: 0.8 
       },
     }));
-  }, []);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(baseNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    if (activeTab === 'all') {
+      return allEdges;
+    }
 
-  // Update nodes with tooltip state without causing re-renders
-  React.useEffect(() => {
-    setNodes((currentNodes) => 
-      currentNodes.map(node => {
-        if (node.type === 'skillNode') {
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              activeTooltip,
-              setActiveTooltip
-            }
-          };
-        }
-        return node;
-      })
+    // Filter edges to only show connections between visible nodes
+    const visibleNodeIds = new Set(filteredNodes.map(node => node.id));
+    return allEdges.filter(edge => 
+      visibleNodeIds.has(edge.source) && visibleNodeIds.has(edge.target)
     );
-  }, [activeTooltip, setNodes]);
+  }, [filteredNodes, activeTab]);
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(filteredNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(filteredEdges);
+
+  // Update nodes when tab changes
+  React.useEffect(() => {
+    setNodes(filteredNodes);
+    setEdges(filteredEdges);
+  }, [filteredNodes, filteredEdges, setNodes, setEdges]);
 
   const onConnect = useCallback((params) => {
     setEdges((eds) => [...eds, params]);
@@ -120,6 +157,50 @@ const Roadmap = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
+      {/* Tab Navigation */}
+      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl">
+        <motion.div 
+          className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
+          <div className="flex gap-1 flex-wrap justify-center">
+            {/* All Skills Tab */}
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
+                activeTab === 'all'
+                  ? 'bg-gray-900 text-white shadow-md'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              All Skills
+            </button>
+            
+            {/* Category Tabs */}
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveTab(category.id)}
+                className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                  activeTab === category.id
+                    ? 'text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+                style={activeTab === category.id ? { backgroundColor: category.color } : {}}
+              >
+                <div 
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: activeTab === category.id ? 'rgba(255,255,255,0.8)' : category.color }}
+                />
+                <span className="hidden sm:inline">{category.title}</span>
+                <span className="sm:hidden">{category.title.split(' ')[0]}</span>
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      </div>
       {/* Tooltip Activity Indicator */}
       <AnimatePresence>
         {activeTooltip && (
@@ -134,14 +215,22 @@ const Roadmap = () => {
         )}
       </AnimatePresence>
 
-      <div className="absolute top-4 left-4 z-10">
+      <div className="absolute top-20 left-4 z-10">
         <motion.div 
           className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">Skills Roadmap</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            {activeTab === 'all' ? 'All Skills' : categories.find(c => c.id === activeTab)?.title || 'Skills'} Roadmap
+          </h3>
+          <p className="text-sm text-gray-600 mb-3">
+            {activeTab === 'all' 
+              ? `Showing all ${filteredNodes.filter(n => n.type === 'skillNode').length} skills across categories`
+              : `${filteredNodes.filter(n => n.type === 'skillNode').length} skills in this category`
+            }
+          </p>
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -159,7 +248,7 @@ const Roadmap = () => {
         </motion.div>
       </div>
 
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-20 right-4 z-10">
         <motion.div 
           className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
           initial={{ x: 100, opacity: 0 }}
@@ -198,15 +287,17 @@ const Roadmap = () => {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
-          padding: 0.1,
-          minZoom: 0.5,
-          maxZoom: 1.5,
+          padding: 0.2,
+          minZoom: 0.3,
+          maxZoom: 1.2,
+          includeHiddenNodes: false,
         }}
-        minZoom={0.3}
-        maxZoom={2}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        minZoom={0.2}
+        maxZoom={1.5}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
         className="bg-transparent"
         proOptions={{ hideAttribution: true }}
+        key={activeTab} // Force re-render and fit view on tab change
       >
         <Background 
           color="#E5E7EB" 

@@ -5,49 +5,55 @@ export const skillsData = {
       id: 'frontend',
       title: 'Frontend Development',
       color: '#3B82F6',
-      position: { x: 100, y: 100 }
+      position: { x: 200, y: 50 }
     },
     'backend': {
       id: 'backend', 
       title: 'Backend Development',
       color: '#10B981',
-      position: { x: 400, y: 100 }
+      position: { x: 600, y: 50 }
     },
     'architecture': {
       id: 'architecture',
       title: 'System Architecture & Design',
       color: '#8B5CF6',
-      position: { x: 700, y: 100 }
+      position: { x: 1000, y: 50 }
     },
     'cloud': {
       id: 'cloud',
       title: 'Cloud & Infrastructure',
       color: '#F59E0B',
-      position: { x: 1000, y: 100 }
+      position: { x: 200, y: 350 }
     },
     'devops': {
       id: 'devops',
       title: 'DevOps & Automation',
       color: '#EF4444',
-      position: { x: 100, y: 400 }
+      position: { x: 600, y: 350 }
     },
     'leadership': {
       id: 'leadership',
       title: 'Leadership & Management',
       color: '#EC4899',
-      position: { x: 400, y: 400 }
+      position: { x: 1000, y: 350 }
     },
     'data': {
       id: 'data',
       title: 'Data & Analytics',
       color: '#06B6D4',
-      position: { x: 700, y: 400 }
+      position: { x: 200, y: 650 }
+    },
+    'ml': {
+      id: 'ml',
+      title: 'Machine Learning',
+      color: '#9333EA',
+      position: { x: 600, y: 650 }
     },
     'tools': {
       id: 'tools',
       title: 'Tools & Platforms',
       color: '#84CC16',
-      position: { x: 1000, y: 400 }
+      position: { x: 1000, y: 650 }
     }
   },
 
@@ -61,7 +67,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Advanced React development with hooks, context, performance optimization, and scalable architecture patterns',
       yearsOfExperience: 6,
-      position: { x: 50, y: 200 },
+      position: { x: 100, y: 150 },
       detailedAccomplishments: [
         'Built enterprise React applications serving 100K+ daily active users',
         'Implemented custom hooks library reducing code duplication by 60%',
@@ -90,7 +96,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Full-stack React framework with SSR, SSG, API routes, and production deployment expertise',
       yearsOfExperience: 4,
-      position: { x: 150, y: 200 },
+      position: { x: 300, y: 150 },
       detailedAccomplishments: [
         'Built production Next.js applications with 50+ pages and complex routing',
         'Implemented hybrid SSR/SSG strategy optimizing SEO and performance',
@@ -119,7 +125,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Advanced typing, generics, utility types, and large-scale application architecture',
       yearsOfExperience: 5,
-      position: { x: 100, y: 280 },
+      position: { x: 200, y: 250 },
       detailedAccomplishments: [
         'Migrated 200K+ lines of JavaScript codebase to TypeScript',
         'Created complex type definitions and generic utilities',
@@ -150,7 +156,7 @@ export const skillsData = {
       status: 'completed',
       description: 'High-performance server-side JavaScript, microservices, and enterprise-grade applications',
       yearsOfExperience: 7,
-      position: { x: 350, y: 200 },
+      position: { x: 500, y: 150 },
       detailedAccomplishments: [
         'Built Node.js microservices handling 1M+ requests per day',
         'Implemented event-driven architecture with EventEmitter patterns',
@@ -179,7 +185,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Concurrent programming, microservices, high-performance APIs, and cloud-native applications',
       yearsOfExperience: 5,
-      position: { x: 450, y: 200 },
+      position: { x: 700, y: 150 },
       detailedAccomplishments: [
         'Built high-performance microservices handling 100K+ concurrent connections',
         'Implemented goroutine pools for optimal resource utilization',
@@ -208,7 +214,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Backend development, automation, data processing, and ML integration',
       yearsOfExperience: 6,
-      position: { x: 400, y: 280 },
+      position: { x: 600, y: 250 },
       detailedAccomplishments: [
         'Built scalable Python APIs with FastAPI and Django REST Framework',
         'Created data processing pipelines handling TBs of data daily',
@@ -237,7 +243,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Enterprise Java development, Spring Boot, Spring WebFlux for reactive programming',
       yearsOfExperience: 4,
-      position: { x: 320, y: 350 },
+      position: { x: 500, y: 350 },
       detailedAccomplishments: [
         'Built enterprise Spring Boot applications with 50+ microservices',
         'Implemented Spring Security with OAuth2 and JWT authentication',
@@ -266,7 +272,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Reactive programming with Spring WebFlux, non-blocking I/O, and asynchronous processing',
       yearsOfExperience: 3,
-      position: { x: 480, y: 350 },
+      position: { x: 700, y: 350 },
       detailedAccomplishments: [
         'Built reactive microservices handling 50K+ concurrent connections',
         'Implemented non-blocking I/O with Mono and Flux reactive streams',
@@ -297,7 +303,7 @@ export const skillsData = {
       status: 'completed',
       description: 'RESTful APIs, GraphQL, OpenAPI specification, API versioning, and best practices',
       yearsOfExperience: 7,
-      position: { x: 650, y: 200 },
+      position: { x: 900, y: 150 },
       detailedAccomplishments: [
         'Designed RESTful API standards adopted across 15+ microservices',
         'Created OpenAPI 3.0 specifications with automated documentation',
@@ -326,7 +332,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Large-scale distributed systems, scalability patterns, performance optimization',
       yearsOfExperience: 6,
-      position: { x: 750, y: 200 },
+      position: { x: 1100, y: 150 },
       detailedAccomplishments: [
         'Architected distributed system handling 10M+ daily requests',
         'Designed horizontal scaling patterns with auto-scaling groups',
@@ -355,7 +361,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Service decomposition, inter-service communication, distributed system patterns',
       yearsOfExperience: 5,
-      position: { x: 620, y: 280 },
+      position: { x: 1000, y: 250 },
       detailedAccomplishments: [
         'Decomposed monolithic applications into 30+ microservices',
         'Designed service boundaries using Domain-Driven Design principles',
@@ -384,7 +390,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Event sourcing, CQRS, message queues, pub/sub patterns, and asynchronous processing',
       yearsOfExperience: 4,
-      position: { x: 780, y: 280 },
+      position: { x: 900, y: 350 },
       detailedAccomplishments: [
         'Designed event-driven system processing 1M+ events per hour',
         'Implemented CQRS pattern separating read/write operations',
@@ -444,7 +450,7 @@ export const skillsData = {
       status: 'completed',
       description: 'EC2, ECS, EKS, Lambda, API Gateway, RDS, S3, CloudFormation, and multi-AZ deployments',
       yearsOfExperience: 6,
-      position: { x: 950, y: 200 },
+      position: { x: 100, y: 450 },
       detailedAccomplishments: [
         'Designed multi-AZ architecture with auto-failover capabilities',
         'Built serverless applications using Lambda, API Gateway, and DynamoDB',
@@ -473,7 +479,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Infrastructure as Code, multi-cloud deployments, state management, and modules',
       yearsOfExperience: 4,
-      position: { x: 1050, y: 200 },
+      position: { x: 300, y: 450 },
       detailedAccomplishments: [
         'Managed infrastructure for 50+ microservices across multiple environments',
         'Created reusable Terraform modules adopted across 10+ teams',
@@ -562,7 +568,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Containerization, multi-stage builds, optimization, and container orchestration',
       yearsOfExperience: 5,
-      position: { x: 50, y: 500 },
+      position: { x: 500, y: 450 },
       detailedAccomplishments: [
         'Containerized 100+ applications reducing deployment complexity by 80%',
         'Created multi-stage Dockerfiles optimizing image sizes by 70%',
@@ -591,7 +597,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Container orchestration, cluster management, service mesh, and production deployments',
       yearsOfExperience: 4,
-      position: { x: 150, y: 500 },
+      position: { x: 700, y: 450 },
       detailedAccomplishments: [
         'Managed production K8s clusters serving 500+ microservices',
         'Implemented GitOps deployment workflows with ArgoCD',
@@ -620,7 +626,7 @@ export const skillsData = {
       status: 'completed',
       description: 'GitHub Actions, Jenkins, GitLab CI, automated testing, and deployment pipelines',
       yearsOfExperience: 6,
-      position: { x: 100, y: 580 },
+      position: { x: 600, y: 550 },
       detailedAccomplishments: [
         'Built CI/CD pipelines for 50+ repositories with automated testing',
         'Implemented GitOps workflows with automatic deployments',
@@ -680,7 +686,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Leading engineering teams, technical vision, cross-functional collaboration',
       yearsOfExperience: 5,
-      position: { x: 350, y: 500 },
+      position: { x: 900, y: 450 },
       detailedAccomplishments: [
         'Led engineering teams of 15+ developers across multiple projects',
         'Established technical standards and coding practices organization-wide',
@@ -880,12 +886,12 @@ export const skillsData = {
     {
       id: 'machine-learning',
       title: 'Machine Learning',
-      category: 'data',
+      category: 'ml',
       level: 'beginner',
       status: 'in-progress',
       description: 'ML algorithms, model training, AI integration into applications',
       yearsOfExperience: 0,
-      position: { x: 620, y: 650 },
+      position: { x: 600, y: 750 },
       learningRoadmap: {
         totalTopics: 25,
         completedTopics: 0,
