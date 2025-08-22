@@ -65,9 +65,16 @@ const Roadmap = () => {
       );
       
       nodes = [...categoryNode, ...skillNodes];
+      
+      // Debug logging
+      console.log(`Filtered nodes for tab ${activeTab}:`, {
+        categoryNodes: categoryNode.map(n => n.id),
+        skillNodes: skillNodes.map(n => n.id),
+        total: nodes.length
+      });
     }
     
-    // Add tooltip state to skill nodes
+    // Add tooltip state to skill nodes and active category state to category nodes
     return nodes.map(node => {
       if (node.type === 'skillNode') {
         return {
@@ -76,6 +83,14 @@ const Roadmap = () => {
             ...node.data,
             activeTooltip,
             setActiveTooltip
+          }
+        };
+      } else if (node.type === 'categoryNode') {
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            isActiveCategory: node.id === activeTab
           }
         };
       }
@@ -109,6 +124,8 @@ const Roadmap = () => {
       },
     }));
 
+    // Add category-to-skills connection lines when viewing a specific category
+    // Simplified: just return regular edges since we're using visual indicators on CategoryNode
     if (activeTab === 'all') {
       return allEdges;
     }
@@ -118,13 +135,18 @@ const Roadmap = () => {
     return allEdges.filter(edge => 
       visibleNodeIds.has(edge.source) && visibleNodeIds.has(edge.target)
     );
-  }, [filteredNodes, activeTab]);
+  }, [filteredNodes, activeTab, categories]);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(filteredNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(filteredEdges);
 
   // Update nodes when tab changes
   React.useEffect(() => {
+    console.log('Setting nodes and edges:', {
+      nodes: filteredNodes.length,
+      edges: filteredEdges.length,
+      activeTab
+    });
     setNodes(filteredNodes);
     setEdges(filteredEdges);
   }, [filteredNodes, filteredEdges, setNodes, setEdges]);
@@ -297,7 +319,7 @@ const Roadmap = () => {
         minZoom={0.2}
         maxZoom={1.5}
         defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
-        className="bg-transparent"
+        className="bg-transparent category-roadmap"
         style={{ height: 'calc(100vh - 80px)' }}
         proOptions={{ hideAttribution: true }}
         key={activeTab} // Force re-render and fit view on tab change

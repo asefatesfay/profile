@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const CategoryNode = ({ data }) => {
-  const { category } = data;
+  const { category, isActiveCategory } = data;
   
   return (
     <motion.div
@@ -16,7 +16,7 @@ const CategoryNode = ({ data }) => {
       }}
     >
       <div 
-        className="px-6 py-4 rounded-xl font-bold text-white shadow-lg cursor-pointer text-center min-w-[200px]"
+        className="px-6 py-4 rounded-xl font-bold text-white shadow-lg cursor-pointer text-center min-w-[200px] relative"
         style={{ backgroundColor: category.color }}
       >
         <motion.div
@@ -30,6 +30,74 @@ const CategoryNode = ({ data }) => {
         {/* Decorative elements */}
         <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-white/5 pointer-events-none"></div>
         <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-white/20 to-transparent blur-sm -z-10"></div>
+        
+        {/* Visual connection indicators when this category is active */}
+        {isActiveCategory && (
+          <>
+            {/* Longer radiating lines to indicate connections to skill groups */}
+            <motion.div
+              className="absolute top-1/2 -right-6 h-0.5 bg-white/90"
+              style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 80, opacity: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            />
+            <motion.div
+              className="absolute top-1/2 -left-6 h-0.5 bg-white/90"
+              style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 80, opacity: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            />
+            <motion.div
+              className="absolute -top-6 left-1/2 w-0.5 bg-white/90 transform -translate-x-1/2"
+              style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 80, opacity: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            />
+            <motion.div
+              className="absolute -bottom-6 left-1/2 w-0.5 bg-white/90 transform -translate-x-1/2"
+              style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 80, opacity: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            />
+            
+            {/* Additional diagonal lines for more connection feel */}
+            <motion.div
+              className="absolute top-0 -right-6 w-0.5 bg-white/70 transform rotate-45 origin-left"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 60, opacity: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            />
+            <motion.div
+              className="absolute bottom-0 -right-6 w-0.5 bg-white/70 transform -rotate-45 origin-left"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 60, opacity: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            />
+            <motion.div
+              className="absolute top-0 -left-6 w-0.5 bg-white/70 transform -rotate-45 origin-right"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 60, opacity: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            />
+            <motion.div
+              className="absolute bottom-0 -left-6 w-0.5 bg-white/70 transform rotate-45 origin-right"
+              style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 60, opacity: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            />
+            
+            {/* Enhanced glow effect */}
+            <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-white/15 to-white/15 blur-lg animate-pulse"></div>
+          </>
+        )}
       </div>
     </motion.div>
   );
