@@ -25,6 +25,19 @@ const LearningRoadmap = ({ skill }) => {
 
   const roadmap = skill.learningRoadmap;
 
+  // Safety check for roadmap structure
+  if (!roadmap || !roadmap.phases || !Array.isArray(roadmap.phases)) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 mb-2">Learning Roadmap Not Available</h3>
+          <p className="text-gray-500">This skill doesn't have a detailed learning roadmap yet.</p>
+        </div>
+      </div>
+    );
+  }
+
   // Save progress to localStorage whenever completedTopics changes
   useEffect(() => {
     localStorage.setItem('ml-roadmap-progress', JSON.stringify([...completedTopics]));
@@ -51,6 +64,9 @@ const LearningRoadmap = ({ skill }) => {
   };
 
   const getPhaseProgress = (phase) => {
+    if (!phase || !phase.topics || !Array.isArray(phase.topics)) {
+      return { completed: 0, total: 0 };
+    }
     const totalTopics = phase.topics.length;
     const completedCount = phase.topics.filter(topic => 
       completedTopics.has(topic.id)
@@ -59,11 +75,16 @@ const LearningRoadmap = ({ skill }) => {
   };
 
   const getOverallProgress = () => {
-    const totalTopics = roadmap.phases.reduce((sum, phase) => sum + phase.topics.length, 0);
-    const completedCount = roadmap.phases.reduce((sum, phase) => 
-      sum + phase.topics.filter(topic => completedTopics.has(topic.id)).length, 0
+    if (!roadmap || !roadmap.phases || !Array.isArray(roadmap.phases)) {
+      return 0;
+    }
+    const totalTopics = roadmap.phases.reduce((sum, phase) => 
+      sum + (phase.topics ? phase.topics.length : 0), 0
     );
-    return Math.round((completedCount / totalTopics) * 100);
+    const completedCount = roadmap.phases.reduce((sum, phase) => 
+      sum + (phase.topics ? phase.topics.filter(topic => completedTopics.has(topic.id)).length : 0), 0
+    );
+    return totalTopics > 0 ? Math.round((completedCount / totalTopics) * 100) : 0;
   };
 
   const getStatusColor = (status) => {
@@ -123,7 +144,9 @@ const LearningRoadmap = ({ skill }) => {
             <div className="text-sm text-gray-600">Total Phases</div>
           </div>
           <div className="bg-orange-50 p-4 rounded-lg">
-            <div className="text-2xl font-bold text-orange-600">{roadmap.weeklyGoal.hoursPerWeek}h</div>
+            <div className="text-2xl font-bold text-orange-600">
+              {roadmap.weeklyGoal?.hoursPerWeek || 10}h
+            </div>
             <div className="text-sm text-gray-600">Weekly Goal</div>
           </div>
         </div>
@@ -205,8 +228,8 @@ const LearningRoadmap = ({ skill }) => {
                         {phaseIndex + 1}. {phase.title}
                       </h3>
                       <div className="flex items-center gap-4 mt-2">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(phase.status)}`}>
-                          {phase.status.replace('-', ' ')}
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(phase.status || 'planned')}`}>
+                          {(phase.status || 'planned').replace('-', ' ')}
                         </span>
                         <span className="text-sm text-gray-600">
                           {phase.estimatedWeeks} weeks
@@ -327,7 +350,7 @@ const LearningRoadmap = ({ skill }) => {
           Key Milestones
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {roadmap.milestones.map((milestone, index) => (
+          {(roadmap.milestones || []).map((milestone, index) => (
             <div 
               key={milestone.id}
               className={`p-4 rounded-lg border-2 ${
@@ -358,15 +381,21 @@ const LearningRoadmap = ({ skill }) => {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <div className="text-2xl font-bold text-blue-600">{roadmap.weeklyGoal.hoursPerWeek} hours</div>
+            <div className="text-2xl font-bold text-blue-600">
+              {roadmap.weeklyGoal?.hoursPerWeek || 10} hours
+            </div>
             <div className="text-sm text-gray-600">per week commitment</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-purple-600">{roadmap.weeklyGoal.currentWeekHours}/{roadmap.weeklyGoal.hoursPerWeek}</div>
+            <div className="text-2xl font-bold text-purple-600">
+              {roadmap.weeklyGoal?.currentWeekHours || 0}/{roadmap.weeklyGoal?.hoursPerWeek || 10}
+            </div>
             <div className="text-sm text-gray-600">this week progress</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-green-600">{roadmap.weeklyGoal.targetDate}</div>
+            <div className="text-2xl font-bold text-green-600">
+              {roadmap.weeklyGoal?.targetDate || 'TBD'}
+            </div>
             <div className="text-sm text-gray-600">target completion</div>
           </div>
         </div>

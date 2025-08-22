@@ -5,7 +5,7 @@ export const skillsData = {
       id: 'frontend',
       title: 'Frontend Development',
       color: '#3B82F6',
-      position: { x: 200, y: 50 }
+          position: { x: 450, y: 150 }, // Backend category position: { x: 200, y: 50 }
     },
     'backend': {
       id: 'backend', 
@@ -58,7 +58,7 @@ export const skillsData = {
   },
 
   skills: [
-    // Frontend Skills
+    // Frontend Skills - positioned under Frontend category (x: 200, y: 50)
     {
       id: 'react',
       title: 'React',
@@ -67,7 +67,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Advanced React development with hooks, context, performance optimization, and scalable architecture patterns',
       yearsOfExperience: 6,
-      position: { x: 100, y: 150 },
+      position: { x: 50, y: 150 }, // Under frontend category
       detailedAccomplishments: [
         'Built enterprise React applications serving 100K+ daily active users',
         'Implemented custom hooks library reducing code duplication by 60%',
@@ -96,7 +96,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Full-stack React framework with SSR, SSG, API routes, and production deployment expertise',
       yearsOfExperience: 4,
-      position: { x: 300, y: 150 },
+      position: { x: 250, y: 150 }, // Under frontend category
       detailedAccomplishments: [
         'Built production Next.js applications with 50+ pages and complex routing',
         'Implemented hybrid SSR/SSG strategy optimizing SEO and performance',
@@ -125,7 +125,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Advanced typing, generics, utility types, and large-scale application architecture',
       yearsOfExperience: 5,
-      position: { x: 200, y: 250 },
+      position: { x: 150, y: 230 }, // Under frontend category, second row
       detailedAccomplishments: [
         'Migrated 200K+ lines of JavaScript codebase to TypeScript',
         'Created complex type definitions and generic utilities',
@@ -147,7 +147,7 @@ export const skillsData = {
       ]
     },
 
-    // Backend Skills
+    // Backend Skills - positioned under Backend category (x: 600, y: 50)
     {
       id: 'nodejs',
       title: 'Node.js',
@@ -156,7 +156,7 @@ export const skillsData = {
       status: 'completed',
       description: 'High-performance server-side JavaScript, microservices, and enterprise-grade applications',
       yearsOfExperience: 7,
-      position: { x: 500, y: 150 },
+      position: { x: 150, y: 230 }, // Frontend category, second row // Under backend category
       detailedAccomplishments: [
         'Built Node.js microservices handling 1M+ requests per day',
         'Implemented event-driven architecture with EventEmitter patterns',
@@ -178,43 +178,14 @@ export const skillsData = {
       ]
     },
     {
-      id: 'golang',
-      title: 'Go (Golang)',
-      category: 'backend',
-      level: 'expert',
-      status: 'completed',
-      description: 'Concurrent programming, microservices, high-performance APIs, and cloud-native applications',
-      yearsOfExperience: 5,
-      position: { x: 700, y: 150 },
-      detailedAccomplishments: [
-        'Built high-performance microservices handling 100K+ concurrent connections',
-        'Implemented goroutine pools for optimal resource utilization',
-        'Created custom middleware for authentication, logging, and metrics',
-        'Built gRPC services with protocol buffers for inter-service communication',
-        'Developed CLI tools for infrastructure automation and deployment',
-        'Optimized memory usage reducing garbage collection overhead by 40%',
-        'Built real-time data streaming services with Kafka integration',
-        'Created custom HTTP routers with sub-millisecond response times',
-        'Implemented context-aware request handling with graceful shutdowns',
-        'Mentored team on Go best practices and idiomatic patterns'
-      ],
-      technologies: ['Goroutines', 'Channels', 'gRPC', 'Gin', 'Echo', 'Protocol Buffers', 'Context', 'Sync Package'],
-      keyMetrics: [
-        '100K+ concurrent connections handled',
-        'Sub-millisecond API response times',
-        '40% GC overhead reduction',
-        '10+ production microservices built'
-      ]
-    },
-    {
       id: 'python',
       title: 'Python',
       category: 'backend',
       level: 'expert',
       status: 'completed',
-      description: 'Backend development, automation, data processing, and ML integration',
-      yearsOfExperience: 6,
-      position: { x: 600, y: 250 },
+      description: 'Full-stack Python development with Django, FastAPI, data processing, and automation',
+      yearsOfExperience: 8,
+      position: { x: 650, y: 150 }, // Backend category
       detailedAccomplishments: [
         'Built scalable Python APIs with FastAPI and Django REST Framework',
         'Created data processing pipelines handling TBs of data daily',
@@ -236,103 +207,103 @@ export const skillsData = {
       ]
     },
     {
-      id: 'java-spring',
-      title: 'Java Spring Boot',
-      category: 'backend',
-      level: 'expert',
-      status: 'completed',
-      description: 'Enterprise Java development, Spring Boot, Spring WebFlux for reactive programming',
-      yearsOfExperience: 4,
-      position: { x: 500, y: 350 },
-      detailedAccomplishments: [
-        'Built enterprise Spring Boot applications with 50+ microservices',
-        'Implemented Spring Security with OAuth2 and JWT authentication',
-        'Created JPA repositories with custom queries and specifications',
-        'Built reactive programming solutions with Spring WebFlux',
-        'Implemented Spring Cloud Gateway for API management',
-        'Created comprehensive integration tests with TestContainers',
-        'Built monitoring with Spring Actuator and Micrometer',
-        'Implemented caching strategies with Redis and Spring Cache',
-        'Created automated documentation with Spring REST Docs',
-        'Built batch processing with Spring Batch for large datasets'
-      ],
-      technologies: ['Spring Boot', 'Spring Security', 'Spring Data JPA', 'Spring Cloud', 'Maven', 'Gradle', 'Hibernate'],
-      keyMetrics: [
-        '50+ microservices built',
-        '99.8% application uptime',
-        '5ms average response time',
-        '100% test coverage achieved'
-      ]
-    },
-    {
-      id: 'spring-webflux',
-      title: 'Spring WebFlux',
+      id: 'go',
+      title: 'Go',
       category: 'backend',
       level: 'advanced',
       status: 'completed',
-      description: 'Reactive programming with Spring WebFlux, non-blocking I/O, and asynchronous processing',
+      description: 'High-performance concurrent programming, microservices, and cloud-native applications',
       yearsOfExperience: 3,
-      position: { x: 700, y: 350 },
+      position: { x: 850, y: 150 }, // Backend category
       detailedAccomplishments: [
-        'Built reactive microservices handling 50K+ concurrent connections',
-        'Implemented non-blocking I/O with Mono and Flux reactive streams',
-        'Created WebClient for reactive HTTP communications',
-        'Built functional routing with RouterFunction and HandlerFunction',
-        'Implemented backpressure handling for high-throughput scenarios',
-        'Created reactive database access with R2DBC',
-        'Built streaming APIs for real-time data delivery',
-        'Implemented error handling with onErrorResume and retry mechanisms',
-        'Created reactive testing with StepVerifier and WebTestClient',
-        'Optimized performance achieving 10x throughput improvement'
+        'Built high-performance microservices handling 100K+ concurrent connections',
+        'Implemented goroutine pools for optimal resource utilization',
+        'Created custom middleware for authentication, logging, and metrics',
+        'Built gRPC services with protocol buffers for inter-service communication',
+        'Developed CLI tools for infrastructure automation and deployment',
+        'Optimized memory usage reducing garbage collection overhead by 40%',
+        'Built real-time data streaming services with Kafka integration',
+        'Created custom HTTP routers with sub-millisecond response times',
+        'Implemented context-aware request handling with graceful shutdowns',
+        'Mentored team on Go best practices and idiomatic patterns'
       ],
-      technologies: ['Spring WebFlux', 'Reactor', 'R2DBC', 'WebClient', 'Netty', 'Mono/Flux', 'RouterFunction'],
+      technologies: ['Goroutines', 'Channels', 'gRPC', 'Gin', 'Echo', 'Protocol Buffers', 'Context', 'Sync Package'],
       keyMetrics: [
-        '50K+ concurrent connections',
-        '10x throughput improvement',
-        '90% reduction in thread usage',
-        '5ms reactive response time'
+        '100K+ concurrent connections handled',
+        'Sub-millisecond API response times',
+        '40% GC overhead reduction',
+        '10+ production microservices built'
+      ]
+    },
+    {
+      id: 'java',
+      title: 'Java',
+      category: 'backend',
+      level: 'intermediate',
+      status: 'completed',
+      description: 'Enterprise Java development with Spring framework and microservices architecture',
+      yearsOfExperience: 2,
+      position: { x: 550, y: 230 }, // Backend category, second row
+      detailedAccomplishments: [
+        'Developed RESTful APIs using Spring Boot and Java',
+        'Implemented security features using Spring Security',
+        'Created data access layers with Spring Data JPA',
+        'Built microservices deployed on AWS with Docker',
+        'Implemented unit and integration testing with JUnit and Mockito',
+        'Created CI/CD pipelines for automated deployment',
+        'Optimized application performance and resource utilization',
+        'Participated in code reviews and agile ceremonies',
+        'Mentored junior developers in Java and Spring best practices',
+        'Contributed to architecture and design discussions'
+      ],
+      technologies: ['Java 11', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'Docker', 'AWS', 'JUnit', 'Maven'],
+      keyMetrics: [
+        'Developed and deployed 10+ microservices',
+        'Achieved 99.9% uptime for critical services',
+        'Reduced build and deployment times by 30%',
+        'Improved code quality with 80% test coverage'
+      ]
+    },
+    {
+      id: 'csharp',
+      title: 'C#',
+      category: 'backend',
+      level: 'intermediate',
+      status: 'completed',
+      description: '.NET development with ASP.NET Core, Entity Framework, and Azure integration',
+      yearsOfExperience: 2,
+      position: { x: 750, y: 230 }, // Backend category, second row
+      detailedAccomplishments: [
+        'Developed web applications using ASP.NET Core and C#',
+        'Implemented RESTful APIs and microservices architecture',
+        'Created data models and performed ORM with Entity Framework',
+        'Built CI/CD pipelines for automated testing and deployment',
+        'Optimized application performance and scalability',
+        'Implemented security best practices and authentication',
+        'Participated in code reviews and agile development processes',
+        'Mentored junior developers in C# and .NET technologies',
+        'Contributed to system design and architecture discussions',
+        'Maintained and improved legacy .NET applications'
+      ],
+      technologies: ['C#', '.NET 5', 'ASP.NET Core', 'Entity Framework', 'Azure', 'Docker', 'Kubernetes', 'Git'],
+      keyMetrics: [
+        'Delivered 5+ web applications and APIs',
+        'Achieved 99.8% uptime for production services',
+        'Reduced application response time by 40%',
+        'Improved deployment frequency with automated pipelines'
       ]
     },
 
-    // Architecture Skills
+    // Architecture Skills - positioned under Architecture category (x: 1000, y: 50)
     {
-      id: 'api-design',
-      title: 'API Design',
+      id: 'system-design',
+      title: 'System Design',
       category: 'architecture',
       level: 'expert',
       status: 'completed',
-      description: 'RESTful APIs, GraphQL, OpenAPI specification, API versioning, and best practices',
-      yearsOfExperience: 7,
-      position: { x: 900, y: 150 },
-      detailedAccomplishments: [
-        'Designed RESTful API standards adopted across 15+ microservices',
-        'Created OpenAPI 3.0 specifications with automated documentation',
-        'Implemented API versioning strategy supporting backward compatibility',
-        'Built GraphQL federation layer unifying 20+ data sources',
-        'Established rate limiting and authentication patterns (OAuth2, JWT)',
-        'Designed event-driven API patterns with webhooks and callbacks',
-        'Created API gateway configurations with request/response transformation',
-        'Implemented HATEOAS principles for self-describing APIs',
-        'Built API monitoring with SLA tracking (99.9% uptime achieved)',
-        'Mentored teams on API design patterns and industry standards'
-      ],
-      technologies: ['OpenAPI 3.0', 'GraphQL', 'REST', 'gRPC', 'OAuth2', 'JWT', 'API Gateway', 'Swagger'],
-      keyMetrics: [
-        '15+ microservices following unified API standards',
-        '99.9% API uptime across production services',
-        '50ms average response time optimization',
-        '100+ API endpoints documented and versioned'
-      ]
-    },
-    {
-      id: 'system-architecture',
-      title: 'System Architecture',
-      category: 'architecture',
-      level: 'expert',
-      status: 'completed',
-      description: 'Large-scale distributed systems, scalability patterns, performance optimization',
-      yearsOfExperience: 6,
-      position: { x: 1100, y: 150 },
+      description: 'Large-scale distributed systems, microservices architecture, and scalability patterns',
+      yearsOfExperience: 8,
+      position: { x: 850, y: 150 }, // Architecture category
       detailedAccomplishments: [
         'Architected distributed system handling 10M+ daily requests',
         'Designed horizontal scaling patterns with auto-scaling groups',
@@ -359,9 +330,9 @@ export const skillsData = {
       category: 'architecture',
       level: 'expert',
       status: 'completed',
-      description: 'Service decomposition, inter-service communication, distributed system patterns',
-      yearsOfExperience: 5,
-      position: { x: 1000, y: 250 },
+      description: 'Service-oriented architecture, API design, distributed systems, and cross-service communication',
+      yearsOfExperience: 6,
+      position: { x: 1150, y: 150 }, // Architecture category
       detailedAccomplishments: [
         'Decomposed monolithic applications into 30+ microservices',
         'Designed service boundaries using Domain-Driven Design principles',
@@ -383,74 +354,45 @@ export const skillsData = {
       ]
     },
     {
-      id: 'event-driven',
-      title: 'Event-Driven Architecture',
+      id: 'api-design',
+      title: 'API Design',
       category: 'architecture',
       level: 'expert',
       status: 'completed',
-      description: 'Event sourcing, CQRS, message queues, pub/sub patterns, and asynchronous processing',
-      yearsOfExperience: 4,
-      position: { x: 900, y: 350 },
+      description: 'RESTful APIs, GraphQL, API versioning, documentation, and developer experience',
+      yearsOfExperience: 7,
+      position: { x: 1000, y: 230 }, // Architecture category, second row
       detailedAccomplishments: [
-        'Designed event-driven system processing 1M+ events per hour',
-        'Implemented CQRS pattern separating read/write operations',
-        'Built event sourcing system with complete audit trail capability',
-        'Created saga patterns for distributed transaction management',
-        'Implemented dead letter queues and retry mechanisms',
-        'Built event replay capabilities for system recovery',
-        'Designed event schemas with backward/forward compatibility',
-        'Implemented event streaming with Apache Kafka clusters',
-        'Created event-driven microservices reducing coupling by 80%',
-        'Built real-time notification system using WebSockets and events'
+        'Designed RESTful API standards adopted across 15+ microservices',
+        'Created OpenAPI 3.0 specifications with automated documentation',
+        'Implemented API versioning strategy supporting backward compatibility',
+        'Built GraphQL federation layer unifying 20+ data sources',
+        'Established rate limiting and authentication patterns (OAuth2, JWT)',
+        'Designed event-driven API patterns with webhooks and callbacks',
+        'Created API gateway configurations with request/response transformation',
+        'Implemented HATEOAS principles for self-describing APIs',
+        'Built API monitoring with SLA tracking (99.9% uptime achieved)',
+        'Mentored teams on API design patterns and industry standards'
       ],
-      technologies: ['Apache Kafka', 'RabbitMQ', 'Event Sourcing', 'CQRS', 'WebSockets', 'Saga Pattern'],
+      technologies: ['OpenAPI 3.0', 'GraphQL', 'REST', 'gRPC', 'OAuth2', 'JWT', 'API Gateway', 'Swagger'],
       keyMetrics: [
-        '1M+ events processed per hour',
-        '80% reduction in service coupling',
-        '99.99% event delivery reliability',
-        '5ms average event processing time'
-      ]
-    },
-    {
-      id: 'design-patterns',
-      title: 'Design Patterns',
-      category: 'architecture',
-      level: 'expert',
-      status: 'completed',
-      description: 'Gang of Four patterns, architectural patterns, SOLID principles, clean architecture',
-      yearsOfExperience: 8,
-      position: { x: 700, y: 350 },
-      detailedAccomplishments: [
-        'Applied SOLID principles across 100+ classes and modules',
-        'Implemented GoF patterns: Singleton, Factory, Observer, Strategy, Command',
-        'Created architectural patterns: MVC, MVP, MVVM, Clean Architecture',
-        'Built enterprise patterns: Repository, Unit of Work, Specification',
-        'Implemented messaging patterns: Publish-Subscribe, Message Queue',
-        'Created behavioral patterns for complex business rule engines',
-        'Built creational patterns for flexible object instantiation',
-        'Implemented structural patterns for system composition',
-        'Created domain-driven design patterns with aggregates and entities',
-        'Mentored teams on pattern selection and implementation strategies'
-      ],
-      technologies: ['SOLID Principles', 'Gang of Four', 'Clean Architecture', 'DDD', 'Enterprise Patterns'],
-      keyMetrics: [
-        '100+ classes following SOLID principles',
-        '90% code maintainability score',
-        '50% reduction in code complexity',
-        '80% faster onboarding for new developers'
+        '15+ microservices following unified API standards',
+        '99.9% API uptime across production services',
+        '50ms average response time optimization',
+        '100+ API endpoints documented and versioned'
       ]
     },
 
-    // Cloud & Infrastructure
+    // Cloud Skills - positioned under Cloud category (x: 200, y: 350)
     {
       id: 'aws',
       title: 'AWS',
       category: 'cloud',
       level: 'expert',
       status: 'completed',
-      description: 'EC2, ECS, EKS, Lambda, API Gateway, RDS, S3, CloudFormation, and multi-AZ deployments',
+      description: 'Comprehensive AWS services, serverless architecture, and cloud-native development',
       yearsOfExperience: 6,
-      position: { x: 100, y: 450 },
+      position: { x: 50, y: 450 }, // Cloud category
       detailedAccomplishments: [
         'Designed multi-AZ architecture with auto-failover capabilities',
         'Built serverless applications using Lambda, API Gateway, and DynamoDB',
@@ -475,11 +417,11 @@ export const skillsData = {
       id: 'terraform',
       title: 'Terraform',
       category: 'cloud',
-      level: 'expert',
+      level: 'advanced',
       status: 'completed',
-      description: 'Infrastructure as Code, multi-cloud deployments, state management, and modules',
+      description: 'Infrastructure as Code, multi-cloud provisioning, and automated infrastructure management',
       yearsOfExperience: 4,
-      position: { x: 300, y: 450 },
+      position: { x: 350, y: 450 }, // Cloud category
       detailedAccomplishments: [
         'Managed infrastructure for 50+ microservices across multiple environments',
         'Created reusable Terraform modules adopted across 10+ teams',
@@ -500,75 +442,17 @@ export const skillsData = {
         '100% infrastructure as code coverage'
       ]
     },
-    {
-      id: 'cloudformation',
-      title: 'CloudFormation',
-      category: 'cloud',
-      level: 'advanced',
-      status: 'completed',
-      description: 'AWS native IaC, stack management, nested stacks, and resource orchestration',
-      yearsOfExperience: 3,
-      position: { x: 920, y: 280 },
-      detailedAccomplishments: [
-        'Created CloudFormation templates for 20+ AWS service configurations',
-        'Built nested stack architecture for modular infrastructure',
-        'Implemented custom CloudFormation resources with Lambda functions',
-        'Created stack sets for multi-account deployments',
-        'Built drift detection and remediation workflows',
-        'Implemented parameterized templates for environment-specific deployments',
-        'Created CloudFormation macros for template transformation',
-        'Built rollback strategies and stack protection policies',
-        'Implemented cross-stack references and exports',
-        'Created automated stack deployment pipelines with CodePipeline'
-      ],
-      technologies: ['CloudFormation', 'AWS CDK', 'Stack Sets', 'Custom Resources', 'Lambda', 'CodePipeline'],
-      keyMetrics: [
-        '20+ service configurations automated',
-        '100% infrastructure as code coverage',
-        '60% faster environment provisioning',
-        '95% reduction in configuration errors'
-      ]
-    },
-    {
-      id: 'serverless',
-      title: 'Serverless',
-      category: 'cloud',
-      level: 'advanced',
-      status: 'completed',
-      description: 'AWS Lambda, API Gateway, serverless patterns, and event-driven architectures',
-      yearsOfExperience: 3,
-      position: { x: 1080, y: 280 },
-      detailedAccomplishments: [
-        'Built serverless applications with 100+ Lambda functions',
-        'Implemented serverless API Gateway with custom authorizers',
-        'Created event-driven workflows with Step Functions',
-        'Built serverless data processing pipelines with S3 triggers',
-        'Implemented cold start optimization reducing latency by 70%',
-        'Created serverless monitoring with CloudWatch and X-Ray',
-        'Built serverless authentication with Cognito and Lambda authorizers',
-        'Implemented serverless batch processing with SQS and Lambda',
-        'Created cost optimization strategies reducing serverless costs by 40%',
-        'Built serverless CI/CD with SAM and CDK deployments'
-      ],
-      technologies: ['AWS Lambda', 'API Gateway', 'Step Functions', 'SAM', 'Serverless Framework', 'CloudWatch', 'X-Ray'],
-      keyMetrics: [
-        '100+ Lambda functions deployed',
-        '70% cold start latency reduction',
-        '40% cost optimization achieved',
-        '99.9% serverless function availability'
-      ]
-    },
 
-    // DevOps Skills
+    // DevOps Skills - positioned under DevOps category (x: 600, y: 350)
     {
       id: 'docker',
       title: 'Docker',
       category: 'devops',
       level: 'expert',
       status: 'completed',
-      description: 'Containerization, multi-stage builds, optimization, and container orchestration',
+      description: 'Containerization, multi-stage builds, orchestration, and production deployment strategies',
       yearsOfExperience: 5,
-      position: { x: 500, y: 450 },
+      position: { x: 450, y: 450 }, // DevOps category
       detailedAccomplishments: [
         'Containerized 100+ applications reducing deployment complexity by 80%',
         'Created multi-stage Dockerfiles optimizing image sizes by 70%',
@@ -593,11 +477,11 @@ export const skillsData = {
       id: 'kubernetes',
       title: 'Kubernetes',
       category: 'devops',
-      level: 'expert',
+      level: 'advanced',
       status: 'completed',
-      description: 'Container orchestration, cluster management, service mesh, and production deployments',
+      description: 'Container orchestration, cluster management, service mesh, and cloud-native deployment',
       yearsOfExperience: 4,
-      position: { x: 700, y: 450 },
+      position: { x: 750, y: 450 }, // DevOps category
       detailedAccomplishments: [
         'Managed production K8s clusters serving 500+ microservices',
         'Implemented GitOps deployment workflows with ArgoCD',
@@ -624,9 +508,9 @@ export const skillsData = {
       category: 'devops',
       level: 'expert',
       status: 'completed',
-      description: 'GitHub Actions, Jenkins, GitLab CI, automated testing, and deployment pipelines',
+      description: 'Automated testing, deployment pipelines, GitOps, and release management',
       yearsOfExperience: 6,
-      position: { x: 600, y: 550 },
+      position: { x: 600, y: 530 }, // DevOps category, second row
       detailedAccomplishments: [
         'Built CI/CD pipelines for 50+ repositories with automated testing',
         'Implemented GitOps workflows with automatic deployments',
@@ -647,46 +531,17 @@ export const skillsData = {
         '10 deployments per day average'
       ]
     },
-    {
-      id: 'monitoring',
-      title: 'Monitoring & Observability',
-      category: 'devops',
-      level: 'advanced',
-      status: 'completed',
-      description: 'Prometheus, Grafana, ELK stack, distributed tracing, and performance monitoring',
-      yearsOfExperience: 4,
-      position: { x: 50, y: 650 },
-      detailedAccomplishments: [
-        'Built comprehensive monitoring for 100+ microservices',
-        'Implemented Prometheus and Grafana with custom dashboards',
-        'Created ELK stack for centralized logging and log analysis',
-        'Built distributed tracing with Jaeger and OpenTelemetry',
-        'Implemented SLI/SLO monitoring with error budgets',
-        'Created alerting rules with PagerDuty integration',
-        'Built application performance monitoring (APM) with New Relic',
-        'Implemented synthetic monitoring for critical user journeys',
-        'Created cost monitoring dashboards for cloud resources',
-        'Built incident response playbooks with automated remediation'
-      ],
-      technologies: ['Prometheus', 'Grafana', 'ELK Stack', 'Jaeger', 'OpenTelemetry', 'New Relic', 'PagerDuty'],
-      keyMetrics: [
-        '100+ services monitored',
-        '99.9% monitoring uptime',
-        '5-minute mean time to detection',
-        '90% reduction in false positives'
-      ]
-    },
 
-    // Leadership Skills
+    // Leadership Skills - positioned under Leadership category (x: 1000, y: 350)
     {
       id: 'team-leadership',
       title: 'Team Leadership',
       category: 'leadership',
       level: 'expert',
       status: 'completed',
-      description: 'Leading engineering teams, technical vision, cross-functional collaboration',
+      description: 'Engineering management, team building, mentoring, and cross-functional collaboration',
       yearsOfExperience: 5,
-      position: { x: 900, y: 450 },
+      position: { x: 850, y: 450 }, // Leadership category
       detailedAccomplishments: [
         'Led engineering teams of 15+ developers across multiple projects',
         'Established technical standards and coding practices organization-wide',
@@ -708,43 +563,14 @@ export const skillsData = {
       ]
     },
     {
-      id: 'technical-mentoring',
-      title: 'Technical Mentoring',
-      category: 'leadership',
-      level: 'expert',
-      status: 'completed',
-      description: 'Coaching senior developers, establishing engineering practices, code reviews',
-      yearsOfExperience: 4,
-      position: { x: 450, y: 500 },
-      detailedAccomplishments: [
-        'Mentored 25+ engineers across junior to senior levels',
-        'Created technical training programs for new technologies',
-        'Established code review standards improving code quality by 60%',
-        'Built technical interview processes for hiring top talent',
-        'Created technical documentation standards and templates',
-        'Implemented pair programming practices for knowledge sharing',
-        'Built technical career progression frameworks',
-        'Created brown bag sessions and tech talks program',
-        'Established architectural decision record (ADR) processes',
-        'Built cross-team knowledge sharing initiatives'
-      ],
-      technologies: ['Code Reviews', 'Documentation', 'ADRs', 'Technical Training', 'Knowledge Management'],
-      keyMetrics: [
-        '25+ engineers mentored',
-        '60% code quality improvement',
-        '90% mentee retention rate',
-        '80% internal promotion rate'
-      ]
-    },
-    {
       id: 'project-management',
       title: 'Project Management',
       category: 'leadership',
       level: 'advanced',
       status: 'completed',
-      description: 'Agile methodologies, sprint planning, stakeholder management, delivery optimization',
-      yearsOfExperience: 5,
-      position: { x: 400, y: 580 },
+      description: 'Agile methodologies, stakeholder management, delivery planning, and risk mitigation',
+      yearsOfExperience: 6,
+      position: { x: 1150, y: 450 }, // Leadership category
       detailedAccomplishments: [
         'Led 15+ cross-functional projects with $2M+ total budget',
         'Implemented Scrum and Kanban methodologies across teams',
@@ -765,378 +591,155 @@ export const skillsData = {
         '30% improvement in delivery speed'
       ]
     },
-    {
-      id: 'architecture-reviews',
-      title: 'Architecture Reviews',
-      category: 'leadership',
-      level: 'expert',
-      status: 'completed',
-      description: 'Technical decision making, architecture governance, risk assessment',
-      yearsOfExperience: 4,
-      position: { x: 320, y: 650 },
-      detailedAccomplishments: [
-        'Led architecture review board for 30+ major technical decisions',
-        'Created architecture governance frameworks and standards',
-        'Built technical risk assessment methodologies',
-        'Established architecture documentation standards',
-        'Created technology evaluation and selection processes',
-        'Built cross-team architecture alignment processes',
-        'Implemented architecture compliance monitoring',
-        'Created architecture review templates and checklists',
-        'Built technical debt assessment and prioritization frameworks',
-        'Led architecture migration strategies and roadmaps'
-      ],
-      technologies: ['Architecture Documentation', 'Risk Assessment', 'Technical Standards', 'Governance Frameworks'],
-      keyMetrics: [
-        '30+ architecture decisions reviewed',
-        '95% architecture compliance rate',
-        '50% reduction in technical debt',
-        '90% team alignment on technical decisions'
-      ]
-    },
 
-    // Data Skills
-    {
-      id: 'databases',
-      title: 'Database Design',
-      category: 'data',
-      level: 'expert',
-      status: 'completed',
-      description: 'PostgreSQL, MongoDB, Redis, database optimization, sharding strategies',
-      yearsOfExperience: 7,
-      position: { x: 650, y: 500 },
-      detailedAccomplishments: [
-        'Designed database schemas for 20+ production applications',
-        'Implemented database sharding strategies handling TBs of data',
-        'Optimized query performance achieving 90% speed improvements',
-        'Built multi-master replication setups for high availability',
-        'Implemented database backup and disaster recovery strategies',
-        'Created database monitoring and alerting systems',
-        'Built data migration pipelines with zero downtime',
-        'Implemented database security with encryption and access controls',
-        'Created database capacity planning and scaling strategies',
-        'Built polyglot persistence with SQL and NoSQL databases'
-      ],
-      technologies: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Cassandra', 'ElasticSearch', 'DynamoDB'],
-      keyMetrics: [
-        '20+ production databases designed',
-        '90% query performance improvement',
-        'TBs of data managed daily',
-        '99.99% database uptime'
-      ]
-    },
-    {
-      id: 'data-streaming',
-      title: 'Data Streaming',
-      category: 'data',
-      level: 'advanced',
-      status: 'completed',
-      description: 'Apache Kafka, event streaming, real-time processing, data pipelines',
-      yearsOfExperience: 3,
-      position: { x: 750, y: 500 },
-      detailedAccomplishments: [
-        'Built real-time data streaming pipelines processing 1M+ events/hour',
-        'Implemented Apache Kafka clusters with multi-region replication',
-        'Created stream processing applications with Kafka Streams',
-        'Built real-time analytics with Apache Flink and Kafka',
-        'Implemented exactly-once semantics for critical data flows',
-        'Created schema registry for Avro and JSON schema evolution',
-        'Built monitoring and alerting for streaming pipelines',
-        'Implemented back-pressure handling for high-throughput scenarios',
-        'Created data lineage tracking for streaming data',
-        'Built real-time ETL pipelines with stream processing'
-      ],
-      technologies: ['Apache Kafka', 'Kafka Streams', 'Apache Flink', 'Schema Registry', 'Confluent Platform', 'Avro'],
-      keyMetrics: [
-        '1M+ events processed per hour',
-        '99.9% data delivery guarantee',
-        'Sub-second processing latency',
-        '10+ real-time pipelines in production'
-      ]
-    },
-    {
-      id: 'data-analytics',
-      title: 'Data Analytics',
-      category: 'data',
-      level: 'intermediate',
-      status: 'completed',
-      description: 'Business intelligence, metrics design, data-driven decision making',
-      yearsOfExperience: 3,
-      position: { x: 700, y: 580 },
-      detailedAccomplishments: [
-        'Built analytics dashboards for C-level executive reporting',
-        'Designed KPI frameworks and business metrics tracking',
-        'Created data warehousing solutions with dimensional modeling',
-        'Implemented A/B testing frameworks for product optimization',
-        'Built customer analytics and segmentation models',
-        'Created real-time business intelligence with streaming data',
-        'Implemented data governance and quality frameworks',
-        'Built predictive analytics models for business forecasting',
-        'Created automated reporting systems reducing manual effort by 70%',
-        'Implemented data visualization best practices with Tableau and Power BI'
-      ],
-      technologies: ['Tableau', 'Power BI', 'SQL', 'Python', 'R', 'Apache Spark', 'Data Warehousing', 'ETL/ELT'],
-      keyMetrics: [
-        '15+ executive dashboards created',
-        '70% reduction in manual reporting',
-        '90% data accuracy achieved',
-        '50+ KPIs tracked automatically'
-      ]
-    },
+    // Data Skills - positioned under Data category (x: 200, y: 650)
     {
       id: 'machine-learning',
       title: 'Machine Learning',
       category: 'ml',
-      level: 'beginner',
+      level: 'advanced',
       status: 'in-progress',
-      description: 'ML algorithms, model training, AI integration into applications',
-      yearsOfExperience: 0,
-      position: { x: 600, y: 750 },
+      description: 'Comprehensive ML engineering with MLOps, model deployment, and production ML systems',
+      yearsOfExperience: 2,
+      position: { x: 450, y: 750 }, // ML category
       learningRoadmap: {
-        totalTopics: 25,
-        completedTopics: 0,
-        currentPhase: 'Introduction',
+        weeklyGoal: {
+          hoursPerWeek: 10,
+          studyDays: 5,
+          targetCompletion: 'December 2025',
+          currentWeekHours: 0,
+          targetDate: 'Dec 2025'
+        },
         phases: [
           {
             id: 'introduction',
-            title: 'Introduction',
+            title: 'Introduction to Machine Learning',
+            description: 'Build foundational understanding of ML concepts and ecosystem',
+            estimatedWeeks: 4,
             status: 'planned',
-            estimatedWeeks: 2,
             topics: [
               {
-                id: 'what-is-ml-engineer',
-                title: 'What is an ML Engineer',
-                completed: false,
-                resources: ['Articles', 'YouTube videos', 'Job descriptions analysis'],
-                estimatedHours: 4
+                id: 'ml-basics',
+                title: 'ML Fundamentals',
+                description: 'Understanding supervised, unsupervised, and reinforcement learning',
+                estimatedHours: 8,
+                resources: ['Coursera ML Course', 'Python ML Handbook'],
+                priority: 'high'
               },
               {
-                id: 'ml-vs-ai-engineer', 
-                title: 'ML Engineer vs AI Engineer',
-                completed: false,
-                resources: ['Comparison articles', 'Career path guides'],
-                estimatedHours: 3
+                id: 'python-setup',
+                title: 'Python ML Environment',
+                description: 'Set up Jupyter, Anaconda, and essential libraries',
+                estimatedHours: 4,
+                resources: ['Anaconda Documentation', 'Jupyter Tutorials'],
+                priority: 'high'
               },
               {
-                id: 'skills-responsibilities',
-                title: 'Skills and Responsibilities',
-                completed: false,
-                resources: ['Industry reports', 'Job market analysis'],
-                estimatedHours: 5
+                id: 'data-basics',
+                title: 'Data Fundamentals',
+                description: 'Understanding datasets, features, and data preprocessing',
+                estimatedHours: 6,
+                resources: ['Pandas Documentation', 'Data Cleaning Tutorials'],
+                priority: 'medium'
               }
             ]
           },
           {
-            id: 'mathematical-foundations',
-            title: 'Mathematical Foundations',
-            status: 'planned',
+            id: 'foundations',
+            title: 'ML Foundations',
+            description: 'Core algorithms and mathematical foundations',
             estimatedWeeks: 8,
+            status: 'planned',
             topics: [
               {
-                id: 'linear-algebra',
-                title: 'Linear Algebra',
-                completed: false,
-                subtopics: [
-                  'Vectors and vector operations',
-                  'Matrices and matrix operations',
-                  'Eigenvalues and eigenvectors',
-                  'Singular Value Decomposition (SVD)',
-                  'Principal Component Analysis (PCA)'
-                ],
-                resources: ['Khan Academy', '3Blue1Brown videos', 'Linear Algebra textbook'],
-                estimatedHours: 40
+                id: 'linear-regression',
+                title: 'Linear Regression',
+                description: 'Understanding linear relationships and regression analysis',
+                estimatedHours: 10,
+                resources: ['StatQuest Videos', 'Scikit-learn Documentation'],
+                priority: 'high'
               },
               {
-                id: 'statistics-probability',
-                title: 'Statistics and Probability',
-                completed: false,
-                subtopics: [
-                  'Descriptive statistics',
-                  'Probability distributions',
-                  'Bayes theorem',
-                  'Hypothesis testing',
-                  'Confidence intervals'
-                ],
-                resources: ['Statistics courses', 'Probability textbooks'],
-                estimatedHours: 35
+                id: 'classification',
+                title: 'Classification Algorithms',
+                description: 'Decision trees, random forests, logistic regression',
+                estimatedHours: 12,
+                resources: ['Hands-On ML Book', 'Kaggle Learn'],
+                priority: 'high'
               },
               {
-                id: 'calculus',
-                title: 'Calculus',
-                completed: false,
-                subtopics: [
-                  'Derivatives and partial derivatives',
-                  'Chain rule',
-                  'Gradients and optimization',
-                  'Multivariate calculus'
-                ],
-                resources: ['Calculus courses', 'Khan Academy'],
-                estimatedHours: 30
+                id: 'clustering',
+                title: 'Clustering',
+                description: 'K-means, hierarchical clustering, DBSCAN',
+                estimatedHours: 8,
+                resources: ['Scikit-learn Clustering Guide'],
+                priority: 'medium'
               }
             ]
           },
           {
-            id: 'programming-fundamentals',
-            title: 'Programming Fundamentals',
-            status: 'planned',
-            estimatedWeeks: 6,
-            topics: [
-              {
-                id: 'python-basics',
-                title: 'Python for ML',
-                completed: false,
-                subtopics: [
-                  'Python syntax and data structures',
-                  'Object-oriented programming',
-                  'File handling and APIs',
-                  'Error handling and debugging'
-                ],
-                resources: ['Python.org tutorial', 'Real Python', 'Python courses'],
-                estimatedHours: 50
-              },
-              {
-                id: 'data-manipulation',
-                title: 'Data Manipulation Libraries',
-                completed: false,
-                subtopics: [
-                  'NumPy for numerical computing',
-                  'Pandas for data manipulation',
-                  'Matplotlib/Seaborn for visualization',
-                  'Data cleaning and preprocessing'
-                ],
-                resources: ['Pandas documentation', 'NumPy tutorials'],
-                estimatedHours: 40
-              }
-            ]
-          },
-          {
-            id: 'ml-fundamentals',
-            title: 'Machine Learning Fundamentals',
-            status: 'planned',
-            estimatedWeeks: 10,
-            topics: [
-              {
-                id: 'ml-types',
-                title: 'Types of Machine Learning',
-                completed: false,
-                subtopics: [
-                  'Supervised learning',
-                  'Unsupervised learning',
-                  'Reinforcement learning',
-                  'Semi-supervised learning'
-                ],
-                resources: ['ML textbooks', 'Online courses'],
-                estimatedHours: 15
-              },
-              {
-                id: 'supervised-learning',
-                title: 'Supervised Learning Algorithms',
-                completed: false,
-                subtopics: [
-                  'Linear/Logistic regression',
-                  'Decision trees and random forests',
-                  'Support Vector Machines',
-                  'Naive Bayes',
-                  'K-Nearest Neighbors'
-                ],
-                resources: ['Scikit-learn documentation', 'ML courses'],
-                estimatedHours: 60
-              },
-              {
-                id: 'unsupervised-learning',
-                title: 'Unsupervised Learning',
-                completed: false,
-                subtopics: [
-                  'K-means clustering',
-                  'Hierarchical clustering',
-                  'DBSCAN',
-                  'Principal Component Analysis',
-                  'Association rules'
-                ],
-                resources: ['ML textbooks', 'Clustering tutorials'],
-                estimatedHours: 40
-              }
-            ]
-          },
-          {
-            id: 'deep-learning',
-            title: 'Deep Learning',
-            status: 'planned',
+            id: 'advanced',
+            title: 'Advanced ML',
+            description: 'Deep learning and advanced techniques',
             estimatedWeeks: 12,
+            status: 'planned',
             topics: [
               {
                 id: 'neural-networks',
-                title: 'Neural Network Fundamentals',
-                completed: false,
-                subtopics: [
-                  'Perceptrons and multilayer networks',
-                  'Backpropagation algorithm',
-                  'Activation functions',
-                  'Loss functions and optimization'
-                ],
-                resources: ['Deep Learning by Ian Goodfellow', 'Neural Networks courses'],
-                estimatedHours: 50
+                title: 'Neural Networks',
+                description: 'Fundamentals of neural networks and backpropagation',
+                estimatedHours: 15,
+                resources: ['Deep Learning Specialization', 'TensorFlow Tutorials'],
+                priority: 'high'
               },
               {
                 id: 'cnn',
                 title: 'Convolutional Neural Networks',
-                completed: false,
-                subtopics: [
-                  'Convolution and pooling layers',
-                  'CNN architectures (LeNet, AlexNet, VGG, ResNet)',
-                  'Image classification and object detection',
-                  'Transfer learning'
-                ],
-                resources: ['CNN tutorials', 'Computer Vision courses'],
-                estimatedHours: 45
+                description: 'Image processing and computer vision',
+                estimatedHours: 12,
+                resources: ['CS231n Course', 'Keras Documentation'],
+                priority: 'medium'
               },
               {
-                id: 'rnn',
-                title: 'Recurrent Neural Networks',
-                completed: false,
-                subtopics: [
-                  'Vanilla RNNs and LSTM',
-                  'GRU networks',
-                  'Sequence-to-sequence models',
-                  'Attention mechanisms'
-                ],
-                resources: ['RNN tutorials', 'NLP courses'],
-                estimatedHours: 40
+                id: 'nlp',
+                title: 'Natural Language Processing',
+                description: 'Text processing and language models',
+                estimatedHours: 10,
+                resources: ['NLTK Book', 'Hugging Face Tutorials'],
+                priority: 'medium'
               }
             ]
           },
           {
-            id: 'mlops-deployment',
-            title: 'MLOps and Deployment',
+            id: 'production',
+            title: 'ML in Production',
+            description: 'MLOps, deployment, and production systems',
+            estimatedWeeks: 6,
             status: 'planned',
-            estimatedWeeks: 8,
             topics: [
               {
-                id: 'model-deployment',
-                title: 'Model Deployment',
-                completed: false,
-                subtopics: [
-                  'REST APIs for ML models',
-                  'Containerization with Docker',
-                  'Cloud deployment (AWS, GCP, Azure)',
-                  'Model serving frameworks'
-                ],
-                resources: ['MLOps courses', 'Deployment tutorials'],
-                estimatedHours: 40
+                id: 'mlops',
+                title: 'MLOps Fundamentals',
+                description: 'CI/CD for ML, model versioning, monitoring',
+                estimatedHours: 12,
+                resources: ['MLOps Course', 'MLflow Documentation'],
+                priority: 'high'
               },
               {
-                id: 'monitoring-maintenance',
-                title: 'Model Monitoring and Maintenance',
-                completed: false,
-                subtopics: [
-                  'Model performance monitoring',
-                  'Data drift detection',
-                  'Model versioning',
-                  'A/B testing for models',
-                  'Automated retraining pipelines'
-                ],
-                resources: ['MLOps best practices', 'Monitoring tools documentation'],
-                estimatedHours: 35
+                id: 'deployment',
+                title: 'Model Deployment',
+                description: 'Deploy models with Flask, FastAPI, cloud services',
+                estimatedHours: 10,
+                resources: ['FastAPI Docs', 'AWS SageMaker Tutorials'],
+                priority: 'high'
+              },
+              {
+                id: 'monitoring',
+                title: 'Model Monitoring',
+                description: 'Track model performance and data drift',
+                estimatedHours: 8,
+                resources: ['Evidently AI', 'MLflow Tracking'],
+                priority: 'medium'
               }
             ]
           }
@@ -1144,31 +747,29 @@ export const skillsData = {
         milestones: [
           {
             id: 'first-model',
-            title: 'Build First ML Model',
-            description: 'Complete a simple classification project end-to-end',
-            targetPhase: 'ml-fundamentals',
-            completed: false
+            title: 'First ML Model',
+            description: 'Successfully train and evaluate your first machine learning model',
+            completed: false,
+            targetDate: 'October 2025',
+            phase: 'foundations'
           },
           {
-            id: 'deep-learning-project',
-            title: 'Deep Learning Project',
-            description: 'Build and train a neural network for image classification',
-            targetPhase: 'deep-learning',
-            completed: false
+            id: 'production-ready',
+            title: 'Production Deployment',
+            description: 'Deploy a machine learning model to production environment',
+            completed: false,
+            targetDate: 'November 2025',
+            phase: 'production'
           },
           {
-            id: 'production-deployment',
-            title: 'Deploy Model to Production',
-            description: 'Deploy an ML model with proper monitoring and maintenance',
-            targetPhase: 'mlops-deployment', 
-            completed: false
+            id: 'portfolio-complete',
+            title: 'ML Portfolio',
+            description: 'Complete portfolio with 3+ diverse ML projects',
+            completed: false,
+            targetDate: 'December 2025',
+            phase: 'production'
           }
-        ],
-        weeklyGoal: {
-          hoursPerWeek: 10,
-          currentWeekHours: 0,
-          targetDate: '2025-12-31'
-        }
+        ]
       },
       detailedAccomplishments: [
         'Starting ML journey - building foundational knowledge',
@@ -1184,16 +785,134 @@ export const skillsData = {
       ]
     },
 
-    // Tools & Platforms
+    // Data & Analytics Skills - positioned under Data category (x: 200, y: 650)
+    {
+      id: 'sql',
+      title: 'SQL & Databases',
+      category: 'data',
+      level: 'expert',
+      status: 'completed',
+      description: 'Advanced SQL, database design, query optimization, and data modeling across multiple database systems',
+      yearsOfExperience: 8,
+      position: { x: 50, y: 750 }, // Data category
+      detailedAccomplishments: [
+        'Designed and optimized databases serving 10M+ records with sub-second query times',
+        'Built complex ETL pipelines processing TBs of data daily',
+        'Implemented database sharding and partitioning strategies',
+        'Created data warehousing solutions with star and snowflake schemas',
+        'Built real-time analytics dashboards with sub-minute data freshness',
+        'Optimized query performance achieving 90% reduction in execution time',
+        'Implemented database security and compliance (GDPR, HIPAA)',
+        'Created automated backup and disaster recovery procedures',
+        'Built data migration strategies for legacy system modernization',
+        'Designed multi-tenant database architectures for SaaS platforms'
+      ],
+      technologies: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'BigQuery', 'Snowflake', 'DynamoDB', 'Elasticsearch'],
+      keyMetrics: [
+        '10M+ records managed across multiple databases',
+        '90% query performance improvement',
+        'Sub-second response times for 95% of queries',
+        'Zero data loss across 5 years of operations'
+      ]
+    },
+    {
+      id: 'data-visualization',
+      title: 'Data Visualization',
+      category: 'data',
+      level: 'advanced',
+      status: 'completed',
+      description: 'Interactive dashboards, business intelligence, data storytelling, and executive reporting',
+      yearsOfExperience: 5,
+      position: { x: 250, y: 750 }, // Data category
+      detailedAccomplishments: [
+        'Built executive dashboards serving C-level executives and board members',
+        'Created interactive visualizations with D3.js and custom React components',
+        'Designed self-service BI platforms enabling non-technical users',
+        'Built real-time monitoring dashboards for operational metrics',
+        'Created data storytelling presentations influencing $5M+ investment decisions',
+        'Implemented A/B testing visualization frameworks',
+        'Built mobile-responsive analytics dashboards',
+        'Created automated report generation reducing manual effort by 80%',
+        'Designed accessibility-compliant visualizations following WCAG guidelines',
+        'Built custom visualization libraries adopted across multiple teams'
+      ],
+      technologies: ['Tableau', 'Power BI', 'D3.js', 'Chart.js', 'Plotly', 'Grafana', 'Looker', 'Google Analytics'],
+      keyMetrics: [
+        '50+ interactive dashboards built',
+        '200+ business users enabled with self-service BI',
+        '80% reduction in manual reporting effort',
+        '$5M+ investment decisions influenced by data presentations'
+      ]
+    },
+    {
+      id: 'data-engineering',
+      title: 'Data Engineering',
+      category: 'data',
+      level: 'advanced',
+      status: 'completed',
+      description: 'ETL/ELT pipelines, data warehousing, stream processing, and big data infrastructure',
+      yearsOfExperience: 4,
+      position: { x: 150, y: 830 }, // Data category, second row
+      detailedAccomplishments: [
+        'Built scalable data pipelines processing 100GB+ daily across multiple sources',
+        'Implemented real-time stream processing with Apache Kafka and Apache Spark',
+        'Created data lake architecture with automated data cataloging',
+        'Built CDC (Change Data Capture) pipelines for real-time data synchronization',
+        'Implemented data quality monitoring and alerting systems',
+        'Created data lineage tracking for compliance and debugging',
+        'Built cost-optimized data storage strategies reducing costs by 60%',
+        'Implemented data versioning and rollback mechanisms',
+        'Created self-healing data pipelines with automatic error recovery',
+        'Built data governance frameworks ensuring data privacy and security'
+      ],
+      technologies: ['Apache Spark', 'Apache Kafka', 'Apache Airflow', 'dbt', 'Snowflake', 'AWS Glue', 'Databricks', 'Pandas'],
+      keyMetrics: [
+        '100GB+ daily data processing',
+        '99.9% pipeline reliability',
+        '60% reduction in data storage costs',
+        'Sub-hour data freshness for critical business metrics'
+      ]
+    },
+    {
+      id: 'python-analytics',
+      title: 'Python for Analytics',
+      category: 'data',
+      level: 'expert',
+      status: 'completed',
+      description: 'Data science libraries, statistical analysis, data manipulation, and analytical modeling',
+      yearsOfExperience: 6,
+      position: { x: 350, y: 830 }, // Data category, second row
+      detailedAccomplishments: [
+        'Built statistical models for business forecasting with 95% accuracy',
+        'Created customer segmentation models using clustering algorithms',
+        'Implemented time series analysis for demand forecasting',
+        'Built recommendation systems using collaborative filtering',
+        'Created A/B testing frameworks with statistical significance testing',
+        'Built automated data quality checking and anomaly detection',
+        'Implemented dimensionality reduction for large dataset analysis',
+        'Created custom data analysis libraries used across multiple teams',
+        'Built predictive models for customer churn and lifetime value',
+        'Implemented advanced statistical techniques (regression, classification, clustering)'
+      ],
+      technologies: ['Pandas', 'NumPy', 'SciPy', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'Jupyter', 'Statsmodels'],
+      keyMetrics: [
+        '95% accuracy in business forecasting models',
+        '30+ statistical models built and deployed',
+        '40% improvement in customer segmentation accuracy',
+        '25% reduction in customer churn through predictive modeling'
+      ]
+    },
+
+    // Tools Skills - positioned under Tools category (x: 1000, y: 650)
     {
       id: 'git',
-      title: 'Git & Version Control',
+      title: 'Git',
       category: 'tools',
       level: 'expert',
       status: 'completed',
-      description: 'Advanced Git workflows, branching strategies, code collaboration',
-      yearsOfExperience: 8,
-      position: { x: 950, y: 500 },
+      description: 'Advanced version control, branching strategies, and collaborative development workflows',
+      yearsOfExperience: 10,
+      position: { x: 850, y: 750 }, // Tools category
       detailedAccomplishments: [
         'Implemented Git workflows for 50+ repositories and 100+ developers',
         'Created branching strategies: GitFlow, GitHub Flow, and trunk-based development',
@@ -1222,7 +941,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Unit testing, integration testing, E2E testing, TDD, testing pyramids',
       yearsOfExperience: 6,
-      position: { x: 1050, y: 500 },
+      position: { x: 1050, y: 750 }, // Tools category
       detailedAccomplishments: [
         'Implemented comprehensive testing strategies achieving 95+ code coverage',
         'Built automated testing pipelines with unit, integration, and E2E tests',
@@ -1251,7 +970,7 @@ export const skillsData = {
       status: 'completed',
       description: 'OWASP top 10, secure coding, authentication, authorization, vulnerability assessment',
       yearsOfExperience: 5,
-      position: { x: 1000, y: 580 },
+      position: { x: 950, y: 830 }, // Tools category, second row
       detailedAccomplishments: [
         'Implemented security practices across 30+ applications',
         'Built authentication and authorization systems with OAuth2 and SAML',
@@ -1280,7 +999,7 @@ export const skillsData = {
       status: 'completed',
       description: 'Application profiling, load testing, caching strategies, performance tuning',
       yearsOfExperience: 6,
-      position: { x: 920, y: 650 },
+      position: { x: 1150, y: 830 }, // Tools category, second row
       detailedAccomplishments: [
         'Optimized application performance achieving 80% latency reduction',
         'Implemented caching strategies with Redis and CDN optimization',
