@@ -9,8 +9,9 @@ import SkillsAssessment from './components/SkillsAssessment';
 import ResourceHub from './components/ResourceHub';
 import Achievements from './components/Achievements';
 import Goals from './components/Goals';
+import PortfolioExport from './components/PortfolioExport';
 import { skillsData, personalInfo } from './data/skillsData';
-import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair } from 'lucide-react';
+import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair, FileText } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState('roadmap');
@@ -182,6 +183,20 @@ function App() {
             >
               <Crosshair size={18} />
               Goals
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentView('export')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                currentView === 'export' 
+                  ? 'bg-primary-500 text-white' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FileText size={18} />
+              Export
             </motion.button>
           </div>
           
@@ -496,6 +511,18 @@ function App() {
               transition={{ duration: 0.5 }}
             >
               <Goals />
+            </motion.div>
+          )}
+
+          {currentView === 'export' && (
+            <motion.div
+              key="export"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+            >
+              <PortfolioExport />
             </motion.div>
           )}
         </AnimatePresence>

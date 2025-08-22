@@ -942,31 +942,51 @@ export const skillsData = {
           title: 'Microservices Patterns by Chris Richardson',
           url: 'https://microservices.io/',
           type: 'website',
-          description: 'Comprehensive patterns and practices for microservices'
+          description: 'Comprehensive patterns and practices for microservices',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '8-12 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Microservices by Martin Fowler',
           url: 'https://martinfowler.com/articles/microservices.html',
           type: 'article',
-          description: 'Foundational article on microservices architecture'
+          description: 'Foundational article on microservices architecture',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.9,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Microservices Tutorial by Tech Primers',
           url: 'https://www.youtube.com/playlist?list=PLTyWtrsGknYdKTppVQDjqy8YrYYAYjH-a',
           type: 'youtube',
-          description: 'Complete microservices tutorial series'
+          description: 'Complete microservices tutorial series',
+          difficulty: 'intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Building Microservices by Sam Newman',
           url: 'https://samnewman.io/books/building_microservices/',
           type: 'book',
-          description: 'Essential book on microservices (free chapters available)'
+          description: 'Essential book on microservices (free chapters available)',
+          difficulty: 'advanced',
+          timeToComplete: '15-20 hours',
+          rating: 4.7,
+          lastUpdated: '2024-09-20'
         },
         {
           title: 'Microservices with Spring Boot',
           url: 'https://www.youtube.com/watch?v=BLlEgtp2_i8',
           type: 'youtube',
-          description: 'Practical microservices implementation guide'
+          description: 'Practical microservices implementation guide',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.4,
+          lastUpdated: '2024-11-10'
         }
       ]
     },
@@ -1003,31 +1023,51 @@ export const skillsData = {
           title: 'RESTful API Design Best Practices',
           url: 'https://restfulapi.net/',
           type: 'website',
-          description: 'Comprehensive guide to REST API design principles'
+          description: 'Comprehensive guide to REST API design principles',
+          difficulty: 'intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'OpenAPI Specification',
           url: 'https://swagger.io/specification/',
           type: 'documentation',
-          description: 'Official OpenAPI specification and examples'
+          description: 'Official OpenAPI specification and examples',
+          difficulty: 'intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.7,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'GraphQL Tutorial by The Net Ninja',
           url: 'https://www.youtube.com/playlist?list=PL4cUxeGkcC9iK6Qhn-QLcXCXPQUov1U7f',
           type: 'youtube',
-          description: 'Complete GraphQL tutorial series'
+          description: 'Complete GraphQL tutorial series',
+          difficulty: 'intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-15'
         },
         {
           title: 'API Design Patterns by Google',
           url: 'https://cloud.google.com/apis/design',
           type: 'documentation',
-          description: 'Google Cloud API design guide and best practices'
+          description: 'Google Cloud API design guide and best practices',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '5-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Building APIs with Node.js',
           url: 'https://www.youtube.com/watch?v=pKd0Rpw7O48',
           type: 'youtube',
-          description: 'Practical API development tutorial'
+          description: 'Practical API development tutorial',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.3,
+          lastUpdated: '2024-10-25'
         }
       ]
     },
@@ -1392,31 +1432,51 @@ export const skillsData = {
           title: 'GitHub Actions Documentation',
           url: 'https://docs.github.com/en/actions',
           type: 'documentation',
-          description: 'Complete guide to GitHub Actions CI/CD'
+          description: 'Complete guide to GitHub Actions CI/CD',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'CI/CD Tutorial by TechWorld with Nana',
           url: 'https://www.youtube.com/watch?v=1er2cjUq1UI',
           type: 'youtube',
-          description: 'Complete CI/CD pipeline tutorial'
+          description: 'Complete CI/CD pipeline tutorial',
+          difficulty: 'intermediate',
+          timeToComplete: '2.5 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Jenkins Tutorial by edureka!',
           url: 'https://www.youtube.com/watch?v=FX322RVNGj4',
           type: 'youtube',
-          description: 'Comprehensive Jenkins CI/CD tutorial'
+          description: 'Comprehensive Jenkins CI/CD tutorial',
+          difficulty: 'intermediate',
+          timeToComplete: '4-5 hours',
+          rating: 4.4,
+          lastUpdated: '2024-10-20'
         },
         {
           title: 'GitLab CI/CD Documentation',
           url: 'https://docs.gitlab.com/ee/ci/',
           type: 'documentation',
-          description: 'GitLab CI/CD configuration and best practices'
+          description: 'GitLab CI/CD configuration and best practices',
+          difficulty: 'intermediate',
+          timeToComplete: '5-6 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'DevOps CI/CD Pipeline Tutorial',
           url: 'https://www.youtube.com/watch?v=scEDHsr3APg',
           type: 'youtube',
-          description: 'End-to-end CI/CD pipeline setup'
+          description: 'End-to-end CI/CD pipeline setup',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '3-4 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-30'
         }
       ]
     },
@@ -1455,31 +1515,51 @@ export const skillsData = {
           title: 'The Manager\'s Path by Camille Fournier',
           url: 'https://www.youtube.com/watch?v=9VBnai2rKWY',
           type: 'youtube',
-          description: 'Engineering management principles and practices'
+          description: 'Engineering management principles and practices',
+          difficulty: 'intermediate',
+          timeToComplete: '1.5 hours',
+          rating: 4.8,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'Harvard Business Review Leadership',
           url: 'https://hbr.org/topic/leadership',
           type: 'articles',
-          description: 'Free leadership articles and insights'
+          description: 'Free leadership articles and insights',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '5-10 hours',
+          rating: 4.7,
+          lastUpdated: '2024-12-05'
         },
         {
           title: 'Coursera Leadership Courses',
           url: 'https://www.coursera.org/courses?query=leadership',
           type: 'course',
-          description: 'Free leadership courses (audit mode)'
+          description: 'Free leadership courses (audit mode)',
+          difficulty: 'intermediate',
+          timeToComplete: '15-20 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-20'
         },
         {
           title: 'MIT Leadership Resources',
           url: 'https://web.mit.edu/leadership/',
           type: 'website',
-          description: 'MIT leadership development resources'
+          description: 'MIT leadership development resources',
+          difficulty: 'advanced',
+          timeToComplete: '8-12 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Engineering Management Handbook',
           url: 'https://github.com/ryanburgess/engineer-manager',
           type: 'github',
-          description: 'Open source engineering management resources'
+          description: 'Open source engineering management resources',
+          difficulty: 'intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.4,
+          lastUpdated: '2024-11-15'
         }
       ]
     },
@@ -1516,31 +1596,51 @@ export const skillsData = {
           title: 'Project Management Institute Resources',
           url: 'https://www.pmi.org/learning/training-development/free-content',
           type: 'website',
-          description: 'Free project management training and resources'
+          description: 'Free project management training and resources',
+          difficulty: 'intermediate',
+          timeToComplete: '10-15 hours',
+          rating: 4.6,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Agile and Scrum Tutorial by edureka!',
           url: 'https://www.youtube.com/watch?v=9TycLR0TqFA',
           type: 'youtube',
-          description: 'Complete Agile and Scrum methodology tutorial'
+          description: 'Complete Agile and Scrum methodology tutorial',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '4-5 hours',
+          rating: 4.4,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'Google Project Management Certificate',
           url: 'https://www.coursera.org/professional-certificates/google-project-management',
           type: 'course',
-          description: 'Free project management course (audit mode)'
+          description: 'Free project management course (audit mode)',
+          difficulty: 'beginner',
+          timeToComplete: '40-60 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Atlassian Agile Coach',
           url: 'https://www.atlassian.com/agile',
           type: 'tutorial',
-          description: 'Free Agile methodologies and best practices'
+          description: 'Free Agile methodologies and best practices',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Scrum.org Learning Resources',
           url: 'https://www.scrum.org/learning-series',
           type: 'website',
-          description: 'Free Scrum training and certification info'
+          description: 'Free Scrum training and certification info',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-20'
         }
       ]
     },
@@ -2078,31 +2178,51 @@ export const skillsData = {
           title: 'Git Official Documentation',
           url: 'https://git-scm.com/docs',
           type: 'documentation',
-          description: 'Comprehensive Git documentation and reference'
+          description: 'Comprehensive Git documentation and reference',
+          difficulty: 'beginner-advanced',
+          timeToComplete: '8-12 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Git Tutorial by Traversy Media',
           url: 'https://www.youtube.com/watch?v=SWYqp7iY_Tc',
           type: 'youtube',
-          description: 'Git crash course for beginners'
+          description: 'Git crash course for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '1.5 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Learn Git Branching',
           url: 'https://learngitbranching.js.org/',
           type: 'interactive',
-          description: 'Interactive Git tutorial with visualizations'
+          description: 'Interactive Git tutorial with visualizations',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.9,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Pro Git Book',
           url: 'https://git-scm.com/book',
           type: 'book',
-          description: 'Free comprehensive Git book by Scott Chacon'
+          description: 'Free comprehensive Git book by Scott Chacon',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '15-20 hours',
+          rating: 4.7,
+          lastUpdated: '2024-10-30'
         },
         {
           title: 'Atlassian Git Tutorials',
           url: 'https://www.atlassian.com/git/tutorials',
           type: 'tutorial',
-          description: 'Comprehensive Git tutorials and best practices'
+          description: 'Comprehensive Git tutorials and best practices',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         }
       ]
     },
@@ -2139,31 +2259,51 @@ export const skillsData = {
           title: 'Jest Official Documentation',
           url: 'https://jestjs.io/docs/getting-started',
           type: 'documentation',
-          description: 'Complete Jest testing framework documentation'
+          description: 'Complete Jest testing framework documentation',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Testing JavaScript with Kent C. Dodds',
           url: 'https://www.youtube.com/playlist?list=PLV5CVI1eNcJgCrPH_e6d57KRUTiDZgs0u',
           type: 'youtube',
-          description: 'Comprehensive JavaScript testing tutorial series'
+          description: 'Comprehensive JavaScript testing tutorial series',
+          difficulty: 'intermediate',
+          timeToComplete: '8-10 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'Cypress Documentation',
           url: 'https://docs.cypress.io/',
           type: 'documentation',
-          description: 'End-to-end testing framework documentation'
+          description: 'End-to-end testing framework documentation',
+          difficulty: 'intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Test-Driven Development Tutorial',
           url: 'https://www.youtube.com/watch?v=Jv2uxzhPFl4',
           type: 'youtube',
-          description: 'TDD principles and practical implementation'
+          description: 'TDD principles and practical implementation',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.5,
+          lastUpdated: '2024-10-20'
         },
         {
           title: 'The Art of Unit Testing',
           url: 'https://github.com/artofunittesting',
           type: 'github',
-          description: 'Free unit testing resources and examples'
+          description: 'Free unit testing resources and examples',
+          difficulty: 'intermediate-advanced',
+          timeToComplete: '10-12 hours',
+          rating: 4.4,
+          lastUpdated: '2024-11-15'
         }
       ]
     },
@@ -2200,31 +2340,51 @@ export const skillsData = {
           title: 'OWASP Top 10',
           url: 'https://owasp.org/www-project-top-ten/',
           type: 'documentation',
-          description: 'Top 10 web application security risks'
+          description: 'Top 10 web application security risks',
+          difficulty: 'intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.9,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Cybersecurity Course by freeCodeCamp',
           url: 'https://www.youtube.com/watch?v=U_P23SqJaDc',
           type: 'youtube',
-          description: 'Complete cybersecurity course for beginners'
+          description: 'Complete cybersecurity course for beginners',
+          difficulty: 'beginner',
+          timeToComplete: '5-6 hours',
+          rating: 4.5,
+          lastUpdated: '2024-11-10'
         },
         {
           title: 'OWASP WebGoat',
           url: 'https://owasp.org/www-project-webgoat/',
           type: 'tutorial',
-          description: 'Hands-on security vulnerability learning platform'
+          description: 'Hands-on security vulnerability learning platform',
+          difficulty: 'intermediate',
+          timeToComplete: '8-12 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Security Headers Scanner',
           url: 'https://securityheaders.com/',
           type: 'tool',
-          description: 'Free security headers analysis tool'
+          description: 'Free security headers analysis tool',
+          difficulty: 'beginner',
+          timeToComplete: '1-2 hours',
+          rating: 4.4,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'OAuth 2.0 Tutorial',
           url: 'https://www.youtube.com/watch?v=996OiexHze0',
           type: 'youtube',
-          description: 'Complete OAuth 2.0 explanation and implementation'
+          description: 'Complete OAuth 2.0 explanation and implementation',
+          difficulty: 'intermediate',
+          timeToComplete: '2-3 hours',
+          rating: 4.6,
+          lastUpdated: '2024-10-25'
         }
       ]
     },
@@ -2261,31 +2421,51 @@ export const skillsData = {
           title: 'Web.dev Performance',
           url: 'https://web.dev/performance/',
           type: 'website',
-          description: 'Google\'s comprehensive web performance guides'
+          description: 'Google\'s comprehensive web performance guides',
+          difficulty: 'intermediate',
+          timeToComplete: '8-12 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
         },
         {
           title: 'Performance Optimization by Kyle Simpson',
           url: 'https://www.youtube.com/watch?v=65-RbBwZQdU',
           type: 'youtube',
-          description: 'Deep dive into JavaScript performance optimization'
+          description: 'Deep dive into JavaScript performance optimization',
+          difficulty: 'advanced',
+          timeToComplete: '3-4 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-15'
         },
         {
           title: 'Chrome DevTools Performance',
           url: 'https://developers.google.com/web/tools/chrome-devtools/performance',
           type: 'documentation',
-          description: 'Official Chrome DevTools performance documentation'
+          description: 'Official Chrome DevTools performance documentation',
+          difficulty: 'intermediate',
+          timeToComplete: '4-6 hours',
+          rating: 4.6,
+          lastUpdated: '2024-11-30'
         },
         {
           title: 'Redis Documentation',
           url: 'https://redis.io/documentation',
           type: 'documentation',
-          description: 'Redis caching and performance optimization guide'
+          description: 'Redis caching and performance optimization guide',
+          difficulty: 'intermediate',
+          timeToComplete: '6-8 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-25'
         },
         {
           title: 'Lighthouse Documentation',
           url: 'https://developers.google.com/web/tools/lighthouse',
           type: 'documentation',
-          description: 'Web performance auditing tool documentation'
+          description: 'Web performance auditing tool documentation',
+          difficulty: 'beginner-intermediate',
+          timeToComplete: '3-4 hours',
+          rating: 4.5,
+          lastUpdated: '2024-12-01'
         }
       ]
     }
@@ -2647,6 +2827,11 @@ export const skillsData = {
 export const personalInfo = {
   name: 'Assefa Tesfay',
   title: 'Senior Software Engineer & Technical Architect',
+  email: 'assefa.tesfay@example.com',
+  phone: '+1 (555) 123-4567',
+  linkedin: 'https://linkedin.com/in/assefatesfay',
+  github: 'https://github.com/assefatesfay',
+  website: 'https://assefatesfay.dev',
   experience: '8+ Years',
   location: 'Remote',
   bio: 'Passionate senior engineer specializing in distributed systems, cloud architecture, and high-performance applications. Expert in building scalable microservices, event-driven architectures, and leading engineering teams to deliver enterprise-grade solutions.',
