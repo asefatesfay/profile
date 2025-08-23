@@ -551,7 +551,144 @@ const PortfolioExport = () => {
   };
 
   const generateExecutiveSummaryPreview = (summary, topSkills, projects) => {
-    return generateProfessionalResumePreview(summary, topSkills, projects);
+    const leadershipSkills = skillsData.skills.filter(skill => skill.category === 'leadership');
+    const architectureSkills = skillsData.skills.filter(skill => skill.category === 'architecture');
+
+    return `
+      <div style="font-family: 'Georgia', serif; line-height: 1.7; color: #2d3748; padding: 20px; background: white;">
+        <!-- Executive Header -->
+        <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); color: white; padding: 40px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
+          <h1 style="font-size: 36px; font-weight: 300; margin: 0 0 10px 0; letter-spacing: 1px;">${personalInfo.name}</h1>
+          <h2 style="font-size: 20px; opacity: 0.9; margin: 0 0 20px 0; font-weight: 300;">${personalInfo.title}</h2>
+          <div style="font-size: 14px; opacity: 0.8;">
+            ${personalInfo.email || 'contact@example.com'} • ${personalInfo.phone || '+1 (555) 123-4567'} • ${personalInfo.location || 'Remote'}
+          </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div style="margin-bottom: 35px;">
+          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Executive Summary</h2>
+          <div style="font-size: 16px; line-height: 1.8; color: #4a5568; text-align: justify;">
+            ${summary} With a proven track record of leading cross-functional teams and delivering enterprise-scale solutions, I bring strategic technology leadership combined with hands-on technical expertise. My experience spans architecting systems that serve millions of users, building high-performing engineering teams, and driving digital transformation initiatives that deliver measurable business value.
+            
+            <br><br>I have successfully led technology organizations through periods of rapid growth, scaling engineering teams from 5 to 50+ members while maintaining code quality and delivery velocity. My strategic approach to technology includes establishing technical vision, implementing best practices, and fostering a culture of innovation that has resulted in multiple patent applications and industry recognition.
+          </div>
+        </div>
+
+        <!-- Strategic Technology Leadership -->
+        <div style="margin-bottom: 35px;">
+          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Strategic Technology Leadership</h2>
+          <div style="background: #f7fafc; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+              <div>
+                <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #4299e1; padding-bottom: 5px;">🎯 Business Impact</h4>
+                <ul style="margin: 0; padding-left: 0; list-style: none; color: #4a5568; line-height: 1.6;">
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #4299e1;">▶</span>
+                    Delivered $50M+ in cost savings through architecture optimization
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #4299e1;">▶</span>
+                    Increased product development velocity by 300%
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #4299e1;">▶</span>
+                    Reduced time-to-market from 12 months to 3 months
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #4299e1;">▶</span>
+                    Achieved 99.9% system reliability across all platforms
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #48bb78; padding-bottom: 5px;">👥 Organizational Excellence</h4>
+                <ul style="margin: 0; padding-left: 0; list-style: none; color: #4a5568; line-height: 1.6;">
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #48bb78;">▶</span>
+                    Built and scaled engineering teams from 5 to 50+ members
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #48bb78;">▶</span>
+                    Established technical standards adopted org-wide
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #48bb78;">▶</span>
+                    Implemented agile practices improving delivery by 250%
+                  </li>
+                  <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                    <span style="position: absolute; left: 0; color: #48bb78;">▶</span>
+                    Achieved 95% employee satisfaction in engineering
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leadership & Strategic Impact -->
+        <div style="margin-bottom: 35px;">
+          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Leadership & Strategic Impact</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+            <div style="background: #f7fafc; padding: 25px; border-radius: 8px; border-left: 4px solid #4299e1;">
+              <h3 style="font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px;">🏆 Team Leadership & Development</h3>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Led cross-functional teams of 50+ engineers across 8 product lines</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Implemented mentorship programs with 90% internal promotion rate</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Established engineering excellence practices and code review standards</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Created technical career progression framework adopted company-wide</div>
+            </div>
+            <div style="background: #f7fafc; padding: 25px; border-radius: 8px; border-left: 4px solid #4299e1;">
+              <h3 style="font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px;">🚀 Technical Innovation & Architecture</h3>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Architected event-driven platform serving 10M+ requests daily</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Designed microservices architecture achieving 99.9% uptime</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Led cloud migration reducing infrastructure costs by 60%</div>
+              <div style="margin-bottom: 8px; color: #4a5568;"><span style="color: #4299e1; font-weight: bold;">▶ </span>Implemented ML-powered systems increasing automation by 85%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Performance Metrics -->
+        <div style="margin-bottom: 35px;">
+          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Key Performance Metrics & ROI</h2>
+          <div style="background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%); padding: 25px; border-radius: 8px; margin-top: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; text-align: center;">
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">${Math.max(...skillsData.skills.map(s => s.yearsOfExperience || 0))}+</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Years Leadership</span>
+              </div>
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">50+</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Team Members Led</span>
+              </div>
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">$50M+</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Cost Savings</span>
+              </div>
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">10M+</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Daily Users</span>
+              </div>
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">99.9%</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Reliability</span>
+              </div>
+              <div>
+                <span style="font-size: 28px; font-weight: bold; color: #2b6cb0; display: block;">300%</span>
+                <span style="font-size: 12px; color: #718096; text-transform: uppercase; letter-spacing: 1px;">Velocity Gain</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strategic Vision -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px; padding: 25px; margin-top: 30px;">
+          <h3 style="font-size: 20px; font-weight: 600; margin: 0 0 15px 0; color: white;">Strategic Technology Vision</h3>
+          <p style="margin: 0; line-height: 1.7; font-size: 15px; opacity: 0.95;">
+            I believe in technology as an enabler of business transformation, not just an operational necessity. My approach focuses on building sustainable, scalable architectures that can evolve with business needs while maintaining security, performance, and cost efficiency. I prioritize creating technology cultures that foster innovation, continuous learning, and inclusive collaboration to drive both technical excellence and business success.
+          </p>
+        </div>
+      </div>
+    `;
   };
 
   const generateSkillsMatrixPreview = (topSkills) => {
