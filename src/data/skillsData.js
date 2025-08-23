@@ -2782,6 +2782,139 @@ export const skillsData = {
       status: 'completed',
       difficulty: 'intermediate',
       duration: '4 weeks',
+      architecture: {
+        overview: 'Real-time analytics platform with ETL pipelines, interactive visualizations, and multi-source data integration',
+        diagram: `
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Business      │◄──►│   Analytics      │◄──►│   Data         │
+│   Users         │    │   Dashboard      │    │   Scientists    │
+│   (Stakeholders)│    │   (React SPA)    │    │   (Jupyter)     │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                    ┌──────────────────┐
+                    │   Load Balancer  │
+                    │   (NGINX + SSL)  │
+                    └──────────────────┘
+                                │
+                    ┌───────────┼───────────┐
+                    │           │           │
+                    ▼           ▼           ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │ Analytics API   │ │ WebSocket   │ │ Export Service  │
+        │ (FastAPI +      │ │ Server      │ │ (PDF/Excel      │
+        │ Pydantic)       │ │ (Socket.IO) │ │ Generation)     │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                    │           │           │
+                    └───────────┼───────────┘
+                                ▼
+                    ┌──────────────────┐
+                    │   Redis Cache    │
+                    │   (Query Cache + │
+                    │   Session Store) │
+                    └──────────────────┘
+                                │
+                    ┌───────────┼───────────┐
+                    │           │           │
+                    ▼           ▼           ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │ Data Processing │ │ Query Engine│ │ Time Series DB  │
+        │ Engine          │ │ (SQL +      │ │ (InfluxDB)      │
+        │ (Pandas + NumPy)│ │ Analytics)  │ │                 │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                    │           │           │
+                    └───────────┼───────────┘
+                                ▼
+                    ┌──────────────────┐
+                    │   PostgreSQL     │
+                    │   (Data Warehouse│
+                    │   + Materialized │
+                    │   Views)         │
+                    └──────────────────┘
+                                │
+                                ▼
+        ┌─────────────────────────────────────────────────────────────┐
+        │                    ETL Pipeline                             │
+        │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐│
+        │  │   Apache    │  │   Data      │  │   Data Quality      ││
+        │  │   Airflow   │  │ Validation  │  │   Monitoring        ││
+        │  │ (Scheduler) │  │ (Great      │  │   (Data Lineage)    ││
+        │  │             │  │Expectations)│  │                     ││
+        │  └─────────────┘  └─────────────┘  └─────────────────────┘│
+        └─────────────────────────────────────────────────────────────┘
+                                │
+        ┌───────────────────────┼───────────────────────┐
+        │                       │                       │
+        ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Data Sources  │    │   File Storage  │    │   External APIs │
+│   (MySQL, Oracle│    │   (CSV, JSON,   │    │   (REST APIs,   │
+│   SQL Server)   │    │   Parquet)      │    │   GraphQL)      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘`,
+        components: [
+          {
+            name: 'Analytics Frontend',
+            tech: 'React + TypeScript + D3.js + Recharts',
+            responsibility: 'Interactive dashboards, real-time charts, custom visualizations, responsive design'
+          },
+          {
+            name: 'Analytics API',
+            tech: 'FastAPI + Pydantic + SQLAlchemy',
+            responsibility: 'Data aggregation, query optimization, API endpoints, request validation'
+          },
+          {
+            name: 'WebSocket Server',
+            tech: 'Socket.IO + Redis Pub/Sub',
+            responsibility: 'Real-time data updates, live chart streaming, user notifications'
+          },
+          {
+            name: 'Data Processing Engine',
+            tech: 'Pandas + NumPy + SciPy',
+            responsibility: 'Data transformation, statistical analysis, aggregations, calculations'
+          },
+          {
+            name: 'Query Engine',
+            tech: 'PostgreSQL + Materialized Views',
+            responsibility: 'Complex SQL analytics, pre-computed aggregations, query optimization'
+          },
+          {
+            name: 'Cache Layer',
+            tech: 'Redis + Query Result Caching',
+            responsibility: 'Query result caching, session management, performance optimization'
+          },
+          {
+            name: 'ETL Pipeline',
+            tech: 'Apache Airflow + Great Expectations',
+            responsibility: 'Data extraction, transformation, quality validation, scheduling'
+          },
+          {
+            name: 'Export Service',
+            tech: 'ReportLab + OpenPyXL + Celery',
+            responsibility: 'PDF/Excel generation, scheduled reports, asynchronous processing'
+          }
+        ],
+        visualizationTypes: [
+          'Time Series Charts: Line charts with zoom, pan, and real-time updates',
+          'Statistical Charts: Histograms, box plots, scatter plots with trend lines',
+          'Geographic Maps: Choropleth maps, heat maps, marker clustering',
+          'Business Intelligence: KPI cards, gauge charts, funnel analysis',
+          'Interactive Tables: Sortable, filterable data grids with export options',
+          'Custom Dashboards: Drag-and-drop dashboard builder with widgets'
+        ],
+        dataFlow: [
+          'Data Sources → ETL Pipeline → Data Validation → PostgreSQL Data Warehouse',
+          'User Query → FastAPI → Query Engine → PostgreSQL → Data Processing → JSON Response',
+          'Real-time Updates → WebSocket → Redis Pub/Sub → Frontend Chart Updates',
+          'Export Request → Celery Queue → Background Processing → File Generation → Download'
+        ],
+        performanceOptimizations: [
+          'Materialized views: Pre-computed aggregations for complex queries',
+          'Query result caching: Redis-based caching with TTL strategies',
+          'Database indexing: Optimized indexes for analytical workloads',
+          'Data pagination: Efficient handling of large datasets',
+          'Chart virtualization: Optimized rendering for large datasets'
+        ]
+      },
       features: [
         'Interactive charts and graphs',
         'Real-time data updates',
@@ -2811,6 +2944,125 @@ export const skillsData = {
       status: 'in-progress',
       difficulty: 'advanced',
       duration: '8 weeks',
+      architecture: {
+        overview: 'ML Pipeline architecture with real-time inference, batch training, and A/B testing framework for production recommendation systems',
+        diagram: `
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Mobile Apps   │◄──►│   Load Balancer  │◄──►│   Web Apps      │
+│   (iOS/Android) │    │   (NGINX/ALB)    │    │   (React/Vue)   │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 ▼
+                    ┌──────────────────┐
+                    │   FastAPI Gateway│
+                    │   (Python 3.9+)  │
+                    │   Auth & Routing │
+                    └──────────────────┘
+                                 │
+                    ┌────────────┼────────────┐
+                    │            │            │
+                    ▼            ▼            ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │ Recommendation  │ │ A/B Testing │ │ User Profile    │
+        │ Service         │ │ Service     │ │ Service         │
+        │ (TensorFlow     │ │ (MLflow)    │ │ (FastAPI)       │
+        │ Serving)        │ │             │ │                 │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                    │            │            │
+                    ▼            ▼            ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │   Redis Cache   │ │ Experiment  │ │   PostgreSQL    │
+        │   (Embeddings   │ │ Store       │ │   (User Data &  │
+        │   & Results)    │ │ (MongoDB)   │ │   Interactions) │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                                 │
+                                 ▼
+                    ┌──────────────────┐
+                    │   ML Pipeline    │
+                    │   (Apache Airflow│
+                    │   + Kubeflow)    │
+                    └──────────────────┘
+                                 │
+            ┌────────────────────┼────────────────────┐
+            │                    │                    │
+            ▼                    ▼                    ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Data Ingestion  │    │ Model Training  │    │ Model Deployment│
+│ (Apache Kafka + │    │ (TensorFlow +   │    │ (TensorFlow     │
+│ Spark Streaming)│    │ PyTorch)        │    │ Serving + K8s)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Data Lake     │    │   Model Store   │    │   Monitoring    │
+│   (S3 + Delta   │    │   (MLflow +     │    │   (Prometheus + │
+│   Lake)         │    │   S3)           │    │   Grafana)      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘`,
+        components: [
+          {
+            name: 'FastAPI Gateway',
+            tech: 'FastAPI + Pydantic + JWT',
+            responsibility: 'API routing, authentication, request validation, rate limiting, response caching'
+          },
+          {
+            name: 'Recommendation Service',
+            tech: 'TensorFlow Serving + gRPC',
+            responsibility: 'Real-time inference, model serving, embeddings computation, similarity calculation'
+          },
+          {
+            name: 'A/B Testing Service',
+            tech: 'MLflow + Statistical Testing',
+            responsibility: 'Experiment management, traffic splitting, statistical significance testing, result analysis'
+          },
+          {
+            name: 'User Profile Service',
+            tech: 'FastAPI + SQLAlchemy',
+            responsibility: 'User behavior tracking, preference learning, interaction logging, profile updates'
+          },
+          {
+            name: 'ML Pipeline',
+            tech: 'Apache Airflow + Kubeflow',
+            responsibility: 'ETL workflows, feature engineering, model training orchestration, automated retraining'
+          },
+          {
+            name: 'Data Ingestion',
+            tech: 'Apache Kafka + Spark Streaming',
+            responsibility: 'Real-time event processing, user interaction streaming, data validation, feature extraction'
+          },
+          {
+            name: 'Model Training',
+            tech: 'TensorFlow + PyTorch + Ray',
+            responsibility: 'Collaborative filtering, content-based filtering, deep learning models, hyperparameter tuning'
+          },
+          {
+            name: 'Model Store',
+            tech: 'MLflow + S3 + Docker Registry',
+            responsibility: 'Model versioning, artifact storage, metadata tracking, deployment automation'
+          }
+        ],
+        mlPatterns: [
+          'Collaborative Filtering: Matrix factorization with neural collaborative filtering',
+          'Content-Based: TF-IDF + Word2Vec embeddings for item similarity',
+          'Hybrid Approach: Weighted ensemble of collaborative and content-based models',
+          'Deep Learning: Neural networks for learning complex user-item interactions',
+          'Cold Start: Content-based recommendations for new users/items',
+          'Real-time Learning: Online learning with incremental model updates'
+        ],
+        dataFlow: [
+          'User interaction → Kafka → Spark Streaming → Feature Store → Real-time recommendations',
+          'Batch data → Airflow ETL → Feature engineering → Model training → Model deployment',
+          'A/B test assignment → Experiment tracking → Performance metrics → Model selection',
+          'Model predictions → Redis cache → API response → User experience tracking'
+        ],
+        performanceOptimizations: [
+          'Redis caching: Sub-100ms response times for cached recommendations',
+          'Model quantization: 4x faster inference with minimal accuracy loss',
+          'Batch prediction: Pre-computed recommendations for frequent users',
+          'Feature store: Centralized feature serving with microsecond latency',
+          'Model pruning: 60% model size reduction while maintaining quality'
+        ]
+      },
       features: [
         'Collaborative filtering algorithm',
         'Content-based recommendations',
@@ -2840,6 +3092,152 @@ export const skillsData = {
       status: 'completed',
       difficulty: 'advanced',
       duration: '5 weeks',
+      architecture: {
+        overview: 'Multi-region AWS infrastructure with GitOps workflows, automated provisioning, and comprehensive monitoring across dev/staging/prod environments',
+        diagram: `
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          GitHub Repository                              │
+│   ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐      │
+│   │ Terraform       │  │ Kubernetes      │  │ GitHub Actions  │      │
+│   │ Modules         │  │ Manifests       │  │ Workflows       │      │
+│   │ (Infrastructure)│  │ (Applications)  │  │ (CI/CD)         │      │
+│   └─────────────────┘  └─────────────────┘  └─────────────────┘      │
+└─────────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+                      ┌──────────────────┐
+                      │  GitHub Actions  │
+                      │  Runner          │
+                      │  (Terraform +    │
+                      │  kubectl + AWS   │
+                      │  CLI)            │
+                      └──────────────────┘
+                                   │
+        ┌──────────────────────────┼──────────────────────────┐
+        │                          │                          │
+        ▼                          ▼                          ▼
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│ Development     │      │ Staging         │      │ Production      │
+│ Environment     │      │ Environment     │      │ Environment     │
+│ (us-east-1)     │      │ (us-west-2)     │      │ (us-east-1 +    │
+│                 │      │                 │      │  us-west-2)     │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
+
+Each Environment Contains:
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          AWS Region (Multi-AZ)                         │
+│                                                                         │
+│  ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐  │
+│  │   Route 53      │◄──►│  CloudFront CDN  │◄──►│   WAF/Shield    │  │
+│  │   (DNS)         │    │  (Global Edge)   │    │   (Security)    │  │
+│  └─────────────────┘    └──────────────────┘    └─────────────────┘  │
+│                                   │                                    │
+│                                   ▼                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐ │
+│  │                Application Load Balancer                        │ │
+│  │              (Multi-AZ with SSL Termination)                   │ │
+│  └─────────────────────────────────────────────────────────────────┘ │
+│                                   │                                    │
+│         ┌─────────────────────────┼─────────────────────────┐         │
+│         │                         │                         │         │
+│         ▼                         ▼                         ▼         │
+│  ┌─────────────┐           ┌─────────────┐           ┌─────────────┐ │
+│  │   EKS       │           │   EKS       │           │   EKS       │ │
+│  │ Cluster     │           │ Cluster     │           │ Cluster     │ │
+│  │ (AZ-1a)     │           │ (AZ-1b)     │           │ (AZ-1c)     │ │
+│  │             │           │             │           │             │ │
+│  │ ┌─────────┐ │           │ ┌─────────┐ │           │ ┌─────────┐ │ │
+│  │ │Worker   │ │           │ │Worker   │ │           │ │Worker   │ │ │
+│  │ │Nodes    │ │           │ │Nodes    │ │           │ │Nodes    │ │ │
+│  │ │(EC2 +   │ │           │ │(EC2 +   │ │           │ │(EC2 +   │ │ │
+│  │ │Fargate) │ │           │ │Fargate) │ │           │ │Fargate) │ │ │
+│  │ └─────────┘ │           │ └─────────┘ │           │ └─────────┘ │ │
+│  └─────────────┘           └─────────────┘           └─────────────┘ │
+│         │                         │                         │         │
+│         └─────────────────────────┼─────────────────────────┘         │
+│                                   ▼                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐ │
+│  │                    Data Layer                                   │ │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────┐│ │
+│  │  │    RDS      │  │ ElastiCache │  │     S3      │  │ DynamoDB││ │
+│  │  │(Multi-AZ +  │  │  (Redis)    │  │ (Versioned) │  │(Global  ││ │
+│  │  │Read Replica)│  │             │  │             │  │Tables)  ││ │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────┘│ │
+│  └─────────────────────────────────────────────────────────────────┘ │
+│                                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐ │
+│  │                Monitoring & Logging                             │ │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────┐│ │
+│  │  │ CloudWatch  │  │   X-Ray     │  │    VPC      │  │  AWS    ││ │
+│  │  │(Metrics +   │  │(Distributed │  │ Flow Logs   │  │Config   ││ │
+│  │  │Logs)        │  │Tracing)     │  │             │  │         ││ │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────┘│ │
+│  └─────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘`,
+        components: [
+          {
+            name: 'Terraform State Management',
+            tech: 'Terraform + S3 Backend + DynamoDB',
+            responsibility: 'Infrastructure state management, remote state locking, state versioning, collaborative access'
+          },
+          {
+            name: 'GitHub Actions CI/CD',
+            tech: 'GitHub Actions + OIDC + AWS CLI',
+            responsibility: 'GitOps workflows, automated deployments, infrastructure validation, security scanning'
+          },
+          {
+            name: 'AWS EKS Clusters',
+            tech: 'Kubernetes + EC2 + Fargate + CNI',
+            responsibility: 'Container orchestration, auto-scaling, service mesh, ingress management'
+          },
+          {
+            name: 'Networking Layer',
+            tech: 'VPC + Subnets + NAT + IGW + Route53',
+            responsibility: 'Network isolation, traffic routing, DNS management, security group policies'
+          },
+          {
+            name: 'Data Layer',
+            tech: 'RDS + ElastiCache + S3 + DynamoDB',
+            responsibility: 'Data persistence, caching, object storage, backup and recovery'
+          },
+          {
+            name: 'Security & Compliance',
+            tech: 'IAM + KMS + WAF + GuardDuty + Config',
+            responsibility: 'Identity management, encryption, threat detection, compliance monitoring'
+          },
+          {
+            name: 'Monitoring & Observability',
+            tech: 'CloudWatch + X-Ray + Prometheus + Grafana',
+            responsibility: 'Metrics collection, distributed tracing, alerting, performance monitoring'
+          },
+          {
+            name: 'Load Balancing',
+            tech: 'ALB + NLB + CloudFront + Route53',
+            responsibility: 'Traffic distribution, SSL termination, global content delivery, health checks'
+          }
+        ],
+        infrastructurePatterns: [
+          'Infrastructure as Code: Version-controlled, immutable infrastructure deployments',
+          'GitOps: Git-based workflow for infrastructure changes and deployments',
+          'Multi-Environment: Consistent dev/staging/prod environments with parameter variations',
+          'Blue-Green Deployment: Zero-downtime deployments with instant rollback capability',
+          'Disaster Recovery: Multi-region setup with automated failover and data replication',
+          'Cost Optimization: Spot instances, reserved capacity, resource right-sizing'
+        ],
+        deploymentFlow: [
+          'Code push → GitHub Actions trigger → Terraform plan → Manual approval → Apply changes',
+          'Infrastructure validation → Security scan → Compliance check → Deployment',
+          'Kubernetes manifest deployment → Rolling updates → Health checks → Monitoring',
+          'Automated testing → Performance validation → Smoke tests → Production promotion'
+        ],
+        securityMeasures: [
+          'Zero-trust networking with VPC isolation and security groups',
+          'IAM roles with least privilege access and temporary credentials',
+          'Encryption at rest and in transit using AWS KMS and TLS',
+          'Automated security scanning with AWS Config and GuardDuty',
+          'Network monitoring with VPC Flow Logs and threat detection'
+        ]
+      },
       features: [
         'Multi-environment infrastructure',
         'Auto-scaling configurations',
@@ -2869,6 +3267,129 @@ export const skillsData = {
       status: 'completed',
       difficulty: 'intermediate',
       duration: '3 weeks',
+      architecture: {
+        overview: 'Progressive Web App architecture with offline-first design, service worker caching, and native app-like features',
+        diagram: `
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          User Devices                                  │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│  │   Mobile    │  │   Tablet    │  │   Desktop   │  │    PWA      │  │
+│  │   Browser   │  │   Browser   │  │   Browser   │  │  Installed  │  │
+│  │   (Chrome,  │  │   (Safari,  │  │   (Firefox, │  │   App       │  │
+│  │   Edge)     │  │   Chrome)   │  │   Chrome)   │  │             │  │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+└─────────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+        ┌─────────────────────────────────────────────────────────────┐
+        │                   Service Worker                            │
+        │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐│
+        │  │   Network   │  │   Cache     │  │   Background Sync   ││
+        │  │   Proxy     │  │ Strategies  │  │   & Push Notifications││
+        │  │             │  │             │  │                     ││
+        │  └─────────────┘  └─────────────┘  └─────────────────────┘│
+        └─────────────────────────────────────────────────────────────┘
+                    │                │                │
+                    ▼                ▼                ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │   Cache API     │ │ IndexedDB   │ │ Web Push API    │
+        │   (Static       │ │ (App Data   │ │ (Notifications) │
+        │   Resources)    │ │ Storage)    │ │                 │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                    │                │                │
+                    └────────────────┼────────────────┘
+                                     ▼
+                        ┌──────────────────┐
+                        │   React App      │
+                        │   (TypeScript)   │
+                        │                  │
+                        │ ┌──────────────┐ │
+                        │ │   Offline    │ │
+                        │ │   State      │ │
+                        │ │   Manager    │ │
+                        │ └──────────────┘ │
+                        └──────────────────┘
+                                     │
+                    ┌────────────────┼────────────────┐
+                    │                │                │
+                    ▼                ▼                ▼
+        ┌─────────────────┐ ┌─────────────┐ ┌─────────────────┐
+        │   CDN/Static    │ │   API       │ │   WebSocket     │
+        │   Assets        │ │   Server    │ │   Server        │
+        │   (Cloudflare)  │ │   (REST)    │ │   (Real-time)   │
+        └─────────────────┘ └─────────────┘ └─────────────────┘
+                                     │
+                                     ▼
+                        ┌──────────────────┐
+                        │   Backend        │
+                        │   Services       │
+                        │   (FastAPI +     │
+                        │   PostgreSQL)    │
+                        └──────────────────┘`,
+        components: [
+          {
+            name: 'Service Worker',
+            tech: 'Workbox + TypeScript + Cache API',
+            responsibility: 'Offline functionality, caching strategies, background sync, push notifications'
+          },
+          {
+            name: 'React Application',
+            tech: 'React + TypeScript + Context API',
+            responsibility: 'UI rendering, state management, offline detection, user interaction handling'
+          },
+          {
+            name: 'Offline State Manager',
+            tech: 'React Context + Custom Hooks',
+            responsibility: 'Offline/online state tracking, queue management, sync status updates'
+          },
+          {
+            name: 'IndexedDB Store',
+            tech: 'Dexie.js + TypeScript',
+            responsibility: 'Local data persistence, offline data storage, query capabilities'
+          },
+          {
+            name: 'Cache Layer',
+            tech: 'Cache API + Workbox Strategies',
+            responsibility: 'Static asset caching, API response caching, cache invalidation'
+          },
+          {
+            name: 'Background Sync',
+            tech: 'Background Sync API + Service Worker',
+            responsibility: 'Offline action queuing, automatic retry, data synchronization'
+          },
+          {
+            name: 'Push Notification System',
+            tech: 'Web Push API + Firebase FCM',
+            responsibility: 'Real-time notifications, user engagement, background messaging'
+          },
+          {
+            name: 'Manifest & Installation',
+            tech: 'Web App Manifest + BeforeInstallPrompt',
+            responsibility: 'App installation prompts, home screen icons, app-like experience'
+          }
+        ],
+        pwaFeatures: [
+          'Offline-First: Cache-first strategy for all static assets and critical data',
+          'Background Sync: Queue actions when offline, sync when connection restored',
+          'Push Notifications: Real-time notifications even when app is closed',
+          'Installable: Add to home screen with native app-like experience',
+          'Responsive: Optimized for all screen sizes and orientations',
+          'Fast Loading: Service worker pre-caching for instant loading'
+        ],
+        offlineStrategy: [
+          'Static Assets: Cache-first with fallback to network for updates',
+          'API Responses: Network-first with cache fallback for reliability',
+          'User Actions: Queue in IndexedDB when offline, sync when online',
+          'Critical Data: Always cached locally with background updates'
+        ],
+        performanceOptimizations: [
+          'Resource pre-loading: Critical resources cached on first visit',
+          'Code splitting: Lazy loading of non-critical components',
+          'Image optimization: WebP format with fallbacks, responsive images',
+          'Bundle optimization: Tree shaking, compression, minification',
+          'Service worker registration: Deferred until after app initialization'
+        ]
+      },
       features: [
         'Offline functionality',
         'Push notifications',
@@ -2899,6 +3420,143 @@ export const skillsData = {
       status: 'completed',
       difficulty: 'advanced',
       duration: '7 weeks',
+      architecture: {
+        overview: 'Event sourcing and CQRS architecture with Kafka streams, dead letter queues, and comprehensive monitoring for high-throughput event processing',
+        diagram: `
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Web Apps      │◄──►│   Mobile Apps    │◄──►│   IoT Devices   │
+│   (React/Vue)   │    │   (iOS/Android)  │    │   (Sensors)     │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 ▼
+                    ┌──────────────────┐
+                    │   Event Gateway  │
+                    │   (Go + Gin)     │
+                    │   Rate Limiting  │
+                    │   Auth & Valid.  │
+                    └──────────────────┘
+                                 │
+                                 ▼
+        ┌─────────────────────────────────────────────────────────────┐
+        │                Apache Kafka Cluster                        │
+        │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐│
+        │  │   Events    │  │  Commands   │  │   Dead Letter       ││
+        │  │   Topic     │  │   Topic     │  │   Queue Topic       ││
+        │  │(Partitioned)│  │(Partitioned)│  │   (DLQ)             ││
+        │  └─────────────┘  └─────────────┘  └─────────────────────┘│
+        └─────────────────────────────────────────────────────────────┘
+                    │                │                │
+        ┌───────────┴───────┬────────┴────────┬───────┴────────────┐
+        │                   │                 │                    │
+        ▼                   ▼                 ▼                    ▼
+┌─────────────┐   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
+│Event Sourcing│   │ Command     │   │ Query       │   │ DLQ         │
+│Service       │   │ Handler     │   │ Service     │   │ Processor   │
+│(Go + Kafka  │   │ Service     │   │ (CQRS Read  │   │ (Go +       │
+│Streams)      │   │ (Go)        │   │ Models)     │   │ Retry Logic)│
+└─────────────┘   └─────────────┘   └─────────────┘   └─────────────┘
+         │                │                 │                │
+         ▼                ▼                 ▼                ▼
+┌─────────────┐   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
+│ Event Store │   │ Write DB    │   │ Read DB     │   │ Error DB    │
+│(PostgreSQL  │   │(PostgreSQL) │   │(PostgreSQL │   │(PostgreSQL) │
+│Event Table) │   │             │   │Materialized │   │             │
+│             │   │             │   │Views)       │   │             │
+└─────────────┘   └─────────────┘   └─────────────┘   └─────────────┘
+                                             │
+                                             ▼
+                        ┌─────────────────────────────────────┐
+                        │          Redis Cache                │
+                        │   ┌─────────────┐ ┌─────────────┐  │
+                        │   │   Query     │ │ Session     │  │
+                        │   │   Cache     │ │ Store       │  │
+                        │   └─────────────┘ └─────────────┘  │
+                        └─────────────────────────────────────┘
+                                             │
+                                             ▼
+        ┌─────────────────────────────────────────────────────────────┐
+        │                  Monitoring & Observability                 │
+        │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐│
+        │  │ Prometheus  │  │   Grafana   │  │   Distributed       ││
+        │  │ (Metrics)   │  │ (Dashboard) │  │   Tracing (Jaeger)  ││
+        │  └─────────────┘  └─────────────┘  └─────────────────────┘│
+        │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐│
+        │  │ ELK Stack   │  │ Alertmanager│  │   Health Checks     ││
+        │  │ (Logs)      │  │ (Alerts)    │  │   (Kubernetes)      ││
+        │  └─────────────┘  └─────────────┘  └─────────────────────┘│
+        └─────────────────────────────────────────────────────────────┘`,
+        components: [
+          {
+            name: 'Event Gateway',
+            tech: 'Go + Gin + JWT + Rate Limiter',
+            responsibility: 'Event ingestion, authentication, validation, rate limiting, protocol translation'
+          },
+          {
+            name: 'Event Sourcing Service',
+            tech: 'Go + Kafka Streams + SARAMA',
+            responsibility: 'Event storage, event replay, aggregate reconstruction, snapshot management'
+          },
+          {
+            name: 'Command Handler Service',
+            tech: 'Go + Domain Logic + Validation',
+            responsibility: 'Business logic execution, command validation, state transitions, side effects'
+          },
+          {
+            name: 'Query Service (CQRS)',
+            tech: 'Go + SQL + Read Models',
+            responsibility: 'Read model maintenance, query optimization, data projections, caching'
+          },
+          {
+            name: 'Dead Letter Queue Processor',
+            tech: 'Go + Exponential Backoff + Circuit Breaker',
+            responsibility: 'Failed event handling, retry logic, error classification, manual intervention'
+          },
+          {
+            name: 'Kafka Cluster',
+            tech: 'Apache Kafka + Zookeeper + Schema Registry',
+            responsibility: 'Event streaming, message persistence, topic partitioning, consumer groups'
+          },
+          {
+            name: 'Event Store',
+            tech: 'PostgreSQL + Event Table + Indexes',
+            responsibility: 'Immutable event storage, version tracking, aggregate boundaries, concurrency'
+          },
+          {
+            name: 'Monitoring Stack',
+            tech: 'Prometheus + Grafana + Jaeger + ELK',
+            responsibility: 'Metrics collection, visualization, distributed tracing, log aggregation'
+          }
+        ],
+        eventPatterns: [
+          'Event Sourcing: Complete audit trail with event replay capabilities',
+          'CQRS: Separate read/write models for optimal performance',
+          'Saga Pattern: Distributed transaction management across services',
+          'Outbox Pattern: Reliable event publishing from database transactions',
+          'Dead Letter Queue: Failed event handling with retry strategies',
+          'Event Versioning: Schema evolution and backward compatibility'
+        ],
+        dataFlow: [
+          'Event ingestion → Gateway validation → Kafka topic → Event store → Command processing',
+          'Event stream → Kafka Streams → Read model updates → Materialized views → Query responses',
+          'Failed events → DLQ → Retry logic → Manual intervention → Reprocessing',
+          'Event replay → Historical events → Aggregate reconstruction → State recovery'
+        ],
+        reliabilityFeatures: [
+          'At-least-once delivery: Kafka consumer acknowledgment patterns',
+          'Idempotency: Event deduplication and idempotent processing',
+          'Circuit breaker: Prevent cascade failures during outages',
+          'Bulkhead pattern: Service isolation and resource segregation',
+          'Health checks: Kubernetes liveness and readiness probes'
+        ],
+        performanceOptimizations: [
+          'Kafka partitioning: Parallel processing for high throughput',
+          'Batch processing: Grouped event handling for efficiency',
+          'Read replicas: Query load distribution across multiple databases',
+          'Connection pooling: Optimized database connection management',
+          'Prometheus caching: Aggregated metrics for faster queries'
+        ]
+      },
       features: [
         'Event sourcing pattern',
         'CQRS implementation',
