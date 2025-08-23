@@ -1,23 +1,59 @@
-# AWS Amplify Deployment Guide
+# Deployment Setup Guide
 
-This guide will help you deploy your Senior Engineer Profile app to AWS Amplify using GitHub Actions.
+## Quick Setup for AWS Amplify Deployment
 
-## Prerequisites
+### GitHub Actions Deployment (Automated)
 
-1. **AWS Account** with appropriate permissions
-2. **GitHub Repository** for your code
-3. **AWS Amplify App** created in AWS Console
+The repository includes GitHub Actions workflows for automated deployment. Here's how to set them up:
 
-## Deployment Options
+#### Required GitHub Secrets
 
-### Option 1: Direct GitHub Integration (Recommended)
-This is the simplest approach - connect your GitHub repo directly to Amplify.
+To enable automatic deployment to AWS Amplify, add these secrets to your GitHub repository:
 
-#### Steps:
-1. Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
-2. Click "New app" → "Host web app"
-3. Select "GitHub" as source
-4. Authorize AWS Amplify to access your GitHub
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Secrets and variables** → **Actions**
+3. Add the following secrets:
+
+| Secret Name | Description | Required |
+|-------------|-------------|----------|
+| `AWS_ACCESS_KEY_ID` | AWS IAM user access key ID | ✅ |
+| `AWS_SECRET_ACCESS_KEY` | AWS IAM user secret access key | ✅ |
+| `AMPLIFY_APP_ID` | Your AWS Amplify app ID | ✅ |
+| `AWS_REGION` | AWS region (optional, defaults to us-east-1) | ❌ |
+
+### How to Get These Values
+
+#### 1. AWS Credentials (`AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY`)
+
+**Option A: Create New IAM User (Recommended)**
+```bash
+# Using AWS CLI
+aws iam create-user --user-name github-actions-deployer
+aws iam attach-user-policy --user-name github-actions-deployer --policy-arn arn:aws:iam::aws:policy/AdministratorAccess-Amplify
+aws iam create-access-key --user-name github-actions-deployer
+```
+
+**Option B: Use Existing IAM User**
+- Ensure the user has `AdministratorAccess-Amplify` policy attached
+- Generate new access keys in the AWS console
+
+#### 2. Amplify App ID (`AMPLIFY_APP_ID`)
+
+**Create new Amplify app:**
+```bash
+# Using AWS CLI
+aws amplify create-app --name "your-portfolio-app" --repository "https://github.com/yourusername/your-repo"
+```
+
+**Find existing app ID:**
+```bash
+# List all Amplify apps
+aws amplify list-apps
+
+# Or check in AWS Console
+# Navigate to AWS Amplify → Apps → Your App → General → App ARN
+# The App ID is the last part after the slash
+```
 5. Select your repository and branch (main/master)
 6. Configure build settings:
    ```yaml
