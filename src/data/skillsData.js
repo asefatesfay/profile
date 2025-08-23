@@ -567,29 +567,33 @@ export const skillsData = {
       id: 'java',
       title: 'Java',
       category: 'backend',
-      level: 'intermediate',
+      level: 'advanced',
       status: 'completed',
-      description: 'Enterprise Java development with Spring framework and microservices architecture',
+      description: 'Enterprise Java development with Spring framework, reactive programming, and microservices architecture. Specialized in converting traditional Spring Boot REST APIs to reactive Spring WebFlux for improved performance.',
       yearsOfExperience: 2,
       position: { x: 550, y: 230 }, // Backend category, second row
       detailedAccomplishments: [
-        'Developed RESTful APIs using Spring Boot and Java',
-        'Implemented security features using Spring Security',
-        'Created data access layers with Spring Data JPA',
-        'Built microservices deployed on AWS with Docker',
-        'Implemented unit and integration testing with JUnit and Mockito',
-        'Created CI/CD pipelines for automated deployment',
-        'Optimized application performance and resource utilization',
-        'Participated in code reviews and agile ceremonies',
-        'Mentored junior developers in Java and Spring best practices',
-        'Contributed to architecture and design discussions'
+        'Successfully converted traditional Spring Boot REST APIs to reactive Spring WebFlux, improving performance by 40%',
+        'Developed reactive microservices using Spring WebFlux and Project Reactor',
+        'Implemented non-blocking I/O operations with reactive streams for high-throughput applications',
+        'Built reactive data access layers using Spring Data R2DBC for database operations',
+        'Developed RESTful and reactive APIs using Spring Boot and Spring WebFlux',
+        'Implemented comprehensive security features using Spring Security (both MVC and WebFlux)',
+        'Created reactive error handling and backpressure management strategies',
+        'Optimized memory usage and thread efficiency through reactive programming patterns',
+        'Built microservices deployed on AWS with Docker containers',
+        'Implemented comprehensive testing strategies for reactive applications (WebTestClient, StepVerifier)',
+        'Created CI/CD pipelines for automated deployment of reactive applications',
+        'Mentored team members on reactive programming concepts and Spring WebFlux best practices',
+        'Performed performance analysis and optimization of both traditional and reactive applications'
       ],
-      technologies: ['Java 11', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'Docker', 'AWS', 'JUnit', 'Maven'],
+      technologies: ['Java 11+', 'Spring Boot', 'Spring WebFlux', 'Project Reactor', 'Spring Security', 'Spring Data JPA', 'Spring Data R2DBC', 'Reactive Streams', 'Docker', 'AWS', 'JUnit', 'WebTestClient', 'Maven'],
       keyMetrics: [
-        'Developed and deployed 10+ microservices',
-        'Achieved 99.9% uptime for critical services',
-        'Reduced build and deployment times by 30%',
-        'Improved code quality with 80% test coverage'
+        'Converted 5+ traditional REST APIs to reactive WebFlux, achieving 40% performance improvement',
+        'Developed and deployed 10+ microservices (both traditional and reactive)',
+        'Achieved 99.9% uptime for critical reactive services handling 10k+ concurrent requests',
+        'Reduced memory footprint by 25% through reactive programming optimizations',
+        'Improved code quality with 85% test coverage including reactive testing strategies'
       ],
       freeResources: [
         {
@@ -621,6 +625,26 @@ export const skillsData = {
           timeToComplete: '1.5 hours',
           rating: 4.6,
           lastUpdated: '2024-10-30'
+        },
+        {
+          title: 'Project Reactor Core Features',
+          url: 'https://projectreactor.io/docs/core/release/reference/',
+          type: 'documentation',
+          description: 'Official Project Reactor documentation for reactive streams',
+          difficulty: 'advanced',
+          timeToComplete: '4-6 hours',
+          rating: 4.8,
+          lastUpdated: '2024-12-01'
+        },
+        {
+          title: 'Reactive Programming with Spring Boot 3',
+          url: 'https://www.youtube.com/watch?v=IK26KdGRl48',
+          type: 'youtube',
+          description: 'Modern reactive programming patterns and best practices',
+          difficulty: 'advanced',
+          timeToComplete: '2 hours',
+          rating: 4.7,
+          lastUpdated: '2024-11-28'
         },
         {
           title: 'Spring Security Tutorial by Java Brains',
@@ -2747,6 +2771,43 @@ export const skillsData = {
       ],
       githubUrl: 'https://github.com/yourusername/event-system',
       estimatedHours: 140
+    },
+    {
+      id: 'reactive-microservices-platform',
+      title: 'Reactive Microservices Platform',
+      description: 'High-performance reactive microservices platform built with Spring WebFlux, achieving 40% performance improvement over traditional REST APIs',
+      technologies: ['Java 17', 'Spring Boot', 'Spring WebFlux', 'Project Reactor', 'Spring Data R2DBC', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'WebTestClient'],
+      skillsUsed: ['java', 'spring-webflux', 'reactive-programming', 'microservices', 'postgresql', 'redis', 'docker', 'kubernetes'],
+      category: 'Backend/Reactive',
+      status: 'completed',
+      difficulty: 'advanced',
+      duration: '8 weeks',
+      features: [
+        'Non-blocking I/O operations with reactive streams',
+        'Reactive data access using Spring Data R2DBC',
+        'Backpressure handling and error management',
+        'Reactive security implementation with Spring Security WebFlux',
+        'Performance monitoring and metrics collection',
+        'Comprehensive reactive testing with WebTestClient and StepVerifier',
+        'API migration from traditional REST to reactive endpoints'
+      ],
+      learningOutcomes: [
+        'Reactive programming paradigms and patterns',
+        'Performance optimization through non-blocking operations',
+        'Reactive stream composition and transformation',
+        'Memory and thread efficiency improvements',
+        'Testing strategies for reactive applications',
+        'Migration strategies from traditional to reactive architectures',
+        'Reactive error handling and resilience patterns'
+      ],
+      performanceMetrics: [
+        '40% improvement in response times under high load',
+        'Reduced memory footprint by 25%',
+        'Handles 10,000+ concurrent requests efficiently',
+        '99.9% uptime with improved resilience'
+      ],
+      githubUrl: 'https://github.com/yourusername/reactive-microservices',
+      estimatedHours: 160
     }
   ],
 
