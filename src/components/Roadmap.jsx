@@ -174,14 +174,13 @@ const Roadmap = () => {
 
   return (
     <motion.div 
-      className="h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-visible"
+      className="h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-visible pt-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      style={{ paddingTop: '80px' }}
     >
       {/* Tab Navigation */}
-      <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl mb-4">
+      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl mb-4">
         <motion.div 
           className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200 mb-4"
           initial={{ y: -50, opacity: 0 }}
@@ -228,7 +227,7 @@ const Roadmap = () => {
       <AnimatePresence>
         {activeTooltip && (
           <motion.div 
-            className="absolute top-4 left-4 z-20 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg"
+            className="absolute top-36 left-4 z-20 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -238,7 +237,7 @@ const Roadmap = () => {
         )}
       </AnimatePresence>
 
-      <div className="absolute top-20 left-4 z-10">
+      <div className="absolute top-44 left-4 z-10">
         <motion.div 
           className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
           initial={{ x: -100, opacity: 0 }}
@@ -271,7 +270,7 @@ const Roadmap = () => {
         </motion.div>
       </div>
 
-      <div className="absolute top-20 right-4 z-10">
+      <div className="absolute top-44 right-4 z-10">
         <motion.div 
           className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
           initial={{ x: 100, opacity: 0 }}
@@ -320,7 +319,7 @@ const Roadmap = () => {
         maxZoom={1.5}
         defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}
         className="bg-transparent category-roadmap"
-        style={{ height: 'calc(100vh - 80px)' }}
+        style={{ height: 'calc(100vh - 140px)' }}
         proOptions={{ hideAttribution: true }}
         key={activeTab} // Force re-render and fit view on tab change
       >

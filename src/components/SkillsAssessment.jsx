@@ -47,7 +47,7 @@ const SkillsAssessment = () => {
   const analysis = getGapAnalysis();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-20 p-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-8"

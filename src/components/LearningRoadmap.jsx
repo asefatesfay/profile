@@ -138,17 +138,18 @@ const LearningRoadmap = ({ skill }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <Target className="w-8 h-8 text-blue-600" />
-          <h1 className="text-3xl font-bold text-gray-900">Machine Learning Roadmap</h1>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 pt-20">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Target className="w-8 h-8 text-blue-600" />
+            <h1 className="text-3xl font-bold text-gray-900">Machine Learning Roadmap</h1>
+          </div>
 
-        {/* Motivation Message */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-6 border border-blue-100">
-          <div className="text-sm text-gray-700">
+          {/* Motivation Message */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-6 border border-blue-100">
+            <div className="text-sm text-gray-700">
             {getOverallProgress() === 0 && (
               <span>🚀 Welcome to your ML journey! Every expert was once a beginner. Start with the Introduction phase to build your foundation.</span>
             )}
@@ -516,6 +517,7 @@ const LearningRoadmap = ({ skill }) => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
