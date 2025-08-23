@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Roadmap from './components/Roadmap';
 import LearningRoadmap from './components/LearningRoadmap';
 import Projects from './components/Projects';
@@ -527,6 +528,9 @@ function App() {
           )}
         </AnimatePresence>
       </main>
+      
+      {/* Footer */}
+      <Footer personalInfo={personalInfo} setCurrentView={setCurrentView} />
     </div>
   );
 }
