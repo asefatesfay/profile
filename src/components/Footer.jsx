@@ -5,7 +5,7 @@ import {
   Linkedin, 
   Mail, 
   Heart, 
-  ExternalLink, 
+  Home, 
   Code, 
   MapPin, 
   Calendar,
@@ -41,11 +41,18 @@ const Footer = ({ personalInfo, setCurrentView }) => {
       description: 'Get in touch'
     },
     {
-      name: 'Portfolio',
-      url: personalInfo.website,
-      icon: ExternalLink,
+      name: 'Portfolio Home',
+      url: '#home',
+      icon: Home,
       color: 'hover:text-purple-400',
-      description: 'Visit my website'
+      description: 'Back to portfolio home',
+      isInternal: true,
+      action: () => {
+        if (setCurrentView) {
+          setCurrentView('roadmap');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
     }
   ];
 
@@ -210,6 +217,27 @@ const Footer = ({ personalInfo, setCurrentView }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {socialLinks.map((social, index) => {
               const IconComponent = social.icon;
+              
+              if (social.isInternal) {
+                return (
+                  <motion.button
+                    key={social.name}
+                    onClick={social.action}
+                    className="group flex items-center gap-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-blue-500/50 transition-all duration-300 w-full text-left"
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-300`}>
+                      <IconComponent size={18} className={`text-gray-300 ${social.color} transition-colors duration-300`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-white group-hover:text-blue-400 transition-colors duration-300">{social.name}</div>
+                      <div className="text-xs text-gray-400 truncate">{social.description}</div>
+                    </div>
+                  </motion.button>
+                );
+              }
+              
               return (
                 <motion.a
                   key={social.name}
