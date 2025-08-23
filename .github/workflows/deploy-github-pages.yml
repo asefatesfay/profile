@@ -29,11 +29,18 @@ jobs:
       run: |
         # Add base path for GitHub Pages deployment
         sed -i "s|plugins: \[react()\]|base: '/profile/',\n  plugins: [react()]|" vite.config.js
-        echo "Updated vite.config.js for GitHub Pages:"
+        echo "✅ Updated vite.config.js for GitHub Pages:"
         cat vite.config.js
 
     - name: Build application
       run: npm run build
+
+    - name: Verify build output
+      run: |
+        echo "📁 Build contents:"
+        ls -la dist/
+        echo "📄 Generated index.html:"
+        head -10 dist/index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -41,10 +48,11 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
         force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
 
-    - name: Output deployment URL
+    - name: Success message
       run: |
         echo "🚀 Successfully deployed to GitHub Pages!"
         echo "📱 Site URL: https://asefatesfay.github.io/profile/"
-        echo "⏱️ Deployment may take a few minutes to propagate"
-        echo "📋 Enable GitHub Pages in Settings > Pages if not already done"
+        echo "⏱️ It may take 2-5 minutes for the site to be available"
