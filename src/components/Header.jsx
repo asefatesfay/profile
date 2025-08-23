@@ -12,13 +12,29 @@ const Header = ({ personalInfo }) => {
     >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Profile Image Placeholder */}
+          {/* Profile Image */}
           <motion.div 
-            className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold"
+            className="relative"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            {personalInfo.name.split(' ').map(n => n[0]).join('')}
+            {personalInfo.profilePicture ? (
+              <img 
+                src={personalInfo.profilePicture}
+                alt={personalInfo.name}
+                className="w-32 h-32 rounded-full object-cover border-4 border-white/30 shadow-lg"
+                onError={(e) => {
+                  // Fallback to initials if image fails to load
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+            ) : null}
+            <div 
+              className={`w-32 h-32 bg-white/20 rounded-full flex items-center justify-center text-4xl font-bold border-4 border-white/30 shadow-lg ${personalInfo.profilePicture ? 'hidden' : 'flex'}`}
+            >
+              {personalInfo.name.split(' ').map(n => n[0]).join('')}
+            </div>
           </motion.div>
           
           {/* Profile Info */}
