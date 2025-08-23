@@ -2642,6 +2642,80 @@ export const skillsData = {
           'User sends message → WebSocket server receives → Redis pub/sub broadcasts to all connected clients',
           'Message stored in PostgreSQL for history → File uploads go to S3 → CDN serves media',
           'Redis maintains active user sessions and presence information'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Socket.IO vs Native WebSockets for Real-time Communication',
+            status: 'Accepted',
+            date: '2024-01-10',
+            context: 'Need reliable real-time bidirectional communication with fallback options for various network conditions',
+            decision: 'Use Socket.IO for WebSocket management with automatic fallbacks to polling',
+            rationale: 'Socket.IO provides automatic fallbacks, connection management, and easier implementation than raw WebSockets',
+            consequences: 'Slightly larger bundle size but significantly better reliability and developer experience',
+            alternatives: ['Native WebSockets', 'Server-Sent Events', 'Long polling'],
+            tradeoffs: 'Bundle size vs reliability and ease of implementation'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Redis Pub/Sub vs Database for Message Broadcasting',
+            status: 'Accepted',
+            date: '2024-01-12',
+            context: 'Need to broadcast messages to multiple server instances with minimal latency',
+            decision: 'Implement Redis Pub/Sub for real-time message broadcasting between server instances',
+            rationale: 'Redis Pub/Sub provides millisecond latency for message distribution across server cluster',
+            consequences: 'Additional infrastructure complexity but enables horizontal scaling',
+            alternatives: ['Database polling', 'RabbitMQ', 'Apache Kafka', 'Direct server communication'],
+            tradeoffs: 'Infrastructure complexity vs scalability and performance'
+          },
+          {
+            id: 'ADR-003',
+            title: 'PostgreSQL vs MongoDB for Message Storage',
+            status: 'Accepted',
+            date: '2024-01-15',
+            context: 'Need persistent storage for chat history, user profiles, and relationship data',
+            decision: 'Use PostgreSQL for structured data with JSON columns for flexible message content',
+            rationale: 'ACID compliance for user data, excellent JSON support, and team PostgreSQL expertise',
+            consequences: 'Strong consistency and data integrity but potentially slower for very large message volumes',
+            alternatives: ['MongoDB', 'Cassandra', 'DynamoDB', 'Elasticsearch'],
+            tradeoffs: 'Consistency and familiarity vs document-oriented flexibility'
+          },
+          {
+            id: 'ADR-004',
+            title: 'JWT vs Session-based Authentication',
+            status: 'Accepted',
+            date: '2024-01-18',
+            context: 'Need stateless authentication that works across multiple server instances',
+            decision: 'Implement JWT tokens with Redis-based refresh token management',
+            rationale: 'Stateless authentication enables horizontal scaling, Redis provides secure token invalidation',
+            consequences: 'More complex token management but better scalability and security',
+            alternatives: ['Session cookies', 'OAuth only', 'API keys', 'Basic authentication'],
+            tradeoffs: 'Implementation complexity vs scalability and security features'
+          },
+          {
+            id: 'ADR-005',
+            title: 'AWS S3 vs Self-hosted Storage for File Sharing',
+            status: 'Accepted',
+            date: '2024-01-20',
+            context: 'Need reliable file storage for images, documents, and media with global accessibility',
+            decision: 'Use AWS S3 with CloudFront CDN for file storage and distribution',
+            rationale: 'Proven reliability, global CDN, automatic scaling, and cost-effective for variable loads',
+            consequences: 'AWS vendor dependency but significantly reduced operational overhead',
+            alternatives: ['Self-hosted MinIO', 'Google Cloud Storage', 'Azure Blob Storage', 'Local filesystem'],
+            tradeoffs: 'Vendor lock-in vs operational simplicity and global performance'
+          },
+          {
+            id: 'ADR-006',
+            title: 'Node.js vs Go for WebSocket Server Implementation',
+            status: 'Accepted',
+            date: '2024-01-22',
+            context: 'Need high-performance server handling thousands of concurrent WebSocket connections',
+            decision: 'Use Node.js with Socket.IO for WebSocket server implementation',
+            rationale: 'Excellent WebSocket ecosystem, event-driven architecture suits real-time applications',
+            consequences: 'Single-threaded limitations but optimal for I/O-intensive real-time operations',
+            alternatives: ['Go with Gorilla WebSocket', 'Java with Spring WebSocket', 'Python with AsyncIO'],
+            tradeoffs: 'Single-threaded constraints vs ecosystem maturity and development speed'
+          }
         ]
       },
       features: [
@@ -2750,6 +2824,92 @@ export const skillsData = {
           'Payment Service processes payment → Inventory Service reserves stock → Notification sent',
           'Each service maintains its own database (Database per Service pattern)',
           'Eventual consistency through event-driven architecture'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Microservices vs Monolithic Architecture',
+            status: 'Accepted',
+            date: '2024-02-01',
+            context: 'E-commerce platform needs to scale different components independently and enable team autonomy',
+            decision: 'Implement microservices architecture with domain-driven design boundaries',
+            rationale: 'Independent scaling, technology diversity, team autonomy, and better fault isolation',
+            consequences: 'Increased operational complexity but better scalability and development velocity',
+            alternatives: ['Monolithic application', 'Modular monolith', 'Service-oriented architecture'],
+            tradeoffs: 'Operational complexity vs scalability and team independence'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Go vs Java for Microservices Implementation',
+            status: 'Accepted',
+            date: '2024-02-03',
+            context: 'Need high-performance, resource-efficient services with fast deployment cycles',
+            decision: 'Use Go for all microservices due to performance, concurrency, and deployment benefits',
+            rationale: 'Excellent concurrency, low resource footprint, fast compilation, and simple deployment',
+            consequences: 'Team learning curve but significantly better resource utilization and performance',
+            alternatives: ['Java Spring Boot', 'Node.js', 'Python FastAPI', 'C# .NET Core'],
+            tradeoffs: 'Learning curve vs performance and resource efficiency'
+          },
+          {
+            id: 'ADR-003',
+            title: 'Database per Service vs Shared Database',
+            status: 'Accepted',
+            date: '2024-02-05',
+            context: 'Need data independence and autonomy for each microservice',
+            decision: 'Implement database per service pattern with eventual consistency',
+            rationale: 'Service autonomy, independent scaling, technology choice freedom, and fault isolation',
+            consequences: 'Complex data consistency but true service independence and scalability',
+            alternatives: ['Shared database', 'Database per bounded context', 'Shared database with views'],
+            tradeoffs: 'Data consistency complexity vs service autonomy and scalability'
+          },
+          {
+            id: 'ADR-004',
+            title: 'RabbitMQ vs Apache Kafka for Event-Driven Communication',
+            status: 'Accepted',
+            date: '2024-02-08',
+            context: 'Need reliable asynchronous communication between services with guaranteed delivery',
+            decision: 'Use RabbitMQ for service-to-service communication with event sourcing patterns',
+            rationale: 'Better message routing, dead letter queues, and easier operational management for our scale',
+            consequences: 'Excellent reliability and routing but potentially lower throughput than Kafka',
+            alternatives: ['Apache Kafka', 'Amazon SQS/SNS', 'Redis Streams', 'Direct HTTP calls'],
+            tradeoffs: 'Peak throughput vs message routing flexibility and operational simplicity'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Kong vs Zuul for API Gateway',
+            status: 'Accepted',
+            date: '2024-02-10',
+            context: 'Need centralized routing, authentication, and rate limiting for microservices',
+            decision: 'Implement Kong API Gateway for request routing and cross-cutting concerns',
+            rationale: 'High performance, extensive plugin ecosystem, and proven scalability in production',
+            consequences: 'Additional infrastructure component but centralized security and routing',
+            alternatives: ['Netflix Zuul', 'AWS API Gateway', 'Istio Service Mesh', 'Custom gateway'],
+            tradeoffs: 'Infrastructure complexity vs centralized management and security'
+          },
+          {
+            id: 'ADR-006',
+            title: 'Docker Swarm vs Kubernetes for Container Orchestration',
+            status: 'Accepted',
+            date: '2024-02-12',
+            context: 'Need container orchestration for deployment, scaling, and management of microservices',
+            decision: 'Use Kubernetes for container orchestration and service management',
+            rationale: 'Industry standard, extensive ecosystem, advanced networking, and better scaling capabilities',
+            consequences: 'Steeper learning curve but future-proof orchestration with extensive capabilities',
+            alternatives: ['Docker Swarm', 'Amazon ECS', 'HashiCorp Nomad', 'Manual deployment'],
+            tradeoffs: 'Learning curve and complexity vs advanced orchestration features and ecosystem'
+          },
+          {
+            id: 'ADR-007',
+            title: 'Synchronous vs Asynchronous Service Communication',
+            status: 'Accepted',
+            date: '2024-02-15',
+            context: 'Balance between data consistency and system resilience in distributed architecture',
+            decision: 'Use hybrid approach: synchronous for critical real-time operations, asynchronous for eventual consistency',
+            rationale: 'Critical operations (payment) need immediate consistency, others can be eventually consistent',
+            consequences: 'Complex communication patterns but optimal balance of consistency and resilience',
+            alternatives: ['Fully synchronous', 'Fully asynchronous', 'Event sourcing only'],
+            tradeoffs: 'System complexity vs balanced consistency and performance requirements'
+          }
         ]
       },
       features: [
@@ -2913,6 +3073,68 @@ export const skillsData = {
           'Database indexing: Optimized indexes for analytical workloads',
           'Data pagination: Efficient handling of large datasets',
           'Chart virtualization: Optimized rendering for large datasets'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Choice of FastAPI over Django for Analytics API',
+            status: 'Accepted',
+            date: '2024-01-15',
+            context: 'Need high-performance API for real-time analytics with automatic OpenAPI documentation',
+            decision: 'Use FastAPI with Pydantic for type validation and automatic API docs',
+            rationale: 'FastAPI provides 2-3x better performance than Django, native async support, and automatic validation',
+            consequences: 'Faster query responses, better developer experience, but smaller ecosystem than Django',
+            alternatives: ['Django REST Framework', 'Flask with extensions', 'Express.js'],
+            tradeoffs: 'Performance and type safety vs ecosystem maturity'
+          },
+          {
+            id: 'ADR-002',
+            title: 'PostgreSQL with Materialized Views vs Time-Series Database',
+            status: 'Accepted',
+            date: '2024-01-18',
+            context: 'Need efficient storage and querying for large volumes of analytical data',
+            decision: 'Use PostgreSQL with materialized views for pre-computed aggregations',
+            rationale: 'Team expertise in PostgreSQL, ACID compliance, and complex query support outweighed specialized TSDB benefits',
+            consequences: 'Leveraged existing skills, strong consistency, but manual optimization required',
+            alternatives: ['InfluxDB', 'TimescaleDB', 'ClickHouse'],
+            tradeoffs: 'Familiar tooling vs specialized time-series optimizations'
+          },
+          {
+            id: 'ADR-003',
+            title: 'React with D3.js vs Pre-built Chart Libraries',
+            status: 'Accepted',
+            date: '2024-01-22',
+            context: 'Requirements for highly customizable, interactive visualizations with real-time updates',
+            decision: 'Combine React for UI state management with D3.js for custom visualizations',
+            rationale: 'Maximum flexibility for custom charts, smooth real-time updates, and responsive design',
+            consequences: 'Higher development time initially, but unlimited customization and better performance',
+            alternatives: ['Chart.js', 'Recharts only', 'Highcharts', 'Observable Plot'],
+            tradeoffs: 'Development time vs customization flexibility'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Redis Caching Strategy Implementation',
+            status: 'Accepted',
+            date: '2024-02-01',
+            context: 'Query response times exceeding 2 seconds for complex analytical queries',
+            decision: 'Implement multi-layer caching with Redis for query results and session management',
+            rationale: 'Reduced average query time from 2.1s to 180ms, improved user experience significantly',
+            consequences: 'Added complexity in cache invalidation, but dramatic performance improvement',
+            alternatives: ['Database query optimization only', 'Application-level caching', 'CDN caching'],
+            tradeoffs: 'System complexity vs query performance'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Apache Airflow for ETL Pipeline Orchestration',
+            status: 'Accepted',
+            date: '2024-02-05',
+            context: 'Complex data pipeline with multiple sources, transformations, and quality checks',
+            decision: 'Use Apache Airflow for workflow orchestration with Great Expectations for data validation',
+            rationale: 'Mature ecosystem, visual DAG representation, extensive logging, and retry mechanisms',
+            consequences: 'Robust pipeline management but requires dedicated infrastructure and monitoring',
+            alternatives: ['Prefect', 'Dagster', 'Custom cron jobs', 'AWS Step Functions'],
+            tradeoffs: 'Infrastructure overhead vs pipeline reliability and visibility'
+          }
         ]
       },
       features: [
@@ -3061,6 +3283,68 @@ export const skillsData = {
           'Batch prediction: Pre-computed recommendations for frequent users',
           'Feature store: Centralized feature serving with microsecond latency',
           'Model pruning: 60% model size reduction while maintaining quality'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Hybrid Recommendation Approach vs Single Algorithm',
+            status: 'Accepted',
+            date: '2024-03-10',
+            context: 'Cold start problem for new users/items and need for diverse recommendation quality',
+            decision: 'Implement hybrid approach combining collaborative filtering, content-based, and deep learning models',
+            rationale: 'Collaborative filtering excels for existing users, content-based handles cold start, deep learning captures complex patterns',
+            consequences: 'Better overall recommendation quality but increased system complexity and training time',
+            alternatives: ['Pure collaborative filtering', 'Content-based only', 'Deep learning only'],
+            tradeoffs: 'System complexity vs recommendation quality and coverage'
+          },
+          {
+            id: 'ADR-002',
+            title: 'TensorFlow Serving vs Custom Model API',
+            status: 'Accepted',
+            date: '2024-03-15',
+            context: 'Need production-grade model serving with high availability and performance',
+            decision: 'Use TensorFlow Serving with gRPC for model inference and version management',
+            rationale: 'Built-in model versioning, A/B testing support, optimized inference, and industry standard',
+            consequences: 'Robust production serving but vendor lock-in to TensorFlow ecosystem',
+            alternatives: ['Custom FastAPI service', 'MLflow serving', 'Triton Inference Server'],
+            tradeoffs: 'Framework dependency vs production features and reliability'
+          },
+          {
+            id: 'ADR-003',
+            title: 'Real-time vs Batch Recommendation Generation',
+            status: 'Accepted',
+            date: '2024-03-18',
+            context: 'Balance between recommendation freshness and system performance at scale',
+            decision: 'Hybrid approach: pre-computed batch recommendations with real-time personalization layer',
+            rationale: 'Handles high throughput efficiently while maintaining personalization for user context',
+            consequences: 'Optimal performance and user experience but requires cache management strategy',
+            alternatives: ['Pure real-time', 'Pure batch', 'Streaming recommendations'],
+            tradeoffs: 'System complexity vs latency and resource utilization'
+          },
+          {
+            id: 'ADR-004',
+            title: 'MLflow for Experiment Tracking and Model Registry',
+            status: 'Accepted',
+            date: '2024-03-22',
+            context: 'Need comprehensive ML lifecycle management with model versioning and A/B testing',
+            decision: 'Implement MLflow for experiment tracking, model registry, and deployment management',
+            rationale: 'Centralized experiment management, model lineage, and seamless deployment pipeline integration',
+            consequences: 'Better ML operations and reproducibility but additional infrastructure overhead',
+            alternatives: ['Weights & Biases', 'Neptune', 'Custom tracking solution'],
+            tradeoffs: 'Infrastructure complexity vs ML experiment management capabilities'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Feature Store Implementation with Redis',
+            status: 'Accepted',
+            date: '2024-03-25',
+            context: 'Need low-latency feature serving for real-time recommendations with feature consistency',
+            decision: 'Build feature store using Redis with background batch updates from data pipeline',
+            rationale: 'Microsecond latency for feature lookup, consistent features across training and serving',
+            consequences: 'Excellent performance and consistency but requires careful feature versioning and updates',
+            alternatives: ['Database-based features', 'In-memory application cache', 'Dedicated feature store (Feast)'],
+            tradeoffs: 'Development effort vs feature serving performance and consistency'
+          }
         ]
       },
       features: [
@@ -3236,6 +3520,68 @@ Each Environment Contains:
           'Encryption at rest and in transit using AWS KMS and TLS',
           'Automated security scanning with AWS Config and GuardDuty',
           'Network monitoring with VPC Flow Logs and threat detection'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Terraform vs AWS CloudFormation for Infrastructure as Code',
+            status: 'Accepted',
+            date: '2024-02-10',
+            context: 'Need multi-cloud capable IaC solution with team expertise and community support',
+            decision: 'Use Terraform with AWS provider for all infrastructure provisioning',
+            rationale: 'Multi-cloud portability, extensive provider ecosystem, better state management, and HCL readability',
+            consequences: 'Team needed to learn HCL syntax but gained cloud-agnostic skills and better tooling',
+            alternatives: ['AWS CloudFormation', 'AWS CDK', 'Pulumi'],
+            tradeoffs: 'Learning curve vs multi-cloud flexibility and ecosystem'
+          },
+          {
+            id: 'ADR-002',
+            title: 'EKS vs ECS for Container Orchestration',
+            status: 'Accepted',
+            date: '2024-02-15',
+            context: 'Need scalable container platform with ecosystem compatibility and team skills',
+            decision: 'Deploy applications on Amazon EKS with mixed EC2 and Fargate node groups',
+            rationale: 'Kubernetes standard ensures portability, extensive ecosystem, and team had K8s experience',
+            consequences: 'Higher operational complexity but gained standard orchestration and ecosystem benefits',
+            alternatives: ['Amazon ECS', 'AWS Fargate only', 'Self-managed Kubernetes'],
+            tradeoffs: 'Operational complexity vs ecosystem compatibility and portability'
+          },
+          {
+            id: 'ADR-003',
+            title: 'Multi-Region Architecture Strategy',
+            status: 'Accepted',
+            date: '2024-02-18',
+            context: 'Business requirements for high availability and disaster recovery with global user base',
+            decision: 'Implement active-passive multi-region setup with automated failover mechanisms',
+            rationale: 'Balanced cost and complexity while meeting RTO/RPO requirements of 15 minutes',
+            consequences: 'Increased infrastructure costs by 40% but achieved 99.9% availability target',
+            alternatives: ['Single region with multi-AZ', 'Active-active multi-region', 'Manual failover'],
+            tradeoffs: 'Infrastructure cost vs availability and disaster recovery capabilities'
+          },
+          {
+            id: 'ADR-004',
+            title: 'GitOps Workflow with GitHub Actions vs GitLab CI',
+            status: 'Accepted',
+            date: '2024-02-22',
+            context: 'Need automated deployment pipeline integrated with existing GitHub repositories',
+            decision: 'Implement GitOps using GitHub Actions with OIDC for secure AWS access',
+            rationale: 'Seamless integration with existing GitHub repos, OIDC eliminates long-lived credentials',
+            consequences: 'Improved security posture and simplified credential management but GitHub dependency',
+            alternatives: ['GitLab CI/CD', 'Jenkins', 'AWS CodePipeline'],
+            tradeoffs: 'Platform lock-in vs integration simplicity and security'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Monitoring Strategy with CloudWatch vs Third-party Tools',
+            status: 'Accepted',
+            date: '2024-02-25',
+            context: 'Need comprehensive monitoring solution balancing cost, features, and AWS integration',
+            decision: 'Use CloudWatch for basic metrics with Prometheus/Grafana for advanced application monitoring',
+            rationale: 'CloudWatch for infrastructure monitoring, Prometheus for detailed application metrics and alerting',
+            consequences: 'Optimal cost-performance balance but requires managing two monitoring systems',
+            alternatives: ['CloudWatch only', 'Datadog', 'New Relic', 'Full Prometheus stack'],
+            tradeoffs: 'System complexity vs monitoring capabilities and cost optimization'
+          }
         ]
       },
       features: [
@@ -3388,6 +3734,68 @@ Each Environment Contains:
           'Image optimization: WebP format with fallbacks, responsive images',
           'Bundle optimization: Tree shaking, compression, minification',
           'Service worker registration: Deferred until after app initialization'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Offline-First vs Online-First Architecture',
+            status: 'Accepted',
+            date: '2024-04-05',
+            context: 'Target users often experience unreliable network connectivity, need seamless offline experience',
+            decision: 'Implement offline-first architecture with cache-first strategies for critical resources',
+            rationale: 'Better user experience in poor connectivity, faster load times, and true native app-like behavior',
+            consequences: 'Increased complexity in sync logic and cache management but significantly improved UX',
+            alternatives: ['Online-first with offline fallback', 'Network-first strategies', 'Hybrid approach'],
+            tradeoffs: 'Development complexity vs user experience and reliability'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Workbox vs Custom Service Worker Implementation',
+            status: 'Accepted',
+            date: '2024-04-08',
+            context: 'Need robust caching strategies with minimal development overhead and maintenance',
+            decision: 'Use Workbox for service worker functionality with custom extensions where needed',
+            rationale: 'Battle-tested caching strategies, automatic precaching, and extensive PWA feature support',
+            consequences: 'Faster development and fewer bugs but some vendor dependency and bundle size increase',
+            alternatives: ['Custom service worker', 'sw-precache + sw-toolbox', 'PWA Builder'],
+            tradeoffs: 'Bundle size and vendor dependency vs development speed and reliability'
+          },
+          {
+            id: 'ADR-003',
+            title: 'IndexedDB vs LocalStorage for Offline Data',
+            status: 'Accepted',
+            date: '2024-04-10',
+            context: 'Need to store large amounts of structured data offline with query capabilities',
+            decision: 'Use IndexedDB with Dexie.js wrapper for complex offline data storage and querying',
+            rationale: 'Large storage capacity, structured queries, transactions, and better performance than localStorage',
+            consequences: 'More complex API but unlimited storage and better data management capabilities',
+            alternatives: ['localStorage', 'WebSQL (deprecated)', 'Raw IndexedDB', 'Cache API only'],
+            tradeoffs: 'API complexity vs storage capacity and query capabilities'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Firebase FCM vs Web Push Protocol',
+            status: 'Accepted',
+            date: '2024-04-12',
+            context: 'Need cross-platform push notifications with reliable delivery and analytics',
+            decision: 'Implement Firebase Cloud Messaging for push notifications with fallback to standard Web Push',
+            rationale: 'Simplified cross-platform implementation, analytics, and better delivery rates on Android',
+            consequences: 'Google service dependency but significantly easier implementation and better features',
+            alternatives: ['Pure Web Push API', 'OneSignal', 'Pusher', 'Custom push service'],
+            tradeoffs: 'Vendor lock-in vs implementation simplicity and feature richness'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Background Sync Strategy for Offline Actions',
+            status: 'Accepted',
+            date: '2024-04-15',
+            context: 'Users need to perform actions offline that must sync when connectivity returns',
+            decision: 'Implement Background Sync API with IndexedDB queue for reliable action synchronization',
+            rationale: 'Automatic retry when online, survives page refreshes, and provides reliable eventual consistency',
+            consequences: 'Complex sync logic implementation but guaranteed data integrity and user action persistence',
+            alternatives: ['Manual sync on page load', 'Periodic sync', 'WebSocket reconnection', 'No offline actions'],
+            tradeoffs: 'Implementation complexity vs data reliability and user experience'
+          }
         ]
       },
       features: [
@@ -3555,6 +3963,68 @@ Each Environment Contains:
           'Read replicas: Query load distribution across multiple databases',
           'Connection pooling: Optimized database connection management',
           'Prometheus caching: Aggregated metrics for faster queries'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Event Sourcing vs Traditional CRUD Operations',
+            status: 'Accepted',
+            date: '2024-05-01',
+            context: 'Need complete audit trail, temporal queries, and ability to rebuild system state from events',
+            decision: 'Implement Event Sourcing pattern with immutable event store and event replay capabilities',
+            rationale: 'Complete audit trail, ability to replay events for debugging, and temporal queries for business analytics',
+            consequences: 'Increased storage requirements and complexity but gained powerful debugging and analytics capabilities',
+            alternatives: ['Traditional CRUD with audit log', 'Change Data Capture', 'Hybrid approach'],
+            tradeoffs: 'Storage and complexity vs audit capabilities and temporal queries'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Apache Kafka vs Amazon SQS for Event Streaming',
+            status: 'Accepted',
+            date: '2024-05-05',
+            context: 'Need high-throughput event streaming with ordering guarantees and replay capabilities',
+            decision: 'Use Apache Kafka for event streaming with topic partitioning for scalability',
+            rationale: 'Superior throughput, ordering guarantees, built-in replication, and event replay capabilities',
+            consequences: 'More operational overhead but significantly better performance and feature set',
+            alternatives: ['Amazon SQS/SNS', 'Redis Streams', 'RabbitMQ', 'Apache Pulsar'],
+            tradeoffs: 'Operational complexity vs performance and event streaming capabilities'
+          },
+          {
+            id: 'ADR-003',
+            title: 'CQRS Implementation with Separate Read/Write Models',
+            status: 'Accepted',
+            date: '2024-05-08',
+            context: 'Different performance requirements for write operations vs complex analytical queries',
+            decision: 'Implement CQRS with separate write database and read-optimized materialized views',
+            rationale: 'Optimized write performance, complex read queries without affecting writes, independent scaling',
+            consequences: 'Eventual consistency challenges but optimal performance for both read and write operations',
+            alternatives: ['Single database model', 'Read replicas only', 'Microservices per bounded context'],
+            tradeoffs: 'Data consistency complexity vs read/write performance optimization'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Go vs Java for High-Performance Event Processing',
+            status: 'Accepted',
+            date: '2024-05-10',
+            context: 'Need high-throughput, low-latency event processing with efficient resource utilization',
+            decision: 'Use Go for all event processing services due to superior concurrency and resource efficiency',
+            rationale: 'Excellent concurrency with goroutines, low memory footprint, fast compilation, and simple deployment',
+            consequences: 'Team learning curve but achieved 3x better resource efficiency and lower latency',
+            alternatives: ['Java with Spring Boot', 'Node.js', 'Rust', 'C#/.NET'],
+            tradeoffs: 'Team learning curve vs performance and resource efficiency'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Dead Letter Queue Strategy with Exponential Backoff',
+            status: 'Accepted',
+            date: '2024-05-12',
+            context: 'Need robust error handling for failed events without losing data or blocking processing',
+            decision: 'Implement DLQ with exponential backoff, circuit breaker, and manual intervention capabilities',
+            rationale: 'Prevents event loss, avoids cascade failures, and provides operational visibility into failures',
+            consequences: 'Additional infrastructure complexity but significantly improved system resilience',
+            alternatives: ['Simple retry without DLQ', 'Immediate failure without retry', 'Fixed retry intervals'],
+            tradeoffs: 'System complexity vs error handling robustness and operational visibility'
+          }
         ]
       },
       features: [
@@ -3667,6 +4137,92 @@ Each Environment Contains:
           'Memory efficiency: 25% reduction through reactive streams',
           'Latency improvement: 40% faster response times under load',
           'Throughput: Handles 10k+ concurrent connections with minimal resource usage'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Spring WebFlux vs Traditional Spring MVC',
+            status: 'Accepted',
+            date: '2024-06-01',
+            context: 'Legacy system experiencing performance bottlenecks with high concurrent loads and blocking I/O operations',
+            decision: 'Migrate from Spring MVC to Spring WebFlux for non-blocking reactive programming',
+            rationale: 'WebFlux provides non-blocking I/O, better resource utilization, and handles high concurrency with fewer threads',
+            consequences: '40% performance improvement and 25% memory reduction, but team needed reactive programming training',
+            alternatives: ['Spring MVC with async', 'Node.js migration', 'Vert.x framework', 'Micronaut reactive'],
+            tradeoffs: 'Learning curve and paradigm shift vs significant performance gains'
+          },
+          {
+            id: 'ADR-002',
+            title: 'R2DBC vs Traditional JPA for Reactive Data Access',
+            status: 'Accepted',
+            date: '2024-06-05',
+            context: 'Need fully reactive stack without blocking database operations that would negate WebFlux benefits',
+            decision: 'Use Spring Data R2DBC for reactive database access instead of JPA/Hibernate',
+            rationale: 'R2DBC provides non-blocking database operations, maintaining reactive streams end-to-end',
+            consequences: 'True reactive stack but limited ecosystem compared to JPA and requires connection pool tuning',
+            alternatives: ['JPA with @Async', 'MongoDB reactive', 'Cassandra reactive', 'JDBC with thread pools'],
+            tradeoffs: 'Ecosystem maturity vs end-to-end reactive performance'
+          },
+          {
+            id: 'ADR-003',
+            title: 'Project Reactor vs RxJava for Reactive Streams',
+            status: 'Accepted',
+            date: '2024-06-08',
+            context: 'Need to choose reactive library for composing asynchronous and event-driven applications',
+            decision: 'Use Project Reactor (Mono/Flux) as the reactive streams implementation',
+            rationale: 'Native Spring integration, better Spring WebFlux compatibility, and superior debugging tools',
+            consequences: 'Seamless Spring integration but team needed to learn Reactor operators and patterns',
+            alternatives: ['RxJava 3', 'Akka Streams', 'Vert.x reactive streams', 'Java 9 Flow API'],
+            tradeoffs: 'Framework coupling vs optimal Spring ecosystem integration'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Netty vs Tomcat for Reactive Server Runtime',
+            status: 'Accepted',
+            date: '2024-06-10',
+            context: 'Traditional servlet containers not optimized for reactive workloads and non-blocking operations',
+            decision: 'Use Netty as the embedded server runtime for reactive applications',
+            rationale: 'Event-loop architecture, non-blocking I/O, and optimized for reactive workloads with low memory footprint',
+            consequences: 'Superior reactive performance but different threading model requiring operational adjustments',
+            alternatives: ['Reactive Tomcat', 'Undertow reactive', 'Jetty reactive', 'Custom NIO server'],
+            tradeoffs: 'Operational complexity vs reactive runtime optimization'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Backpressure Strategy Implementation',
+            status: 'Accepted',
+            date: '2024-06-12',
+            context: 'Need to handle scenarios where data producers exceed consumer processing capacity',
+            decision: 'Implement multiple backpressure strategies: buffering, dropping, and error signals based on use case',
+            rationale: 'Different scenarios require different strategies - buffer for bursty loads, drop for real-time data, error for critical flows',
+            consequences: 'Robust handling of load spikes but requires careful strategy selection per endpoint',
+            alternatives: ['Single global strategy', 'No backpressure handling', 'Custom backpressure implementation'],
+            tradeoffs: 'Configuration complexity vs system resilience and performance'
+          },
+          {
+            id: 'ADR-006',
+            title: 'Reactive Security with Spring Security WebFlux',
+            status: 'Accepted',
+            date: '2024-06-15',
+            context: 'Traditional Spring Security blocks threads, contradicting reactive programming benefits',
+            decision: 'Implement Spring Security WebFlux with reactive authentication and authorization',
+            rationale: 'Maintains non-blocking security pipeline, integrates with reactive JWT validation and RBAC',
+            consequences: 'Consistent reactive behavior but limited documentation and fewer examples available',
+            alternatives: ['Custom reactive security', 'Blocking security with separate thread pool', 'Gateway-level security only'],
+            tradeoffs: 'Implementation complexity vs end-to-end reactive consistency'
+          },
+          {
+            id: 'ADR-007',
+            title: 'Circuit Breaker Pattern with Resilience4j',
+            status: 'Accepted',
+            date: '2024-06-18',
+            context: 'Microservices need protection against cascading failures and service degradation',
+            decision: 'Implement Resilience4j circuit breaker with reactive operators for fault tolerance',
+            rationale: 'Native reactive support, metrics integration, and configurable failure thresholds with fallback mechanisms',
+            consequences: 'Improved system resilience but requires proper threshold tuning and fallback strategy design',
+            alternatives: ['Netflix Hystrix', 'Custom circuit breaker', 'Timeout-only approach', 'Spring Retry'],
+            tradeoffs: 'Configuration overhead vs system fault tolerance and reliability'
+          }
         ]
       },
       features: [
@@ -3692,6 +4248,92 @@ Each Environment Contains:
         'Reduced memory footprint by 25%',
         'Handles 10,000+ concurrent requests efficiently',
         '99.9% uptime with improved resilience'
+      ],
+      designDecisions: [
+        {
+          id: 'ADR-001',
+          title: 'Spring WebFlux vs Traditional Spring MVC',
+          status: 'Accepted',
+          date: '2024-04-01',
+          context: 'Need to handle high concurrent load with limited resources and improve response times',
+          decision: 'Migrate from Spring MVC to Spring WebFlux for reactive, non-blocking I/O operations',
+          rationale: 'WebFlux provides better resource utilization, handles more concurrent requests with fewer threads',
+          consequences: 'Paradigm shift in programming model but 40% performance improvement and better scalability',
+          alternatives: ['Spring MVC with async', 'Node.js', 'Go with Gin', 'Vert.x'],
+          tradeoffs: 'Learning curve and paradigm shift vs performance and resource efficiency'
+        },
+        {
+          id: 'ADR-002',
+          title: 'R2DBC vs Traditional JDBC for Database Access',
+          status: 'Accepted',
+          date: '2024-04-03',
+          context: 'Need non-blocking database operations to maintain reactive streams throughout the application',
+          decision: 'Use R2DBC (Reactive Relational Database Connectivity) for all database interactions',
+          rationale: 'Maintains reactive streams end-to-end, prevents blocking operations that would negate WebFlux benefits',
+          consequences: 'Limited ORM features compared to JPA but true non-blocking database operations',
+          alternatives: ['JDBC with thread pools', 'JPA with async wrappers', 'NoSQL databases', 'JOOQ reactive'],
+          tradeoffs: 'ORM feature richness vs true reactive database operations'
+        },
+        {
+          id: 'ADR-003',
+          title: 'Project Reactor vs RxJava for Reactive Streams',
+          status: 'Accepted',
+          date: '2024-04-05',
+          context: 'Need reactive library that integrates seamlessly with Spring ecosystem',
+          decision: 'Use Project Reactor (Mono/Flux) as it\'s the foundation of Spring WebFlux',
+          rationale: 'Native integration with Spring, better performance, and simpler learning curve within Spring ecosystem',
+          consequences: 'Framework dependency but optimal integration and performance within Spring applications',
+          alternatives: ['RxJava', 'Akka Streams', 'Reactive Streams TCK only'],
+          tradeoffs: 'Framework coupling vs optimal integration and performance'
+        },
+        {
+          id: 'ADR-004',
+          title: 'Netty vs Undertow for Reactive Web Server',
+          status: 'Accepted',
+          date: '2024-04-08',
+          context: 'Need high-performance, non-blocking web server for WebFlux applications',
+          decision: 'Use Netty as the underlying web server for Spring WebFlux applications',
+          rationale: 'Default choice for WebFlux, excellent performance, mature async I/O implementation',
+          consequences: 'Optimal performance and memory usage with Spring WebFlux reactive stack',
+          alternatives: ['Undertow', 'Jetty reactive', 'Tomcat with NIO'],
+          tradeoffs: 'Limited choice flexibility vs optimal performance and Spring integration'
+        },
+        {
+          id: 'ADR-005',
+          title: 'Reactive Redis vs Traditional Redis Operations',
+          status: 'Accepted',
+          date: '2024-04-10',
+          context: 'Need non-blocking cache operations and pub/sub messaging in reactive architecture',
+          decision: 'Use Lettuce driver for reactive Redis operations with Spring Data Redis Reactive',
+          rationale: 'Maintains reactive streams for caching and messaging, prevents blocking in reactive pipeline',
+          consequences: 'Different API patterns but maintains non-blocking operations throughout the stack',
+          alternatives: ['Jedis with thread pools', 'Redisson reactive', 'Custom reactive wrapper'],
+          tradeoffs: 'API learning curve vs maintaining reactive principles throughout the stack'
+        },
+        {
+          id: 'ADR-006',
+          title: 'Backpressure Strategy for High-Load Scenarios',
+          status: 'Accepted',
+          date: '2024-04-12',
+          context: 'Need to handle varying load patterns without overwhelming downstream services',
+          decision: 'Implement adaptive backpressure with buffer, drop, and throttle strategies based on load',
+          rationale: 'Prevents system overload, maintains responsiveness, and provides graceful degradation',
+          consequences: 'Complex backpressure management but system stability under varying load conditions',
+          alternatives: ['Fixed buffer sizes', 'No backpressure handling', 'Circuit breaker only'],
+          tradeoffs: 'Implementation complexity vs system stability and performance under load'
+        },
+        {
+          id: 'ADR-007',
+          title: 'WebTestClient vs MockMvc for Reactive Testing',
+          status: 'Accepted',
+          date: '2024-04-15',
+          context: 'Need testing approach that works with reactive streams and async operations',
+          decision: 'Use WebTestClient and StepVerifier for testing reactive endpoints and streams',
+          rationale: 'Designed for reactive applications, supports async testing patterns, integrates with WebFlux',
+          consequences: 'New testing patterns to learn but proper testing of reactive behavior',
+          alternatives: ['MockMvc with async', 'TestRestTemplate', 'Custom reactive test utilities'],
+          tradeoffs: 'Learning new testing approaches vs proper reactive application testing'
+        }
       ],
       githubUrl: 'https://github.com/yourusername/reactive-microservices',
       estimatedHours: 160

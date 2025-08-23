@@ -425,6 +425,8 @@ const Projects = () => {
                             </ul>
                           </div>
                         )}
+
+                        {/* Design Decisions (ADRs) - Moved to full-width section below */}
                       </div>
                     )}
 
@@ -478,6 +480,71 @@ const Projects = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Full-width Design Decisions Section */}
+                {selectedProject.architecture && selectedProject.architecture.designDecisions && (
+                  <div className="mt-8 border-t border-gray-200 pt-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <Lightbulb className="w-5 h-5 text-yellow-500" />
+                      Architecture Decision Records (ADRs)
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedProject.architecture.designDecisions.map((decision, index) => (
+                        <div key={index} className="border border-gray-200 rounded-lg p-4 bg-white hover:shadow-md transition-shadow">
+                          <div className="flex items-start justify-between mb-3">
+                            <h4 className="text-sm font-semibold text-gray-900 pr-2">{decision.id}: {decision.title}</h4>
+                            <span className={`px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${
+                              decision.status === 'Accepted' ? 'bg-green-100 text-green-700' :
+                              decision.status === 'Superseded' ? 'bg-yellow-100 text-yellow-700' :
+                              'bg-gray-100 text-gray-700'
+                            }`}>
+                              {decision.status}
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-3">
+                            <div>
+                              <h5 className="text-xs font-medium text-gray-700 mb-1">Context</h5>
+                              <p className="text-xs text-gray-600">{decision.context}</p>
+                            </div>
+                            
+                            <div>
+                              <h5 className="text-xs font-medium text-gray-700 mb-1">Decision</h5>
+                              <p className="text-xs text-gray-600">{decision.decision}</p>
+                            </div>
+                            
+                            <div>
+                              <h5 className="text-xs font-medium text-gray-700 mb-1">Rationale</h5>
+                              <p className="text-xs text-gray-600">{decision.rationale}</p>
+                            </div>
+                            
+                            <div>
+                              <h5 className="text-xs font-medium text-gray-700 mb-1">Trade-offs</h5>
+                              <p className="text-xs text-gray-600">{decision.tradeoffs}</p>
+                            </div>
+                            
+                            {decision.alternatives && decision.alternatives.length > 0 && (
+                              <div>
+                                <h5 className="text-xs font-medium text-gray-700 mb-1">Alternatives Considered</h5>
+                                <div className="flex flex-wrap gap-1">
+                                  {decision.alternatives.map((alt, altIndex) => (
+                                    <span key={altIndex} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
+                                      {alt}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            
+                            <div className="pt-2 border-t border-gray-100">
+                              <span className="text-xs text-gray-500">Decision made: {decision.date}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>
