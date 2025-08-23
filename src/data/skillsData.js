@@ -4422,7 +4422,7 @@ export const personalInfo = {
   linkedin: 'https://linkedin.com/in/assefatesfay',
   github: 'https://github.com/assefatesfay',
   website: 'https://assefatesfay.dev',
-  profilePicture: '/images/profile-2.png', // Profile picture located at public/images/profile.png
+  profilePicture: `${import.meta.env.BASE_URL}images/profile-2.png`, // Profile picture located at public/images/profile-2.png
   experience: '8+ Years',
   location: 'Remote',
   bio: 'Passionate senior engineer specializing in distributed systems, cloud architecture, and high-performance applications. Expert in building scalable microservices, event-driven architectures, and leading engineering teams to deliver enterprise-grade solutions.',
