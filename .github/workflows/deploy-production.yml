@@ -119,11 +119,33 @@ jobs:
     needs: [validate-secrets, build]
     if: needs.validate-secrets.outputs.has-aws-secrets == 'false' || needs.validate-secrets.outputs.has-amplify-secrets == 'false'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (if rebuild needed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-files
           path: dist/
+
+      - name: Verify build files exist
+        run: |
+          echo "📁 Checking build files..."
+          ls -la dist/
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ Build files missing! Re-building..."
+            # Rebuild if artifacts are missing
+            npm ci
+            npm run build
+          else
+            echo "✅ Build files found!"
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -135,9 +157,9 @@ jobs:
 
       - name: Alternative deployment options
         run: |
-          echo "🔧 AWS secrets not configured. Consider these deployment options:"
+          echo "🔧 Static hosting deployment options:"
           echo ""
-          echo "1. **GitHub Pages**: Enabled above (free for public repos)"
+          echo "✅ **GitHub Pages**: Deployed above"
           echo "2. **Netlify**: Add NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID secrets"
           echo "3. **Vercel**: Add VERCEL_TOKEN and VERCEL_PROJECT_ID secrets"
           echo "4. **Firebase**: Add FIREBASE_TOKEN secret"
@@ -148,7 +170,8 @@ jobs:
           echo "- AMPLIFY_APP_ID"
           echo "- AWS_REGION (optional, defaults to us-east-1)"
           echo ""
-          echo "📁 Build files are ready in the artifacts."
+          echo "📁 Build files verified:"
+          ls -la dist/
 
   notify:
     name: Deployment Notification
