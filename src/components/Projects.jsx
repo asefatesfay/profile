@@ -11,7 +11,10 @@ import {
   Filter,
   Lightbulb,
   Target,
-  Star
+  Star,
+  Layout,
+  Database,
+  Layers
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
 
@@ -332,6 +335,99 @@ const Projects = () => {
                       </ul>
                     </div>
 
+                    {/* Architecture Section */}
+                    {selectedProject.architecture && (
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                          <Layout className="w-5 h-5" />
+                          System Architecture
+                        </h3>
+                        
+                        {/* Architecture Overview */}
+                        <div className="mb-4">
+                          <h4 className="text-sm font-medium text-gray-800 mb-2">Overview</h4>
+                          <p className="text-sm text-gray-600">{selectedProject.architecture.overview}</p>
+                        </div>
+
+                        {/* Architecture Diagram */}
+                        <div className="mb-4">
+                          <h4 className="text-sm font-medium text-gray-800 mb-2 flex items-center gap-1">
+                            <Layers className="w-4 h-4" />
+                            Architecture Diagram
+                          </h4>
+                          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs font-mono overflow-x-auto">
+                            <pre className="whitespace-pre">{selectedProject.architecture.diagram}</pre>
+                          </div>
+                        </div>
+
+                        {/* Components */}
+                        <div className="mb-4">
+                          <h4 className="text-sm font-medium text-gray-800 mb-2 flex items-center gap-1">
+                            <Database className="w-4 h-4" />
+                            Key Components
+                          </h4>
+                          <div className="space-y-3">
+                            {selectedProject.architecture.components.map((component, index) => (
+                              <div key={index} className="border-l-2 border-blue-200 pl-3">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="font-medium text-gray-800 text-sm">{component.name}</span>
+                                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
+                                    {component.tech}
+                                  </span>
+                                </div>
+                                <p className="text-xs text-gray-600">{component.responsibility}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Reactive Patterns (if available) */}
+                        {selectedProject.architecture.reactivePatterns && (
+                          <div className="mb-4">
+                            <h4 className="text-sm font-medium text-gray-800 mb-2">Reactive Patterns</h4>
+                            <ul className="space-y-1">
+                              {selectedProject.architecture.reactivePatterns.map((pattern, index) => (
+                                <li key={index} className="flex items-start gap-2 text-xs text-gray-600">
+                                  <Circle className="w-2 h-2 mt-1 text-green-500 flex-shrink-0" />
+                                  {pattern}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Data Flow (if available) */}
+                        {selectedProject.architecture.dataFlow && (
+                          <div className="mb-4">
+                            <h4 className="text-sm font-medium text-gray-800 mb-2">Data Flow</h4>
+                            <ul className="space-y-1">
+                              {selectedProject.architecture.dataFlow.map((flow, index) => (
+                                <li key={index} className="flex items-start gap-2 text-xs text-gray-600">
+                                  <Circle className="w-2 h-2 mt-1 text-purple-500 flex-shrink-0" />
+                                  {flow}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Performance Optimizations (if available) */}
+                        {selectedProject.architecture.performanceOptimizations && (
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-800 mb-2">Performance Optimizations</h4>
+                            <ul className="space-y-1">
+                              {selectedProject.architecture.performanceOptimizations.map((optimization, index) => (
+                                <li key={index} className="flex items-start gap-2 text-xs text-gray-600">
+                                  <Circle className="w-2 h-2 mt-1 text-orange-500 flex-shrink-0" />
+                                  {optimization}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     {/* Project Info */}
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h3 className="text-lg font-semibold text-gray-900 mb-3">Project Information</h3>
@@ -362,6 +458,24 @@ const Projects = () => {
                         </div>
                       </div>
                     </div>
+
+                    {/* Performance Metrics (if available) */}
+                    {selectedProject.performanceMetrics && (
+                      <div className="bg-green-50 p-4 rounded-lg">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                          <Target className="w-5 h-5" />
+                          Performance Metrics
+                        </h3>
+                        <ul className="space-y-2">
+                          {selectedProject.performanceMetrics.map((metric, index) => (
+                            <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                              <CheckCircle className="w-3 h-3 mt-1 text-green-600 flex-shrink-0" />
+                              {metric}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
