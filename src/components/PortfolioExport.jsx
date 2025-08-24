@@ -741,7 +741,7 @@ const PortfolioExport = () => {
     };
 
     return `
-      <div style="font-family: 'Arial', sans-serif; line-height: 1.5; color: #333; padding: 20px; background: white;">
+      <div style="font-family: 'Arial', sans-serif; line-height: 1.5; color: ${textColor}; padding: 20px; background: ${bgColor};">
         <!-- Header -->
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
           <h1 style="font-size: 28px; font-weight: bold; margin: 0 0 8px 0;">${personalInfo.name}</h1>
@@ -795,36 +795,36 @@ const PortfolioExport = () => {
         </div>
 
         <!-- Skills Impact Metrics -->
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; margin-bottom: 30px; border-left: 4px solid #28a745;">
-          <h3 style="font-size: 18px; font-weight: 600; color: #212529; margin: 0 0 20px 0;">📊 Skills Application & Impact Metrics</h3>
+        <div style="background: ${isDark ? '#374151' : '#f8f9fa'}; border-radius: 8px; padding: 25px; margin-bottom: 30px; border-left: 4px solid #28a745;">
+          <h3 style="font-size: 18px; font-weight: 600; color: ${textColor}; margin: 0 0 20px 0;">📊 Skills Application & Impact Metrics</h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-            <div style="background: white; border-radius: 6px; padding: 15px; border-left: 3px solid #007bff;">
+            <div style="background: ${cardBg}; border-radius: 6px; padding: 15px; border-left: 3px solid #007bff;">
               <h4 style="color: #007bff; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Technical Leadership</h4>
-              <div style="font-size: 12px; color: #495057; line-height: 1.4;">
+              <div style="font-size: 12px; color: ${textColor}; line-height: 1.4;">
                 • Mentored 50+ engineers<br>
                 • Led 15+ major products<br>
                 • Established org-wide standards
               </div>
             </div>
-            <div style="background: white; border-radius: 6px; padding: 15px; border-left: 3px solid #28a745;">
+            <div style="background: ${cardBg}; border-radius: 6px; padding: 15px; border-left: 3px solid #28a745;">
               <h4 style="color: #28a745; font-weight: 600; margin-bottom: 8px; font-size: 14px;">System Performance</h4>
-              <div style="font-size: 12px; color: #495057; line-height: 1.4;">
+              <div style="font-size: 12px; color: ${textColor}; line-height: 1.4;">
                 • 10M+ daily requests served<br>
                 • 99.9% uptime achieved<br>
                 • 60% latency reduction
               </div>
             </div>
-            <div style="background: white; border-radius: 6px; padding: 15px; border-left: 3px solid #ffc107;">
+            <div style="background: ${cardBg}; border-radius: 6px; padding: 15px; border-left: 3px solid #ffc107;">
               <h4 style="color: #e99500; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Innovation Impact</h4>
-              <div style="font-size: 12px; color: #495057; line-height: 1.4;">
+              <div style="font-size: 12px; color: ${textColor}; line-height: 1.4;">
                 • 3 patents filed<br>
                 • 25+ technical articles<br>
                 • 10+ open source projects
               </div>
             </div>
-            <div style="background: white; border-radius: 6px; padding: 15px; border-left: 3px solid #dc3545;">
+            <div style="background: ${cardBg}; border-radius: 6px; padding: 15px; border-left: 3px solid #dc3545;">
               <h4 style="color: #dc3545; font-weight: 600; margin-bottom: 8px; font-size: 14px;">Business Results</h4>
-              <div style="font-size: 12px; color: #495057; line-height: 1.4;">
+              <div style="font-size: 12px; color: ${textColor}; line-height: 1.4;">
                 • $50M+ cost savings<br>
                 • 300% cycle reduction<br>
                 • 250% productivity gain
@@ -835,13 +835,13 @@ const PortfolioExport = () => {
 
         <!-- Top Skills Preview -->
         <div style="margin-bottom: 30px;">
-          <h3 style="font-size: 20px; font-weight: bold; color: #212529; margin-bottom: 20px; border-bottom: 2px solid #dee2e6; padding-bottom: 8px;">🎯 Top Technical Skills</h3>
+          <h3 style="font-size: 20px; font-weight: bold; color: ${textColor}; margin-bottom: 20px; border-bottom: 2px solid ${isDark ? '#4b5563' : '#dee2e6'}; padding-bottom: 8px;">🎯 Top Technical Skills</h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
             ${(topSkills || []).slice(0, 6).map((skill, index) => {
               const colors = ['#007bff', '#28a745', '#ffc107', '#dc3545', '#6f42c1', '#20c997'];
               const color = colors[index % colors.length];
               return `
-                <div style="background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; border-left: 4px solid ${color};">
+                <div style="background: ${cardBg}; border: 1px solid ${isDark ? '#4b5563' : '#dee2e6'}; border-radius: 8px; padding: 15px; border-left: 4px solid ${color};">
                   <div style="display: flex; align-items: center; margin-bottom: 10px;">
                     <span style="margin-right: 8px; font-size: 16px;">
                       ${skill.title === 'React' ? '⚛️' : 
@@ -851,14 +851,14 @@ const PortfolioExport = () => {
                         skill.title === 'Kubernetes' ? '⚓' : '💻'}
                     </span>
                     <div>
-                      <h4 style="font-size: 16px; font-weight: 600; color: #212529; margin: 0;">${skill.title}</h4>
-                      <div style="font-size: 12px; color: #6c757d; text-transform: capitalize;">${skill.level} • ${skill.yearsOfExperience || 0}+ years</div>
+                      <h4 style="font-size: 16px; font-weight: 600; color: ${textColor}; margin: 0;">${skill.title}</h4>
+                      <div style="font-size: 12px; color: ${isDark ? '#9ca3af' : '#6c757d'}; text-transform: capitalize;">${skill.level} • ${skill.yearsOfExperience || 0}+ years</div>
                     </div>
                   </div>
-                  <div style="background: #f8f9fa; border-radius: 4px; padding: 2px; margin-bottom: 8px;">
+                  <div style="background: ${isDark ? '#4b5563' : '#f8f9fa'}; border-radius: 4px; padding: 2px; margin-bottom: 8px;">
                     <div style="background: ${color}; height: 6px; border-radius: 3px; width: ${Math.min((skill.yearsOfExperience / 8) * 100, 100)}%;"></div>
                   </div>
-                  <div style="font-size: 12px; color: #495057;">
+                  <div style="font-size: 12px; color: ${textColor};">
                     ${skill.detailedAccomplishments ? skill.detailedAccomplishments[0]?.substring(0, 80) + '...' : `Expert-level ${skill.title} with enterprise applications`}
                   </div>
                 </div>
@@ -868,11 +868,11 @@ const PortfolioExport = () => {
         </div>
 
         <!-- Assessment Legend -->
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; border-left: 4px solid #007bff;">
+        <div style="background: ${isDark ? '#374151' : '#f8f9fa'}; border-radius: 8px; padding: 20px; border-left: 4px solid #007bff;">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
             <div>
-              <strong style="color: #212529;">Proficiency Scale:</strong><br>
-              <div style="margin-top: 10px; line-height: 1.6; font-size: 13px; color: #495057;">
+              <strong style="color: ${textColor};">Proficiency Scale:</strong><br>
+              <div style="margin-top: 10px; line-height: 1.6; font-size: 13px; color: ${textColor};">
                 <div>● ● ● ● ● <strong>Expert</strong> - Architect, lead, mentor</div>
                 <div>● ● ● ● ○ <strong>Advanced</strong> - Independent implementation</div>
                 <div>● ● ● ○ ○ <strong>Intermediate</strong> - Solid experience</div>
@@ -880,8 +880,8 @@ const PortfolioExport = () => {
               </div>
             </div>
             <div>
-              <strong style="color: #212529;">Assessment Criteria:</strong><br>
-              <ul style="margin-top: 10px; padding-left: 16px; line-height: 1.6; font-size: 13px; color: #495057;">
+              <strong style="color: ${textColor};">Assessment Criteria:</strong><br>
+              <ul style="margin-top: 10px; padding-left: 16px; line-height: 1.6; font-size: 13px; color: ${textColor};">
                 <li>Years of hands-on experience</li>
                 <li>Complexity of projects delivered</li>
                 <li>Leadership and mentoring ability</li>
@@ -1045,7 +1045,7 @@ const PortfolioExport = () => {
 
       <div class="section">
         <div class="section-title">Architecture & Design Philosophy</div>
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; border-left: 4px solid #667eea; margin-bottom: 30px;">
+        <div style="background: ${isDark ? '#374151' : '#f8f9fa'}; border-radius: 8px; padding: 25px; border-left: 4px solid #667eea; margin-bottom: 30px;">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
             <div>
               <h4 style="color: #2D3748; font-weight: 600; margin-bottom: 10px;">🏗️ System Architecture</h4>
@@ -1142,7 +1142,7 @@ const PortfolioExport = () => {
         `).join('')}
         
         <!-- Additional Technical Contributions -->
-        <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; margin-top: 30px; border-left: 4px solid #667eea;">
+        <div style="background: ${isDark ? '#374151' : '#f8f9fa'}; border-radius: 8px; padding: 25px; margin-top: 30px; border-left: 4px solid #667eea;">
           <h3 style="font-size: 18px; font-weight: 600; color: #2D3748; margin: 0 0 20px 0;">Additional Technical Contributions</h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
             <div>
