@@ -19,8 +19,10 @@ import {
   Settings
 } from 'lucide-react';
 import { skillsData, personalInfo } from '../data/skillsData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const PortfolioExport = () => {
+  const { isDark } = useTheme();
   const [exportFormat, setExportFormat] = useState('professional');
   const [selectedSections, setSelectedSections] = useState({
     personalInfo: true,
@@ -1727,17 +1729,25 @@ const PortfolioExport = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
             Portfolio Export Center
           </h1>
-          <p className="text-gray-600">
+          <p className={`transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Generate professional resumes and portfolio documents from your skills data
           </p>
         </motion.div>

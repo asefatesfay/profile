@@ -20,8 +20,10 @@ import {
   TrendingUp
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const ResourceHub = () => {
+  const { isDark } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedSkill, setSelectedSkill] = useState('all');
@@ -168,7 +170,11 @@ const ResourceHub = () => {
   const progress = getProgress();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -176,11 +182,15 @@ const ResourceHub = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
+          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
             <BookOpen className="w-10 h-10 text-blue-600" />
             Learning Resource Hub
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className={`text-lg max-w-3xl mx-auto transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Curated learning resources across all skills with progress tracking, favorites, and personalized recommendations.
           </p>
         </motion.div>
