@@ -228,16 +228,20 @@ const TechStackVisualization = () => {
                   rx="12"
                   fill={selectedLayer === layer.id ? `url(#gradient-${layer.id})` : (isDark ? '#374151' : '#f9fafb')}
                   stroke={layer.color}
-                  strokeWidth={animationStep === index ? "3" : "1"}
-                  filter={animationStep === index ? "url(#glow)" : "url(#dropshadow)"}
+                  filter="url(#dropshadow)"
                   className="cursor-pointer transition-all duration-300"
                   onClick={() => setSelectedLayer(selectedLayer === layer.id ? null : layer.id)}
                   animate={{
-                    strokeOpacity: animationStep === index ? 1 : 0.5,
-                    fillOpacity: animationStep === index ? 0.9 : (selectedLayer === layer.id ? 0.8 : 0.7)
+                    strokeOpacity: animationStep === index ? 1 : (selectedLayer === layer.id ? 0.9 : 0.6),
+                    fillOpacity: animationStep === index ? 0.9 : (selectedLayer === layer.id ? 0.8 : 0.7),
+                    strokeWidth: animationStep === index ? 3 : (selectedLayer === layer.id ? 2 : 1)
                   }}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ duration: 0.2 }}
+                  whileHover={{ 
+                    strokeOpacity: 0.8,
+                    fillOpacity: 0.85,
+                    transition: { duration: 0.2 }
+                  }}
+                  transition={{ duration: 0.3 }}
                 />
 
                 {/* Layer icon circle */}
@@ -314,23 +318,24 @@ const TechStackVisualization = () => {
                 {/* Pulse effect for current animation step */}
                 {animationStep === index && (
                   <motion.rect
-                    x="50"
-                    y={layer.y}
-                    width="700"
-                    height="50"
-                    rx="8"
+                    x="58"
+                    y={layer.y - 2}
+                    width="684"
+                    height="64"
+                    rx="14"
                     fill="none"
                     stroke={layer.color}
-                    strokeWidth="2"
-                    strokeOpacity="0.6"
-                    initial={{ scale: 1, strokeOpacity: 0.6 }}
+                    strokeWidth="1"
+                    initial={{ strokeOpacity: 0 }}
                     animate={{ 
-                      scale: [1, 1.05, 1],
-                      strokeOpacity: [0.6, 1, 0.6]
+                      strokeOpacity: [0, 0.8, 0]
                     }}
                     transition={{ 
                       duration: 1.2,
                       ease: "easeInOut"
+                    }}
+                    style={{
+                      pointerEvents: 'none'
                     }}
                   />
                 )}
