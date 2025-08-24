@@ -16,10 +16,10 @@ const ThemeToggle = () => {
   return (
     <motion.button
       onClick={handleToggle}
-      className={`flex items-center justify-center p-2 rounded-lg transition-all duration-300 ${
+      className={`flex items-center justify-center p-2 rounded-lg transition-all duration-300 shadow-sm border-2 ${
         isDark 
-          ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600 shadow-lg' 
-          : 'bg-gray-100 text-gray-600 hover:bg-gray-200 shadow-sm'
+          ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700 border-gray-600 hover:border-gray-500' 
+          : 'bg-white text-gray-700 hover:bg-gray-100 border-gray-300 hover:border-gray-400'
       } ${isToggling ? 'ring-2 ring-blue-400 ring-opacity-50' : ''}`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}

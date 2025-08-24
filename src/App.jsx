@@ -56,165 +56,173 @@ function AppContent() {
       
       {/* Navigation */}
       <motion.nav 
-        className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 transition-colors duration-300"
+        className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 lg:px-6 py-4 transition-colors duration-300"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.6 }}
       >
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex gap-4">
-            <motion.button
-              onClick={() => setCurrentView('roadmap')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'roadmap' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Map size={18} />
-              Skills Roadmap
-            </motion.button>
-            
-            <motion.button
-              onClick={() => setCurrentView('profile')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'profile' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <User size={18} />
-              Profile Overview
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('ml-roadmap')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'ml-roadmap' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <BookOpen size={18} />
-              ML Roadmap
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('projects')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'projects' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Code size={18} />
-              Projects
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('timeline')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'timeline' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Clock size={18} />
-              Timeline
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('assessment')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'assessment' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Target size={18} />
-              Assessment
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('resources')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'resources' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Bookmark size={18} />
-              Resources
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('achievements')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'achievements' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Trophy size={18} />
-              Achievements
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('goals')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'goals' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Crosshair size={18} />
-              Goals
-            </motion.button>
-
-            <motion.button
-              onClick={() => setCurrentView('export')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                currentView === 'export' 
-                  ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FileText size={18} />
-              Export
-            </motion.button>
+        <div className="max-w-7xl mx-auto">
+          {/* Top row - Always visible controls */}
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl font-bold text-gray-800 dark:text-white">Portfolio Dashboard</h1>
+            <div className="flex items-center gap-3">
+              <motion.button
+                onClick={() => setCurrentView('export')}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 font-medium shadow-sm ${
+                  currentView === 'export' 
+                    ? 'bg-blue-600 text-white shadow-md border-2 border-blue-500' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-white dark:bg-gray-800'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FileText size={16} />
+                <span className="hidden sm:inline">Export</span>
+              </motion.button>
+              
+              <ThemeToggle />
+              
+              <motion.button
+                onClick={() => setShowStats(!showStats)}
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 font-medium shadow-sm border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-white dark:bg-gray-800"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {showStats ? <EyeOff size={16} /> : <Eye size={16} />}
+                <span className="hidden sm:inline">{showStats ? 'Hide Stats' : 'Show Stats'}</span>
+              </motion.button>
+            </div>
           </div>
-          
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <motion.button
-              onClick={() => setShowStats(!showStats)}
-              className="flex items-center gap-2 px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {showStats ? <EyeOff size={18} /> : <Eye size={18} />}
-              {showStats ? 'Hide Stats' : 'Show Stats'}
-            </motion.button>
+
+          {/* Main navigation - scrollable on mobile */}
+          <div className="overflow-x-auto">
+            <div className="flex gap-2 md:gap-3 min-w-max md:min-w-0 md:flex-wrap">
+              <motion.button
+                onClick={() => setCurrentView('roadmap')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'roadmap' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Map size={16} />
+                <span>Skills</span>
+              </motion.button>
+              
+              <motion.button
+                onClick={() => setCurrentView('profile')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'profile' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <User size={16} />
+                <span>Profile</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('ml-roadmap')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'ml-roadmap' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <BookOpen size={16} />
+                <span>ML Roadmap</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('projects')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'projects' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Code size={16} />
+                <span>Projects</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('timeline')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'timeline' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Clock size={16} />
+                <span>Timeline</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('assessment')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'assessment' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Target size={16} />
+                <span>Assessment</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('resources')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'resources' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Bookmark size={16} />
+                <span>Resources</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('achievements')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'achievements' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Trophy size={16} />
+                <span>Achievements</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('goals')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'goals' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Crosshair size={16} />
+                <span>Goals</span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.nav>
