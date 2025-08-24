@@ -176,7 +176,11 @@ const Roadmap = () => {
 
   return (
     <motion.div 
-      className="h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-visible"
+      className={`h-screen w-full relative overflow-visible transition-colors duration-300 ${
+        isDark 
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+          : 'bg-gradient-to-br from-gray-50 to-gray-100'
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -285,28 +289,28 @@ const Roadmap = () => {
 
       <div className="absolute top-20 right-4 z-10">
         <motion.div 
-          className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
+          className={`backdrop-blur-sm rounded-lg p-4 shadow-lg transition-all duration-300 ${
+            isDark ? 'bg-gray-800/90 border border-gray-600' : 'bg-white/90'
+          }`}
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">Connection Types</h3>
+          <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+            isDark ? 'text-gray-100' : 'text-gray-800'
+          }`}>Connection Types</h3>
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-8 h-0.5 bg-green-500"></div>
-              <span>Prerequisite</span>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Prerequisites</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-8 h-0.5 bg-blue-500"></div>
-              <span>Enables</span>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Related Skills</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-0.5 bg-red-500"></div>
-              <span>Requires</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-0.5 bg-gray-500"></div>
-              <span>Related</span>
+              <div className="w-8 h-0.5 bg-purple-500"></div>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Learning Path</span>
             </div>
           </div>
         </motion.div>
