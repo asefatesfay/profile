@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { skillsData, personalInfo } from '../data/skillsData';
 import { useTheme } from '../contexts/ThemeContext';
+import TechStackSVG from './TechStackSVG';
 
 const PortfolioExport = () => {
   const { isDark } = useTheme();
@@ -1978,16 +1979,34 @@ const PortfolioExport = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
-            Portfolio Export Center
-          </h1>
-          <p className={`transition-colors duration-300 ${
-            isDark ? 'text-gray-300' : 'text-gray-600'
-          }`}>
-            Generate professional resumes and portfolio documents from your skills data
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>
+                Portfolio Export Center
+              </h1>
+              <p className={`transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Generate professional resumes and portfolio documents from your skills data
+              </p>
+            </div>
+            
+            {/* Tech Stack SVG as visual enhancement */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="flex-shrink-0 ml-8"
+            >
+              <TechStackSVG 
+                width={400} 
+                height={200} 
+                className="opacity-80 hover:opacity-100 transition-all duration-500 hover:scale-105" 
+              />
+            </motion.div>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -2173,11 +2192,22 @@ const PortfolioExport = () => {
             <div className={`p-6 border-b transition-colors duration-300 ${
               isDark ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
             }`}>
-              <h2 className={`text-xl font-semibold transition-colors duration-300 ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
-                Preview: {exportFormats.find(f => f.id === exportFormat)?.title}
-              </h2>
+              <div className="flex items-center justify-between">
+                <h2 className={`text-xl font-semibold transition-colors duration-300 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Preview: {exportFormats.find(f => f.id === exportFormat)?.title}
+                </h2>
+                
+                {/* Tech Stack SVG as visual enhancement */}
+                <div className="flex-shrink-0 ml-4">
+                  <TechStackSVG 
+                    width={300} 
+                    height={120} 
+                    className="opacity-70 hover:opacity-100 transition-opacity duration-300" 
+                  />
+                </div>
+              </div>
             </div>
             <div 
               className={`p-8 min-h-[600px] max-h-[800px] overflow-y-auto transition-colors duration-300 ${
