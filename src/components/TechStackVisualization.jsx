@@ -212,6 +212,36 @@ const TechStackVisualization = () => {
       ],
       color: '#6b7280',
       y: 1080
+    },
+    {
+      id: 'testing',
+      title: '🧪 Testing & Quality Assurance',
+      description: 'Comprehensive testing strategies and quality gates',
+      technologies: [
+        { name: 'Jest', level: 'expert', description: 'JavaScript testing framework with mocking and coverage', url: 'https://jestjs.io' },
+        { name: 'Cypress', level: 'expert', description: 'End-to-end testing framework for modern web apps', url: 'https://cypress.io' },
+        { name: 'Playwright', level: 'proficient', description: 'Cross-browser testing automation framework', url: 'https://playwright.dev' },
+        { name: 'PyTest', level: 'proficient', description: 'Python testing framework with fixtures and plugins', url: 'https://pytest.org' },
+        { name: 'React Testing Library', level: 'expert', description: 'Simple and complete testing utilities for React', url: 'https://testing-library.com/docs/react-testing-library/intro' },
+        { name: 'SonarQube', level: 'proficient', description: 'Code quality and security analysis platform', url: 'https://sonarqube.org' }
+      ],
+      color: '#22c55e',
+      y: 1160
+    },
+    {
+      id: 'collaboration',
+      title: '🤝 Version Control & Collaboration',
+      description: 'Code versioning, collaboration, and project management',
+      technologies: [
+        { name: 'Git', level: 'expert', description: 'Distributed version control system', url: 'https://git-scm.com' },
+        { name: 'GitHub', level: 'expert', description: 'Git repository hosting and collaboration platform', url: 'https://github.com' },
+        { name: 'GitLab', level: 'expert', description: 'Complete DevOps platform with integrated CI/CD', url: 'https://gitlab.com' },
+        { name: 'Jira', level: 'proficient', description: 'Project management and issue tracking', url: 'https://atlassian.com/software/jira' },
+        { name: 'Confluence', level: 'proficient', description: 'Team collaboration and documentation platform', url: 'https://atlassian.com/software/confluence' },
+        { name: 'Linear', level: 'proficient', description: 'Modern issue tracking and project management', url: 'https://linear.app' }
+      ],
+      color: '#8b5a2b',
+      y: 1240
     }
   ];
 
@@ -231,7 +261,7 @@ const TechStackVisualization = () => {
           Modern Software Stack
         </h2>
         <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-          Interactive layers with skill assessments
+          Comprehensive 16-layer architecture • Interactive skill assessments
         </p>
       </div>
 
@@ -239,9 +269,9 @@ const TechStackVisualization = () => {
       <div className="p-6" role="img" aria-label="Interactive technology stack visualization">
         <div className="relative">
           <svg 
-            viewBox="0 0 800 1200" 
+            viewBox="0 0 800 1400" 
             className="w-full h-auto"
-            style={{ maxHeight: '1200px' }}
+            style={{ maxHeight: '1400px' }}
             role="presentation"
             aria-hidden="true"
           >
