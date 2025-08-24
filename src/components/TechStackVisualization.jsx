@@ -6,6 +6,7 @@ const TechStackVisualization = () => {
   const { isDark } = useTheme();
   const [selectedLayer, setSelectedLayer] = useState(null);
   const [animationStep, setAnimationStep] = useState(0);
+  const [hoveredTech, setHoveredTech] = useState(null);
 
   const techStack = [
     {
@@ -220,7 +221,7 @@ const TechStackVisualization = () => {
     }, 1200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [techStack.length]);
 
   return (
     <div className={`rounded-xl ${isDark ? 'bg-gray-800/50' : 'bg-white/50'} backdrop-blur-sm border ${isDark ? 'border-gray-700' : 'border-gray-200'} overflow-hidden`}>
@@ -230,17 +231,19 @@ const TechStackVisualization = () => {
           Modern Software Stack
         </h2>
         <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-          Source: ByteByteGo • Click layers to explore technologies
+          Interactive layers with skill assessments
         </p>
       </div>
 
       {/* SVG Visualization */}
-      <div className="p-6">
+      <div className="p-6" role="img" aria-label="Interactive technology stack visualization">
         <div className="relative">
           <svg 
             viewBox="0 0 800 1200" 
             className="w-full h-auto"
             style={{ maxHeight: '1200px' }}
+            role="presentation"
+            aria-hidden="true"
           >
             {/* Definitions for gradients and effects */}
             <defs>
@@ -483,12 +486,26 @@ const TechStackVisualization = () => {
                       initial={{ opacity: 0, scale: 0.8, y: 20 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       transition={{ delay: techIndex * 0.05 }}
-                      className={`group relative p-3 rounded-lg border transition-all duration-200 hover:scale-105 hover:shadow-md ${colors.bg} ${colors.border}`}
+                      onHoverStart={() => setHoveredTech(techName)}
+                      onHoverEnd={() => setHoveredTech(null)}
+                      className={`group relative p-3 rounded-lg border transition-all duration-200 hover:scale-105 hover:shadow-md cursor-pointer ${colors.bg} ${colors.border} ${
+                        hoveredTech === techName ? 'ring-2 ring-opacity-50' : ''
+                      }`}
+                      style={{
+                        ringColor: hoveredTech === techName ? techStack.find(l => l.id === selectedLayer)?.color : 'transparent'
+                      }}
                     >
                       {/* Skill level indicator */}
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <div className={`w-2 h-2 rounded-full ${colors.dot}`}></div>
+                          <motion.div 
+                            className={`w-2 h-2 rounded-full ${colors.dot}`}
+                            animate={{ 
+                              scale: hoveredTech === techName ? [1, 1.3, 1] : 1,
+                              opacity: hoveredTech === techName ? [1, 0.7, 1] : 1
+                            }}
+                            transition={{ duration: 0.6, repeat: hoveredTech === techName ? Infinity : 0 }}
+                          ></motion.div>
                           <span className={`text-xs font-medium uppercase tracking-wider ${colors.text}`}>
                             {techLevel}
                           </span>
@@ -498,10 +515,12 @@ const TechStackVisualization = () => {
                             href={techUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`opacity-0 group-hover:opacity-100 transition-opacity text-xs ${colors.text} hover:underline`}
+                            className={`opacity-0 group-hover:opacity-100 transition-opacity text-xs ${colors.text} hover:underline flex items-center gap-1`}
                             whileHover={{ scale: 1.1 }}
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            🔗
+                            <span>🔗</span>
+                            <span className="hidden sm:inline">docs</span>
                           </motion.a>
                         )}
                       </div>
@@ -520,18 +539,26 @@ const TechStackVisualization = () => {
                       
                       {/* Skill level visual indicator */}
                       <div className="flex items-center gap-1 mt-2">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <div
-                            key={star}
-                            className={`w-2 h-2 rounded-full ${
-                              (techLevel === 'expert' && star <= 5) ||
-                              (techLevel === 'proficient' && star <= 3) ||
-                              (techLevel === 'familiar' && star <= 2)
-                                ? colors.dot
-                                : 'bg-gray-300 dark:bg-gray-600'
-                            }`}
-                          />
-                        ))}
+                        {[1, 2, 3, 4, 5].map((star) => {
+                          const isActive = (techLevel === 'expert' && star <= 5) ||
+                                         (techLevel === 'proficient' && star <= 3) ||
+                                         (techLevel === 'familiar' && star <= 2);
+                          return (
+                            <motion.div
+                              key={star}
+                              className={`w-2 h-2 rounded-full transition-colors ${
+                                isActive ? colors.dot : 'bg-gray-300 dark:bg-gray-600'
+                              }`}
+                              animate={{
+                                scale: hoveredTech === techName && isActive ? [1, 1.2, 1] : 1
+                              }}
+                              transition={{ delay: star * 0.1, duration: 0.3 }}
+                            />
+                          );
+                        })}
+                        <span className={`ml-2 text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                          {techLevel === 'expert' ? '5/5' : techLevel === 'proficient' ? '3/5' : '2/5'}
+                        </span>
                       </div>
                       
                       {/* Hover overlay for additional info */}
@@ -554,18 +581,23 @@ const TechStackVisualization = () => {
               
               {/* Legend */}
               <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-600">
-                <div className="flex items-center justify-center gap-6 text-xs">
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Expert (5/5)</span>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-6 text-xs">
+                    <div className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Expert (5/5)</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Proficient (3/5)</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Familiar (2/5)</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Proficient (3/5)</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>Familiar (2/5)</span>
+                  <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                    {techStack.find(l => l.id === selectedLayer)?.technologies.filter(t => t.url !== '#').length || 0} technologies with documentation
                   </div>
                 </div>
               </div>
