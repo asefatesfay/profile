@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Roadmap from './components/Roadmap';
@@ -35,29 +37,30 @@ function App() {
 
   const StatCard = ({ title, value, color, delay }) => (
     <motion.div
-      className={`bg-white rounded-lg p-4 shadow-sm border-l-4`}
+      className={`bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border-l-4 transition-colors duration-300`}
       style={{ borderLeftColor: color }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
       whileHover={{ scale: 1.02, boxShadow: "0 8px 25px rgba(0,0,0,0.1)" }}
     >
-      <div className="text-2xl font-bold text-gray-800">{value}</div>
-      <div className="text-sm text-gray-600">{title}</div>
+      <div className="text-2xl font-bold text-gray-800 dark:text-gray-100">{value}</div>
+      <div className="text-sm text-gray-600 dark:text-gray-300">{title}</div>
     </motion.div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header personalInfo={personalInfo} />
-      
-      {/* Navigation */}
-      <motion.nav 
-        className="bg-white border-b border-gray-200 px-6 py-4"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-      >
+    <ThemeProvider>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+        <Header personalInfo={personalInfo} />
+        
+        {/* Navigation */}
+        <motion.nav 
+          className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 transition-colors duration-300"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex gap-4">
             <motion.button
@@ -65,7 +68,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'roadmap' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -79,7 +82,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'profile' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -93,7 +96,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'ml-roadmap' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -107,7 +110,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'projects' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -121,7 +124,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'timeline' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -135,7 +138,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'assessment' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -149,7 +152,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'resources' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -163,7 +166,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'achievements' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -177,7 +180,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'goals' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -191,7 +194,7 @@ function App() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 currentView === 'export' 
                   ? 'bg-primary-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -201,15 +204,18 @@ function App() {
             </motion.button>
           </div>
           
-          <motion.button
-            onClick={() => setShowStats(!showStats)}
-            className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {showStats ? <EyeOff size={18} /> : <Eye size={18} />}
-            {showStats ? 'Hide Stats' : 'Show Stats'}
-          </motion.button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <motion.button
+              onClick={() => setShowStats(!showStats)}
+              className="flex items-center gap-2 px-3 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {showStats ? <EyeOff size={18} /> : <Eye size={18} />}
+              {showStats ? 'Hide Stats' : 'Show Stats'}
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
@@ -217,7 +223,7 @@ function App() {
       <AnimatePresence>
         {showStats && (
           <motion.div
-            className="bg-gray-100 px-6 py-4 border-b border-gray-200"
+            className="bg-gray-100 dark:bg-gray-800 px-6 py-4 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -531,7 +537,8 @@ function App() {
       
       {/* Footer */}
       <Footer personalInfo={personalInfo} setCurrentView={setCurrentView} />
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 
