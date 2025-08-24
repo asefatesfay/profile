@@ -1705,22 +1705,44 @@ const PortfolioExport = () => {
   };
 
   const ShareOptions = () => (
-    <div className="bg-white rounded-lg p-6 border">
-      <h3 className="text-lg font-semibold mb-4">Share Portfolio</h3>
+    <div className={`rounded-lg p-6 border transition-colors duration-300 ${
+      isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+    }`}>
+      <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+        isDark ? 'text-white' : 'text-gray-900'
+      }`}>Share Portfolio</h3>
       <div className="grid grid-cols-2 gap-4">
-        <button className="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50">
+        <button className={`flex items-center gap-2 p-3 border rounded-lg transition-colors ${
+          isDark 
+            ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+        }`}>
           <Linkedin className="w-5 h-5 text-blue-600" />
           LinkedIn
         </button>
-        <button className="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50">
+        <button className={`flex items-center gap-2 p-3 border rounded-lg transition-colors ${
+          isDark 
+            ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+        }`}>
           <Mail className="w-5 h-5 text-red-600" />
           Email
         </button>
-        <button className="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50">
-          <Github className="w-5 h-5 text-gray-800" />
+        <button className={`flex items-center gap-2 p-3 border rounded-lg transition-colors ${
+          isDark 
+            ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+        }`}>
+          <Github className={`w-5 h-5 transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-800'
+          }`} />
           GitHub
         </button>
-        <button className="flex items-center gap-2 p-3 border rounded-lg hover:bg-gray-50">
+        <button className={`flex items-center gap-2 p-3 border rounded-lg transition-colors ${
+          isDark 
+            ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+        }`}>
           <ExternalLink className="w-5 h-5 text-green-600" />
           Public Link
         </button>
@@ -1755,8 +1777,12 @@ const PortfolioExport = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Export Formats */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm border">
-              <h2 className="text-xl font-semibold mb-4">Choose Export Format</h2>
+            <div className={`rounded-xl p-6 shadow-sm border transition-colors duration-300 ${
+              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}>
+              <h2 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>Choose Export Format</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {exportFormats.map((format) => (
                   <motion.div
@@ -1764,8 +1790,12 @@ const PortfolioExport = () => {
                     onClick={() => setExportFormat(format.id)}
                     className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
                       exportFormat === format.id
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? (isDark 
+                          ? 'border-blue-500 bg-blue-900/20' 
+                          : 'border-blue-500 bg-blue-50')
+                        : (isDark 
+                          ? 'border-gray-600 hover:border-gray-500 bg-gray-700' 
+                          : 'border-gray-200 hover:border-gray-300 bg-white')
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -1775,18 +1805,26 @@ const PortfolioExport = () => {
                         {format.icon}
                       </div>
                       <div>
-                        <h3 className="font-semibold">{format.title}</h3>
+                        <h3 className={`font-semibold transition-colors duration-300 ${
+                          isDark ? 'text-white' : 'text-gray-900'
+                        }`}>{format.title}</h3>
                       </div>
                     </div>
-                    <p className="text-sm text-gray-600">{format.description}</p>
+                    <p className={`text-sm transition-colors duration-300 ${
+                      isDark ? 'text-gray-300' : 'text-gray-600'
+                    }`}>{format.description}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Section Selection */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border">
-              <h2 className="text-xl font-semibold mb-4">Customize Sections</h2>
+            <div className={`rounded-xl p-6 shadow-sm border transition-colors duration-300 ${
+              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}>
+              <h2 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>Customize Sections</h2>
               <div className="grid grid-cols-2 gap-4">
                 {Object.entries(selectedSections).map(([section, isSelected]) => (
                   <label key={section} className="flex items-center gap-2 cursor-pointer">
@@ -1799,15 +1837,21 @@ const PortfolioExport = () => {
                       }))}
                       className="rounded border-gray-300"
                     />
-                    <span className="capitalize">{section.replace(/([A-Z])/g, ' $1').trim()}</span>
+                    <span className={`capitalize transition-colors duration-300 ${
+                      isDark ? 'text-gray-300' : 'text-gray-700'
+                    }`}>{section.replace(/([A-Z])/g, ' $1').trim()}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Export Actions */}
-            <div className="bg-white rounded-xl p-6 shadow-sm border">
-              <h2 className="text-xl font-semibold mb-4">Export Actions</h2>
+            <div className={`rounded-xl p-6 shadow-sm border transition-colors duration-300 ${
+              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}>
+              <h2 className={`text-xl font-semibold mb-4 transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>Export Actions</h2>
               <div className="flex flex-wrap gap-3">
                 <motion.button
                   onClick={() => handleExport(exportFormat)}
@@ -1831,7 +1875,11 @@ const PortfolioExport = () => {
                 
                 <motion.button
                   onClick={() => window.print()}
-                  className="flex items-center gap-2 border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+                  className={`flex items-center gap-2 border px-6 py-3 rounded-lg transition-colors ${
+                    isDark 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                      : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -1847,28 +1895,48 @@ const PortfolioExport = () => {
             <ShareOptions />
             
             {/* Quick Stats */}
-            <div className="bg-white rounded-lg p-6 border">
-              <h3 className="text-lg font-semibold mb-4">Portfolio Stats</h3>
+            <div className={`rounded-lg p-6 border transition-colors duration-300 ${
+              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}>
+              <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>Portfolio Stats</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Total Skills</span>
-                  <span className="font-semibold">{skillsData.skills.length}</span>
+                  <span className={`transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Total Skills</span>
+                  <span className={`font-semibold transition-colors duration-300 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>{skillsData.skills.length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Expert Level</span>
-                  <span className="font-semibold">
+                  <span className={`transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Expert Level</span>
+                  <span className={`font-semibold transition-colors duration-300 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {skillsData.skills.filter(s => s.level === 'expert').length}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Categories</span>
-                  <span className="font-semibold">
+                  <span className={`transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Categories</span>
+                  <span className={`font-semibold transition-colors duration-300 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {Object.keys(skillsData.categories).length}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Max Experience</span>
-                  <span className="font-semibold">
+                  <span className={`transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Max Experience</span>
+                  <span className={`font-semibold transition-colors duration-300 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {Math.max(...skillsData.skills.map(s => s.yearsOfExperience || 0))}+ years
                   </span>
                 </div>
