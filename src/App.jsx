@@ -13,8 +13,9 @@ import ResourceHub from './components/ResourceHub';
 import Achievements from './components/Achievements';
 import Goals from './components/Goals';
 import PortfolioExport from './components/PortfolioExport';
+import TechStackVisualization from './components/TechStackVisualization';
 import { skillsData, personalInfo } from './data/skillsData';
-import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair, FileText } from 'lucide-react';
+import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair, FileText, Layers } from 'lucide-react';
 
 function AppContent() {
   const { isDark } = useTheme();
@@ -151,6 +152,20 @@ function AppContent() {
               >
                 <Code size={16} />
                 <span>Projects</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setCurrentView('tech-stack')}
+                className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg transition-all duration-200 font-medium whitespace-nowrap ${
+                  currentView === 'tech-stack' 
+                    ? 'bg-blue-600 text-white shadow-md' 
+                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Layers size={16} />
+                <span>Tech Stack</span>
               </motion.button>
 
               <motion.button
@@ -498,6 +513,19 @@ function AppContent() {
               transition={{ duration: 0.5 }}
             >
               <Projects />
+            </motion.div>
+          )}
+
+          {currentView === 'tech-stack' && (
+            <motion.div
+              key="tech-stack"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.5 }}
+              className="p-6"
+            >
+              <TechStackVisualization />
             </motion.div>
           )}
 
