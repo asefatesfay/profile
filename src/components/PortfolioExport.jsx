@@ -124,23 +124,32 @@ const PortfolioExport = () => {
     const filename = `${personalInfo.name.replace(/\s+/g, '_')}_${format}_${new Date().getFullYear()}.pdf`;
     
     try {
+      // Generate HTML content
+      const htmlContent = generateHTMLResume(format);
+      console.log('Generated HTML content length:', htmlContent.length);
+      
       // Create a temporary div with the resume content
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = generateHTMLResume(format);
+      tempDiv.innerHTML = htmlContent;
       tempDiv.style.position = 'absolute';
       tempDiv.style.left = '-9999px';
-      tempDiv.style.width = '800px';
+      tempDiv.style.width = '1200px'; // Increased width for better layout
+      tempDiv.style.maxWidth = '1200px';
       tempDiv.style.padding = '40px';
-      tempDiv.style.backgroundColor = 'white';
+      tempDiv.style.backgroundColor = isDark ? '#1f2937' : 'white';
       tempDiv.style.fontFamily = 'Arial, sans-serif';
+      tempDiv.style.lineHeight = '1.5';
+      tempDiv.style.fontSize = '14px';
       document.body.appendChild(tempDiv);
 
       // Convert to canvas
       const canvas = await html2canvas(tempDiv, {
-        scale: 2,
+        scale: 1.5, // Reduced scale to fit better
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#ffffff'
+        backgroundColor: isDark ? '#1f2937' : '#ffffff',
+        width: 1200,
+        height: tempDiv.scrollHeight
       });
 
       // Create PDF
@@ -151,11 +160,31 @@ const PortfolioExport = () => {
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-      const imgX = (pdfWidth - imgWidth * ratio) / 2;
-      const imgY = 0;
-
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      
+      // Calculate scaling to fit width while maintaining aspect ratio
+      const scale = pdfWidth / (imgWidth * 0.264583); // Convert px to mm
+      const scaledHeight = (imgHeight * 0.264583) * scale;
+      
+      // Add multiple pages if content is too tall
+      let position = 0;
+      const pageHeight = pdfHeight;
+      
+      while (position < scaledHeight) {
+        if (position > 0) {
+          pdf.addPage();
+        }
+        
+        pdf.addImage(
+          imgData, 
+          'PNG', 
+          0, 
+          -position, 
+          pdfWidth, 
+          scaledHeight
+        );
+        
+        position += pageHeight;
+      }
       
       // Clean up
       document.body.removeChild(tempDiv);
@@ -165,8 +194,30 @@ const PortfolioExport = () => {
       console.log(`Generated PDF: ${filename}`);
     } catch (error) {
       console.error('Error generating PDF:', error);
-      // Fallback to HTML download
-      const htmlContent = generateHTMLResume(format);
+      // Fallback to HTML download with static functions
+      let htmlContent;
+      const topSkills = getTopSkills();
+      const projects = getRecentProjects();
+      const summary = generateProfessionalSummary();
+      
+      switch (format) {
+        case 'professional':
+          htmlContent = generateProfessionalResume(summary, topSkills, projects);
+          break;
+        case 'technical':
+          htmlContent = generateTechnicalPortfolio(summary, topSkills, projects);
+          break;
+        case 'executive':
+          htmlContent = generateExecutiveSummary(summary, topSkills, projects);
+          break;
+        case 'skills-matrix':
+          htmlContent = generateSkillsMatrix(topSkills);
+          break;
+        default:
+          htmlContent = generateProfessionalResume(summary, topSkills, projects);
+          break;
+      }
+      
       const blob = new Blob([htmlContent], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       
@@ -903,23 +954,83 @@ const PortfolioExport = () => {
     return generateProfessionalResumePreview(summary, topSkills, projects);
   };
 
+  const wrapInHTMLDocument = (content, title, isDark = false) => {
+    const bgColor = isDark ? '#1f2937' : '#ffffff';
+    const textColor = isDark ? '#f3f4f6' : '#2d3748';
+    
+    return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>${title}</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body { 
+          margin: 0; 
+          padding: 0; 
+          background: ${bgColor}; 
+          color: ${textColor}; 
+          font-family: Arial, sans-serif;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        .export-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        @media print { 
+          body { margin: 0; padding: 15px; font-size: 12px; } 
+          .no-print { display: none; }
+          .export-container { max-width: none; padding: 0; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="export-container">
+        ${content}
+      </div>
+    </body>
+    </html>
+    `;
+  };
+
   const generateHTMLResume = (format) => {
     const topSkills = getTopSkills();
     const projects = getRecentProjects();
     const summary = generateProfessionalSummary();
-
+    // Use the isDark from the theme context
+    
+    let content, title;
+    
     switch (format) {
       case 'professional':
-        return generateProfessionalResume(summary, topSkills, projects);
+        content = generateProfessionalResumePreview(summary, topSkills, projects, isDark);
+        title = `${personalInfo.name} - Professional Resume`;
+        break;
       case 'technical':
-        return generateTechnicalPortfolio(summary, topSkills, projects);
+        content = generateTechnicalPortfolioPreview(summary, topSkills, projects, isDark);
+        title = `${personalInfo.name} - Technical Portfolio`;
+        break;
       case 'executive':
-        return generateExecutiveSummary(summary, topSkills, projects);
+        content = generateExecutiveSummaryPreview(summary, topSkills, projects, isDark);
+        title = `${personalInfo.name} - Executive Summary`;
+        break;
       case 'skills-matrix':
-        return generateSkillsMatrix(topSkills);
+        content = generateSkillsMatrixPreview(topSkills, isDark);
+        title = `${personalInfo.name} - Skills Matrix`;
+        break;
       default:
-        return generateProfessionalResume(summary, topSkills, projects);
+        content = generateProfessionalResumePreview(summary, topSkills, projects, isDark);
+        title = `${personalInfo.name} - Professional Resume`;
+        break;
     }
+    
+    return wrapInHTMLDocument(content, title, isDark);
   };
 
   const generateProfessionalResume = (summary, topSkills, projects) => {
