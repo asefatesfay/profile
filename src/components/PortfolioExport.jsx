@@ -231,6 +231,84 @@ const PortfolioExport = () => {
     }
   };
 
+  const handlePrint = () => {
+    // Generate HTML content with current theme
+    const previewContent = generatePreviewHTML(exportFormat);
+    const printWindow = window.open('', '_blank');
+    
+    const printHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <title>${personalInfo.name} - ${exportFormats.find(f => f.id === exportFormat)?.title || 'Portfolio'}</title>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    body { 
+      margin: 0; 
+      padding: 20px; 
+      background: ${isDark ? '#1f2937' : '#ffffff'} !important;
+      color: ${isDark ? '#f3f4f6' : '#2d3748'} !important;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      font-size: 12px;
+      -webkit-print-color-adjust: exact !important;
+    }
+    
+    @media print {
+      body { 
+        margin: 0; 
+        padding: 15px; 
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      .no-print { 
+        display: none !important; 
+      }
+      
+      /* Force backgrounds and colors to print */
+      div[style*="background"], 
+      span[style*="background"],
+      section[style*="background"] {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div style="max-width: 1200px; margin: 0 auto;">
+    ${previewContent}
+  </div>
+</body>
+</html>`;
+    
+    printWindow.document.write(printHTML);
+    printWindow.document.close();
+    
+    // Wait for content to load, then print
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 200);
+    };
+  };
+
   // Generate preview-optimized HTML (body content only with inline styles)
   const generatePreviewHTML = (format) => {
     const topSkills = getTopSkills();
@@ -2012,7 +2090,7 @@ const PortfolioExport = () => {
                 </motion.button>
                 
                 <motion.button
-                  onClick={() => window.print()}
+                  onClick={handlePrint}
                   className={`flex items-center gap-2 border px-6 py-3 rounded-lg transition-colors ${
                     isDark 
                       ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
