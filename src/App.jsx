@@ -16,7 +16,8 @@ import PortfolioExport from './components/PortfolioExport';
 import { skillsData, personalInfo } from './data/skillsData';
 import { BarChart3, Map, User, Eye, EyeOff, BookOpen, Code, Clock, Target, Trophy, Bookmark, Crosshair, FileText } from 'lucide-react';
 
-function App() {
+function AppContent() {
+  const { isDark } = useTheme();
   const [currentView, setCurrentView] = useState('roadmap');
   const [showStats, setShowStats] = useState(true);
   const [selectedSkillForRoadmap, setSelectedSkillForRoadmap] = useState(null);
@@ -50,17 +51,16 @@ function App() {
   );
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <Header personalInfo={personalInfo} />
-        
-        {/* Navigation */}
-        <motion.nav 
-          className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 transition-colors duration-300"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <Header personalInfo={personalInfo} />
+      
+      {/* Navigation */}
+      <motion.nav 
+        className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 transition-colors duration-300"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+      >
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex gap-4">
             <motion.button
@@ -289,7 +289,9 @@ function App() {
                   {/* Skills by Category */}
                   <div className="lg:col-span-2">
                     <motion.h2 
-                      className="text-2xl font-bold text-gray-800 mb-6"
+                      className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
+                        isDark ? 'text-white' : 'text-gray-800'
+                      }`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
@@ -306,13 +308,17 @@ function App() {
                         return (
                           <motion.div
                             key={category.id}
-                            className="bg-white rounded-lg p-6 shadow-sm border"
+                            className={`rounded-lg p-6 shadow-sm border transition-colors duration-300 ${
+                              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                            }`}
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + categoryIndex * 0.1 }}
                           >
                             <h3 
-                              className="text-lg font-semibold mb-4 pb-2 border-b-2"
+                              className={`text-lg font-semibold mb-4 pb-2 border-b-2 transition-colors duration-300 ${
+                                isDark ? 'text-white' : 'text-gray-900'
+                              }`}
                               style={{ borderBottomColor: category.color }}
                             >
                               {category.title}
@@ -322,14 +328,20 @@ function App() {
                               {categorySkills.map((skill, skillIndex) => (
                                 <motion.div
                                   key={skill.id}
-                                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                                  className={`flex items-center justify-between p-3 rounded-lg transition-colors duration-300 ${
+                                    isDark ? 'bg-gray-700' : 'bg-gray-50'
+                                  }`}
                                   initial={{ opacity: 0, x: -20 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ delay: 0.5 + skillIndex * 0.05 }}
                                 >
                                   <div>
-                                    <div className="font-medium text-gray-800">{skill.title}</div>
-                                    <div className="text-sm text-gray-600">{skill.level}</div>
+                                    <div className={`font-medium transition-colors duration-300 ${
+                                      isDark ? 'text-white' : 'text-gray-800'
+                                    }`}>{skill.title}</div>
+                                    <div className={`text-sm transition-colors duration-300 ${
+                                      isDark ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>{skill.level}</div>
                                   </div>
                                   <div className="text-right">
                                     <div 
@@ -342,7 +354,9 @@ function App() {
                                       {skill.status.replace('-', ' ')}
                                     </div>
                                     {skill.yearsOfExperience > 0 && (
-                                      <div className="text-xs text-gray-500 mt-1">
+                                      <div className={`text-xs mt-1 transition-colors duration-300 ${
+                                        isDark ? 'text-gray-400' : 'text-gray-500'
+                                      }`}>
                                         {skill.yearsOfExperience}y exp
                                       </div>
                                     )}
@@ -359,7 +373,9 @@ function App() {
                   {/* Progress Overview */}
                   <div>
                     <motion.h2 
-                      className="text-2xl font-bold text-gray-800 mb-6"
+                      className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
+                        isDark ? 'text-white' : 'text-gray-800'
+                      }`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
@@ -369,14 +385,18 @@ function App() {
                     
                     <div className="space-y-4">
                       <motion.div
-                        className="bg-white rounded-lg p-6 shadow-sm border"
+                        className={`rounded-lg p-6 shadow-sm border transition-colors duration-300 ${
+                          isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                        }`}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 }}
                       >
                         <div className="flex items-center gap-3 mb-4">
                           <BarChart3 className="text-primary-500" size={24} />
-                          <h3 className="text-lg font-semibold">Skill Distribution</h3>
+                          <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                            isDark ? 'text-white' : 'text-gray-900'
+                          }`}>Skill Distribution</h3>
                         </div>
                         
                         {['completed', 'in-progress', 'planned'].map((status, index) => {
@@ -390,11 +410,15 @@ function App() {
                           
                           return (
                             <div key={status} className="mb-3">
-                              <div className="flex justify-between text-sm mb-1">
+                              <div className={`flex justify-between text-sm mb-1 transition-colors duration-300 ${
+                                isDark ? 'text-gray-300' : 'text-gray-700'
+                              }`}>
                                 <span className="capitalize">{status.replace('-', ' ')}</span>
                                 <span>{count} ({percentage.toFixed(0)}%)</span>
                               </div>
-                              <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div className={`w-full rounded-full h-2 transition-colors duration-300 ${
+                                isDark ? 'bg-gray-700' : 'bg-gray-200'
+                              }`}>
                                 <motion.div
                                   className={`h-2 rounded-full ${colors[status]}`}
                                   initial={{ width: 0 }}
@@ -409,17 +433,25 @@ function App() {
                       
                       {/* Experience Summary */}
                       <motion.div
-                        className="bg-white rounded-lg p-6 shadow-sm border"
+                        className={`rounded-lg p-6 shadow-sm border transition-colors duration-300 ${
+                          isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                        }`}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.6 }}
                       >
-                        <h3 className="text-lg font-semibold mb-4">Experience Highlights</h3>
+                        <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
+                          isDark ? 'text-white' : 'text-gray-900'
+                        }`}>Experience Highlights</h3>
                         <div className="space-y-3">
                           {personalInfo.highlights.map((highlight, index) => (
                             <motion.div
                               key={index}
-                              className="text-sm text-gray-600 p-3 bg-gray-50 rounded-lg"
+                              className={`text-sm p-3 rounded-lg transition-colors duration-300 ${
+                                isDark 
+                                  ? 'text-gray-300 bg-gray-700' 
+                                  : 'text-gray-600 bg-gray-50'
+                              }`}
                               initial={{ opacity: 0, x: 20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.8 + index * 0.1 }}
@@ -537,7 +569,15 @@ function App() {
       
       {/* Footer */}
       <Footer personalInfo={personalInfo} setCurrentView={setCurrentView} />
-      </div>
+    </div>
+  );
+}
+
+// Main App component with ThemeProvider wrapper
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }

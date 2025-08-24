@@ -136,20 +136,38 @@ const Achievements = () => {
   };
 
   const getTypeColor = (type) => {
-    switch (type) {
-      case 'certification': return 'bg-blue-100 text-blue-700';
-      case 'milestone': return 'bg-purple-100 text-purple-700';
-      case 'achievement': return 'bg-green-100 text-green-700';
-      default: return 'bg-gray-100 text-gray-700';
+    if (isDark) {
+      switch (type) {
+        case 'certification': return 'bg-blue-900/30 text-blue-400 border border-blue-600/30';
+        case 'milestone': return 'bg-purple-900/30 text-purple-400 border border-purple-600/30';
+        case 'achievement': return 'bg-green-900/30 text-green-400 border border-green-600/30';
+        default: return 'bg-gray-700/50 text-gray-300 border border-gray-600/30';
+      }
+    } else {
+      switch (type) {
+        case 'certification': return 'bg-blue-100 text-blue-700';
+        case 'milestone': return 'bg-purple-100 text-purple-700';
+        case 'achievement': return 'bg-green-100 text-green-700';
+        default: return 'bg-gray-100 text-gray-700';
+      }
     }
   };
 
   const getLevelColor = (level) => {
-    switch (level) {
-      case 'beginner': return 'bg-green-50 text-green-700 border-green-200';
-      case 'intermediate': return 'bg-yellow-50 text-yellow-700 border-yellow-200';
-      case 'advanced': return 'bg-red-50 text-red-700 border-red-200';
-      default: return 'bg-gray-50 text-gray-700 border-gray-200';
+    if (isDark) {
+      switch (level) {
+        case 'beginner': return 'bg-green-900/30 text-green-400 border border-green-600/30';
+        case 'intermediate': return 'bg-yellow-900/30 text-yellow-400 border border-yellow-600/30';
+        case 'advanced': return 'bg-red-900/30 text-red-400 border border-red-600/30';
+        default: return 'bg-gray-700/50 text-gray-300 border border-gray-600/30';
+      }
+    } else {
+      switch (level) {
+        case 'beginner': return 'bg-green-50 text-green-700 border-green-200';
+        case 'intermediate': return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+        case 'advanced': return 'bg-red-50 text-red-700 border-red-200';
+        default: return 'bg-gray-50 text-gray-700 border-gray-200';
+      }
     }
   };
 
@@ -252,7 +270,9 @@ const Achievements = () => {
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   selectedCategory === category.id
                     ? 'bg-blue-600 text-white shadow-md'
-                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                    : isDark 
+                      ? 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700'
+                      : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
                 }`}
               >
                 {category.name} ({category.count})
@@ -271,7 +291,9 @@ const Achievements = () => {
           {filteredAchievements.map((achievement, index) => (
             <motion.div
               key={achievement.id}
-              className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 cursor-pointer"
+              className={`rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 cursor-pointer ${
+                isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * index }}
@@ -288,7 +310,11 @@ const Achievements = () => {
                       {achievement.type}
                     </span>
                     {achievement.expiryDate && isExpiringSoon(achievement.expiryDate) && (
-                      <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium flex items-center gap-1">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${
+                        isDark 
+                          ? 'bg-orange-900/30 text-orange-400 border border-orange-600/30' 
+                          : 'bg-orange-100 text-orange-700'
+                      }`}>
                         <Clock className="w-3 h-3" />
                         Expires Soon
                       </span>
@@ -297,15 +323,21 @@ const Achievements = () => {
                 </div>
 
                 {/* Title and Issuer */}
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors duration-300 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>
                   {achievement.title}
                 </h3>
                 {achievement.issuer && (
-                  <p className="text-sm text-gray-600 mb-3">{achievement.issuer}</p>
+                  <p className={`text-sm mb-3 transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>{achievement.issuer}</p>
                 )}
 
                 {/* Description */}
-                <p className="text-sm text-gray-700 mb-4 line-clamp-3">
+                <p className={`text-sm mb-4 line-clamp-3 transition-colors duration-300 ${
+                  isDark ? 'text-gray-300' : 'text-gray-700'
+                }`}>
                   {achievement.description}
                 </p>
 
@@ -325,20 +357,30 @@ const Achievements = () => {
                   {achievement.skills.slice(0, 3).map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                      className={`px-2 py-1 text-xs rounded transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gray-700 text-gray-300' 
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
                     >
                       {skill}
                     </span>
                   ))}
                   {achievement.skills.length > 3 && (
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
+                    <span className={`px-2 py-1 text-xs rounded transition-colors duration-300 ${
+                      isDark 
+                        ? 'bg-gray-700 text-gray-400' 
+                        : 'bg-gray-100 text-gray-500'
+                    }`}>
                       +{achievement.skills.length - 3} more
                     </span>
                   )}
                 </div>
 
                 {/* Date */}
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className={`flex items-center gap-2 text-sm transition-colors duration-300 ${
+                  isDark ? 'text-gray-400' : 'text-gray-500'
+                }`}>
                   <Calendar className="w-4 h-4" />
                   Earned: {new Date(achievement.dateEarned).toLocaleDateString()}
                 </div>
@@ -358,7 +400,9 @@ const Achievements = () => {
               onClick={() => setSelectedAchievement(null)}
             >
               <motion.div
-                className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+                className={`rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transition-colors duration-300 ${
+                  isDark ? 'bg-gray-800' : 'bg-white'
+                }`}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
@@ -370,11 +414,15 @@ const Achievements = () => {
                     <div className="flex items-start gap-4">
                       <div className="text-6xl">{selectedAchievement.badge}</div>
                       <div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                        <h2 className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
+                          isDark ? 'text-white' : 'text-gray-900'
+                        }`}>
                           {selectedAchievement.title}
                         </h2>
                         {selectedAchievement.issuer && (
-                          <p className="text-gray-600 mb-2">{selectedAchievement.issuer}</p>
+                          <p className={`mb-2 transition-colors duration-300 ${
+                            isDark ? 'text-gray-300' : 'text-gray-600'
+                          }`}>{selectedAchievement.issuer}</p>
                         )}
                         <div className="flex items-center gap-3">
                           <span className={`px-3 py-1 rounded-full text-sm font-medium flex items-center gap-2 ${getTypeColor(selectedAchievement.type)}`}>

@@ -15,8 +15,10 @@ import {
   Check,
   ExternalLink
 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const LearningRoadmap = ({ skill }) => {
+  const { isDark } = useTheme();
   const [expandedPhases, setExpandedPhases] = useState(new Set(['introduction']));
   const [completedTopics, setCompletedTopics] = useState(() => {
     // Load progress from localStorage
@@ -36,9 +38,15 @@ const LearningRoadmap = ({ skill }) => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Learning Roadmap Not Available</h3>
-          <p className="text-gray-500">This skill doesn't have a detailed learning roadmap yet.</p>
+          <BookOpen className={`w-12 h-12 mx-auto mb-4 transition-colors duration-300 ${
+            isDark ? 'text-gray-500' : 'text-gray-400'
+          }`} />
+          <h3 className={`text-lg font-medium mb-2 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>Learning Roadmap Not Available</h3>
+          <p className={`transition-colors duration-300 ${
+            isDark ? 'text-gray-400' : 'text-gray-500'
+          }`}>This skill doesn't have a detailed learning roadmap yet.</p>
         </div>
       </div>
     );
@@ -129,26 +137,45 @@ const LearningRoadmap = ({ skill }) => {
   };
 
   const getStatusColor = (status) => {
-    switch (status) {
-      case 'completed': return 'text-green-600 bg-green-100';
-      case 'in-progress': return 'text-blue-600 bg-blue-100';
-      case 'planned': return 'text-gray-600 bg-gray-100';
-      default: return 'text-gray-600 bg-gray-100';
+    if (isDark) {
+      switch (status) {
+        case 'completed': return 'text-green-400 bg-green-900/30 border border-green-600/30';
+        case 'in-progress': return 'text-blue-400 bg-blue-900/30 border border-blue-600/30';
+        case 'planned': return 'text-gray-300 bg-gray-700/50 border border-gray-600/30';
+        default: return 'text-gray-300 bg-gray-700/50 border border-gray-600/30';
+      }
+    } else {
+      switch (status) {
+        case 'completed': return 'text-green-600 bg-green-100';
+        case 'in-progress': return 'text-blue-600 bg-blue-100';
+        case 'planned': return 'text-gray-600 bg-gray-100';
+        default: return 'text-gray-600 bg-gray-100';
+      }
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <div className={`max-w-4xl mx-auto p-6 rounded-xl shadow-lg transition-colors duration-300 ${
+      isDark ? 'bg-gray-800' : 'bg-white'
+    }`}>
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-4">
           <Target className="w-8 h-8 text-blue-600" />
-          <h1 className="text-3xl font-bold text-gray-900">Machine Learning Roadmap</h1>
+          <h1 className={`text-3xl font-bold transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>Machine Learning Roadmap</h1>
         </div>
 
         {/* Motivation Message */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-6 border border-blue-100">
-          <div className="text-sm text-gray-700">
+        <div className={`p-4 rounded-lg mb-6 border transition-colors duration-300 ${
+          isDark 
+            ? 'bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-blue-600/30' 
+            : 'bg-gradient-to-r from-blue-50 to-purple-50 border-blue-100'
+        }`}>
+          <div className={`text-sm transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-700'
+          }`}>
             {getOverallProgress() === 0 && (
               <span>🚀 Welcome to your ML journey! Every expert was once a beginner. Start with the Introduction phase to build your foundation.</span>
             )}
@@ -172,28 +199,46 @@ const LearningRoadmap = ({ skill }) => {
         
         {/* Progress Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-blue-50 p-4 rounded-lg">
+          <div className={`p-4 rounded-lg transition-colors duration-300 ${
+            isDark ? 'bg-blue-900/30' : 'bg-blue-50'
+          }`}>
             <div className="text-2xl font-bold text-blue-600">{getOverallProgress()}%</div>
-            <div className="text-sm text-gray-600">Overall Progress</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>Overall Progress</div>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg">
+          <div className={`p-4 rounded-lg transition-colors duration-300 ${
+            isDark ? 'bg-green-900/30' : 'bg-green-50'
+          }`}>
             <div className="text-2xl font-bold text-green-600">{completedTopics.size}</div>
-            <div className="text-sm text-gray-600">Topics Completed</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>Topics Completed</div>
           </div>
-          <div className="bg-purple-50 p-4 rounded-lg">
+          <div className={`p-4 rounded-lg transition-colors duration-300 ${
+            isDark ? 'bg-purple-900/30' : 'bg-purple-50'
+          }`}>
             <div className="text-2xl font-bold text-purple-600">{roadmap.phases.length}</div>
-            <div className="text-sm text-gray-600">Total Phases</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>Total Phases</div>
           </div>
-          <div className="bg-orange-50 p-4 rounded-lg">
+          <div className={`p-4 rounded-lg transition-colors duration-300 ${
+            isDark ? 'bg-orange-900/30' : 'bg-orange-50'
+          }`}>
             <div className="text-2xl font-bold text-orange-600">
               {roadmap.weeklyGoal?.hoursPerWeek || 10}h
             </div>
-            <div className="text-sm text-gray-600">Weekly Goal</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>Weekly Goal</div>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+        <div className={`w-full rounded-full h-3 mb-4 transition-colors duration-300 ${
+          isDark ? 'bg-gray-700' : 'bg-gray-200'
+        }`}>
           <motion.div 
             className="bg-blue-600 h-3 rounded-full"
             initial={{ width: 0 }}
@@ -213,7 +258,11 @@ const LearningRoadmap = ({ skill }) => {
                 localStorage.removeItem('ml-roadmap-resources');
               }
             }}
-            className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors text-sm"
+            className={`px-4 py-2 rounded-lg transition-colors text-sm ${
+              isDark 
+                ? 'bg-red-900/30 text-red-400 hover:bg-red-900/50' 
+                : 'bg-red-100 text-red-700 hover:bg-red-200'
+            }`}
           >
             Reset Progress
           </button>
@@ -233,7 +282,11 @@ const LearningRoadmap = ({ skill }) => {
               a.click();
               URL.revokeObjectURL(url);
             }}
-            className="px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors text-sm"
+            className={`px-4 py-2 rounded-lg transition-colors text-sm ${
+              isDark 
+                ? 'bg-blue-900/30 text-blue-400 hover:bg-blue-900/50' 
+                : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+            }`}
           >
             Export Progress
           </button>
@@ -250,7 +303,9 @@ const LearningRoadmap = ({ skill }) => {
           return (
             <motion.div
               key={phase.id}
-              className="border border-gray-200 rounded-xl overflow-hidden"
+              className={`border rounded-xl overflow-hidden transition-colors duration-300 ${
+                isDark ? 'border-gray-700' : 'border-gray-200'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: phaseIndex * 0.1 }}
@@ -258,35 +313,51 @@ const LearningRoadmap = ({ skill }) => {
               {/* Phase Header */}
               <button
                 onClick={() => togglePhase(phase.id)}
-                className="w-full p-6 text-left hover:bg-gray-50 transition-colors"
+                className={`w-full p-6 text-left transition-colors ${
+                  isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {isExpanded ? (
-                      <ChevronDown className="w-5 h-5 text-gray-500" />
+                      <ChevronDown className={`w-5 h-5 transition-colors duration-300 ${
+                        isDark ? 'text-gray-400' : 'text-gray-500'
+                      }`} />
                     ) : (
-                      <ChevronRight className="w-5 h-5 text-gray-500" />
+                      <ChevronRight className={`w-5 h-5 transition-colors duration-300 ${
+                        isDark ? 'text-gray-400' : 'text-gray-500'
+                      }`} />
                     )}
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900">
+                      <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                        isDark ? 'text-white' : 'text-gray-900'
+                      }`}>
                         {phaseIndex + 1}. {phase.title}
                       </h3>
                       <div className="flex items-center gap-4 mt-2">
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(phase.status || 'planned')}`}>
                           {(phase.status || 'planned').replace('-', ' ')}
                         </span>
-                        <span className="text-sm text-gray-600">
+                        <span className={`text-sm transition-colors duration-300 ${
+                          isDark ? 'text-gray-300' : 'text-gray-600'
+                        }`}>
                           {phase.estimatedWeeks} weeks
                         </span>
-                        <span className="text-sm text-gray-600">
+                        <span className={`text-sm transition-colors duration-300 ${
+                          isDark ? 'text-gray-300' : 'text-gray-600'
+                        }`}>
                           {progress.completed}/{progress.total} topics completed
                         </span>
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-gray-900">{progressPercentage}%</div>
-                    <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
+                    <div className={`text-2xl font-bold transition-colors duration-300 ${
+                      isDark ? 'text-white' : 'text-gray-900'
+                    }`}>{progressPercentage}%</div>
+                    <div className={`w-20 rounded-full h-2 mt-1 transition-colors duration-300 ${
+                      isDark ? 'bg-gray-700' : 'bg-gray-200'
+                    }`}>
                       <div 
                         className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${progressPercentage}%` }}
@@ -304,7 +375,9 @@ const LearningRoadmap = ({ skill }) => {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="border-t border-gray-200"
+                    className={`border-t transition-colors duration-300 ${
+                      isDark ? 'border-gray-700' : 'border-gray-200'
+                    }`}
                   >
                     <div className="p-6 space-y-4">
                       {phase.topics.map((topic, topicIndex) => {
@@ -315,8 +388,12 @@ const LearningRoadmap = ({ skill }) => {
                             key={topic.id}
                             className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
                               isCompleted 
-                                ? 'border-green-300 bg-green-50' 
-                                : 'border-gray-200 bg-white hover:border-blue-300'
+                                ? (isDark 
+                                  ? 'border-green-600 bg-green-900/20' 
+                                  : 'border-green-300 bg-green-50')
+                                : (isDark 
+                                  ? 'border-gray-600 bg-gray-800 hover:border-blue-500' 
+                                  : 'border-gray-200 bg-white hover:border-blue-300')
                             }`}
                             onClick={() => toggleTopic(topic.id)}
                             whileHover={{ scale: 1.01 }}
@@ -332,22 +409,32 @@ const LearningRoadmap = ({ skill }) => {
                               </button>
                               
                               <div className="flex-1">
-                                <h4 className={`font-semibold ${isCompleted ? 'text-green-900' : 'text-gray-900'}`}>
+                                <h4 className={`font-semibold transition-colors duration-300 ${
+                                  isCompleted 
+                                    ? (isDark ? 'text-green-400' : 'text-green-900')
+                                    : (isDark ? 'text-white' : 'text-gray-900')
+                                }`}>
                                   {topic.title}
                                 </h4>
                                 
                                 {topic.subtopics && (
                                   <ul className="mt-2 space-y-1">
                                     {topic.subtopics.map((subtopic, subIndex) => (
-                                      <li key={subIndex} className="text-sm text-gray-600 flex items-center gap-2">
-                                        <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                      <li key={subIndex} className={`text-sm flex items-center gap-2 transition-colors duration-300 ${
+                                        isDark ? 'text-gray-300' : 'text-gray-600'
+                                      }`}>
+                                        <span className={`w-1 h-1 rounded-full transition-colors duration-300 ${
+                                          isDark ? 'bg-gray-500' : 'bg-gray-400'
+                                        }`}></span>
                                         {subtopic}
                                       </li>
                                     ))}
                                   </ul>
                                 )}
                                 
-                                <div className="mt-3 flex items-center gap-4 text-xs text-gray-500">
+                                <div className={`mt-3 flex items-center gap-4 text-xs transition-colors duration-300 ${
+                                  isDark ? 'text-gray-400' : 'text-gray-500'
+                                }`}>
                                   <div className="flex items-center gap-1">
                                     <Clock className="w-3 h-3" />
                                     {topic.estimatedHours}h
@@ -368,7 +455,9 @@ const LearningRoadmap = ({ skill }) => {
                                 
                                 {topic.resources && (
                                   <div className="mt-4">
-                                    <div className="text-sm font-medium text-gray-700 mb-2">Learning Resources:</div>
+                                    <div className={`text-sm font-medium mb-2 transition-colors duration-300 ${
+                                      isDark ? 'text-gray-300' : 'text-gray-700'
+                                    }`}>Learning Resources:</div>
                                     <div className="space-y-2">
                                       {topic.resources.map((resource, resIndex) => {
                                         const parsedResource = parseResource(resource, topic.id, resIndex);
@@ -377,7 +466,11 @@ const LearningRoadmap = ({ skill }) => {
                                         return (
                                           <div 
                                             key={parsedResource.id}
-                                            className="flex items-start gap-2 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                                            className={`flex items-start gap-2 p-2 rounded-lg transition-colors ${
+                                              isDark 
+                                                ? 'bg-gray-700 hover:bg-gray-600' 
+                                                : 'bg-gray-50 hover:bg-gray-100'
+                                            }`}
                                           >
                                             <button
                                               onClick={(e) => {
@@ -400,20 +493,20 @@ const LearningRoadmap = ({ skill }) => {
                                                   target="_blank"
                                                   rel="noopener noreferrer"
                                                   onClick={(e) => e.stopPropagation()}
-                                                  className={`text-sm font-medium hover:underline flex items-center gap-1 ${
+                                                  className={`text-sm font-medium hover:underline flex items-center gap-1 transition-colors duration-300 ${
                                                     isResourceCompleted 
-                                                      ? 'text-green-700 line-through' 
-                                                      : 'text-blue-600'
+                                                      ? (isDark ? 'text-green-400 line-through' : 'text-green-700 line-through')
+                                                      : (isDark ? 'text-blue-400' : 'text-blue-600')
                                                   }`}
                                                 >
                                                   {parsedResource.name}
                                                   <ExternalLink className="w-3 h-3 flex-shrink-0" />
                                                 </a>
                                               ) : (
-                                                <span className={`text-sm ${
+                                                <span className={`text-sm transition-colors duration-300 ${
                                                   isResourceCompleted 
-                                                    ? 'text-green-700 line-through' 
-                                                    : 'text-gray-700'
+                                                    ? (isDark ? 'text-green-400 line-through' : 'text-green-700 line-through')
+                                                    : (isDark ? 'text-gray-300' : 'text-gray-700')
                                                 }`}>
                                                   {parsedResource.name}
                                                 </span>
@@ -426,12 +519,16 @@ const LearningRoadmap = ({ skill }) => {
                                     
                                     {/* Resource completion summary */}
                                     <div className="mt-3 flex items-center gap-2">
-                                      <span className="text-xs text-gray-500">
+                                      <span className={`text-xs transition-colors duration-300 ${
+                                        isDark ? 'text-gray-400' : 'text-gray-500'
+                                      }`}>
                                         {topic.resources.filter((_, index) => 
                                           completedResources.has(`${topic.id}-resource-${index}`)
                                         ).length} of {topic.resources.length} resources completed
                                       </span>
-                                      <div className="flex-1 bg-gray-200 rounded-full h-1.5">
+                                      <div className={`flex-1 rounded-full h-1.5 transition-colors duration-300 ${
+                                        isDark ? 'bg-gray-700' : 'bg-gray-200'
+                                      }`}>
                                         <div 
                                           className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
                                           style={{ 

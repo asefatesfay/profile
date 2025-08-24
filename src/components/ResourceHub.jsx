@@ -139,22 +139,42 @@ const ResourceHub = () => {
   };
 
   const getTypeColor = (type) => {
-    switch (type) {
-      case 'video': return 'bg-red-100 text-red-700';
-      case 'article': return 'bg-blue-100 text-blue-700';
-      case 'course': return 'bg-green-100 text-green-700';
-      case 'tutorial': return 'bg-purple-100 text-purple-700';
-      case 'documentation': return 'bg-gray-100 text-gray-700';
-      default: return 'bg-gray-100 text-gray-700';
+    if (isDark) {
+      switch (type) {
+        case 'video': return 'bg-red-900/30 text-red-400 border border-red-600/30';
+        case 'article': return 'bg-blue-900/30 text-blue-400 border border-blue-600/30';
+        case 'course': return 'bg-green-900/30 text-green-400 border border-green-600/30';
+        case 'tutorial': return 'bg-purple-900/30 text-purple-400 border border-purple-600/30';
+        case 'documentation': return 'bg-gray-700/50 text-gray-300 border border-gray-600/30';
+        default: return 'bg-gray-700/50 text-gray-300 border border-gray-600/30';
+      }
+    } else {
+      switch (type) {
+        case 'video': return 'bg-red-100 text-red-700';
+        case 'article': return 'bg-blue-100 text-blue-700';
+        case 'course': return 'bg-green-100 text-green-700';
+        case 'tutorial': return 'bg-purple-100 text-purple-700';
+        case 'documentation': return 'bg-gray-100 text-gray-700';
+        default: return 'bg-gray-100 text-gray-700';
+      }
     }
   };
 
   const getDifficultyColor = (difficulty) => {
-    switch (difficulty) {
-      case 'beginner': return 'bg-green-100 text-green-700';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-700';
-      case 'advanced': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+    if (isDark) {
+      switch (difficulty) {
+        case 'beginner': return 'bg-green-900/30 text-green-400 border border-green-600/30';
+        case 'intermediate': return 'bg-yellow-900/30 text-yellow-400 border border-yellow-600/30';
+        case 'advanced': return 'bg-red-900/30 text-red-400 border border-red-600/30';
+        default: return 'bg-gray-700/50 text-gray-300 border border-gray-600/30';
+      }
+    } else {
+      switch (difficulty) {
+        case 'beginner': return 'bg-green-100 text-green-700';
+        case 'intermediate': return 'bg-yellow-100 text-yellow-700';
+        case 'advanced': return 'bg-red-100 text-red-700';
+        default: return 'bg-gray-100 text-gray-700';
+      }
     }
   };
 
@@ -202,37 +222,63 @@ const ResourceHub = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
+          <div className={`p-6 rounded-xl shadow-sm border transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}>
             <div className="flex items-center gap-3 mb-2">
               <BookOpen className="w-6 h-6 text-blue-600" />
-              <span className="text-sm font-medium text-gray-600">Total Resources</span>
+              <span className={`text-sm font-medium transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>Total Resources</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">{progress.total}</div>
+            <div className={`text-2xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>{progress.total}</div>
           </div>
           
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
+          <div className={`p-6 rounded-xl shadow-sm border transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}>
             <div className="flex items-center gap-3 mb-2">
               <CheckCircle className="w-6 h-6 text-green-600" />
-              <span className="text-sm font-medium text-gray-600">Completed</span>
+              <span className={`text-sm font-medium transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>Completed</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">{progress.completed}</div>
+            <div className={`text-2xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>{progress.completed}</div>
           </div>
           
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
+          <div className={`p-6 rounded-xl shadow-sm border transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}>
             <div className="flex items-center gap-3 mb-2">
               <Heart className="w-6 h-6 text-red-600" />
-              <span className="text-sm font-medium text-gray-600">Favorites</span>
+              <span className={`text-sm font-medium transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>Favorites</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">{progress.favorites}</div>
+            <div className={`text-2xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>{progress.favorites}</div>
           </div>
           
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
+          <div className={`p-6 rounded-xl shadow-sm border transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}>
             <div className="flex items-center gap-3 mb-2">
               <TrendingUp className="w-6 h-6 text-purple-600" />
-              <span className="text-sm font-medium text-gray-600">Progress</span>
+              <span className={`text-sm font-medium transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>Progress</span>
             </div>
-            <div className="text-2xl font-bold text-gray-900">{progress.percentage}%</div>
-            <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+            <div className={`text-2xl font-bold transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>{progress.percentage}%</div>
+            <div className={`w-full rounded-full h-2 mt-2 transition-colors duration-300 ${
+              isDark ? 'bg-gray-700' : 'bg-gray-200'
+            }`}>
               <div 
                 className="bg-purple-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress.percentage}%` }}
@@ -243,7 +289,9 @@ const ResourceHub = () => {
 
         {/* Filters */}
         <motion.div
-          className="bg-white p-6 rounded-xl shadow-sm border mb-8"
+          className={`p-6 rounded-xl shadow-sm border mb-8 transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -252,13 +300,19 @@ const ResourceHub = () => {
             {/* Search */}
             <div className="lg:col-span-2">
               <div className="relative">
-                <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+                <Search className={`absolute left-3 top-3 w-4 h-4 transition-colors duration-300 ${
+                  isDark ? 'text-gray-500' : 'text-gray-400'
+                }`} />
                 <input
                   type="text"
                   placeholder="Search resources..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 ${
+                    isDark 
+                      ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                  }`}
                 />
               </div>
             </div>
@@ -267,7 +321,11 @@ const ResourceHub = () => {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 ${
+                isDark 
+                  ? 'bg-gray-700 border-gray-600 text-white' 
+                  : 'bg-white border-gray-300 text-gray-900'
+              }`}
             >
               {resourceTypes.map(type => (
                 <option key={type} value={type}>
@@ -280,7 +338,11 @@ const ResourceHub = () => {
             <select
               value={selectedSkill}
               onChange={(e) => setSelectedSkill(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 ${
+                isDark 
+                  ? 'bg-gray-700 border-gray-600 text-white' 
+                  : 'bg-white border-gray-300 text-gray-900'
+              }`}
             >
               <option value="all">All Skills</option>
               {Array.from(new Set(skills.slice(1).map(s => s.id))).map(skillId => {
@@ -297,7 +359,11 @@ const ResourceHub = () => {
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={`px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300 ${
+                isDark 
+                  ? 'bg-gray-700 border-gray-600 text-white' 
+                  : 'bg-white border-gray-300 text-gray-900'
+              }`}
             >
               {difficulties.map(difficulty => (
                 <option key={difficulty} value={difficulty}>
@@ -322,7 +388,9 @@ const ResourceHub = () => {
             return (
               <motion.div
                 key={resource.id}
-                className="bg-white rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300"
+                className={`rounded-xl shadow-sm border hover:shadow-lg transition-all duration-300 ${
+                  isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -332,7 +400,9 @@ const ResourceHub = () => {
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                      <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors duration-300 ${
+                        isDark ? 'text-white' : 'text-gray-900'
+                      }`}>
                         {resource.title}
                       </h3>
                       <div className="flex items-center gap-2 mb-2">
@@ -351,8 +421,8 @@ const ResourceHub = () => {
                         onClick={() => toggleFavorite(resource.id)}
                         className={`p-2 rounded-lg transition-colors ${
                           isFavorite 
-                            ? 'bg-red-100 text-red-600' 
-                            : 'bg-gray-100 text-gray-400 hover:text-red-600'
+                            ? (isDark ? 'bg-red-900/30 text-red-400' : 'bg-red-100 text-red-600')
+                            : (isDark ? 'bg-gray-700 text-gray-400 hover:text-red-400' : 'bg-gray-100 text-gray-400 hover:text-red-600')
                         }`}
                       >
                         <Heart className="w-4 h-4" />
@@ -361,8 +431,8 @@ const ResourceHub = () => {
                         onClick={() => toggleCompleted(resource.id)}
                         className={`p-2 rounded-lg transition-colors ${
                           isCompleted 
-                            ? 'bg-green-100 text-green-600' 
-                            : 'bg-gray-100 text-gray-400 hover:text-green-600'
+                            ? (isDark ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-600')
+                            : (isDark ? 'bg-gray-700 text-gray-400 hover:text-green-400' : 'bg-gray-100 text-gray-400 hover:text-green-600')
                         }`}
                       >
                         <CheckCircle className="w-4 h-4" />
@@ -372,21 +442,31 @@ const ResourceHub = () => {
 
                   {/* Description */}
                   {resource.description && (
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                    <p className={`text-sm mb-4 line-clamp-3 transition-colors duration-300 ${
+                      isDark ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
                       {resource.description}
                     </p>
                   )}
 
                   {/* Skill Tag */}
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs text-gray-500">Skill:</span>
-                    <span className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded">
+                    <span className={`text-xs transition-colors duration-300 ${
+                      isDark ? 'text-gray-400' : 'text-gray-500'
+                    }`}>Skill:</span>
+                    <span className={`px-2 py-1 text-xs rounded transition-colors duration-300 ${
+                      isDark 
+                        ? 'bg-blue-900/30 text-blue-400 border border-blue-600/30' 
+                        : 'bg-blue-50 text-blue-700'
+                    }`}>
                       {resource.skillName}
                     </span>
                   </div>
 
                   {/* Meta Info */}
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                  <div className={`flex items-center justify-between text-sm mb-4 transition-colors duration-300 ${
+                    isDark ? 'text-gray-400' : 'text-gray-500'
+                  }`}>
                     {resource.duration && (
                       <div className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
@@ -408,7 +488,11 @@ const ResourceHub = () => {
                         href={resource.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                        className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-colors text-sm ${
+                          isDark 
+                            ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                            : 'bg-blue-600 text-white hover:bg-blue-700'
+                        }`}
                       >
                         <ExternalLink className="w-3 h-3" />
                         {resource.type === 'video' ? 'Watch' : 'View'}
@@ -424,9 +508,15 @@ const ResourceHub = () => {
         {/* No Results */}
         {filteredResources.length === 0 && (
           <div className="text-center py-12">
-            <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No resources found</h3>
-            <p className="text-gray-500">Try adjusting your filters to see more resources.</p>
+            <BookOpen className={`w-16 h-16 mx-auto mb-4 transition-colors duration-300 ${
+              isDark ? 'text-gray-500' : 'text-gray-400'
+            }`} />
+            <h3 className={`text-lg font-medium mb-2 transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>No resources found</h3>
+            <p className={`transition-colors duration-300 ${
+              isDark ? 'text-gray-400' : 'text-gray-500'
+            }`}>Try adjusting your filters to see more resources.</p>
           </div>
         )}
       </div>

@@ -324,7 +324,9 @@ const Goals = () => {
             return (
               <motion.div
                 key={goal.id}
-                className="bg-white rounded-xl shadow-sm border hover:shadow-md transition-all duration-300"
+                className={`rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 ${
+                  isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                }`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -334,7 +336,9 @@ const Goals = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-semibold text-gray-900">{goal.title}</h3>
+                        <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                          isDark ? 'text-white' : 'text-gray-900'
+                        }`}>{goal.title}</h3>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(goal.priority)}`}>
                           {goal.priority} priority
                         </span>

@@ -60,14 +60,22 @@ const SkillsAssessment = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Skills Assessment</h1>
-          <p className="text-lg text-gray-600">Evaluate your current skills and identify learning priorities</p>
+          <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>Skills Assessment</h1>
+          <p className={`text-lg transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>Evaluate your current skills and identify learning priorities</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Assessment Form */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <div className={`rounded-xl shadow-lg p-6 transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+          }`}>
+            <h2 className={`text-2xl font-bold mb-6 flex items-center gap-2 transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
               <Target className="w-6 h-6 text-blue-500" />
               Rate Your Skills
             </h2>
@@ -78,10 +86,16 @@ const SkillsAssessment = () => {
                 const currentLevel = assessments[skillId] || 1;
                 
                 return (
-                  <div key={skillId} className="border-b border-gray-200 pb-4">
+                  <div key={skillId} className={`pb-4 border-b transition-colors duration-300 ${
+                    isDark ? 'border-gray-600' : 'border-gray-200'
+                  }`}>
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-medium text-gray-900">{skill?.title}</h3>
-                      <span className="text-sm text-gray-500">Target: Level {targetLevels[skillId]}</span>
+                      <h3 className={`font-medium transition-colors duration-300 ${
+                        isDark ? 'text-white' : 'text-gray-900'
+                      }`}>{skill?.title}</h3>
+                      <span className={`text-sm transition-colors duration-300 ${
+                        isDark ? 'text-gray-400' : 'text-gray-500'
+                      }`}>Target: Level {targetLevels[skillId]}</span>
                     </div>
                     
                     <div className="flex gap-2">
@@ -92,7 +106,9 @@ const SkillsAssessment = () => {
                           className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                             currentLevel === level.value
                               ? level.color
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              : (isDark 
+                                ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' 
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200')
                           }`}
                         >
                           {level.label}
@@ -106,8 +122,12 @@ const SkillsAssessment = () => {
           </div>
 
           {/* Gap Analysis */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <div className={`rounded-xl shadow-lg p-6 transition-colors duration-300 ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white'
+          }`}>
+            <h2 className={`text-2xl font-bold mb-6 flex items-center gap-2 transition-colors duration-300 ${
+              isDark ? 'text-white' : 'text-gray-900'
+            }`}>
               <TrendingUp className="w-6 h-6 text-green-500" />
               Learning Priorities
             </h2>
@@ -116,7 +136,9 @@ const SkillsAssessment = () => {
               {analysis.map((item, index) => (
                 <motion.div
                   key={item.skill?.id}
-                  className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
+                  className={`flex items-center gap-4 p-4 rounded-lg transition-colors duration-300 ${
+                    isDark ? 'bg-gray-700' : 'bg-gray-50'
+                  }`}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -130,16 +152,22 @@ const SkillsAssessment = () => {
                   </div>
                   
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{item.skill?.title}</h3>
+                    <h3 className={`font-medium transition-colors duration-300 ${
+                      isDark ? 'text-white' : 'text-gray-900'
+                    }`}>{item.skill?.title}</h3>
                     <div className="flex items-center gap-4 mt-1">
-                      <span className="text-sm text-gray-600">
+                      <span className={`text-sm transition-colors duration-300 ${
+                        isDark ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
                         Current: {item.current}/4
                       </span>
-                      <span className="text-sm text-gray-600">
+                      <span className={`text-sm transition-colors duration-300 ${
+                        isDark ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
                         Target: {item.target}/4
                       </span>
                       {item.gap > 0 && (
-                        <span className="text-sm font-medium text-orange-600">
+                        <span className="text-sm font-medium text-orange-500">
                           Gap: {item.gap} levels
                         </span>
                       )}
@@ -152,7 +180,9 @@ const SkillsAssessment = () => {
                         <Star
                           key={i}
                           className={`w-4 h-4 ${
-                            i < item.current ? 'text-yellow-400 fill-current' : 'text-gray-300'
+                            i < item.current 
+                              ? 'text-yellow-400 fill-current' 
+                              : (isDark ? 'text-gray-600' : 'text-gray-300')
                           }`}
                         />
                       ))}
