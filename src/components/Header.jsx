@@ -1,11 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Header = ({ personalInfo }) => {
+  const { isDark } = useTheme();
+  
   return (
     <motion.header 
-      className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 px-6"
+      className={`py-12 px-6 transition-all duration-300 ${
+        isDark 
+          ? 'bg-gradient-to-r from-gray-800 to-gray-900 text-gray-100' 
+          : 'bg-gradient-to-r from-primary-600 to-primary-800 text-white'
+      }`}
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
@@ -49,7 +56,9 @@ const Header = ({ personalInfo }) => {
             </motion.h1>
             
             <motion.h2 
-              className="text-xl md:text-2xl text-primary-100 mb-4"
+              className={`text-xl md:text-2xl mb-4 transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-primary-100'
+              }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
@@ -58,7 +67,9 @@ const Header = ({ personalInfo }) => {
             </motion.h2>
             
             <motion.div 
-              className="flex flex-wrap justify-center md:justify-start gap-4 text-primary-100 mb-4"
+              className={`flex flex-wrap justify-center md:justify-start gap-4 mb-4 transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-primary-100'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
@@ -74,7 +85,9 @@ const Header = ({ personalInfo }) => {
             </motion.div>
             
             <motion.p 
-              className="text-lg text-primary-50 mb-6 max-w-2xl"
+              className={`text-lg mb-6 max-w-2xl transition-colors duration-300 ${
+                isDark ? 'text-gray-200' : 'text-primary-50'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -91,7 +104,11 @@ const Header = ({ personalInfo }) => {
             >
               <motion.a 
                 href="#" 
-                className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  isDark 
+                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
+                    : 'bg-white/20 hover:bg-white/30 text-white'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -99,7 +116,11 @@ const Header = ({ personalInfo }) => {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  isDark 
+                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
+                    : 'bg-white/20 hover:bg-white/30 text-white'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -107,7 +128,11 @@ const Header = ({ personalInfo }) => {
               </motion.a>
               <motion.a 
                 href="#" 
-                className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                className={`p-2 rounded-full transition-all duration-300 ${
+                  isDark 
+                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' 
+                    : 'bg-white/20 hover:bg-white/30 text-white'
+                }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -127,11 +152,17 @@ const Header = ({ personalInfo }) => {
           {personalInfo.highlights.map((highlight, index) => (
             <motion.div 
               key={index}
-              className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center"
+              className={`backdrop-blur-sm rounded-lg p-4 text-center transition-all duration-300 ${
+                isDark 
+                  ? 'bg-gray-700/50 hover:bg-gray-600/50' 
+                  : 'bg-white/10 hover:bg-white/20'
+              }`}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <p className="text-sm text-primary-50">{highlight}</p>
+              <p className={`text-sm transition-colors duration-300 ${
+                isDark ? 'text-gray-200' : 'text-primary-50'
+              }`}>{highlight}</p>
             </motion.div>
           ))}
         </motion.div>

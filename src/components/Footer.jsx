@@ -14,8 +14,10 @@ import {
   TrendingUp,
   ArrowUp
 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Footer = ({ personalInfo, setCurrentView }) => {
+  const { isDark } = useTheme();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -94,12 +96,21 @@ const Footer = ({ personalInfo, setCurrentView }) => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+    <footer className={`relative overflow-hidden transition-all duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100' 
+        : 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white'
+    }`}>
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className={`absolute inset-0 transition-opacity duration-300 ${
+        isDark ? 'opacity-10' : 'opacity-5'
+      }`}>
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, #3B82F6 0%, transparent 70%), 
-                           radial-gradient(circle at 75% 75%, #8B5CF6 0%, transparent 70%)`
+          backgroundImage: isDark 
+            ? `radial-gradient(circle at 25% 25%, #1F2937 0%, transparent 70%), 
+               radial-gradient(circle at 75% 75%, #374151 0%, transparent 70%)`
+            : `radial-gradient(circle at 25% 25%, #3B82F6 0%, transparent 70%), 
+               radial-gradient(circle at 75% 75%, #8B5CF6 0%, transparent 70%)`
         }} />
       </div>
 
@@ -114,10 +125,16 @@ const Footer = ({ personalInfo, setCurrentView }) => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-300 ${
+            isDark 
+              ? 'bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent'
+              : 'bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'
+          }`}>
             {personalInfo.name}
           </h2>
-          <p className="text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
+          <p className={`text-xl mb-6 max-w-2xl mx-auto transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-300'
+          }`}>
             {personalInfo.title}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
@@ -132,11 +149,21 @@ const Footer = ({ personalInfo, setCurrentView }) => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full mb-2">
-                    <IconComponent size={20} className="text-blue-400" />
+                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-2 transition-all duration-300 ${
+                    isDark 
+                      ? 'bg-gradient-to-br from-gray-700/50 to-gray-600/50' 
+                      : 'bg-gradient-to-br from-blue-500/20 to-purple-500/20'
+                  }`}>
+                    <IconComponent size={20} className={`transition-colors duration-300 ${
+                      isDark ? 'text-gray-300' : 'text-blue-400'
+                    }`} />
                   </div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                  <div className="font-semibold text-white">{stat.value}</div>
+                  <div className={`text-sm transition-colors duration-300 ${
+                    isDark ? 'text-gray-400' : 'text-gray-400'
+                  }`}>{stat.label}</div>
+                  <div className={`font-semibold transition-colors duration-300 ${
+                    isDark ? 'text-gray-100' : 'text-white'
+                  }`}>{stat.value}</div>
                 </motion.div>
               );
             })}
