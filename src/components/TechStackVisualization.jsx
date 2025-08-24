@@ -14,7 +14,7 @@ const TechStackVisualization = () => {
       description: 'Crafting beautiful, responsive experiences that users love',
       technologies: ['React', 'Next.js', 'Vue.js', 'Tailwind CSS', 'TypeScript', 'Vite'],
       color: '#3b82f6',
-      y: 50
+      y: 40
     },
     {
       id: 'edge',
@@ -22,7 +22,7 @@ const TechStackVisualization = () => {
       description: 'Lightning-fast content delivery worldwide',
       technologies: ['Cloudflare', 'Vercel Edge', 'AWS CloudFront', 'Fastly', 'Netlify Edge'],
       color: '#06b6d4',
-      y: 130
+      y: 120
     },
     {
       id: 'integration',
@@ -30,7 +30,7 @@ const TechStackVisualization = () => {
       description: 'Seamless communication between services and systems',
       technologies: ['REST APIs', 'GraphQL', 'gRPC', 'WebSocket', 'tRPC', 'API Gateway'],
       color: '#8b5cf6',
-      y: 210
+      y: 200
     },
     {
       id: 'security',
@@ -38,7 +38,7 @@ const TechStackVisualization = () => {
       description: 'Protecting applications and user data with enterprise-grade security',
       technologies: ['Auth0', 'JWT', 'OAuth 2.0', 'SAML', 'Firebase Auth', 'AWS Cognito'],
       color: '#dc2626',
-      y: 290
+      y: 280
     },
     {
       id: 'caching',
@@ -46,7 +46,7 @@ const TechStackVisualization = () => {
       description: 'Blazing-fast data access and session management',
       technologies: ['Redis', 'Memcached', 'CDN Cache', 'Browser Cache', 'Service Worker'],
       color: '#f97316',
-      y: 370
+      y: 360
     },
     {
       id: 'messaging',
@@ -54,7 +54,7 @@ const TechStackVisualization = () => {
       description: 'Scalable async communication and real-time updates',
       technologies: ['Apache Kafka', 'RabbitMQ', 'AWS SQS', 'WebSockets', 'Server-Sent Events'],
       color: '#f59e0b',
-      y: 450
+      y: 440
     },
     {
       id: 'business',
@@ -62,7 +62,7 @@ const TechStackVisualization = () => {
       description: 'Robust, scalable backend services powering applications',
       technologies: ['Node.js', 'Python', 'Go', 'Java Spring', 'C# .NET', 'Rust'],
       color: '#10b981',
-      y: 530
+      y: 520
     },
     {
       id: 'dataaccess',
@@ -70,7 +70,7 @@ const TechStackVisualization = () => {
       description: 'Efficient, type-safe database interactions and query optimization',
       technologies: ['Prisma', 'TypeORM', 'SQLAlchemy', 'Hibernate', 'GORM', 'Mongoose'],
       color: '#ef4444',
-      y: 610
+      y: 600
     },
     {
       id: 'search',
@@ -78,7 +78,7 @@ const TechStackVisualization = () => {
       description: 'Intelligent search and lightning-fast data processing',
       technologies: ['Elasticsearch', 'Apache Solr', 'Algolia', 'Apache Flink', 'Kafka Streams'],
       color: '#8b5cf6',
-      y: 690
+      y: 680
     },
     {
       id: 'storage',
@@ -86,7 +86,7 @@ const TechStackVisualization = () => {
       description: 'Reliable, scalable data storage for any workload',
       technologies: ['PostgreSQL', 'MongoDB', 'Redis', 'AWS S3', 'Snowflake', 'Firebase'],
       color: '#7c3aed',
-      y: 770
+      y: 760
     },
     {
       id: 'analytics',
@@ -94,7 +94,7 @@ const TechStackVisualization = () => {
       description: 'Intelligent insights and predictive analytics',
       technologies: ['Python ML Stack', 'TensorFlow', 'PyTorch', 'Apache Spark', 'Jupyter'],
       color: '#ec4899',
-      y: 850
+      y: 840
     },
     {
       id: 'cicd',
@@ -102,7 +102,7 @@ const TechStackVisualization = () => {
       description: 'Streamlined deployment pipelines and infrastructure automation',
       technologies: ['GitLab CI', 'GitHub Actions', 'Jenkins', 'Docker', 'Terraform'],
       color: '#059669',
-      y: 930
+      y: 920
     },
     {
       id: 'monitoring',
@@ -110,7 +110,7 @@ const TechStackVisualization = () => {
       description: 'Comprehensive insights into application performance and health',
       technologies: ['Prometheus', 'Grafana', 'New Relic', 'DataDog', 'Sentry', 'ELK Stack'],
       color: '#7c2d12',
-      y: 1010
+      y: 1000
     },
     {
       id: 'infrastructure',
@@ -118,7 +118,7 @@ const TechStackVisualization = () => {
       description: 'Scalable, resilient cloud-native architecture',
       technologies: ['AWS', 'Azure', 'GCP', 'Kubernetes', 'Docker Swarm', 'Serverless'],
       color: '#6b7280',
-      y: 1090
+      y: 1080
     }
   ];
 
@@ -221,11 +221,11 @@ const TechStackVisualization = () => {
               <g key={layer.id}>
                 {/* Main layer rectangle */}
                 <motion.rect
-                  x="50"
+                  x="60"
                   y={layer.y}
-                  width="700"
-                  height="50"
-                  rx="8"
+                  width="680"
+                  height="60"
+                  rx="12"
                   fill={selectedLayer === layer.id ? `url(#gradient-${layer.id})` : (isDark ? '#374151' : '#f9fafb')}
                   stroke={layer.color}
                   strokeWidth={animationStep === index ? "3" : "1"}
@@ -242,9 +242,9 @@ const TechStackVisualization = () => {
 
                 {/* Layer icon circle */}
                 <motion.circle
-                  cx="80"
-                  cy={layer.y + 25}
-                  r="15"
+                  cx="95"
+                  cy={layer.y + 30}
+                  r="16"
                   fill={layer.color}
                   className="cursor-pointer"
                   onClick={() => setSelectedLayer(selectedLayer === layer.id ? null : layer.id)}
@@ -257,8 +257,8 @@ const TechStackVisualization = () => {
 
                 {/* Layer title */}
                 <motion.text
-                  x="110"
-                  y={layer.y + 20}
+                  x="130"
+                  y={layer.y + 22}
                   fill={isDark ? '#f3f4f6' : '#1f2937'}
                   fontSize="16"
                   fontWeight="600"
@@ -273,10 +273,10 @@ const TechStackVisualization = () => {
 
                 {/* Description */}
                 <text
-                  x="110"
-                  y={layer.y + 35}
+                  x="130"
+                  y={layer.y + 38}
                   fill={isDark ? '#9ca3af' : '#6b7280'}
-                  fontSize="11"
+                  fontSize="12"
                   className="cursor-pointer select-none"
                   onClick={() => setSelectedLayer(selectedLayer === layer.id ? null : layer.id)}
                 >
@@ -285,10 +285,10 @@ const TechStackVisualization = () => {
 
                 {/* Technology count */}
                 <text
-                  x="110"
-                  y={layer.y + 50}
+                  x="130"
+                  y={layer.y + 52}
                   fill={isDark ? '#9ca3af' : '#6b7280'}
-                  fontSize="12"
+                  fontSize="11"
                   className="cursor-pointer select-none"
                   onClick={() => setSelectedLayer(selectedLayer === layer.id ? null : layer.id)}
                 >
@@ -297,8 +297,8 @@ const TechStackVisualization = () => {
 
                 {/* Expand indicator */}
                 <motion.text
-                  x="720"
-                  y={layer.y + 40}
+                  x="710"
+                  y={layer.y + 35}
                   fill={isDark ? '#9ca3af' : '#6b7280'}
                   fontSize="14"
                   className="cursor-pointer select-none"
@@ -306,7 +306,7 @@ const TechStackVisualization = () => {
                   animate={{
                     rotate: selectedLayer === layer.id ? 180 : 0
                   }}
-                  style={{ transformOrigin: '720px ' + (layer.y + 35) + 'px' }}
+                  style={{ transformOrigin: '710px ' + (layer.y + 30) + 'px' }}
                 >
                   ▼
                 </motion.text>
