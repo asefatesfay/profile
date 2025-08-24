@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 const CategoryNode = ({ data }) => {
+  const { isDark } = useTheme();
   const { category, isActiveCategory } = data;
   
   return (
@@ -16,7 +18,9 @@ const CategoryNode = ({ data }) => {
       }}
     >
       <div 
-        className="px-6 py-4 rounded-xl font-bold text-white shadow-lg cursor-pointer text-center min-w-[200px] relative"
+        className={`px-6 py-4 rounded-xl font-bold text-white shadow-lg cursor-pointer text-center min-w-[200px] relative transition-all duration-300 ${
+          isDark ? 'shadow-gray-900/50' : 'shadow-gray-700/50'
+        }`}
         style={{ backgroundColor: category.color }}
       >
         <motion.div
@@ -27,9 +31,17 @@ const CategoryNode = ({ data }) => {
           <span className="text-lg">{category.title}</span>
         </motion.div>
         
-        {/* Decorative elements */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/10 to-white/5 pointer-events-none"></div>
-        <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-white/20 to-transparent blur-sm -z-10"></div>
+        {/* Decorative elements with theme-aware opacity */}
+        <div className={`absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-300 ${
+          isDark 
+            ? 'bg-gradient-to-r from-white/15 to-white/10' 
+            : 'bg-gradient-to-r from-white/10 to-white/5'
+        }`}></div>
+        <div className={`absolute -inset-1 rounded-xl blur-sm -z-10 transition-opacity duration-300 ${
+          isDark 
+            ? 'bg-gradient-to-r from-white/25 to-transparent' 
+            : 'bg-gradient-to-r from-white/20 to-transparent'
+        }`}></div>
         
         {/* Visual connection indicators when this category is active */}
         {isActiveCategory && (
@@ -94,8 +106,12 @@ const CategoryNode = ({ data }) => {
               transition={{ duration: 0.6, delay: 0.9 }}
             />
             
-            {/* Enhanced glow effect */}
-            <div className="absolute -inset-3 rounded-xl bg-gradient-to-r from-white/15 to-white/15 blur-lg animate-pulse"></div>
+            {/* Enhanced glow effect with theme awareness */}
+            <div className={`absolute -inset-3 rounded-xl blur-lg animate-pulse transition-opacity duration-300 ${
+              isDark 
+                ? 'bg-gradient-to-r from-white/20 to-white/20' 
+                : 'bg-gradient-to-r from-white/15 to-white/15'
+            }`}></div>
           </>
         )}
       </div>
