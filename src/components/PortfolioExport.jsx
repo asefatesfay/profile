@@ -189,35 +189,48 @@ const PortfolioExport = () => {
     try {
       switch (format) {
         case 'professional':
-          return generateProfessionalResumePreview(summary, topSkills, projects);
+          return generateProfessionalResumePreview(summary, topSkills, projects, isDark);
         case 'technical':
-          return generateTechnicalPortfolioPreview(summary, topSkills, projects);
+          return generateTechnicalPortfolioPreview(summary, topSkills, projects, isDark);
         case 'executive':
-          return generateExecutiveSummaryPreview(summary, topSkills, projects);
+          return generateExecutiveSummaryPreview(summary, topSkills, projects, isDark);
         case 'skills-matrix':
-          return generateSkillsMatrixPreview(topSkills);
+          return generateSkillsMatrixPreview(topSkills, isDark);
         case 'creative':
-          return generateCreativePortfolioPreview(summary, topSkills, projects);
+          return generateCreativePortfolioPreview(summary, topSkills, projects, isDark);
         case 'consulting':
-          return generateConsultingProfilePreview(summary, topSkills, projects);
+          return generateConsultingProfilePreview(summary, topSkills, projects, isDark);
         default:
-          return generateProfessionalResumePreview(summary, topSkills, projects);
+          return generateProfessionalResumePreview(summary, topSkills, projects, isDark);
       }
     } catch (error) {
       console.error('Error generating preview:', error);
-      return `<div style="padding: 20px; font-family: Arial, sans-serif; color: #333;">
-        <h2 style="color: #dc3545;">Preview Error</h2>
+      const bgColor = isDark ? '#1f2937' : '#ffffff';
+      const textColor = isDark ? '#f3f4f6' : '#333333';
+      const errorColor = isDark ? '#ef4444' : '#dc3545';
+      
+      return `<div style="padding: 20px; font-family: Arial, sans-serif; color: ${textColor}; background-color: ${bgColor};">
+        <h2 style="color: ${errorColor};">Preview Error</h2>
         <p>Unable to generate preview for format: <strong>${format}</strong></p>
         <p>Error: ${error.message}</p>
       </div>`;
     }
   };
 
-  const generateProfessionalResumePreview = (summary, topSkills, projects) => {
+  const generateProfessionalResumePreview = (summary, topSkills, projects, isDark = false) => {
+    // Theme-aware colors
+    const bgColor = isDark ? '#1f2937' : '#ffffff';
+    const textColor = isDark ? '#f3f4f6' : '#2c3e50';
+    const secondaryTextColor = isDark ? '#d1d5db' : '#34495e';
+    const borderColor = isDark ? '#374151' : '#ecf0f1';
+    const headerBg = isDark ? 'linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%)' : 'linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%)';
+    const cardBg = isDark ? '#374151' : '#ffffff';
+    const gradientBg = isDark ? 'linear-gradient(135deg, #374151 0%, #4b5563 100%)' : 'linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%)';
+    
     return `
-      <div style="font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #2c3e50; background: #ffffff; box-shadow: 0 0 20px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
+      <div style="font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: ${textColor}; background: ${bgColor}; box-shadow: 0 0 20px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden;">
         <!-- Header Section with Gradient Background -->
-        <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%); color: #ffffff; padding: 40px 30px; text-align: center; position: relative;">
+        <div style="background: ${headerBg}; color: #ffffff; padding: 40px 30px; text-align: center; position: relative;">
           <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);"></div>
           <div style="font-size: 42px; font-weight: 700; margin-bottom: 8px; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">${personalInfo.name || 'John Doe'}</div>
           <div style="font-size: 22px; margin-bottom: 20px; opacity: 0.95; font-weight: 300; letter-spacing: 1px;">${personalInfo.title || 'Senior Software Engineer'}</div>
@@ -245,10 +258,10 @@ const PortfolioExport = () => {
               <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 4px 15px rgba(52,152,219,0.3);">
                 <span style="color: white; font-size: 20px; font-weight: bold;">💼</span>
               </div>
-              <h2 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Professional Summary</h2>
+              <h2 style="font-size: 24px; font-weight: 700; color: ${textColor}; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Professional Summary</h2>
             </div>
-            <div style="background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%); padding: 25px; border-radius: 12px; border-left: 5px solid #3498db; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-              <p style="font-size: 16px; line-height: 1.8; margin: 0; text-align: justify; color: #34495e; font-style: italic; position: relative;">
+            <div style="background: ${gradientBg}; padding: 25px; border-radius: 12px; border-left: 5px solid #3498db; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <p style="font-size: 16px; line-height: 1.8; margin: 0; text-align: justify; color: ${secondaryTextColor}; font-style: italic; position: relative;">
                 <span style="font-size: 48px; color: #3498db; position: absolute; top: -10px; left: -10px; line-height: 1; opacity: 0.3;">"</span>
                 <span style="margin-left: 20px;">${summary || 'An accomplished professional with extensive experience in software development and technical leadership...'}</span>
               </p>
@@ -261,7 +274,7 @@ const PortfolioExport = () => {
               <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 4px 15px rgba(231,76,60,0.3);">
                 <span style="color: white; font-size: 20px; font-weight: bold;">⚡</span>
               </div>
-              <h2 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Technical Expertise</h2>
+              <h2 style="font-size: 24px; font-weight: 700; color: ${textColor}; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Technical Expertise</h2>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
               ${(topSkills || []).map((skill, index) => {
@@ -275,17 +288,17 @@ const PortfolioExport = () => {
                 ];
                 const bgColor = colors[index % colors.length];
                 return `
-                  <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-top: 4px solid transparent; background-clip: padding-box; position: relative; transition: all 0.3s ease;">
+                  <div style="background: ${cardBg}; border-radius: 12px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-top: 4px solid transparent; background-clip: padding-box; position: relative; transition: all 0.3s ease;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: ${bgColor}; border-radius: 12px 12px 0 0;"></div>
                     <div style="display: flex; align-items: center; margin-bottom: 12px;">
                       <div style="width: 12px; height: 12px; background: ${bgColor}; border-radius: 50%; margin-right: 12px;"></div>
-                      <h3 style="font-size: 18px; font-weight: 600; color: #2c3e50; margin: 0;">${skill.title || 'Technical Skill'}</h3>
+                      <h3 style="font-size: 18px; font-weight: 600; color: ${textColor}; margin: 0;">${skill.title || 'Technical Skill'}</h3>
                     </div>
-                    <div style="background: #ecf0f1; border-radius: 8px; padding: 2px; margin-bottom: 8px;">
+                    <div style="background: ${borderColor}; border-radius: 8px; padding: 2px; margin-bottom: 8px;">
                       <div style="background: ${bgColor}; height: 8px; border-radius: 6px; width: ${Math.min((skill.yearsOfExperience / 8) * 100, 100)}%;"></div>
                     </div>
-                    <div style="font-size: 14px; color: #7f8c8d; font-weight: 500;">
-                      <strong style="color: #2c3e50;">${skill.yearsOfExperience || 0}+ years</strong> experience
+                    <div style="font-size: 14px; color: ${secondaryTextColor}; font-weight: 500;">
+                      <strong style="color: ${textColor};">${skill.yearsOfExperience || 0}+ years</strong> experience
                     </div>
                   </div>
                 `;
@@ -299,22 +312,22 @@ const PortfolioExport = () => {
               <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #27ae60, #229954); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 4px 15px rgba(39,174,96,0.3);">
                 <span style="color: white; font-size: 20px; font-weight: bold;">🚀</span>
               </div>
-              <h2 style="font-size: 24px; font-weight: 700; color: #2c3e50; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Professional Experience</h2>
+              <h2 style="font-size: 24px; font-weight: 700; color: ${textColor}; margin: 0; letter-spacing: 1px; text-transform: uppercase;">Professional Experience</h2>
             </div>
             ${(projects || []).map((project, index) => `
-              <div style="background: white; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-left: 5px solid #27ae60; position: relative; overflow: hidden;">
+              <div style="background: ${cardBg}; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-left: 5px solid #27ae60; position: relative; overflow: hidden;">
                 <div style="position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(39,174,96,0.05)); border-radius: 0 0 0 100%;"></div>
                 <div style="position: relative; z-index: 1;">
                   <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; flex-wrap: wrap;">
-                    <h3 style="font-size: 22px; font-weight: 700; color: #2c3e50; margin: 0; flex: 1;">${project.title || 'Project Title'}</h3>
+                    <h3 style="font-size: 22px; font-weight: 700; color: ${textColor}; margin: 0; flex: 1;">${project.title || 'Project Title'}</h3>
                     <div style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-left: 15px;">
                       ${project.duration || '2022-2024'}
                     </div>
                   </div>
-                  <div style="font-size: 16px; color: #7f8c8d; margin-bottom: 15px; font-weight: 500;">
+                  <div style="font-size: 16px; color: ${secondaryTextColor}; margin-bottom: 15px; font-weight: 500;">
                     ${project.role || 'Senior Software Engineer'} • ${personalInfo.title}
                   </div>
-                  <p style="font-size: 15px; line-height: 1.7; margin: 0 0 20px 0; text-align: justify; color: #34495e;">
+                  <p style="font-size: 15px; line-height: 1.7; margin: 0 0 20px 0; text-align: justify; color: ${secondaryTextColor};">
                     ${project.description || 'Led comprehensive software development initiatives, architecting scalable solutions and mentoring development teams to deliver high-impact technical projects.'}
                   </p>
                   
@@ -363,7 +376,12 @@ const PortfolioExport = () => {
   };
 
   // Placeholder functions for other formats (enhanced with better content)
-  const generateTechnicalPortfolioPreview = (summary, topSkills, projects) => {
+  const generateTechnicalPortfolioPreview = (summary, topSkills, projects, isDark = false) => {
+    // Theme-aware colors
+    const bgColor = isDark ? '#1f2937' : '#f7fafc';
+    const textColor = isDark ? '#f3f4f6' : '#1a202c';
+    const cardBg = isDark ? '#374151' : '#ffffff';
+    
     const allSkills = skillsData.skills;
     const skillsByCategory = {};
     allSkills.forEach(skill => {
@@ -374,7 +392,7 @@ const PortfolioExport = () => {
     });
 
     return `
-      <div style="font-family: 'Inter', 'Arial', sans-serif; line-height: 1.6; color: #1a202c; background: #f7fafc;">
+      <div style="font-family: 'Inter', 'Arial', sans-serif; line-height: 1.6; color: ${textColor}; background: ${bgColor};">
         <!-- Modern Tech Header -->
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 50px 40px; text-align: center; position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"10\" cy=\"10\" r=\"1\" fill=\"white\" opacity=\"0.1\"/><circle cx=\"30\" cy=\"20\" r=\"1\" fill=\"white\" opacity=\"0.1\"/><circle cx=\"50\" cy=\"30\" r=\"1\" fill=\"white\" opacity=\"0.1\"/><circle cx=\"70\" cy=\"40\" r=\"1\" fill=\"white\" opacity=\"0.1\"/><circle cx=\"90\" cy=\"50\" r=\"1\" fill=\"white\" opacity=\"0.1\"/></svg>'); background-size: 100px 100px;"></div>
@@ -392,33 +410,33 @@ const PortfolioExport = () => {
 
         <div style="padding: 40px;">
           <!-- Executive Summary -->
-          <div style="margin-bottom: 50px; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 6px solid #667eea;">
-            <h2 style="font-size: 28px; font-weight: 700; color: #2d3748; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
+          <div style="margin-bottom: 50px; background: ${cardBg}; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 6px solid #667eea;">
+            <h2 style="font-size: 28px; font-weight: 700; color: ${textColor}; margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
               <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">🎯</span>
               Executive Summary
             </h2>
-            <p style="font-size: 18px; line-height: 1.8; color: #4a5568; margin-bottom: 20px;">
+            <p style="font-size: 18px; line-height: 1.8; color: ${textColor}; margin-bottom: 20px;">
               ${summary || 'Accomplished Senior Software Engineer with 10+ years of expertise in full-stack development, cloud architecture, and team leadership. Proven track record of delivering scalable solutions that serve millions of users while mentoring high-performing engineering teams.'}
             </p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
-              <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #e6fffa, #f0fff4); border-radius: 12px;">
+              <div style="text-align: center; padding: 20px; background: ${isDark ? 'linear-gradient(135deg, #065f46, #047857)' : 'linear-gradient(135deg, #e6fffa, #f0fff4)'}; border-radius: 12px;">
                 <div style="font-size: 32px; font-weight: 800; color: #38a169;">$2.5M+</div>
-                <div style="font-size: 14px; color: #4a5568; font-weight: 500;">Cost Savings Delivered</div>
+                <div style="font-size: 14px; color: ${textColor}; font-weight: 500;">Cost Savings Delivered</div>
               </div>
-              <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ebf8ff, #f0f9ff); border-radius: 12px;">
+              <div style="text-align: center; padding: 20px; background: ${isDark ? 'linear-gradient(135deg, #1e3a8a, #2563eb)' : 'linear-gradient(135deg, #ebf8ff, #f0f9ff)'}; border-radius: 12px;">
                 <div style="font-size: 32px; font-weight: 800; color: #3182ce;">99.9%</div>
-                <div style="font-size: 14px; color: #4a5568; font-weight: 500;">System Uptime</div>
+                <div style="font-size: 14px; color: ${textColor}; font-weight: 500;">System Uptime</div>
               </div>
-              <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fef5e7, #fffaf0); border-radius: 12px;">
+              <div style="text-align: center; padding: 20px; background: ${isDark ? 'linear-gradient(135deg, #92400e, #d97706)' : 'linear-gradient(135deg, #fef5e7, #fffaf0)'}; border-radius: 12px;">
                 <div style="font-size: 32px; font-weight: 800; color: #d69e2e;">10M+</div>
-                <div style="font-size: 14px; color: #4a5568; font-weight: 500;">Daily Active Users</div>
+                <div style="font-size: 14px; color: ${textColor}; font-weight: 500;">Daily Active Users</div>
               </div>
             </div>
           </div>
 
           <!-- Technical Architecture & Skills -->
           <div style="margin-bottom: 50px;">
-            <h2 style="font-size: 28px; font-weight: 700; color: #2d3748; margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
+            <h2 style="font-size: 28px; font-weight: 700; color: ${textColor}; margin-bottom: 30px; display: flex; align-items: center; gap: 15px;">
               <span style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">⚡</span>
               Technical Architecture & Expertise
             </h2>
@@ -434,21 +452,21 @@ const PortfolioExport = () => {
                 ];
                 const colors = categoryColors[index % categoryColors.length];
                 return `
-                  <div style="background: white; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid ${colors.accent}; transition: transform 0.3s ease;">
+                  <div style="background: ${cardBg}; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 5px solid ${colors.accent}; transition: transform 0.3s ease;">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
                       <div style="background: ${colors.bg}; color: white; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 20px; font-weight: bold;">
                         ${['🎨', '⚙️', '☁️', '🔒', '📊', '🚀'][index % 6]}
                       </div>
-                      <h3 style="font-size: 20px; font-weight: 700; color: #2d3748; margin: 0; text-transform: capitalize;">${category.replace(/([A-Z])/g, ' $1').trim()}</h3>
+                      <h3 style="font-size: 20px; font-weight: 700; color: ${textColor}; margin: 0; text-transform: capitalize;">${category.replace(/([A-Z])/g, ' $1').trim()}</h3>
                     </div>
                     ${skillsByCategory[category].slice(0, 4).map(skill => `
-                      <div style="margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 3px solid ${colors.accent};">
+                      <div style="margin-bottom: 15px; padding: 12px; background: ${isDark ? '#4b5563' : '#f8fafc'}; border-radius: 8px; border-left: 3px solid ${colors.accent};">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                          <span style="font-weight: 600; color: #2d3748; font-size: 15px;">${skill.title}</span>
+                          <span style="font-weight: 600; color: ${textColor}; font-size: 15px;">${skill.title}</span>
                           <span style="background: ${colors.bg}; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;">${skill.yearsOfExperience || 0}+ years</span>
                         </div>
-                        <div style="font-size: 13px; color: #718096; line-height: 1.4;">${skill.description || 'Advanced proficiency with hands-on experience in enterprise environments'}</div>
-                        <div style="margin-top: 8px; background: #e2e8f0; border-radius: 6px; height: 6px; overflow: hidden;">
+                        <div style="font-size: 13px; color: ${isDark ? '#d1d5db' : '#718096'}; line-height: 1.4;">${skill.description || 'Advanced proficiency with hands-on experience in enterprise environments'}</div>
+                        <div style="margin-top: 8px; background: ${isDark ? '#6b7280' : '#e2e8f0'}; border-radius: 6px; height: 6px; overflow: hidden;">
                           <div style="background: ${colors.bg}; height: 100%; width: ${Math.min((skill.yearsOfExperience / 8) * 100, 100)}%; border-radius: 6px;"></div>
                         </div>
                       </div>
@@ -552,12 +570,16 @@ const PortfolioExport = () => {
     `;
   };
 
-  const generateExecutiveSummaryPreview = (summary, topSkills, projects) => {
+  const generateExecutiveSummaryPreview = (summary, topSkills, projects, isDark = false) => {
+    // Theme-aware colors
+    const bgColor = isDark ? '#1f2937' : '#ffffff';
+    const textColor = isDark ? '#f3f4f6' : '#2d3748';
+    
     const leadershipSkills = skillsData.skills.filter(skill => skill.category === 'leadership');
     const architectureSkills = skillsData.skills.filter(skill => skill.category === 'architecture');
 
     return `
-      <div style="font-family: 'Georgia', serif; line-height: 1.7; color: #2d3748; padding: 20px; background: white;">
+      <div style="font-family: 'Georgia', serif; line-height: 1.7; color: ${textColor}; padding: 20px; background: ${bgColor};">
         <!-- Executive Header -->
         <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); color: white; padding: 40px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
           <h1 style="font-size: 36px; font-weight: 300; margin: 0 0 10px 0; letter-spacing: 1px;">${personalInfo.name}</h1>
@@ -569,8 +591,8 @@ const PortfolioExport = () => {
 
         <!-- Executive Summary -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Executive Summary</h2>
-          <div style="font-size: 16px; line-height: 1.8; color: #4a5568; text-align: justify;">
+          <h2 style="font-size: 24px; font-weight: 600; color: ${textColor}; margin-bottom: 20px; border-bottom: 2px solid ${isDark ? '#4b5563' : '#e2e8f0'}; padding-bottom: 8px;">Executive Summary</h2>
+          <div style="font-size: 16px; line-height: 1.8; color: ${textColor}; text-align: justify;">
             ${summary} With a proven track record of leading cross-functional teams and delivering enterprise-scale solutions, I bring strategic technology leadership combined with hands-on technical expertise. My experience spans architecting systems that serve millions of users, building high-performing engineering teams, and driving digital transformation initiatives that deliver measurable business value.
             
             <br><br>I have successfully led technology organizations through periods of rapid growth, scaling engineering teams from 5 to 50+ members while maintaining code quality and delivery velocity. My strategic approach to technology includes establishing technical vision, implementing best practices, and fostering a culture of innovation that has resulted in multiple patent applications and industry recognition.
@@ -579,12 +601,12 @@ const PortfolioExport = () => {
 
         <!-- Strategic Technology Leadership -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; font-weight: 600; color: #1a202c; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">Strategic Technology Leadership</h2>
-          <div style="background: #f7fafc; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+          <h2 style="font-size: 24px; font-weight: 600; color: ${textColor}; margin-bottom: 20px; border-bottom: 2px solid ${isDark ? '#4b5563' : '#e2e8f0'}; padding-bottom: 8px;">Strategic Technology Leadership</h2>
+          <div style="background: ${isDark ? '#374151' : '#f7fafc'}; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
               <div>
-                <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #4299e1; padding-bottom: 5px;">🎯 Business Impact</h4>
-                <ul style="margin: 0; padding-left: 0; list-style: none; color: #4a5568; line-height: 1.6;">
+                <h4 style="color: ${textColor}; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #4299e1; padding-bottom: 5px;">🎯 Business Impact</h4>
+                <ul style="margin: 0; padding-left: 0; list-style: none; color: ${textColor}; line-height: 1.6;">
                   <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
                     <span style="position: absolute; left: 0; color: #4299e1;">▶</span>
                     Delivered $50M+ in cost savings through architecture optimization
@@ -604,8 +626,8 @@ const PortfolioExport = () => {
                 </ul>
               </div>
               <div>
-                <h4 style="color: #1a202c; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #48bb78; padding-bottom: 5px;">👥 Organizational Excellence</h4>
-                <ul style="margin: 0; padding-left: 0; list-style: none; color: #4a5568; line-height: 1.6;">
+                <h4 style="color: ${textColor}; font-weight: 600; margin-bottom: 15px; border-bottom: 2px solid #48bb78; padding-bottom: 5px;">👥 Organizational Excellence</h4>
+                <ul style="margin: 0; padding-left: 0; list-style: none; color: ${textColor}; line-height: 1.6;">
                   <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
                     <span style="position: absolute; left: 0; color: #48bb78;">▶</span>
                     Built and scaled engineering teams from 5 to 50+ members
@@ -693,7 +715,12 @@ const PortfolioExport = () => {
     `;
   };
 
-  const generateSkillsMatrixPreview = (topSkills) => {
+  const generateSkillsMatrixPreview = (topSkills, isDark = false) => {
+    // Theme-aware colors
+    const bgColor = isDark ? '#1f2937' : '#ffffff';
+    const textColor = isDark ? '#f3f4f6' : '#2d3748';
+    const cardBg = isDark ? '#374151' : '#ffffff';
+    
     const allSkills = skillsData.skills;
     const skillsByCategory = {};
     allSkills.forEach(skill => {
@@ -724,21 +751,21 @@ const PortfolioExport = () => {
 
         <!-- Summary Stats -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 30px;">
-          <div style="background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="background: ${cardBg}; border: 1px solid ${isDark ? '#4b5563' : '#dee2e6'}; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 24px; font-weight: bold; color: #007bff;">${allSkills.length}</div>
-            <div style="font-size: 12px; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Total Skills</div>
+            <div style="font-size: 12px; color: ${textColor}; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Total Skills</div>
           </div>
-          <div style="background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="background: ${cardBg}; border: 1px solid ${isDark ? '#4b5563' : '#dee2e6'}; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 24px; font-weight: bold; color: #007bff;">${allSkills.filter(s => s.level === 'expert').length}</div>
-            <div style="font-size: 12px; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Expert Level</div>
+            <div style="font-size: 12px; color: ${textColor}; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Expert Level</div>
           </div>
-          <div style="background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="background: ${cardBg}; border: 1px solid ${isDark ? '#4b5563' : '#dee2e6'}; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 24px; font-weight: bold; color: #007bff;">${Object.keys(skillsByCategory).length}</div>
-            <div style="font-size: 12px; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Categories</div>
+            <div style="font-size: 12px; color: ${textColor}; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Categories</div>
           </div>
-          <div style="background: white; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <div style="background: ${cardBg}; border: 1px solid ${isDark ? '#4b5563' : '#dee2e6'}; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="font-size: 24px; font-weight: bold; color: #007bff;">${Math.max(...allSkills.map(s => s.yearsOfExperience || 0))}+</div>
-            <div style="font-size: 12px; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Years Experience</div>
+            <div style="font-size: 12px; color: ${textColor}; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Years Experience</div>
           </div>
         </div>
 
@@ -1950,13 +1977,23 @@ const PortfolioExport = () => {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="mt-8 bg-white rounded-xl shadow-sm border overflow-hidden"
+            className={`mt-8 rounded-xl shadow-sm border overflow-hidden transition-colors duration-300 ${
+              isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            }`}
           >
-            <div className="p-6 border-b bg-gray-50">
-              <h2 className="text-xl font-semibold">Preview: {exportFormats.find(f => f.id === exportFormat)?.title}</h2>
+            <div className={`p-6 border-b transition-colors duration-300 ${
+              isDark ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+            }`}>
+              <h2 className={`text-xl font-semibold transition-colors duration-300 ${
+                isDark ? 'text-white' : 'text-gray-900'
+              }`}>
+                Preview: {exportFormats.find(f => f.id === exportFormat)?.title}
+              </h2>
             </div>
             <div 
-              className="p-8 min-h-[600px] max-h-[800px] overflow-y-auto"
+              className={`p-8 min-h-[600px] max-h-[800px] overflow-y-auto transition-colors duration-300 ${
+                isDark ? 'bg-gray-800' : 'bg-white'
+              }`}
               dangerouslySetInnerHTML={{ __html: generatePreviewHTML(exportFormat) }}
             />
           </motion.div>
