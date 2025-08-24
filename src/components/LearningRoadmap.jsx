@@ -557,7 +557,9 @@ const LearningRoadmap = ({ skill }) => {
 
       {/* Milestones */}
       <div className="mt-8">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 transition-colors duration-300 ${
+          isDark ? 'text-white' : 'text-gray-900'
+        }`}>
           <Award className="w-5 h-5 text-yellow-500" />
           Key Milestones
         </h3>
@@ -565,29 +567,45 @@ const LearningRoadmap = ({ skill }) => {
           {(roadmap.milestones || []).map((milestone, index) => (
             <div 
               key={milestone.id}
-              className={`p-4 rounded-lg border-2 ${
+              className={`p-4 rounded-lg border-2 transition-colors duration-300 ${
                 milestone.completed 
-                  ? 'border-green-300 bg-green-50' 
-                  : 'border-gray-200 bg-white'
+                  ? (isDark 
+                    ? 'border-green-600 bg-green-900/20' 
+                    : 'border-green-300 bg-green-50')
+                  : (isDark 
+                    ? 'border-gray-600 bg-gray-800' 
+                    : 'border-gray-200 bg-white')
               }`}
             >
               <div className="flex items-center gap-2 mb-2">
                 {milestone.completed ? (
                   <Check className="w-5 h-5 text-green-600" />
                 ) : (
-                  <Target className="w-5 h-5 text-gray-400" />
+                  <Target className={`w-5 h-5 transition-colors duration-300 ${
+                    isDark ? 'text-gray-500' : 'text-gray-400'
+                  }`} />
                 )}
-                <h4 className="font-semibold text-gray-900">{milestone.title}</h4>
+                <h4 className={`font-semibold transition-colors duration-300 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>{milestone.title}</h4>
               </div>
-              <p className="text-sm text-gray-600">{milestone.description}</p>
+              <p className={`text-sm transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-gray-600'
+              }`}>{milestone.description}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Study Schedule */}
-      <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+      <div className={`mt-8 p-6 rounded-xl transition-colors duration-300 ${
+        isDark 
+          ? 'bg-gradient-to-r from-blue-900/30 to-purple-900/30' 
+          : 'bg-gradient-to-r from-blue-50 to-purple-50'
+      }`}>
+        <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 transition-colors duration-300 ${
+          isDark ? 'text-white' : 'text-gray-900'
+        }`}>
           <Calendar className="w-5 h-5 text-blue-600" />
           Study Schedule
         </h3>
@@ -596,19 +614,25 @@ const LearningRoadmap = ({ skill }) => {
             <div className="text-2xl font-bold text-blue-600">
               {roadmap.weeklyGoal?.hoursPerWeek || 10} hours
             </div>
-            <div className="text-sm text-gray-600">per week commitment</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>per week commitment</div>
           </div>
           <div>
             <div className="text-2xl font-bold text-purple-600">
               {roadmap.weeklyGoal?.currentWeekHours || 0}/{roadmap.weeklyGoal?.hoursPerWeek || 10}
             </div>
-            <div className="text-sm text-gray-600">this week progress</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>this week progress</div>
           </div>
           <div>
             <div className="text-2xl font-bold text-green-600">
               {roadmap.weeklyGoal?.targetDate || 'TBD'}
             </div>
-            <div className="text-sm text-gray-600">target completion</div>
+            <div className={`text-sm transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}>target completion</div>
           </div>
         </div>
       </div>
