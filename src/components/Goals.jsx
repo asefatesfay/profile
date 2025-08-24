@@ -19,8 +19,10 @@ import {
   ChevronDown,
   ChevronRight
 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Goals = () => {
+  const { isDark } = useTheme();
   const [goals, setGoals] = useState(() => {
     const saved = localStorage.getItem('career-goals');
     return saved ? JSON.parse(saved) : [
@@ -209,7 +211,11 @@ const Goals = () => {
   const stats = getOverallStats();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -217,11 +223,15 @@ const Goals = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
+          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>
             <Target className="w-10 h-10 text-blue-600" />
             Goals & Progress Tracking
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className={`text-lg max-w-3xl mx-auto transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Set, track, and achieve your career goals with milestone-based progress tracking and actionable insights.
           </p>
         </motion.div>

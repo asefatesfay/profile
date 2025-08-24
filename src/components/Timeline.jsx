@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Award, TrendingUp, Code, Users } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Timeline = () => {
+  const { isDark } = useTheme();
   const [selectedYear, setSelectedYear] = useState(null);
 
   const timelineData = [
@@ -48,15 +50,23 @@ const Timeline = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-4xl mx-auto">
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Career Journey</h1>
-          <p className="text-lg text-gray-600">My evolution as a software engineer and technical leader</p>
+          <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>Career Journey</h1>
+          <p className={`text-lg transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>My evolution as a software engineer and technical leader</p>
         </motion.div>
 
         <div className="relative">
@@ -72,10 +82,16 @@ const Timeline = () => {
               transition={{ delay: index * 0.2 }}
             >
               {/* Timeline dot */}
-              <div className="absolute -left-10 top-0 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg"></div>
+              <div className={`absolute -left-10 top-0 w-4 h-4 bg-blue-500 rounded-full border-4 shadow-lg transition-colors duration-300 ${
+                isDark ? 'border-gray-800' : 'border-white'
+              }`}></div>
               
               {/* Content card */}
-              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div className={`rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 ${
+                isDark 
+                  ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' 
+                  : 'bg-white hover:shadow-xl'
+              }`}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-2xl font-bold text-blue-600">{item.year}</span>
                   {item.type === 'role' && <Users className="w-5 h-5 text-green-500" />}
@@ -83,24 +99,34 @@ const Timeline = () => {
                   {item.type === 'skill' && <Code className="w-5 h-5 text-purple-500" />}
                 </div>
                 
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <h3 className={`text-xl font-semibold mb-2 transition-colors duration-300 ${
+                  isDark ? 'text-gray-100' : 'text-gray-900'
+                }`}>{item.title}</h3>
                 {item.company && (
-                  <p className="text-gray-600 mb-3 flex items-center gap-2">
+                  <p className={`mb-3 flex items-center gap-2 transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
                     <MapPin className="w-4 h-4" />
                     {item.company}
                   </p>
                 )}
                 
                 {item.description && (
-                  <p className="text-gray-700 mb-4">{item.description}</p>
+                  <p className={`mb-4 transition-colors duration-300 ${
+                    isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}>{item.description}</p>
                 )}
                 
                 {item.achievements && (
                   <div className="mb-4">
-                    <h4 className="font-medium text-gray-900 mb-2">Key Achievements:</h4>
+                    <h4 className={`font-medium mb-2 transition-colors duration-300 ${
+                      isDark ? 'text-gray-200' : 'text-gray-900'
+                    }`}>Key Achievements:</h4>
                     <ul className="space-y-1">
                       {item.achievements.map((achievement, i) => (
-                        <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
+                        <li key={i} className={`text-sm flex items-start gap-2 transition-colors duration-300 ${
+                          isDark ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
                           <TrendingUp className="w-3 h-3 mt-1 text-green-500 flex-shrink-0" />
                           {achievement}
                         </li>
@@ -111,7 +137,11 @@ const Timeline = () => {
                 
                 <div className="flex flex-wrap gap-2">
                   {item.skills.map((skill, i) => (
-                    <span key={i} className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
+                    <span key={i} className={`px-3 py-1 text-sm rounded-full transition-colors duration-300 ${
+                      isDark 
+                        ? 'bg-blue-900/30 text-blue-300' 
+                        : 'bg-blue-100 text-blue-700'
+                    }`}>
                       {skill}
                     </span>
                   ))}

@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, AlertTriangle, CheckCircle, Star } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const SkillsAssessment = () => {
+  const { isDark } = useTheme();
   const [assessments, setAssessments] = useState({});
   
   const skillLevels = [
-    { value: 1, label: 'Beginner', color: 'bg-red-100 text-red-700' },
-    { value: 2, label: 'Intermediate', color: 'bg-yellow-100 text-yellow-700' },
-    { value: 3, label: 'Advanced', color: 'bg-green-100 text-green-700' },
-    { value: 4, label: 'Expert', color: 'bg-blue-100 text-blue-700' }
+    { value: 1, label: 'Beginner', color: isDark ? 'bg-red-900/30 text-red-400' : 'bg-red-100 text-red-700' },
+    { value: 2, label: 'Intermediate', color: isDark ? 'bg-yellow-900/30 text-yellow-400' : 'bg-yellow-100 text-yellow-700' },
+    { value: 3, label: 'Advanced', color: isDark ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-700' },
+    { value: 4, label: 'Expert', color: isDark ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700' }
   ];
 
   const targetLevels = {
@@ -47,7 +49,11 @@ const SkillsAssessment = () => {
   const analysis = getGapAnalysis();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-8"

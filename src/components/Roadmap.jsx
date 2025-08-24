@@ -7,6 +7,7 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 import SkillNode from './SkillNode';
 import CategoryNode from './CategoryNode';
@@ -20,6 +21,7 @@ const nodeTypes = {
 };
 
 const Roadmap = () => {
+  const { isDark } = useTheme();
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [activeTab, setActiveTab] = useState('all');
   
@@ -183,7 +185,11 @@ const Roadmap = () => {
       {/* Tab Navigation */}
       <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-30 max-w-7xl mb-4">
         <motion.div 
-          className="bg-white/90 backdrop-blur-sm rounded-xl p-2 shadow-lg border border-gray-200 mb-4"
+          className={`backdrop-blur-sm rounded-xl p-2 shadow-lg border mb-4 transition-all duration-300 ${
+            isDark 
+              ? 'bg-gray-800/90 border-gray-600' 
+              : 'bg-white/90 border-gray-200'
+          }`}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
@@ -194,8 +200,8 @@ const Roadmap = () => {
               onClick={() => setActiveTab('all')}
               className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 ${
                 activeTab === 'all'
-                  ? 'bg-gray-900 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  ? (isDark ? 'bg-gray-700 text-gray-100 shadow-md' : 'bg-gray-900 text-white shadow-md')
+                  : (isDark ? 'text-gray-300 hover:text-gray-100 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
               }`}
             >
               All Skills
@@ -209,7 +215,7 @@ const Roadmap = () => {
                 className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
                   activeTab === category.id
                     ? 'text-white shadow-md'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    : (isDark ? 'text-gray-300 hover:text-gray-100 hover:bg-gray-700' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100')
                 }`}
                 style={activeTab === category.id ? { backgroundColor: category.color } : {}}
               >
@@ -240,15 +246,21 @@ const Roadmap = () => {
 
       <div className="absolute top-20 left-4 z-10">
         <motion.div 
-          className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg"
+          className={`backdrop-blur-sm rounded-lg p-4 shadow-lg transition-all duration-300 ${
+            isDark ? 'bg-gray-800/90 border border-gray-600' : 'bg-white/90'
+          }`}
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
+          <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+            isDark ? 'text-gray-100' : 'text-gray-800'
+          }`}>
             {activeTab === 'all' ? 'All Skills' : categories.find(c => c.id === activeTab)?.title || 'Skills'} Roadmap
           </h3>
-          <p className="text-sm text-gray-600 mb-3">
+          <p className={`text-sm mb-3 transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             {activeTab === 'all' 
               ? `Showing all ${filteredNodes.filter(n => n.type === 'skillNode').length} skills across categories`
               : `${filteredNodes.filter(n => n.type === 'skillNode').length} skills in this category`
@@ -257,15 +269,15 @@ const Roadmap = () => {
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Completed</span>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Completed</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span>In Progress</span>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>In Progress</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-              <span>Planned</span>
+              <span className={`transition-colors duration-300 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Planned</span>
             </div>
           </div>
         </motion.div>
@@ -325,17 +337,21 @@ const Roadmap = () => {
         key={activeTab} // Force re-render and fit view on tab change
       >
         <Background 
-          color="#E5E7EB" 
+          color={isDark ? "#374151" : "#E5E7EB"} 
           gap={20} 
           size={1}
           variant="dots"
         />
         <Controls 
-          className="bg-white/90 backdrop-blur-sm border border-gray-200"
+          className={`backdrop-blur-sm border rounded transition-all duration-300 ${
+            isDark ? 'bg-gray-800/90 border-gray-600 text-gray-200' : 'bg-white/90 border-gray-200'
+          }`}
           showInteractive={false}
         />
         <MiniMap 
-          className="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg"
+          className={`backdrop-blur-sm border rounded-lg transition-all duration-300 ${
+            isDark ? 'bg-gray-800/90 border-gray-600' : 'bg-white/90 border-gray-200'
+          }`}
           nodeColor={(node) => {
             if (node.type === 'categoryNode') {
               return node.data.category.color;
@@ -347,7 +363,7 @@ const Roadmap = () => {
               default: return '#9CA3AF';
             }
           }}
-          maskColor="rgba(255, 255, 255, 0.2)"
+          maskColor={isDark ? "rgba(31, 41, 55, 0.3)" : "rgba(255, 255, 255, 0.2)"}
         />
       </ReactFlow>
       </div>

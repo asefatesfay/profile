@@ -17,8 +17,10 @@ import {
   Layers
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Projects = () => {
+  const { isDark } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -38,24 +40,28 @@ const Projects = () => {
 
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
-      case 'beginner': return 'text-green-600 bg-green-100';
-      case 'intermediate': return 'text-blue-600 bg-blue-100';
-      case 'advanced': return 'text-purple-600 bg-purple-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'beginner': return isDark ? 'text-green-400 bg-green-900/30' : 'text-green-600 bg-green-100';
+      case 'intermediate': return isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-100';
+      case 'advanced': return isDark ? 'text-purple-400 bg-purple-900/30' : 'text-purple-600 bg-purple-100';
+      default: return isDark ? 'text-gray-400 bg-gray-800/30' : 'text-gray-600 bg-gray-100';
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'completed': return 'text-green-600 bg-green-100';
-      case 'in-progress': return 'text-blue-600 bg-blue-100';
-      case 'planned': return 'text-gray-600 bg-gray-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'completed': return isDark ? 'text-green-400 bg-green-900/30' : 'text-green-600 bg-green-100';
+      case 'in-progress': return isDark ? 'text-blue-400 bg-blue-900/30' : 'text-blue-600 bg-blue-100';
+      case 'planned': return isDark ? 'text-gray-400 bg-gray-800/30' : 'text-gray-600 bg-gray-100';
+      default: return isDark ? 'text-gray-400 bg-gray-800/30' : 'text-gray-600 bg-gray-100';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <div className={`min-h-screen p-6 transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-gray-50 to-gray-100'
+    }`}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -64,8 +70,12 @@ const Projects = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Projects Portfolio</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h1 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`}>Projects Portfolio</h1>
+          <p className={`text-lg max-w-3xl mx-auto transition-colors duration-300 ${
+            isDark ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Practical projects that demonstrate expertise across different technologies and domains. 
             Each project includes detailed implementation guides and learning outcomes.
           </p>
@@ -79,12 +89,20 @@ const Projects = () => {
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">Category:</span>
+            <Filter className={`w-4 h-4 transition-colors duration-300 ${
+              isDark ? 'text-gray-400' : 'text-gray-600'
+            }`} />
+            <span className={`text-sm font-medium transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>Category:</span>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3 py-1 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`px-3 py-1 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${
+                isDark 
+                  ? 'border-gray-700 bg-gray-800 text-gray-200' 
+                  : 'border-gray-300 bg-white text-gray-900'
+              }`}
             >
               {categories.map(category => (
                 <option key={category} value={category}>
@@ -95,12 +113,20 @@ const Projects = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <Target className="w-4 h-4 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">Difficulty:</span>
+            <Target className={`w-4 h-4 transition-colors duration-300 ${
+              isDark ? 'text-gray-400' : 'text-gray-600'
+            }`} />
+            <span className={`text-sm font-medium transition-colors duration-300 ${
+              isDark ? 'text-gray-300' : 'text-gray-700'
+            }`}>Difficulty:</span>
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="px-3 py-1 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`px-3 py-1 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${
+                isDark 
+                  ? 'border-gray-700 bg-gray-800 text-gray-200' 
+                  : 'border-gray-300 bg-white text-gray-900'
+              }`}
             >
               {difficulties.map(difficulty => (
                 <option key={difficulty} value={difficulty}>
@@ -121,7 +147,11 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+              className={`rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer ${
+                isDark 
+                  ? 'bg-gray-800 border border-gray-700 hover:border-gray-600' 
+                  : 'bg-white hover:shadow-xl'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -131,7 +161,9 @@ const Projects = () => {
               <div className="p-6">
                 {/* Project Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900 line-clamp-2">{project.title}</h3>
+                  <h3 className={`text-xl font-bold line-clamp-2 transition-colors duration-300 ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>{project.title}</h3>
                   <div className="flex gap-2">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
                       {project.status}
@@ -143,10 +175,14 @@ const Projects = () => {
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+                <p className={`text-sm mb-4 line-clamp-3 transition-colors duration-300 ${
+                  isDark ? 'text-gray-300' : 'text-gray-600'
+                }`}>{project.description}</p>
 
                 {/* Meta Info */}
-                <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+                <div className={`flex items-center gap-4 text-xs mb-4 transition-colors duration-300 ${
+                  isDark ? 'text-gray-400' : 'text-gray-500'
+                }`}>
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
                     {project.duration}
@@ -166,13 +202,21 @@ const Projects = () => {
                   {project.technologies.slice(0, 4).map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                      className={`px-2 py-1 text-xs rounded transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gray-700 text-gray-300' 
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
+                    <span className={`px-2 py-1 text-xs rounded transition-colors duration-300 ${
+                      isDark 
+                        ? 'bg-gray-700 text-gray-400' 
+                        : 'bg-gray-100 text-gray-500'
+                    }`}>
                       +{project.technologies.length - 4} more
                     </span>
                   )}
@@ -186,7 +230,11 @@ const Projects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="flex items-center gap-1 px-3 py-1 bg-gray-900 text-white text-xs rounded hover:bg-gray-800 transition-colors"
+                      className={`flex items-center gap-1 px-3 py-1 text-xs rounded transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' 
+                          : 'bg-gray-900 text-white hover:bg-gray-800'
+                      }`}
                     >
                       <Github className="w-3 h-3" />
                       Code
@@ -213,9 +261,15 @@ const Projects = () => {
         {/* No results message */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <Code className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects found</h3>
-            <p className="text-gray-500">Try adjusting your filters to see more projects.</p>
+            <Code className={`w-16 h-16 mx-auto mb-4 transition-colors duration-300 ${
+              isDark ? 'text-gray-600' : 'text-gray-400'
+            }`} />
+            <h3 className={`text-lg font-medium mb-2 transition-colors duration-300 ${
+              isDark ? 'text-gray-200' : 'text-gray-900'
+            }`}>No projects found</h3>
+            <p className={`transition-colors duration-300 ${
+              isDark ? 'text-gray-400' : 'text-gray-500'
+            }`}>Try adjusting your filters to see more projects.</p>
           </div>
         )}
       </div>
@@ -231,7 +285,9 @@ const Projects = () => {
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="bg-white rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl"
+              className={`rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl transition-colors duration-300 ${
+                isDark ? 'bg-gray-800' : 'bg-white'
+              }`}
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -301,8 +357,14 @@ const Projects = () => {
                     {/* Left Column */}
                     <div className="space-y-8">
                       {/* Technologies */}
-                      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                      <div className={`rounded-xl p-6 border transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gradient-to-br from-blue-900/20 to-indigo-900/20 border-blue-800' 
+                          : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-100'
+                      }`}>
+                        <h3 className={`text-xl font-bold mb-4 flex items-center gap-3 transition-colors duration-300 ${
+                          isDark ? 'text-gray-100' : 'text-gray-900'
+                        }`}>
                           <div className="p-2 bg-blue-600 rounded-lg">
                             <Code className="w-5 h-5 text-white" />
                           </div>
@@ -312,7 +374,11 @@ const Projects = () => {
                           {selectedProject.technologies.map((tech, index) => (
                             <span
                               key={index}
-                              className="px-4 py-2 bg-white text-blue-700 text-sm font-medium rounded-xl shadow-sm border border-blue-200 hover:shadow-md transition-shadow"
+                              className={`px-4 py-2 text-sm font-medium rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 ${
+                                isDark 
+                                  ? 'bg-gray-700 text-blue-300 border-gray-600 hover:bg-gray-600' 
+                                  : 'bg-white text-blue-700 border-blue-200'
+                              }`}
                             >
                               {tech}
                             </span>
@@ -321,8 +387,14 @@ const Projects = () => {
                       </div>
 
                       {/* Features */}
-                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-100">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                      <div className={`rounded-xl p-6 border transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gradient-to-br from-green-900/20 to-emerald-900/20 border-green-800' 
+                          : 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-100'
+                      }`}>
+                        <h3 className={`text-xl font-bold mb-4 flex items-center gap-3 transition-colors duration-300 ${
+                          isDark ? 'text-gray-100' : 'text-gray-900'
+                        }`}>
                           <div className="p-2 bg-green-600 rounded-lg">
                             <CheckCircle className="w-5 h-5 text-white" />
                           </div>
@@ -330,7 +402,9 @@ const Projects = () => {
                         </h3>
                         <ul className="space-y-3">
                           {selectedProject.features.map((feature, index) => (
-                            <li key={index} className="flex items-start gap-3 text-gray-700">
+                            <li key={index} className={`flex items-start gap-3 transition-colors duration-300 ${
+                              isDark ? 'text-gray-300' : 'text-gray-700'
+                            }`}>
                               <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
                               <span className="text-sm leading-relaxed">{feature}</span>
                             </li>
@@ -345,7 +419,11 @@ const Projects = () => {
                             href={selectedProject.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-3 px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl font-medium"
+                            className={`flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl font-medium ${
+                              isDark 
+                                ? 'bg-gray-700 text-gray-200 hover:bg-gray-600' 
+                                : 'bg-gray-900 text-white hover:bg-gray-800'
+                            }`}
                           >
                             <Github className="w-5 h-5" />
                             View Source Code
@@ -368,8 +446,14 @@ const Projects = () => {
                     {/* Right Column */}
                     <div className="space-y-8">
                       {/* Learning Outcomes */}
-                      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-100">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                      <div className={`rounded-xl p-6 border transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-800' 
+                          : 'bg-gradient-to-br from-purple-50 to-pink-50 border-purple-100'
+                      }`}>
+                        <h3 className={`text-xl font-bold mb-4 flex items-center gap-3 transition-colors duration-300 ${
+                          isDark ? 'text-gray-100' : 'text-gray-900'
+                        }`}>
                           <div className="p-2 bg-purple-600 rounded-lg">
                             <Lightbulb className="w-5 h-5 text-white" />
                           </div>
@@ -377,7 +461,9 @@ const Projects = () => {
                         </h3>
                         <ul className="space-y-3">
                           {selectedProject.learningOutcomes.map((outcome, index) => (
-                            <li key={index} className="flex items-start gap-3 text-gray-700">
+                            <li key={index} className={`flex items-start gap-3 transition-colors duration-300 ${
+                              isDark ? 'text-gray-300' : 'text-gray-700'
+                            }`}>
                               <Star className="w-4 h-4 text-yellow-500 mt-1 flex-shrink-0" />
                               <span className="text-sm leading-relaxed">{outcome}</span>
                             </li>
@@ -386,28 +472,56 @@ const Projects = () => {
                       </div>
 
                       {/* Project Information */}
-                      <div className="bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-6 border border-gray-200">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                          <div className="p-2 bg-gray-600 rounded-lg">
+                      <div className={`rounded-xl p-6 border transition-colors duration-300 ${
+                        isDark 
+                          ? 'bg-gradient-to-br from-gray-800/50 to-slate-800/50 border-gray-700' 
+                          : 'bg-gradient-to-br from-gray-50 to-slate-50 border-gray-200'
+                      }`}>
+                        <h3 className={`text-xl font-bold mb-4 flex items-center gap-3 transition-colors duration-300 ${
+                          isDark ? 'text-gray-100' : 'text-gray-900'
+                        }`}>
+                          <div className={`p-2 rounded-lg ${isDark ? 'bg-gray-600' : 'bg-gray-600'}`}>
                             <Target className="w-5 h-5 text-white" />
                           </div>
                           Project Information
                         </h3>
                         <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div className="bg-white p-3 rounded-lg shadow-sm">
-                            <span className="text-gray-600 font-medium">Category</span>
-                            <div className="font-semibold text-gray-900 mt-1">{selectedProject.category}</div>
+                          <div className={`p-3 rounded-lg shadow-sm transition-colors duration-300 ${
+                            isDark ? 'bg-gray-700' : 'bg-white'
+                          }`}>
+                            <span className={`font-medium transition-colors duration-300 ${
+                              isDark ? 'text-gray-400' : 'text-gray-600'
+                            }`}>Category</span>
+                            <div className={`font-semibold mt-1 transition-colors duration-300 ${
+                              isDark ? 'text-gray-200' : 'text-gray-900'
+                            }`}>{selectedProject.category}</div>
                           </div>
-                          <div className="bg-white p-3 rounded-lg shadow-sm">
-                            <span className="text-gray-600 font-medium">Duration</span>
-                            <div className="font-semibold text-gray-900 mt-1">{selectedProject.duration}</div>
+                          <div className={`p-3 rounded-lg shadow-sm transition-colors duration-300 ${
+                            isDark ? 'bg-gray-700' : 'bg-white'
+                          }`}>
+                            <span className={`font-medium transition-colors duration-300 ${
+                              isDark ? 'text-gray-400' : 'text-gray-600'
+                            }`}>Duration</span>
+                            <div className={`font-semibold mt-1 transition-colors duration-300 ${
+                              isDark ? 'text-gray-200' : 'text-gray-900'
+                            }`}>{selectedProject.duration}</div>
                           </div>
-                          <div className="bg-white p-3 rounded-lg shadow-sm">
-                            <span className="text-gray-600 font-medium">Estimated Hours</span>
-                            <div className="font-semibold text-gray-900 mt-1">{selectedProject.estimatedHours}h</div>
+                          <div className={`p-3 rounded-lg shadow-sm transition-colors duration-300 ${
+                            isDark ? 'bg-gray-700' : 'bg-white'
+                          }`}>
+                            <span className={`font-medium transition-colors duration-300 ${
+                              isDark ? 'text-gray-400' : 'text-gray-600'
+                            }`}>Estimated Hours</span>
+                            <div className={`font-semibold mt-1 transition-colors duration-300 ${
+                              isDark ? 'text-gray-200' : 'text-gray-900'
+                            }`}>{selectedProject.estimatedHours}h</div>
                           </div>
-                          <div className="bg-white p-3 rounded-lg shadow-sm">
-                            <span className="text-gray-600 font-medium">Difficulty</span>
+                          <div className={`p-3 rounded-lg shadow-sm transition-colors duration-300 ${
+                            isDark ? 'bg-gray-700' : 'bg-white'
+                          }`}>
+                            <span className={`font-medium transition-colors duration-300 ${
+                              isDark ? 'text-gray-400' : 'text-gray-600'
+                            }`}>Difficulty</span>
                             <div className="mt-1">
                               <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(selectedProject.difficulty)}`}>
                                 {selectedProject.difficulty}
@@ -425,8 +539,14 @@ const Projects = () => {
                     <div className="space-y-8">
                       {/* Architecture Section */}
                       {selectedProject.architecture && (
-                        <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-100">
-                          <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                        <div className={`rounded-xl p-6 border transition-colors duration-300 ${
+                          isDark 
+                            ? 'bg-gradient-to-br from-indigo-900/20 to-blue-900/20 border-indigo-800' 
+                            : 'bg-gradient-to-br from-indigo-50 to-blue-50 border-indigo-100'
+                        }`}>
+                          <h3 className={`text-xl font-bold mb-4 flex items-center gap-3 transition-colors duration-300 ${
+                            isDark ? 'text-gray-100' : 'text-gray-900'
+                          }`}>
                             <div className="p-2 bg-indigo-600 rounded-lg">
                               <Layout className="w-5 h-5 text-white" />
                             </div>
@@ -435,8 +555,12 @@ const Projects = () => {
                           
                           {/* Architecture Overview */}
                           <div className="mb-6">
-                            <h4 className="text-sm font-semibold text-indigo-700 mb-2">Overview</h4>
-                            <p className="text-sm text-gray-700 leading-relaxed bg-white p-3 rounded-lg shadow-sm">{selectedProject.architecture.overview}</p>
+                            <h4 className={`text-sm font-semibold mb-2 transition-colors duration-300 ${
+                              isDark ? 'text-indigo-400' : 'text-indigo-700'
+                            }`}>Overview</h4>
+                            <p className={`text-sm leading-relaxed p-3 rounded-lg shadow-sm transition-colors duration-300 ${
+                              isDark ? 'text-gray-300 bg-gray-700' : 'text-gray-700 bg-white'
+                            }`}>{selectedProject.architecture.overview}</p>
                           </div>
 
                           {/* Architecture Diagram */}
