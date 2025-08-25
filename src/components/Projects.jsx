@@ -50,52 +50,74 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
       monitoring: []
     };
 
-    // Enhanced categorization
-    components.forEach(component => {
+    // Enhanced categorization with proper component structure
+    components.forEach((component, index) => {
       const name = component.name.toLowerCase();
       const tech = component.tech.toLowerCase();
       
+      // Add positioning and visual properties
+      const enhancedComponent = {
+        ...component,
+        id: `comp-${index}`,
+        health: 'healthy', // Default health status
+        load: Math.random() * 0.7 + 0.2, // Random load between 0.2-0.9
+        instances: name.includes('cluster') || name.includes('server') ? Math.floor(Math.random() * 3) + 2 : 1
+      };
+      
       if (name.includes('frontend') || name.includes('client') || name.includes('spa') || name.includes('admin') ||
-          tech.includes('react') || tech.includes('vue') || tech.includes('nextjs')) {
-        layers.frontend.push(component);
-      } else if (name.includes('cdn') || name.includes('cloudflare') || tech.includes('cdn')) {
-        layers.cdn.push(component);
-      } else if (name.includes('gateway') || name.includes('load balancer') || name.includes('proxy') ||
+          tech.includes('react') || tech.includes('vue') || tech.includes('nextjs') || tech.includes('typescript')) {
+        layers.frontend.push(enhancedComponent);
+      } else if (name.includes('cdn') || name.includes('cloudflare') || tech.includes('cdn') || tech.includes('s3')) {
+        layers.cdn.push(enhancedComponent);
+      } else if (name.includes('gateway') || name.includes('load balancer') || name.includes('proxy') || name.includes('nginx') ||
                  tech.includes('nginx') || tech.includes('kong') || tech.includes('api gateway')) {
-        layers.gateway.push(component);
+        layers.gateway.push(enhancedComponent);
       } else if (name.includes('message') || name.includes('event') || name.includes('queue') || name.includes('kafka') ||
-                 tech.includes('rabbitmq') || tech.includes('kafka') || tech.includes('redis pub/sub')) {
-        layers.messaging.push(component);
+                 name.includes('redis') || name.includes('pub/sub') ||
+                 tech.includes('rabbitmq') || tech.includes('kafka') || tech.includes('redis') || tech.includes('pub/sub')) {
+        layers.messaging.push(enhancedComponent);
       } else if (name.includes('database') || name.includes('storage') || name.includes('cache') ||
                  tech.includes('postgresql') || tech.includes('mongodb') || tech.includes('redis') ||
-                 tech.includes('elasticsearch') || tech.includes('clickhouse')) {
-        layers.data.push(component);
+                 tech.includes('elasticsearch') || tech.includes('clickhouse') || tech.includes('mysql')) {
+        layers.data.push(enhancedComponent);
       } else if (name.includes('monitoring') || name.includes('logging') || name.includes('observability') ||
                  tech.includes('prometheus') || tech.includes('jaeger') || tech.includes('elk')) {
-        layers.monitoring.push(component);
-      } else if (name.includes('service') || name.includes('api') || name.includes('engine') ||
-                 tech.includes('go') || tech.includes('node.js') || tech.includes('python')) {
-        layers.services.push(component);
+        layers.monitoring.push(enhancedComponent);
+      } else if (name.includes('service') || name.includes('api') || name.includes('engine') || name.includes('auth') ||
+                 tech.includes('go') || tech.includes('node.js') || tech.includes('python') || tech.includes('jwt')) {
+        layers.services.push(enhancedComponent);
       } else {
-        layers.external.push(component);
+        layers.external.push(enhancedComponent);
       }
     });
 
-    // Create realistic data flow connections (no animations)
+    // Create realistic data flow connections
     const createConnections = () => {
       const cons = [];
       
-      // Frontend to Gateway
+      // Frontend to Gateway/Services
       layers.frontend.forEach(frontend => {
-        layers.gateway.forEach(gateway => {
-          cons.push({
-            from: frontend,
-            to: gateway,
-            type: 'https',
-            protocol: 'HTTPS/REST',
-            data: 'User Requests'
+        if (layers.gateway.length > 0) {
+          layers.gateway.forEach(gateway => {
+            cons.push({
+              from: frontend,
+              to: gateway,
+              type: 'https',
+              protocol: 'HTTPS/REST',
+              data: 'User Requests'
+            });
           });
-        });
+        } else if (layers.services.length > 0) {
+          layers.services.slice(0, 1).forEach(service => {
+            cons.push({
+              from: frontend,
+              to: service,
+              type: 'https',
+              protocol: 'WebSocket/HTTP',
+              data: 'API Calls'
+            });
+          });
+        }
       });
 
       // Gateway to Services
@@ -106,7 +128,7 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
             to: service,
             type: 'internal',
             protocol: 'HTTP/gRPC',
-            data: 'API Calls'
+            data: 'API Routes'
           });
         });
       });
@@ -114,7 +136,7 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
       // Services to Data
       layers.services.forEach(service => {
         layers.data.forEach(dataStore => {
-          if (service.name.toLowerCase().includes('user') && dataStore.tech.toLowerCase().includes('postgresql')) {
+          if (service.name.toLowerCase().includes('auth') && dataStore.tech.toLowerCase().includes('postgresql')) {
             cons.push({
               from: service,
               to: dataStore,
@@ -122,21 +144,21 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
               protocol: 'SQL',
               data: 'User Data'
             });
-          } else if (service.name.toLowerCase().includes('product') && dataStore.tech.toLowerCase().includes('elasticsearch')) {
-            cons.push({
-              from: service,
-              to: dataStore,
-              type: 'search',
-              protocol: 'HTTP/JSON',
-              data: 'Search Queries'
-            });
-          } else if (service.name.toLowerCase().includes('cart') && dataStore.tech.toLowerCase().includes('redis')) {
+          } else if (dataStore.tech.toLowerCase().includes('redis')) {
             cons.push({
               from: service,
               to: dataStore,
               type: 'cache',
-              protocol: 'Redis Protocol',
-              data: 'Session Data'
+              protocol: 'Redis',
+              data: 'Session/Cache'
+            });
+          } else if (dataStore.tech.toLowerCase().includes('postgresql')) {
+            cons.push({
+              from: service,
+              to: dataStore,
+              type: 'database',
+              protocol: 'SQL',
+              data: 'App Data'
             });
           }
         });
@@ -149,49 +171,31 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
             from: service,
             to: messaging,
             type: 'event',
-            protocol: 'Event Streaming',
-            data: 'Business Events'
+            protocol: 'Pub/Sub',
+            data: 'Events'
           });
         });
       });
 
-      // Messaging back to Services (event consumption)
-      layers.messaging.forEach(messaging => {
-        layers.services.filter(s => 
-          s.name.toLowerCase().includes('notification') || 
-          s.name.toLowerCase().includes('inventory') ||
-          s.name.toLowerCase().includes('analytics')
-        ).forEach(service => {
-          cons.push({
-            from: messaging,
-            to: service,
-            type: 'event_consume',
-            protocol: 'Event Streaming',
-            data: 'Event Processing'
-          });
-        });
-      });
-
-      // Services to External
+      // Services to External/CDN
       layers.services.forEach(service => {
         layers.external.forEach(external => {
-          if (service.name.toLowerCase().includes('payment') && external.name.toLowerCase().includes('stripe')) {
-            cons.push({
-              from: service,
-              to: external,
-              type: 'external',
-              protocol: 'HTTPS/REST',
-              data: 'Payment Data'
-            });
-          } else if (service.name.toLowerCase().includes('shipping') && external.name.toLowerCase().includes('fedex')) {
-            cons.push({
-              from: service,
-              to: external,
-              type: 'external',
-              protocol: 'HTTPS/REST',
-              data: 'Shipping Info'
-            });
-          }
+          cons.push({
+            from: service,
+            to: external,
+            type: 'external',
+            protocol: 'HTTPS/API',
+            data: 'External Calls'
+          });
+        });
+        layers.cdn.forEach(cdn => {
+          cons.push({
+            from: service,
+            to: cdn,
+            type: 'external',
+            protocol: 'HTTPS',
+            data: 'File Upload'
+          });
         });
       });
 
@@ -312,16 +316,16 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
     return styles[type] || styles.external;
   };
 
-  // Connection styles for different data flow types (static, no animations)
+  // Connection styles for different data flow types (enhanced visibility)
   const connectionStyles = {
-    https: { color: '#10b981', width: 3, dashArray: 'none', opacity: 0.8 },
-    internal: { color: '#3b82f6', width: 2, dashArray: '5,5', opacity: 0.7 },
-    database: { color: '#8b5cf6', width: 2.5, dashArray: 'none', opacity: 0.8 },
-    cache: { color: '#f59e0b', width: 2, dashArray: '3,3', opacity: 0.7 },
-    search: { color: '#06b6d4', width: 2, dashArray: '7,3', opacity: 0.7 },
-    event: { color: '#f97316', width: 2.5, dashArray: '10,5', opacity: 0.8 },
-    event_consume: { color: '#ef4444', width: 2, dashArray: '2,8', opacity: 0.7 },
-    external: { color: '#6b7280', width: 2, dashArray: '15,5,5,5', opacity: 0.6 }
+    https: { color: '#10b981', width: 3, dashArray: 'none', opacity: 0.9 },
+    internal: { color: '#3b82f6', width: 2.5, dashArray: '6,4', opacity: 0.8 },
+    database: { color: '#8b5cf6', width: 3, dashArray: 'none', opacity: 0.9 },
+    cache: { color: '#f59e0b', width: 2.5, dashArray: '4,3', opacity: 0.8 },
+    search: { color: '#06b6d4', width: 2.5, dashArray: '8,3', opacity: 0.8 },
+    event: { color: '#f97316', width: 3, dashArray: '12,4', opacity: 0.9 },
+    event_consume: { color: '#ef4444', width: 2.5, dashArray: '3,6', opacity: 0.8 },
+    external: { color: '#6b7280', width: 2.5, dashArray: '16,6,4,6', opacity: 0.7 }
   };
 
   return (
@@ -397,20 +401,20 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
           const layerStyle = getLayerStyle(layer.type);
           return (
             <g key={`layer-bg-${idx}`}>
-              {/* Layer background */}
+              {/* Layer background with better gradient */}
               <rect
                 x={layer.x - 25}
                 y={layer.y - 15}
                 width={layer.width + 50}
                 height={layer.height + 30}
                 fill={`url(#${layerStyle.gradient})`}
-                rx="12"
-                opacity="0.1"
+                rx="15"
+                opacity="0.15"
                 filter="url(#cardShadow)"
                 className="transition-all duration-300"
               />
               
-              {/* Layer border */}
+              {/* Layer border with glow */}
               <rect
                 x={layer.x - 25}
                 y={layer.y - 15}
@@ -418,11 +422,25 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
                 height={layer.height + 30}
                 fill="none"
                 stroke={layerStyle.borderColor}
-                strokeWidth="2"
-                strokeDasharray="5,5"
-                rx="12"
-                opacity="0.4"
+                strokeWidth="1.5"
+                strokeDasharray="8,4"
+                rx="15"
+                opacity="0.6"
                 className="transition-all duration-300"
+                filter="url(#cardShadow)"
+              />
+              
+              {/* Subtle inner glow */}
+              <rect
+                x={layer.x - 20}
+                y={layer.y - 10}
+                width={layer.width + 40}
+                height={layer.height + 20}
+                fill="none"
+                stroke={layerStyle.color}
+                strokeWidth="0.5"
+                rx="12"
+                opacity="0.3"
               />
             </g>
           );
@@ -431,41 +449,57 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
         {/* Enhanced layer labels */}
         {layerBounds.map((layer, idx) => {
           const layerStyle = getLayerStyle(layer.type);
+          const labelWidth = Math.max(layer.label.length * 8 + 50, 140);
           return (
             <g key={`layer-label-${idx}`}>
-              {/* Label background */}
+              {/* Label background with gradient */}
               <rect
                 x={layer.x - 20}
-                y={layer.y - 35}
-                width={Math.max(layer.label.length * 8 + 40, 120)}
-                height="25"
-                fill={layerStyle.color}
-                rx="12"
-                opacity="0.9"
+                y={layer.y - 40}
+                width={labelWidth}
+                height="28"
+                fill={`url(#${layerStyle.gradient})`}
+                rx="14"
+                opacity="0.95"
                 filter="url(#cardShadow)"
+              />
+              
+              {/* Label border */}
+              <rect
+                x={layer.x - 20}
+                y={layer.y - 40}
+                width={labelWidth}
+                height="28"
+                fill="none"
+                stroke={layerStyle.borderColor}
+                strokeWidth="1"
+                rx="14"
+                opacity="0.8"
               />
               
               {/* Layer icon */}
               <text
-                x={layer.x - 10}
-                y={layer.y - 18}
-                fontSize={isModal ? "18" : "14"}
+                x={layer.x - 5}
+                y={layer.y - 20}
+                fontSize={isModal ? "16" : "12"}
                 textAnchor="start"
                 fill="white"
                 className="font-bold"
+                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
               >
                 {layerStyle.icon}
               </text>
               
               {/* Label text */}
               <text
-                x={layer.x + 10}
-                y={layer.y - 18}
-                fontSize={isModal ? "16" : "12"}
-                fontWeight="600"
+                x={layer.x + 15}
+                y={layer.y - 20}
+                fontSize={isModal ? "14" : "11"}
+                fontWeight="700"
                 textAnchor="start"
                 fill="white"
-                className="font-semibold"
+                className="font-bold"
+                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
               >
                 {layer.label}
               </text>
@@ -587,31 +621,35 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
               <rect
                 x={component.x + 8}
                 y={component.y + 8}
-                width={component.tech.length * 5 + 10}
-                height="16"
+                width={Math.min(component.tech.length * 6 + 16, component.width - 16)}
+                height="18"
                 fill={isDark ? '#1f2937' : 'white'}
-                rx="8"
-                opacity="0.9"
+                stroke={layerStyle.borderColor}
+                strokeWidth="1"
+                rx="9"
+                opacity="0.95"
+                filter="url(#cardShadow)"
               />
               <text
-                x={component.x + 13}
-                y={component.y + 18}
-                fontSize={isModal ? "12" : "9"}
+                x={component.x + 16}
+                y={component.y + 19}
+                fontSize={isModal ? "11" : "9"}
                 fontWeight="600"
                 fill={layerStyle.color}
                 className="font-semibold"
               >
-                {component.tech}
+                {component.tech.length > 20 ? component.tech.substring(0, 17) + '...' : component.tech}
               </text>
 
               {/* Component icon */}
               <text
-                x={component.x + component.width - 25}
-                y={component.y + 25}
-                fontSize={isModal ? "20" : "16"}
+                x={component.x + component.width - 20}
+                y={component.y + 22}
+                fontSize={isModal ? "18" : "14"}
                 textAnchor="middle"
-                fill={layerStyle.color}
-                opacity="0.7"
+                fill="white"
+                opacity="0.9"
+                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
               >
                 {layerStyle.icon}
               </text>
@@ -619,14 +657,15 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
               {/* Component name */}
               <text
                 x={component.x + component.width/2}
-                y={component.y + component.height/2 - 5}
-                fontSize="11"
+                y={component.y + component.height/2 + 5}
+                fontSize={isModal ? "13" : "11"}
                 fontWeight="700"
                 textAnchor="middle"
-                fill={isDark ? '#f9fafb' : '#1f2937'}
+                fill="white"
                 className="font-bold"
+                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
               >
-                {component.name}
+                {component.name.length > 18 ? component.name.substring(0, 15) + '...' : component.name}
               </text>
 
               {/* System health indicators */}
