@@ -15,7 +15,12 @@ import {
   Briefcase,
   X,
   Maximize2,
-  ZoomIn
+  ZoomIn,
+  Search,
+  TrendingUp,
+  Users,
+  Clock,
+  Tag
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
 import { useTheme } from '../contexts/ThemeContext';
@@ -735,6 +740,9 @@ const Projects = () => {
   const [expandedFeatures, setExpandedFeatures] = useState({});
   const [expandedDiagram, setExpandedDiagram] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTechnology, setSelectedTechnology] = useState('All');
+  const [sortBy, setSortBy] = useState('recent'); // recent, complexity, impact
 
   // Toggle technology expansion
   const toggleTechExpansion = (projectId) => {
@@ -765,18 +773,46 @@ const Projects = () => {
 
   const projects = skillsData.projects || [];
 
-  // Filter projects
+  // Enhanced filtering with search and technology
   const filteredProjects = projects.filter(project => {
     const categoryMatch = selectedCategory === 'All' || project.category === selectedCategory;
     const difficultyMatch = selectedDifficulty === 'All' || project.difficulty === selectedDifficulty;
     const statusMatch = selectedStatus === 'All' || project.status === selectedStatus;
-    return categoryMatch && difficultyMatch && statusMatch;
+    
+    // Search in title, description, technologies, and features
+    const searchMatch = searchTerm === '' || 
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (project.technologies || []).some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (project.features || []).some(feature => feature.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    // Technology filter
+    const technologyMatch = selectedTechnology === 'All' || 
+      (project.technologies || []).some(tech => tech === selectedTechnology);
+    
+    return categoryMatch && difficultyMatch && statusMatch && searchMatch && technologyMatch;
+  });
+
+  // Sort projects
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    switch (sortBy) {
+      case 'complexity':
+        const complexityOrder = { 'beginner': 1, 'intermediate': 2, 'advanced': 3, 'expert': 4 };
+        return (complexityOrder[b.difficulty] || 0) - (complexityOrder[a.difficulty] || 0);
+      case 'impact':
+        // Sort by number of performance metrics (as a proxy for impact)
+        return (b.performanceMetrics?.length || 0) - (a.performanceMetrics?.length || 0);
+      case 'recent':
+      default:
+        return 0; // Keep original order (most recent first)
+    }
   });
 
   // Get unique values for filter options
   const categories = ['All', ...new Set(projects.map(p => p.category))];
   const difficulties = ['All', ...new Set(projects.map(p => p.difficulty))];
   const statuses = ['All', ...new Set(projects.map(p => p.status))];
+  const allTechnologies = ['All', ...new Set(projects.flatMap(p => p.technologies || []))].sort();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -865,7 +901,7 @@ const Projects = () => {
           </motion.p>
         </motion.div>
 
-        {/* Modern Filter Pills */}
+        {/* Enhanced Filter Section */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -873,14 +909,64 @@ const Projects = () => {
           variants={containerVariants}
           className="mb-16"
         >
+          {/* Search Bar */}
           <div className="text-center mb-8">
             <h3 className={`text-lg font-semibold mb-6 ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
-              Explore by Category
+              Explore Projects
             </h3>
             
-            {/* Category Pills */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+                  isDark ? 'text-gray-400' : 'text-gray-500'
+                }`} />
+                <input
+                  type="text"
+                  placeholder="Search projects, technologies, features..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className={`w-full pl-12 pr-4 py-4 rounded-2xl text-lg border transition-all duration-300 ${
+                    isDark 
+                      ? 'bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-blue-500/50 focus:bg-gray-800/70' 
+                      : 'bg-white/80 border-gray-200/50 text-gray-900 placeholder-gray-500 focus:border-blue-300 focus:bg-white'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                />
+              </div>
+            </div>
+
+            {/* Stats Summary */}
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
+                isDark ? 'bg-gray-800/50 text-gray-300' : 'bg-gray-100/80 text-gray-600'
+              }`}>
+                <Layout className="w-4 h-4" />
+                <span className="text-sm font-medium">{sortedProjects.length} Projects Found</span>
+              </div>
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
+                isDark ? 'bg-gray-800/50 text-gray-300' : 'bg-gray-100/80 text-gray-600'
+              }`}>
+                <Tag className="w-4 h-4" />
+                <span className="text-sm font-medium">{allTechnologies.length - 1} Technologies</span>
+              </div>
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
+                isDark ? 'bg-gray-800/50 text-gray-300' : 'bg-gray-100/80 text-gray-600'
+              }`}>
+                <TrendingUp className="w-4 h-4" />
+                <span className="text-sm font-medium">{categories.length - 1} Categories</span>
+              </div>
+              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
+                isDark ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100/80 text-blue-600'
+              }`}>
+                <Users className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  {projects.reduce((acc, p) => acc + (p.estimatedHours || 0), 0)}+ Hours
+                </span>
+              </div>
+            </div>
+            
+            {/* Primary Category Pills */}
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {categories.map(category => (
                 <motion.button
@@ -903,8 +989,58 @@ const Projects = () => {
               ))}
             </div>
 
-            {/* Difficulty & Status Pills */}
-            <div className="flex flex-wrap justify-center gap-6">
+            {/* Secondary Filters */}
+            <div className="flex flex-wrap justify-center gap-8 mb-6">
+              {/* Sort Options */}
+              <div className="flex items-center gap-3">
+                <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Sort by:
+                </span>
+                <div className="flex gap-2">
+                  {[
+                    { key: 'recent', label: 'Recent', icon: Clock },
+                    { key: 'complexity', label: 'Complexity', icon: TrendingUp },
+                    { key: 'impact', label: 'Impact', icon: Users }
+                  ].map(({ key, label, icon: Icon }) => (
+                    <motion.button
+                      key={key}
+                      onClick={() => setSortBy(key)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                        sortBy === key
+                          ? (isDark ? 'bg-blue-600 text-white' : 'bg-blue-500 text-white')
+                          : (isDark ? 'bg-gray-800 text-gray-400 hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200')
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      {label}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Technology Filter */}
+              <div className="flex items-center gap-3">
+                <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Technology:
+                </span>
+                <select
+                  value={selectedTechnology}
+                  onChange={(e) => setSelectedTechnology(e.target.value)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isDark 
+                      ? 'bg-gray-800 border border-gray-700 text-gray-300 focus:border-blue-500' 
+                      : 'bg-white border border-gray-200 text-gray-700 focus:border-blue-400'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                >
+                  {allTechnologies.slice(0, 20).map(tech => (
+                    <option key={tech} value={tech}>{tech}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Difficulty & Status */}
               <div className="flex items-center gap-3">
                 <span className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Difficulty:
@@ -951,6 +1087,43 @@ const Projects = () => {
                 </div>
               </div>
             </div>
+
+            {/* Active Filters Display */}
+            {(searchTerm || selectedCategory !== 'All' || selectedTechnology !== 'All' || selectedDifficulty !== 'All' || selectedStatus !== 'All' || sortBy !== 'recent') && (
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                <span className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Active filters:
+                </span>
+                {searchTerm && (
+                  <span className={`px-3 py-1 rounded-full text-xs ${
+                    isDark ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    Search: "{searchTerm}"
+                  </span>
+                )}
+                {selectedCategory !== 'All' && (
+                  <span className={`px-3 py-1 rounded-full text-xs ${
+                    isDark ? 'bg-purple-900/30 text-purple-400' : 'bg-purple-100 text-purple-700'
+                  }`}>
+                    Category: {selectedCategory}
+                  </span>
+                )}
+                {selectedTechnology !== 'All' && (
+                  <span className={`px-3 py-1 rounded-full text-xs ${
+                    isDark ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-700'
+                  }`}>
+                    Tech: {selectedTechnology}
+                  </span>
+                )}
+                {sortBy !== 'recent' && (
+                  <span className={`px-3 py-1 rounded-full text-xs ${
+                    isDark ? 'bg-amber-900/30 text-amber-400' : 'bg-amber-100 text-amber-700'
+                  }`}>
+                    Sort: {sortBy}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         </motion.div>
 
@@ -963,7 +1136,7 @@ const Projects = () => {
           className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {sortedProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 variants={projectVariants}
@@ -1260,7 +1433,7 @@ const Projects = () => {
         </motion.div>
 
         {/* Empty State */}
-        {filteredProjects.length === 0 && (
+        {sortedProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1381,6 +1554,49 @@ const Projects = () => {
                         </div>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {/* Business Context & Impact */}
+                {(expandedDiagram.businessContext || expandedDiagram.realWorldImpact) && (
+                  <div className="mt-6">
+                    <h4 className={`text-lg font-semibold mb-4 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      Business Impact
+                    </h4>
+                    {expandedDiagram.businessContext && (
+                      <div className={`p-4 rounded-lg border mb-4 ${
+                        isDark ? 'bg-blue-900/20 border-blue-700/50' : 'bg-blue-50 border-blue-200'
+                      }`}>
+                        <h5 className={`font-semibold mb-2 ${
+                          isDark ? 'text-blue-400' : 'text-blue-700'
+                        }`}>
+                          Business Context
+                        </h5>
+                        <p className={`text-sm ${
+                          isDark ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          {expandedDiagram.businessContext}
+                        </p>
+                      </div>
+                    )}
+                    {expandedDiagram.realWorldImpact && (
+                      <div className={`p-4 rounded-lg border ${
+                        isDark ? 'bg-green-900/20 border-green-700/50' : 'bg-green-50 border-green-200'
+                      }`}>
+                        <h5 className={`font-semibold mb-2 ${
+                          isDark ? 'text-green-400' : 'text-green-700'
+                        }`}>
+                          Real-World Impact
+                        </h5>
+                        <p className={`text-sm ${
+                          isDark ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          {expandedDiagram.realWorldImpact}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
