@@ -2718,6 +2718,38 @@ export const skillsData = {
           }
         ]
       },
+      performanceMetrics: [
+        'Handles 50,000+ concurrent WebSocket connections per server instance',
+        'Sub-100ms message delivery latency across 95% of connections', 
+        'Redis Pub/Sub supports 1M+ messages per second throughput',
+        '99.9% uptime with automatic failover and connection recovery',
+        'PostgreSQL handles 10,000+ read/write operations per second',
+        'Horizontal scaling to 20+ server instances with load balancing'
+      ],
+      securityFeatures: [
+        'JWT token-based authentication with refresh token rotation',
+        'Rate limiting per user/IP to prevent spam and DoS attacks',
+        'Message encryption in transit using TLS 1.3',
+        'Input sanitization and XSS protection for all user content',
+        'CORS policy implementation for secure cross-origin requests',
+        'SQL injection prevention with parameterized queries'
+      ],
+      testingStrategy: [
+        'Unit tests with 85+ code coverage using Jest and RTL',
+        'Integration tests for WebSocket connections and message flow',
+        'Load testing with Artillery.js simulating 10,000+ concurrent users',
+        'End-to-end testing with Playwright for critical user journeys',
+        'Security testing with OWASP ZAP for vulnerability assessment',
+        'Performance monitoring with Lighthouse CI in deployment pipeline'
+      ],
+      deploymentPipeline: [
+        'GitHub Actions CI/CD with automated testing and deployment',
+        'Docker containerization with multi-stage builds for optimization',
+        'Kubernetes deployment with rolling updates and health checks',
+        'Infrastructure as Code using Terraform for AWS resources',
+        'Automated database migrations with Flyway',
+        'Blue-green deployment strategy for zero-downtime releases'
+      ],
       features: [
         'Real-time messaging with Socket.io',
         'File and image sharing with cloud storage',
@@ -3137,6 +3169,30 @@ export const skillsData = {
           }
         ]
       },
+      performanceMetrics: [
+        'Handles 100,000+ concurrent users with sub-200ms response times',
+        'Processes 50,000+ orders per hour during peak traffic (Black Friday)',
+        'Kafka cluster handles 10M+ events per second across all microservices',
+        '99.99% uptime with automatic failover and circuit breaker patterns',
+        'Elasticsearch supports 10,000+ search queries per second with <50ms latency',
+        'Redis cluster provides <1ms cache response times for product catalog'
+      ],
+      businessMetrics: [
+        'Achieved 40% increase in conversion rate through ML-powered recommendations',
+        'Reduced cart abandonment by 25% with real-time inventory and pricing updates',
+        'Increased average order value by 35% through intelligent upselling and cross-selling',
+        'Improved customer retention by 50% with personalized shopping experiences',
+        'Reduced fraud losses by 80% through AI-powered risk detection',
+        'Decreased operational costs by 30% through automation and efficient resource utilization'
+      ],
+      resilencePatterns: [
+        'Circuit breaker pattern prevents cascade failures across microservices',
+        'Bulkhead isolation limits blast radius of service failures',
+        'Timeout and retry patterns with exponential backoff for transient failures',
+        'Health checks and service discovery for automatic traffic routing',
+        'Graceful degradation maintains core functionality during partial outages',
+        'Chaos engineering tests system resilience with controlled failure injection'
+      ],
       features: [
         '🏪 Multi-vendor marketplace with vendor onboarding and management',
         '🔐 Advanced authentication with OAuth2, social login, and multi-factor authentication',
@@ -3605,6 +3661,22 @@ export const skillsData = {
           }
         ]
       },
+      mlOpsMetrics: [
+        'Model training pipeline processes 100GB+ data daily with Apache Airflow',
+        'Real-time inference API serves 1M+ predictions per second with <10ms latency',
+        'A/B testing framework runs 50+ concurrent experiments with statistical significance',
+        'Feature store serves 10B+ feature lookups daily with 99.9% availability',
+        'Model retraining automation maintains 95%+ recommendation accuracy',
+        'MLflow tracks 1000+ model experiments with complete lineage and reproducibility'
+      ],
+      algorithmicImprovements: [
+        'Deep neural collaborative filtering achieves 15% better accuracy than matrix factorization',
+        'Multi-armed bandit algorithms optimize exploration vs exploitation trade-offs',
+        'Graph neural networks capture complex user-item relationships and social signals',
+        'Transformer-based sequence models understand temporal user behavior patterns',
+        'Ensemble methods combine multiple algorithms for robust recommendations',
+        'Online learning adapts to real-time user feedback and behavior changes'
+      ],
       features: [
         'Collaborative filtering algorithm',
         'Content-based recommendations',
@@ -4595,6 +4667,371 @@ Each Environment Contains:
       ],
       githubUrl: 'https://github.com/yourusername/reactive-microservices',
       estimatedHours: 160
+    },
+    {
+      id: 'netflix-streaming-platform',
+      title: 'Netflix-Style Streaming Platform',
+      description: 'Full-scale video streaming platform with microservices architecture, adaptive bitrate streaming, content delivery, and advanced recommendation engine',
+      technologies: ['React', 'Next.js', 'Node.js', 'Go', 'Python', 'TypeScript', 'Docker', 'Kubernetes', 'AWS', 'PostgreSQL', 'Redis', 'Elasticsearch', 'Kafka', 'WebRTC', 'FFmpeg', 'HLS', 'DASH'],
+      skillsUsed: ['react', 'nextjs', 'nodejs', 'golang', 'python', 'typescript', 'docker', 'kubernetes', 'aws', 'postgresql', 'redis', 'elasticsearch', 'kafka', 'microservices', 'system-design'],
+      category: 'Full-Stack',
+      status: 'completed',
+      difficulty: 'expert',
+      duration: '20 weeks',
+      architecture: {
+        overview: 'Enterprise-grade streaming platform with 20+ microservices supporting adaptive bitrate streaming, global CDN distribution, real-time analytics, ML-powered recommendations, and 10M+ concurrent users across multiple devices.',
+        diagram: `
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    CLIENT LAYER                                        │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│  │   Web App   │  │ Mobile Apps │  │   Smart TV  │  │  Gaming     │  │   Tablet    │  │
+│  │ (Next.js +  │  │(React Native│  │    Apps     │  │ Consoles    │  │    Apps     │  │
+│  │  PWA)       │  │ iOS/Android)│  │  (Samsung,  │  │ (Xbox, PS)  │  │  (iPad,     │  │
+│  │             │  │             │  │   LG, etc)  │  │             │  │  Android)   │  │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  EDGE & CDN LAYER                                      │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                           CloudFront CDN Network                                │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │  │
+│  │  │   US East   │  │   US West   │  │   Europe    │  │    Asia     │  │  ...  │ │  │
+│  │  │   (N.VA)    │  │   (Oregon)  │  │  (Ireland)  │  │  (Tokyo)    │  │ 200+  │ │  │
+│  │  │ Edge Nodes  │  │ Edge Nodes  │  │ Edge Nodes  │  │ Edge Nodes  │  │ POPs  │ │  │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────┘ │  │
+│  └─────────────────────────────────────────────────────────────────────────────────┘  │
+│                                           │                                            │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                        Adaptive Bitrate Streaming                               │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │  │
+│  │  │   4K/HDR    │  │   1080p     │  │    720p     │  │    480p     │  │  ...  │ │  │
+│  │  │ (15 Mbps)   │  │ (5 Mbps)    │  │ (2.5 Mbps)  │  │ (1 Mbps)    │  │ Auto  │ │  │
+│  │  │ HLS/DASH    │  │ HLS/DASH    │  │ HLS/DASH    │  │ HLS/DASH    │  │ Switch│ │  │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────┘ │  │
+│  └─────────────────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   API GATEWAY LAYER                                    │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                              Kong API Gateway                                   │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │  │
+│  │  │    Auth     │  │ Rate Limit  │  │  Load Bal   │  │ Circuit     │  │  SSL  │ │  │
+│  │  │   Guard     │  │ & Throttle  │  │  & Health   │  │ Breaker     │  │ Term  │ │  │
+│  │  │   (JWT)     │  │ Per User    │  │   Check     │  │  Pattern    │  │ (TLS) │ │  │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────┘ │  │
+│  └─────────────────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+        ┌──────────────────────────────────┼──────────────────────────────────┐
+        │                                  │                                  │
+        ▼                                  ▼                                  ▼
+┌─────────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│  USER SERVICES  │           │ CONTENT SERVICES│           │ PLATFORM SVCS   │
+│                 │           │                 │           │                 │
+│ ┌─────────────┐ │           │ ┌─────────────┐ │           │ ┌─────────────┐ │
+│ │    Auth     │ │           │ │   Content   │ │           │ │   Search    │ │
+│ │  Service    │ │           │ │  Catalog    │ │           │ │  Service    │ │
+│ │ (Node.js +  │ │           │ │ (Go + PG)   │ │           │ │(Elasticsearch│ │
+│ │  JWT)       │ │           │ │             │ │           │ │   + ML)     │ │
+│ └─────────────┘ │           │ └─────────────┘ │           │ └─────────────┘ │
+│                 │           │                 │           │                 │
+│ ┌─────────────┐ │           │ ┌─────────────┐ │           │ ┌─────────────┐ │
+│ │   User      │ │           │ │  Metadata   │ │           │ │Notification │ │
+│ │ Profile     │ │           │ │  Service    │ │           │ │  Service    │ │
+│ │(Node.js +   │ │           │ │ (Node.js +  │ │           │ │ (Go + FCM + │ │
+│ │  PG + Redis)│ │           │ │  MongoDB)   │ │           │ │  WebSocket) │ │
+│ └─────────────┘ │           │ └─────────────┘ │           │ └─────────────┘ │
+│                 │           │                 │           │                 │
+│ ┌─────────────┐ │           │ ┌─────────────┐ │           │ ┌─────────────┐ │
+│ │Subscription │ │           │ │   Video     │ │           │ │ Analytics   │ │
+│ │  Service    │ │           │ │ Processing  │ │           │ │  Service    │ │
+│ │(Go + Stripe │ │           │ │(Python +    │ │           │ │(Python +    │ │
+│ │  API)       │ │           │ │ FFmpeg)     │ │           │ │ ClickHouse) │ │
+│ └─────────────┘ │           │ └─────────────┘ │           │ └─────────────┘ │
+│                 │           │                 │           │                 │
+│ ┌─────────────┐ │           │ ┌─────────────┐ │           │ ┌─────────────┐ │
+│ │Watch List & │ │           │ │  Encoding   │ │           │ │Recommendation│ │
+│ │ Favorites   │ │           │ │  Service    │ │           │ │    Engine   │ │
+│ │(Node.js +   │ │           │ │(Go + AWS    │ │           │ │(Python + ML │ │
+│ │  Redis)     │ │           │ │ MediaConv.) │ │           │ │  TensorFlow)│ │
+│ └─────────────┘ │           │ └─────────────┘ │           │ └─────────────┘ │
+└─────────────────┘           └─────────────────┘           └─────────────────┘
+        │                             │                             │
+        └─────────────────────────────┼─────────────────────────────┘
+                                      │
+                                      ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                  EVENT STREAMING                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                            Apache Kafka Cluster                                 │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │  │
+│  │  │ User Events │  │View Events  │  │Content Evts │  │ Billing     │  │ ML    │ │  │
+│  │  │ (Login,     │  │(Play, Pause │  │(Upload,     │  │ Events      │  │Events │ │  │
+│  │  │  Profile)   │  │ Seek, Stop) │  │ Processed)  │  │(Subscribe)  │  │(Recs) │ │  │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────┘ │  │
+│  └─────────────────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   DATA LAYER                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│  │PostgreSQL   │  │   MongoDB   │  │    Redis    │  │ClickHouse   │  │Elasticsearch│  │
+│  │ Cluster     │  │ Cluster     │  │   Cluster   │  │  Cluster    │  │  Cluster    │  │
+│  │(Users, Sub, │  │(Content     │  │(Sessions,   │  │(Analytics,  │  │(Search,     │  │
+│  │ Billing)    │  │ Metadata)   │  │ Cache)      │  │ Events)     │  │ Logs)       │  │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+│                                           │                                            │
+│  ┌─────────────────────────────────────────────────────────────────────────────────┐  │
+│  │                              AWS S3 Storage                                     │  │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │  │
+│  │  │   Raw       │  │  Encoded    │  │ Thumbnails  │  │  Subtitles  │  │  ...  │ │  │
+│  │  │  Videos     │  │   Videos    │  │  & Images   │  │    & CC     │  │ Assets│ │  │
+│  │  │ (Original)  │  │(Multi-Rate) │  │             │  │             │  │       │ │  │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └───────┘ │  │
+│  └─────────────────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                              MONITORING & OBSERVABILITY                                │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│  │ Prometheus  │  │   Grafana   │  │   Jaeger    │  │    ELK      │  │  AWS X-Ray  │  │
+│  │ (Metrics)   │  │(Dashboards) │  │ (Tracing)   │  │  (Logs)     │  │ (Tracing)   │  │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────────────────┘`,
+        components: [
+          {
+            name: 'Next.js Frontend',
+            tech: 'Next.js 13 + TypeScript + Tailwind',
+            responsibility: 'Server-side rendering, responsive UI, video player integration, progressive loading, offline capabilities'
+          },
+          {
+            name: 'API Gateway',
+            tech: 'Kong + Rate Limiting + JWT',
+            responsibility: 'Request routing, authentication, rate limiting, load balancing, SSL termination'
+          },
+          {
+            name: 'User Service',
+            tech: 'Node.js + Express + PostgreSQL',
+            responsibility: 'User authentication, profile management, subscription status, session handling'
+          },
+          {
+            name: 'Content Catalog Service',
+            tech: 'Go + PostgreSQL + Redis',
+            responsibility: 'Content metadata, categories, search indexing, content discovery, trending algorithms'
+          },
+          {
+            name: 'Video Processing Pipeline',
+            tech: 'Python + FFmpeg + AWS MediaConvert',
+            responsibility: 'Video transcoding, multiple bitrate generation, thumbnail extraction, subtitle processing'
+          },
+          {
+            name: 'Streaming Service',
+            tech: 'Go + HLS/DASH + CDN',
+            responsibility: 'Adaptive bitrate streaming, content delivery, bandwidth optimization, quality adjustment'
+          },
+          {
+            name: 'Recommendation Engine',
+            tech: 'Python + TensorFlow + Kafka + Redis',
+            responsibility: 'ML-based recommendations, collaborative filtering, content-based filtering, real-time personalization'
+          },
+          {
+            name: 'Analytics Service',
+            tech: 'Python + ClickHouse + Kafka',
+            responsibility: 'Real-time analytics, viewing patterns, performance metrics, business intelligence'
+          },
+          {
+            name: 'Search Service',
+            tech: 'Elasticsearch + NLP + Auto-complete',
+            responsibility: 'Content search, fuzzy matching, autocomplete, search suggestions, advanced filters'
+          },
+          {
+            name: 'Notification Service',
+            tech: 'Go + Firebase + WebSocket',
+            responsibility: 'Push notifications, email alerts, in-app notifications, real-time updates'
+          },
+          {
+            name: 'Billing Service',
+            tech: 'Go + Stripe + PostgreSQL',
+            responsibility: 'Subscription management, payment processing, billing cycles, invoice generation'
+          },
+          {
+            name: 'CDN Network',
+            tech: 'AWS CloudFront + Multi-Region',
+            responsibility: 'Global content delivery, edge caching, origin shield, geographic distribution'
+          }
+        ],
+        streamingFeatures: [
+          'Adaptive Bitrate Streaming: Automatic quality adjustment based on network conditions',
+          'Multi-Device Support: Seamless experience across web, mobile, smart TV, and gaming consoles',
+          'Offline Downloads: Progressive download for mobile with encrypted local storage',
+          'Live Streaming: Real-time streaming with low latency for live events and sports',
+          'Multi-Language Support: Subtitles, closed captions, and audio tracks in 40+ languages',
+          'Chromecast Integration: Cast to TV with playback control from mobile devices'
+        ],
+        dataFlow: [
+          'User request → CDN edge → API Gateway → Service routing → Database query → Response caching',
+          'Video upload → Processing pipeline → Multi-bitrate encoding → CDN distribution → Global availability',
+          'User viewing → Real-time analytics → ML recommendation → Content personalization → User engagement',
+          'Payment flow → Billing service → Stripe processing → Subscription update → Access control'
+        ],
+        scalabilityMeasures: [
+          'Auto-scaling Kubernetes clusters handling 10M+ concurrent users',
+          'Global CDN with 200+ edge locations for <100ms latency worldwide',
+          'Database sharding and read replicas for 99.99% availability',
+          'Event-driven architecture with Kafka for handling 1M+ events/second',
+          'Redis clustering for sub-millisecond cache response times',
+          'Circuit breaker patterns preventing cascade failures'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Microservices Architecture vs Monolithic Design',
+            status: 'Accepted',
+            date: '2024-05-01',
+            context: 'Need to scale different parts of the platform independently and support multiple development teams',
+            decision: 'Implement microservices architecture with domain-driven design boundaries',
+            rationale: 'Enables independent scaling, technology diversity, team autonomy, and fault isolation',
+            consequences: 'Higher operational complexity but better scalability, maintainability, and team productivity',
+            alternatives: ['Modular monolith', 'Service-oriented architecture', 'Serverless functions'],
+            tradeoffs: 'Operational complexity vs scalability and team independence'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Adaptive Bitrate Streaming Implementation',
+            status: 'Accepted',
+            date: '2024-05-05',
+            context: 'Need to provide optimal video quality across varying network conditions and device capabilities',
+            decision: 'Use HLS and DASH protocols with multiple bitrate variants and adaptive switching',
+            rationale: 'Industry standard for streaming, broad device support, automatic quality adjustment',
+            consequences: 'Higher storage costs for multiple encodings but optimal user experience across all conditions',
+            alternatives: ['Fixed bitrate streaming', 'Progressive download', 'WebRTC streaming'],
+            tradeoffs: 'Storage and encoding costs vs user experience and engagement'
+          },
+          {
+            id: 'ADR-003',
+            title: 'Event-Driven Architecture with Kafka',
+            status: 'Accepted',
+            date: '2024-05-10',
+            context: 'Need real-time analytics, recommendation updates, and loose coupling between services',
+            decision: 'Implement event streaming with Apache Kafka for all service communications',
+            rationale: 'Enables real-time processing, service decoupling, and scalable event processing',
+            consequences: 'Additional infrastructure complexity but real-time capabilities and better service independence',
+            alternatives: ['REST API communication', 'Message queues (RabbitMQ)', 'Database polling'],
+            tradeoffs: 'Infrastructure complexity vs real-time capabilities and service decoupling'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Multi-Database Strategy for Different Data Types',
+            status: 'Accepted',
+            date: '2024-05-15',
+            context: 'Different data types have different access patterns, consistency, and performance requirements',
+            decision: 'Use PostgreSQL for transactional data, MongoDB for content metadata, Redis for caching, ClickHouse for analytics',
+            rationale: 'Optimize each database for its specific use case and access patterns',
+            consequences: 'Multiple database technologies to manage but optimal performance for each data type',
+            alternatives: ['Single PostgreSQL database', 'Single MongoDB database', 'Single cloud database'],
+            tradeoffs: 'Operational complexity vs optimized performance for different data patterns'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Machine Learning Recommendation System Architecture',
+            status: 'Accepted',
+            date: '2024-05-20',
+            context: 'Need personalized content recommendations to increase user engagement and retention',
+            decision: 'Build ML pipeline with collaborative filtering, content-based filtering, and deep learning models',
+            rationale: 'Hybrid approach provides better recommendation quality and handles cold start problems',
+            consequences: 'Complex ML infrastructure but significantly improved user engagement and content discovery',
+            alternatives: ['Simple popularity-based recommendations', 'Third-party recommendation service', 'Rule-based recommendations'],
+            tradeoffs: 'ML infrastructure complexity vs recommendation quality and user engagement'
+          },
+          {
+            id: 'ADR-006',
+            title: 'Global CDN Strategy with AWS CloudFront',
+            status: 'Accepted',
+            date: '2024-05-25',
+            context: 'Need low-latency video delivery to global audience with high availability',
+            decision: 'Use AWS CloudFront with origin shield and multiple origin regions for global content delivery',
+            rationale: 'Global edge network, integration with AWS services, origin shield for better cache hit ratios',
+            consequences: 'Higher costs but optimal global performance and user experience',
+            alternatives: ['Cloudflare CDN', 'Self-hosted CDN', 'Multi-CDN strategy'],
+            tradeoffs: 'CDN costs vs global performance and user experience'
+          }
+        ]
+      },
+      performanceMetrics: [
+        'Supports 10M+ concurrent streaming sessions globally',
+        '99.9% uptime with <100ms latency worldwide via 200+ edge locations',
+        'Processes 1M+ video encoding jobs per day with AWS MediaConvert',
+        'Handles 100TB+ daily data transfer through CDN network',
+        'ML recommendation engine processes 10B+ events per day',
+        'Auto-scales from 100 to 5,000+ Kubernetes pods based on demand'
+      ],
+      securityFeatures: [
+        'DRM content protection with PlayReady, Widevine, and FairPlay',
+        'Multi-factor authentication with biometric support',
+        'Content geo-blocking and regional licensing compliance',
+        'API rate limiting and DDoS protection via AWS WAF',
+        'End-to-end encryption for payment and personal data',
+        'OWASP security standards with regular penetration testing'
+      ],
+      costOptimization: [
+        'Intelligent CDN caching reduces origin bandwidth by 95%',
+        'Spot instances for non-critical background processing saves 60%',
+        'Automated scaling policies reduce idle resources by 40%',
+        'S3 Intelligent Tiering for video storage saves 30% on storage costs',
+        'Reserved instances for predictable workloads saves 25%',
+        'Container optimization reduces compute costs by 35%'
+      ],
+      monitoringObservability: [
+        'Real-time dashboards with Grafana tracking 500+ metrics',
+        'Distributed tracing with Jaeger for end-to-end request tracking',
+        'Custom alerting rules for SLA monitoring and business metrics',
+        'Log aggregation with ELK stack processing 1TB+ logs daily',
+        'Performance monitoring with New Relic and custom dashboards',
+        'Business intelligence with real-time streaming analytics'
+      ],
+      testingStrategy: [
+        'Chaos engineering with Netflix Chaos Monkey for resilience testing',
+        'Load testing simulating 1M+ concurrent users with custom tools',
+        'A/B testing framework for recommendation algorithms and UI changes',
+        'Automated security scanning with Snyk and OWASP ZAP',
+        'Contract testing between microservices with Pact',
+        'Performance regression testing in CI/CD pipeline'
+      ],
+      features: [
+        'Adaptive bitrate video streaming',
+        'Multi-device synchronization',
+        'Offline downloads for mobile',
+        'Real-time recommendation engine',
+        'Advanced search with filters',
+        'Live streaming capabilities',
+        'Multi-language support',
+        'Parental controls',
+        'Watch party social features',
+        'Content analytics dashboard',
+        'Subscription management',
+        'Chromecast & AirPlay support'
+      ],
+      learningOutcomes: [
+        'Video streaming protocols (HLS/DASH)',
+        'Microservices architecture at scale',
+        'Real-time event-driven systems',
+        'Machine learning for recommendations',
+        'CDN and global content delivery',
+        'Multi-database data modeling',
+        'Payment and subscription systems',
+        'Video processing and encoding',
+        'Performance optimization',
+        'Monitoring and observability'
+      ],
+      githubUrl: 'https://github.com/yourusername/netflix-streaming-platform',
+      liveUrl: 'https://streaming-platform-demo.com',
+      estimatedHours: 400
     }
   ],
 
