@@ -782,12 +782,22 @@ const TimelineComponent = ({ timeline, isDark }) => {
   return (
     <div 
       ref={timelineRef}
-      className={`mt-8 p-6 rounded-xl border ${
+      className={`mt-8 p-8 rounded-2xl border-2 ${
         isDark 
-          ? 'bg-gray-800/50 border-gray-700/50' 
-          : 'bg-gray-50/50 border-gray-200/50'
-      } backdrop-blur-sm`}
+          ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50' 
+          : 'bg-gradient-to-br from-gray-50/50 to-white/50 border-gray-200/50'
+      } backdrop-blur-lg shadow-xl relative overflow-hidden`}
     >
+      {/* Subtle background pattern */}
+      <div className={`absolute inset-0 opacity-5 ${
+        isDark ? 'bg-gradient-to-br from-blue-400 to-purple-400' : 'bg-gradient-to-br from-blue-500 to-purple-500'
+      }`} style={{
+        backgroundImage: `radial-gradient(circle at 25% 25%, currentColor 2px, transparent 2px),
+                         radial-gradient(circle at 75% 75%, currentColor 2px, transparent 2px)`,
+        backgroundSize: '24px 24px'
+      }} />
+      
+      <div className="relative z-10">
       {/* Timeline Header */}
       <div className="flex items-center gap-3 mb-6">
         <Clock className={`w-6 h-6 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
@@ -804,44 +814,44 @@ const TimelineComponent = ({ timeline, isDark }) => {
       </div>
 
       {/* Timeline Overview Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className={`p-3 rounded-lg ${
-          isDark ? 'bg-gray-700/50' : 'bg-white/70'
-        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
-          <div className={`text-2xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+        <div className={`p-4 rounded-xl ${
+          isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
+          <div className={`text-3xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'} mb-1`}>
             {timeline.phases.length}
           </div>
-          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            Phases
+          <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Development Phases
           </div>
         </div>
-        <div className={`p-3 rounded-lg ${
-          isDark ? 'bg-gray-700/50' : 'bg-white/70'
-        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
-          <div className={`text-2xl font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+        <div className={`p-4 rounded-xl ${
+          isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
+          <div className={`text-3xl font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'} mb-1`}>
             {timeline.phases.reduce((acc, phase) => acc + (phase.milestones?.length || 0), 0)}
           </div>
-          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            Milestones
+          <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Key Milestones
           </div>
         </div>
-        <div className={`p-3 rounded-lg ${
-          isDark ? 'bg-gray-700/50' : 'bg-white/70'
-        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
-          <div className={`text-2xl font-bold ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
+        <div className={`p-4 rounded-xl ${
+          isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
+          <div className={`text-3xl font-bold ${isDark ? 'text-purple-400' : 'text-purple-600'} mb-1`}>
             {timeline.teamSize || 'Solo'}
           </div>
-          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Team Size
           </div>
         </div>
-        <div className={`p-3 rounded-lg ${
-          isDark ? 'bg-gray-700/50' : 'bg-white/70'
-        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
-          <div className={`text-2xl font-bold ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>
+        <div className={`p-4 rounded-xl ${
+          isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
+          <div className={`text-3xl font-bold ${isDark ? 'text-orange-400' : 'text-orange-600'} mb-1`}>
             {timeline.methodology || 'Agile'}
           </div>
-          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Methodology
           </div>
         </div>
@@ -850,13 +860,17 @@ const TimelineComponent = ({ timeline, isDark }) => {
       {/* Animated Timeline */}
       <div className="relative">
         {/* Animated Timeline Line */}
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 to-gray-300 opacity-30"></div>
+        <div className={`absolute left-6 top-0 bottom-0 w-1 rounded-full ${
+          isDark 
+            ? 'bg-gradient-to-b from-gray-700/50 to-gray-800/50' 
+            : 'bg-gradient-to-b from-gray-200/50 to-gray-300/50'
+        }`}></div>
         <motion.div 
-          className={`absolute left-6 top-0 w-0.5 bg-gradient-to-b ${
+          className={`absolute left-6 top-0 w-1 rounded-full bg-gradient-to-b ${
             isDark 
               ? 'from-blue-400 via-purple-400 to-green-400' 
               : 'from-blue-500 via-purple-500 to-green-500'
-          } shadow-lg`}
+          } shadow-lg shadow-blue-500/20`}
           style={{
             height: `${lineProgress.get()}%`,
             transition: 'height 0.3s ease-out'
@@ -879,23 +893,23 @@ const TimelineComponent = ({ timeline, isDark }) => {
                 className="relative pl-16"
               >
                 {/* Phase Circle */}
-                <div className={`absolute -left-1 top-2 w-8 h-8 rounded-full border-4 ${
+                <div className={`absolute -left-2 top-2 w-10 h-10 rounded-full border-4 ${
                   isDark 
-                    ? 'bg-gray-800 border-blue-400' 
-                    : 'bg-white border-blue-500'
-                } flex items-center justify-center shadow-lg`}>
-                  <div className={`w-3 h-3 rounded-full ${
+                    ? 'bg-gray-800 border-blue-400 shadow-lg shadow-blue-400/20' 
+                    : 'bg-white border-blue-500 shadow-lg shadow-blue-500/20'
+                } flex items-center justify-center z-10`}>
+                  <div className={`w-4 h-4 rounded-full ${
                     isDark ? 'bg-blue-400' : 'bg-blue-500'
-                  }`} />
+                  } shadow-inner`} />
                 </div>
 
                 {/* Phase Header */}
                 <div 
-                  className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                  className={`p-5 rounded-xl border cursor-pointer transition-all duration-300 ${
                     isDark 
-                      ? 'bg-gray-700/30 border-gray-600/50 hover:bg-gray-700/50' 
-                      : 'bg-white/70 border-gray-200/50 hover:bg-white/90'
-                  } backdrop-blur-sm`}
+                      ? 'bg-gray-700/30 border-gray-600/50 hover:bg-gray-700/60 hover:border-blue-500/30' 
+                      : 'bg-white/80 border-gray-200/50 hover:bg-white/95 hover:border-blue-400/40'
+                  } backdrop-blur-sm shadow-sm hover:shadow-md transform hover:scale-[1.01]`}
                   onClick={() => togglePhaseExpansion(phaseIndex)}
                 >
                   <div className="flex items-center justify-between">
@@ -950,21 +964,22 @@ const TimelineComponent = ({ timeline, isDark }) => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: milestoneIndex * 0.05 }}
-                            className={`flex items-start gap-3 p-3 rounded-lg ${
+                            className={`flex items-start gap-4 p-4 rounded-xl ${
                               isDark 
-                                ? 'bg-gray-800/50 border border-gray-700/50' 
-                                : 'bg-gray-50/70 border border-gray-200/50'
-                            }`}
+                                ? 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800/70' 
+                                : 'bg-gray-50/80 border border-gray-200/50 hover:bg-white/90'
+                            } transition-all duration-200 shadow-sm hover:shadow-md`}
                           >
                             {/* Milestone Icon */}
                             <div 
-                              className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                              className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center shadow-sm border"
                               style={{ 
-                                backgroundColor: isDark ? config.color + '20' : config.bgColor,
+                                backgroundColor: isDark ? config.color + '15' : config.bgColor,
+                                borderColor: isDark ? config.color + '30' : config.color + '20',
                                 color: config.color 
                               }}
                             >
-                              <IconComponent className="w-4 h-4" />
+                              <IconComponent className="w-5 h-5" />
                             </div>
 
                             {/* Milestone Content */}
@@ -1014,29 +1029,30 @@ const TimelineComponent = ({ timeline, isDark }) => {
           })}
         </div>
 
-        {/* Timeline Completion */}
-        <div className="relative pl-16 mt-8">
-          <div className={`absolute -left-1 top-2 w-8 h-8 rounded-full border-4 ${
+                        {/* Timeline Completion */}
+        <div className="relative pl-18 mt-8">
+          <div className={`absolute -left-2 top-2 w-10 h-10 rounded-full border-4 ${
             isDark 
-              ? 'bg-gray-800 border-green-400' 
-              : 'bg-white border-green-500'
-          } flex items-center justify-center shadow-lg`}>
-            <CheckCircle className={`w-4 h-4 ${isDark ? 'text-green-400' : 'text-green-500'}`} />
+              ? 'bg-gray-800 border-green-400 shadow-lg shadow-green-400/20' 
+              : 'bg-white border-green-500 shadow-lg shadow-green-500/20'
+          } flex items-center justify-center z-10`}>
+            <CheckCircle className={`w-5 h-5 ${isDark ? 'text-green-400' : 'text-green-500'}`} />
           </div>
           
-          <div className={`p-4 rounded-lg border ${
+          <div className={`p-5 rounded-xl border ${
             isDark 
-              ? 'bg-green-900/20 border-green-700/50' 
-              : 'bg-green-50/70 border-green-200/50'
-          }`}>
-            <h5 className={`font-semibold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
-              Project Completed
+              ? 'bg-gradient-to-r from-green-900/20 to-green-800/20 border-green-700/50 shadow-lg' 
+              : 'bg-gradient-to-r from-green-50/80 to-emerald-50/80 border-green-200/50 shadow-lg'
+          } backdrop-blur-sm`}>
+            <h5 className={`font-bold text-lg ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+              🎉 Project Completed Successfully
             </h5>
-            <p className={`text-sm mt-1 ${isDark ? 'text-green-300' : 'text-green-700'}`}>
-              All phases successfully delivered within timeline
+            <p className={`text-sm mt-2 ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+              All phases delivered on time with exceptional quality standards
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
