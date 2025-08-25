@@ -1602,91 +1602,143 @@ const Projects = () => {
 
                 {/* Project Timeline */}
                 {expandedDiagram.projectTimeline && (
-                  <div className="mt-6">
-                    <h4 className={`text-lg font-semibold mb-4 ${
-                      isDark ? 'text-gray-200' : 'text-gray-800'
+                  <div className="mt-8">
+                    <div className={`flex items-center gap-3 mb-6 p-4 rounded-lg border ${
+                      isDark ? 'bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/30' 
+                             : 'bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200'
                     }`}>
-                      <Calendar className="inline w-5 h-5 mr-2" />
-                      Project Timeline ({expandedDiagram.projectTimeline.totalDuration})
-                    </h4>
+                      <Calendar className={`w-6 h-6 ${
+                        isDark ? 'text-purple-400' : 'text-purple-600'
+                      }`} />
+                      <div>
+                        <h4 className={`text-xl font-bold ${
+                          isDark ? 'text-gray-100' : 'text-gray-900'
+                        }`}>
+                          Project Timeline
+                        </h4>
+                        <p className={`text-sm ${
+                          isDark ? 'text-purple-300' : 'text-purple-700'
+                        }`}>
+                          Total Duration: {expandedDiagram.projectTimeline.totalDuration} • {expandedDiagram.projectTimeline.phases.length} Phases
+                        </p>
+                      </div>
+                    </div>
                     
                     {/* Timeline Phases */}
-                    <div className="space-y-4">
-                      {expandedDiagram.projectTimeline.phases.map((phase, phaseIndex) => (
-                        <div key={phase.id} className={`border rounded-lg ${
-                          isDark ? 'border-gray-700 bg-gray-800/30' : 'border-gray-200 bg-gray-50/30'
-                        }`}>
-                          {/* Phase Header */}
-                          <div className={`p-4 border-b ${
-                            isDark ? 'border-gray-700' : 'border-gray-200'
-                          }`}>
-                            <div className="flex items-center justify-between mb-2">
-                              <h6 className={`font-semibold ${
-                                isDark ? 'text-gray-200' : 'text-gray-800'
-                              }`}>
-                                Phase {phaseIndex + 1}: {phase.title}
-                              </h6>
-                              <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                                phase.status === 'completed' 
-                                  ? isDark ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-700'
-                                  : isDark ? 'bg-yellow-900/30 text-yellow-400' : 'bg-yellow-100 text-yellow-700'
-                              }`}>
-                                {phase.status}
-                              </div>
-                            </div>
-                            <p className={`text-sm mb-2 ${
-                              isDark ? 'text-gray-400' : 'text-gray-600'
+                    <div className="relative">
+                      {/* Timeline Line */}
+                      <div className={`absolute left-6 top-0 bottom-0 w-0.5 ${
+                        isDark ? 'bg-gradient-to-b from-purple-500 via-blue-500 to-green-500' 
+                               : 'bg-gradient-to-b from-purple-400 via-blue-400 to-green-400'
+                      }`}></div>
+                      
+                      <div className="space-y-6">
+                        {expandedDiagram.projectTimeline.phases.map((phase, phaseIndex) => (
+                          <div key={phase.id} className="relative">
+                            {/* Phase Number Circle */}
+                            <div className={`absolute left-3 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold z-10 ${
+                              isDark ? 'bg-gradient-to-br from-purple-500 to-blue-500 text-white shadow-lg' 
+                                     : 'bg-gradient-to-br from-purple-400 to-blue-400 text-white shadow-md'
                             }`}>
-                              {phase.description}
-                            </p>
-                            <div className={`text-xs ${
-                              isDark ? 'text-gray-500' : 'text-gray-500'
-                            }`}>
-                              Duration: {phase.duration} • {phase.startDate} to {phase.endDate}
+                              {phaseIndex + 1}
                             </div>
-                          </div>
-                          
-                          {/* Phase Milestones */}
-                          <div className="p-4">
-                            <div className="grid gap-3">
-                              {phase.milestones.map((milestone, milestoneIndex) => (
-                                <div key={milestoneIndex} className={`flex items-start gap-3 p-3 rounded-lg ${
-                                  isDark ? 'bg-gray-800/50' : 'bg-white/50'
-                                }`}>
-                                  <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                                    milestone.status === 'completed'
-                                      ? isDark ? 'bg-green-600 text-white' : 'bg-green-500 text-white'
-                                      : isDark ? 'bg-gray-600 text-gray-300' : 'bg-gray-300 text-gray-600'
-                                  }`}>
-                                    {milestone.week}
-                                  </div>
-                                  <div className="flex-1 min-w-0">
-                                    <div className={`font-medium text-sm ${
-                                      isDark ? 'text-gray-200' : 'text-gray-800'
+                            
+                            {/* Phase Content */}
+                            <div className={`ml-12 border rounded-xl overflow-hidden shadow-lg ${
+                              isDark ? 'border-gray-700/50 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm' 
+                                     : 'border-gray-200 bg-gradient-to-br from-white to-gray-50/50 backdrop-blur-sm'
+                            }`}>
+                              {/* Phase Header */}
+                              <div className={`p-5 border-b ${
+                                isDark ? 'border-gray-700/50 bg-gray-800/30' : 'border-gray-100 bg-gray-50/30'
+                              }`}>
+                                <div className="flex items-start justify-between mb-3">
+                                  <div className="flex-1">
+                                    <h6 className={`text-lg font-bold mb-1 ${
+                                      isDark ? 'text-gray-100' : 'text-gray-900'
                                     }`}>
-                                      Week {milestone.week}: {milestone.title}
-                                    </div>
-                                    <div className={`text-xs mt-1 ${
-                                      isDark ? 'text-gray-400' : 'text-gray-600'
+                                      {phase.title}
+                                    </h6>
+                                    <p className={`text-sm leading-relaxed ${
+                                      isDark ? 'text-gray-300' : 'text-gray-600'
                                     }`}>
-                                      {milestone.deliverables.join(' • ')}
-                                    </div>
+                                      {phase.description}
+                                    </p>
                                   </div>
-                                  <div className={`flex-shrink-0 ${
-                                    milestone.status === 'completed' ? 'text-green-500' : 'text-gray-400'
+                                  <div className={`ml-4 px-3 py-1.5 rounded-full text-xs font-semibold ${
+                                    phase.status === 'completed' 
+                                      ? isDark ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                                               : 'bg-green-100 text-green-700 border border-green-200'
+                                      : isDark ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
+                                               : 'bg-yellow-100 text-yellow-700 border border-yellow-200'
                                   }`}>
-                                    {milestone.status === 'completed' ? (
-                                      <CheckCircle className="w-4 h-4" />
-                                    ) : (
-                                      <Circle className="w-4 h-4" />
-                                    )}
+                                    ✓ {phase.status}
                                   </div>
                                 </div>
-                              ))}
+                                <div className={`flex items-center gap-4 text-xs font-medium ${
+                                  isDark ? 'text-gray-400' : 'text-gray-500'
+                                }`}>
+                                  <span className="flex items-center gap-1">
+                                    <Clock className="w-3 h-3" />
+                                    {phase.duration}
+                                  </span>
+                                  <span>•</span>
+                                  <span>{phase.startDate} → {phase.endDate}</span>
+                                </div>
+                              </div>
+                              
+                              {/* Phase Milestones */}
+                              <div className="p-5">
+                                <div className="space-y-3">
+                                  {phase.milestones.map((milestone, milestoneIndex) => (
+                                    <div key={milestoneIndex} className={`group flex items-start gap-4 p-4 rounded-lg transition-all duration-200 hover:scale-[1.01] ${
+                                      isDark ? 'bg-gray-800/40 hover:bg-gray-800/60 border border-gray-700/30' 
+                                             : 'bg-white/60 hover:bg-white/80 border border-gray-200/50 hover:shadow-md'
+                                    }`}>
+                                      <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-all duration-200 ${
+                                        milestone.status === 'completed'
+                                          ? isDark ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg' 
+                                                   : 'bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-md'
+                                          : isDark ? 'bg-gray-700 text-gray-300 border border-gray-600' 
+                                                   : 'bg-gray-100 text-gray-500 border border-gray-300'
+                                      }`}>
+                                        {milestone.week}
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className={`font-semibold text-sm mb-1 ${
+                                          isDark ? 'text-gray-100' : 'text-gray-900'
+                                        }`}>
+                                          Week {milestone.week}: {milestone.title}
+                                        </div>
+                                        <div className={`text-xs leading-relaxed ${
+                                          isDark ? 'text-gray-400' : 'text-gray-600'
+                                        }`}>
+                                          {milestone.deliverables.map((deliverable, idx) => (
+                                            <span key={idx} className={`inline-block mr-2 mb-1 px-2 py-0.5 rounded text-xs ${
+                                              isDark ? 'bg-gray-700/50 text-gray-300' : 'bg-gray-100 text-gray-600'
+                                            }`}>
+                                              {deliverable}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                      <div className={`flex-shrink-0 transition-all duration-200 ${
+                                        milestone.status === 'completed' ? 'text-green-500' : 'text-gray-400'
+                                      }`}>
+                                        {milestone.status === 'completed' ? (
+                                          <CheckCircle className="w-5 h-5" />
+                                        ) : (
+                                          <Circle className="w-5 h-5" />
+                                        )}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
