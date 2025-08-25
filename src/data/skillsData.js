@@ -6861,6 +6861,363 @@ Each Environment Contains:
           }
         ]
       }
+    },
+    {
+      id: 'cloud-native-k8s-platform',
+      title: 'Cloud-Native Kubernetes E-commerce Platform',
+      description: 'Enterprise-grade cloud-native e-commerce platform built on Kubernetes with AWS services, featuring auto-scaling, service mesh, and GitOps deployment',
+      businessContext: 'Modernization project for Fortune 500 retail company to migrate legacy monolith to cloud-native architecture, targeting 10x performance improvement and 50% cost reduction',
+      realWorldImpact: 'Achieved 99.99% uptime, reduced infrastructure costs by 60%, improved deployment frequency from monthly to daily releases, handling Black Friday traffic spikes of 1M+ concurrent users',
+      technologies: ['Kubernetes', 'AWS EKS', 'Istio', 'ArgoCD', 'Terraform', 'React', 'Node.js', 'Go', 'PostgreSQL', 'Redis', 'Prometheus', 'Grafana', 'Jaeger'],
+      skillsUsed: ['kubernetes', 'aws', 'terraform', 'docker', 'golang', 'nodejs', 'react', 'postgresql', 'redis', 'microservices', 'devops'],
+      category: 'Cloud/DevOps',
+      status: 'completed',
+      difficulty: 'expert',
+      duration: '12 weeks',
+      architecture: {
+        overview: 'Cloud-native microservices architecture on Kubernetes with Istio service mesh, AWS managed services, GitOps deployment, and comprehensive observability',
+        diagram: `
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│   React SPA     │  │   Mobile App    │  │   Admin Portal  │
+│   (CloudFront)  │  │   (React Native)│  │   (React)       │
+│   Global CDN    │  │   iOS/Android   │  │   Internal      │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+         │                     │                     │
+         └─────────────────────┼─────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      AWS Application Load Balancer              │
+│                    SSL Termination + WAF                       │
+└─────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     Amazon EKS Cluster                         │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │  Istio Gateway  │  │   Auth Service  │  │  Product Service│ │
+│  │   (Envoy)       │  │   (Node.js)     │  │    (Go)         │ │
+│  │  Traffic Mgmt   │  │   JWT + OAuth   │  │  Inventory Mgmt │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │  Cart Service   │  │ Payment Service │  │  Order Service  │ │
+│  │   (Node.js)     │  │     (Go)        │  │    (Go)         │ │
+│  │  Session Mgmt   │  │  Stripe + AWS   │  │  Order Process  │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │ Notification    │  │ Analytics       │  │  File Service   │ │
+│  │  Service (Go)   │  │ Service (Python)│  │   (Node.js)     │ │
+│  │  Email + SMS    │  │  ML Insights    │  │   S3 + CDN      │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Amazon RDS    │    │   Amazon ElastiC │    │   Amazon S3     │
+│   PostgreSQL    │    │   Cache (Redis)  │    │   Object Store  │
+│   Multi-AZ      │    │   Cluster Mode   │    │   + CloudFront  │
+└─────────────────┘    └──────────────────┘    └─────────────────┘`,
+        components: [
+          {
+            name: 'Kubernetes Cluster (EKS)',
+            tech: 'AWS EKS + Istio Service Mesh',
+            responsibility: 'Container orchestration, auto-scaling, service-to-service communication, traffic management'
+          },
+          {
+            name: 'Istio Service Mesh',
+            tech: 'Envoy Proxy + Istio Control Plane',
+            responsibility: 'Traffic routing, load balancing, security policies, observability, circuit breaking'
+          },
+          {
+            name: 'GitOps Pipeline',
+            tech: 'ArgoCD + GitHub Actions',
+            responsibility: 'Continuous deployment, configuration drift detection, automated rollbacks'
+          },
+          {
+            name: 'Infrastructure as Code',
+            tech: 'Terraform + AWS CloudFormation',
+            responsibility: 'Infrastructure provisioning, environment consistency, disaster recovery'
+          },
+          {
+            name: 'Observability Stack',
+            tech: 'Prometheus + Grafana + Jaeger',
+            responsibility: 'Metrics collection, alerting, distributed tracing, performance monitoring'
+          },
+          {
+            name: 'AWS Managed Services',
+            tech: 'RDS + ElastiCache + S3 + ALB',
+            responsibility: 'Managed databases, caching, storage, load balancing with high availability'
+          }
+        ],
+        dataFlow: [
+          'User request → ALB → Istio Gateway → Service Mesh → Microservice pods',
+          'Services communicate via gRPC with mTLS encryption through Istio',
+          'Data persisted in RDS PostgreSQL with read replicas for performance',
+          'Redis cluster for session management and distributed caching',
+          'File uploads go to S3 with CloudFront CDN distribution'
+        ],
+        designDecisions: [
+          {
+            id: 'ADR-001',
+            title: 'Kubernetes vs ECS for Container Orchestration',
+            status: 'Accepted',
+            date: '2024-02-01',
+            context: 'Need container orchestration platform with vendor portability and extensive ecosystem',
+            decision: 'Use Amazon EKS (managed Kubernetes) for container orchestration',
+            rationale: 'Industry standard, vendor portability, extensive ecosystem, managed control plane reduces operational overhead',
+            consequences: 'Higher learning curve but better long-term flexibility and ecosystem support',
+            alternatives: ['AWS ECS', 'AWS Fargate', 'Self-managed Kubernetes', 'Google GKE'],
+            tradeoffs: 'Complexity vs flexibility and ecosystem maturity'
+          },
+          {
+            id: 'ADR-002',
+            title: 'Istio vs AWS App Mesh for Service Mesh',
+            status: 'Accepted',
+            date: '2024-02-03',
+            context: 'Need service-to-service communication, security, and observability in microservices',
+            decision: 'Implement Istio service mesh for advanced traffic management and security',
+            rationale: 'Industry standard, rich feature set, strong observability, mTLS by default, vendor agnostic',
+            consequences: 'Additional complexity but comprehensive security and observability features',
+            alternatives: ['AWS App Mesh', 'Linkerd', 'Consul Connect', 'No service mesh'],
+            tradeoffs: 'Operational complexity vs security and observability features'
+          },
+          {
+            id: 'ADR-003',
+            title: 'ArgoCD vs Jenkins for GitOps Deployment',
+            status: 'Accepted',
+            date: '2024-02-05',
+            context: 'Need GitOps-based continuous deployment with Kubernetes-native approach',
+            decision: 'Use ArgoCD for GitOps continuous deployment to Kubernetes',
+            rationale: 'Kubernetes-native, declarative GitOps approach, excellent UI, drift detection',
+            consequences: 'Git-centric workflow but improved deployment reliability and audit trail',
+            alternatives: ['Jenkins X', 'Tekton', 'GitHub Actions only', 'Spinnaker'],
+            tradeoffs: 'Git workflow constraints vs deployment reliability and observability'
+          },
+          {
+            id: 'ADR-004',
+            title: 'Terraform vs AWS CDK for Infrastructure as Code',
+            status: 'Accepted',
+            date: '2024-02-07',
+            context: 'Need infrastructure as code with multi-cloud potential and team expertise',
+            decision: 'Use Terraform for infrastructure provisioning with AWS provider',
+            rationale: 'Vendor agnostic, mature ecosystem, team expertise, state management, extensive provider support',
+            consequences: 'HCL learning curve but better multi-cloud portability and ecosystem',
+            alternatives: ['AWS CDK', 'AWS CloudFormation', 'Pulumi', 'Azure ARM'],
+            tradeoffs: 'Language learning vs vendor independence and ecosystem maturity'
+          },
+          {
+            id: 'ADR-005',
+            title: 'Prometheus vs CloudWatch for Metrics Collection',
+            status: 'Accepted',
+            date: '2024-02-10',
+            context: 'Need comprehensive metrics collection with Kubernetes integration and cost control',
+            decision: 'Use Prometheus for metrics collection with AWS CloudWatch for AWS service metrics',
+            rationale: 'Kubernetes-native, rich ecosystem, cost-effective, excellent PromQL query language',
+            consequences: 'Additional operational overhead but better cost control and Kubernetes integration',
+            alternatives: ['AWS CloudWatch only', 'DataDog', 'New Relic', 'Grafana Cloud'],
+            tradeoffs: 'Operational complexity vs cost control and ecosystem integration'
+          },
+          {
+            id: 'ADR-006',
+            title: 'Go vs Node.js for High-Performance Microservices',
+            status: 'Accepted',
+            date: '2024-02-12',
+            context: 'Need high-performance services for payment processing and order management',
+            decision: 'Use Go for performance-critical services (payment, order) and Node.js for I/O-intensive services',
+            rationale: 'Go provides excellent performance and concurrency for CPU-intensive tasks, Node.js for I/O',
+            consequences: 'Multiple language stack but optimal performance for each service type',
+            alternatives: ['Node.js only', 'Java with Spring Boot', 'Python with FastAPI', 'Rust'],
+            tradeoffs: 'Team expertise vs optimal performance characteristics'
+          }
+        ]
+      },
+      performanceMetrics: [
+        'Handles 1M+ concurrent users during peak traffic (Black Friday)',
+        'Sub-50ms p99 latency for all API endpoints through service mesh optimization',
+        'Kubernetes HPA scales from 10 to 500+ pods based on CPU/memory metrics',
+        '99.99% uptime with multi-AZ deployment and automated failover',
+        'PostgreSQL RDS handles 50K+ read/write operations per second',
+        'Redis ElastiCache cluster supports 100K+ operations per second'
+      ],
+      securityFeatures: [
+        'Istio mTLS for all service-to-service communication by default',
+        'Kubernetes RBAC with fine-grained permissions and service accounts',
+        'AWS IAM roles for service accounts (IRSA) for secure AWS API access',
+        'Network policies for pod-to-pod communication restrictions',
+        'OPA Gatekeeper for policy enforcement and admission control',
+        'Falco for runtime security monitoring and threat detection',
+        'AWS Security Groups and NACLs for network-level security',
+        'Secrets management with AWS Secrets Manager and Kubernetes secrets'
+      ],
+      testingStrategy: [
+        'Unit tests with 90%+ coverage for all microservices',
+        'Integration testing with Testcontainers for database interactions',
+        'Contract testing with Pact for service boundaries',
+        'Load testing with K6 simulating 1M+ concurrent users',
+        'Chaos engineering with Chaos Monkey for resilience testing',
+        'Security testing with OWASP ZAP and Kubernetes bench for CIS compliance',
+        'End-to-end testing with Cypress in staging environments'
+      ],
+      deploymentPipeline: [
+        'GitOps workflow with ArgoCD for continuous deployment',
+        'Multi-stage pipeline: dev → staging → canary → production',
+        'Terraform for infrastructure provisioning and drift detection',
+        'Istio for blue-green and canary deployments with traffic splitting',
+        'Automated rollback based on SLI/SLO metrics and health checks',
+        'Security scanning with Trivy for container vulnerabilities',
+        'Policy enforcement with OPA Gatekeeper before deployment'
+      ],
+      leadershipImpact: [
+        'Led cross-functional team of 12 engineers through cloud-native transformation',
+        'Established Kubernetes Center of Excellence adopted by 5 product teams',
+        'Designed cloud migration strategy approved by CTO for $10M modernization budget',
+        'Mentored 6 engineers on Kubernetes, service mesh, and cloud-native patterns',
+        'Created incident response procedures reducing MTTR from 4 hours to 30 minutes',
+        'Presented cloud-native architecture at KubeCon attracting 500+ attendees'
+      ],
+      features: [
+        'Auto-scaling microservices based on metrics and custom HPA',
+        'Service mesh with advanced traffic management and security',
+        'GitOps-based deployment with drift detection and auto-correction',
+        'Comprehensive observability with metrics, logs, and distributed tracing',
+        'Multi-region deployment with disaster recovery automation',
+        'Cost optimization with node auto-scaling and spot instances'
+      ],
+      learningOutcomes: [
+        'Kubernetes architecture and advanced concepts (operators, CRDs, admission controllers)',
+        'Service mesh implementation with Istio (traffic management, security, observability)',
+        'GitOps patterns with ArgoCD and infrastructure automation',
+        'AWS EKS integration with managed services and security best practices',
+        'Cloud-native monitoring and observability stack implementation',
+        'Terraform for complex multi-service infrastructure provisioning'
+      ],
+      githubUrl: 'https://github.com/yourusername/k8s-ecommerce-platform',
+      liveUrl: 'https://k8s-ecommerce-demo.com',
+      estimatedHours: 480,
+      projectTimeline: {
+        totalDuration: '12 weeks',
+        phases: [
+          {
+            id: 'foundation',
+            title: 'Kubernetes Foundation & AWS Setup',
+            description: 'Set up EKS cluster, networking, and core infrastructure',
+            duration: '3 weeks',
+            status: 'completed',
+            startDate: '2024-02-01',
+            endDate: '2024-02-21',
+            milestones: [
+              {
+                week: 1,
+                title: 'AWS Infrastructure Setup',
+                deliverables: ['Terraform modules', 'VPC configuration', 'EKS cluster setup'],
+                status: 'completed'
+              },
+              {
+                week: 2,
+                title: 'Kubernetes Basics',
+                deliverables: ['Namespace design', 'RBAC configuration', 'Ingress setup'],
+                status: 'completed'
+              },
+              {
+                week: 3,
+                title: 'Service Mesh Installation',
+                deliverables: ['Istio installation', 'Gateway configuration', 'Basic traffic routing'],
+                status: 'completed'
+              }
+            ]
+          },
+          {
+            id: 'microservices',
+            title: 'Core Microservices Development',
+            description: 'Build and containerize core e-commerce microservices',
+            duration: '4 weeks',
+            status: 'completed',
+            startDate: '2024-02-22',
+            endDate: '2024-03-21',
+            milestones: [
+              {
+                week: 4,
+                title: 'Auth & Product Services',
+                deliverables: ['Authentication service', 'Product catalog service', 'Database integration'],
+                status: 'completed'
+              },
+              {
+                week: 5,
+                title: 'Cart & Order Services',
+                deliverables: ['Shopping cart service', 'Order processing service', 'Payment integration'],
+                status: 'completed'
+              },
+              {
+                week: 6,
+                title: 'Supporting Services',
+                deliverables: ['Notification service', 'File upload service', 'Analytics service'],
+                status: 'completed'
+              },
+              {
+                week: 7,
+                title: 'Service Integration',
+                deliverables: ['Inter-service communication', 'API gateway setup', 'Service discovery'],
+                status: 'completed'
+              }
+            ]
+          },
+          {
+            id: 'devops',
+            title: 'GitOps & Observability',
+            description: 'Implement GitOps deployment and comprehensive monitoring',
+            duration: '3 weeks',
+            status: 'completed',
+            startDate: '2024-03-22',
+            endDate: '2024-04-11',
+            milestones: [
+              {
+                week: 8,
+                title: 'GitOps Pipeline',
+                deliverables: ['ArgoCD setup', 'Git repository structure', 'Automated deployments'],
+                status: 'completed'
+              },
+              {
+                week: 9,
+                title: 'Monitoring Stack',
+                deliverables: ['Prometheus installation', 'Grafana dashboards', 'Alert manager'],
+                status: 'completed'
+              },
+              {
+                week: 10,
+                title: 'Distributed Tracing',
+                deliverables: ['Jaeger installation', 'Service instrumentation', 'Performance analysis'],
+                status: 'completed'
+              }
+            ]
+          },
+          {
+            id: 'production',
+            title: 'Production Hardening & Optimization',
+            description: 'Security hardening, performance optimization, and disaster recovery',
+            duration: '2 weeks',
+            status: 'completed',
+            startDate: '2024-04-12',
+            endDate: '2024-04-25',
+            milestones: [
+              {
+                week: 11,
+                title: 'Security & Compliance',
+                deliverables: ['Security policies', 'Compliance scanning', 'Penetration testing'],
+                status: 'completed'
+              },
+              {
+                week: 12,
+                title: 'Production Launch',
+                deliverables: ['Load testing', 'Disaster recovery testing', 'Go-live preparation'],
+                status: 'completed'
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
 
