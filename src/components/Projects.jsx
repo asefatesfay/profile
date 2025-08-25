@@ -12,13 +12,16 @@ import {
   Star,
   Layout,
   Database,
-  Briefcase
+  Briefcase,
+  X,
+  Maximize2,
+  ZoomIn
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
 import { useTheme } from '../contexts/ThemeContext';
 
 // Professional Architecture Diagram Component (No Flying Dots)
-const ArchitectureDiagram = ({ architecture, isDark }) => {
+const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
   if (!architecture || !architecture.components) return null;
 
   // Parse architecture into sophisticated layers
@@ -187,11 +190,13 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
 
   const { layers, connections } = parseArchitecture(architecture.components);
   
+  // Define SVG dimensions at component level
+  const svgWidth = isModal ? 1600 : 1200; // Larger width for modal
+  
   // Create sophisticated layout
   const generateLayout = () => {
     const layout = [];
     let currentY = 60;
-    const svgWidth = 1200;
     const layerOrder = ['cdn', 'frontend', 'gateway', 'services', 'messaging', 'data', 'monitoring', 'external'];
     const layerBounds = [];
 
@@ -199,10 +204,10 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
       const layerComponents = layers[layerType];
       if (layerComponents.length === 0) return;
 
-      const layerHeight = 100;
-      const componentWidth = Math.min(200, (svgWidth - 100) / Math.max(1, layerComponents.length));
-      const componentHeight = 80;
-      const spacing = 20;
+      const layerHeight = isModal ? 120 : 100; // Taller layers for modal
+      const componentWidth = Math.min(isModal ? 250 : 200, (svgWidth - 100) / Math.max(1, layerComponents.length));
+      const componentHeight = isModal ? 100 : 80; // Taller components for modal
+      const spacing = isModal ? 30 : 20; // More spacing for modal
       
       const totalWidth = layerComponents.length * componentWidth + (layerComponents.length - 1) * spacing;
       const startX = (svgWidth - totalWidth) / 2;
@@ -311,9 +316,9 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
       isDark ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'
     }`}>
       <svg 
-        viewBox={`0 0 1200 ${svgHeight}`}
+        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         className="w-full h-auto"
-        style={{ maxHeight: '800px' }}
+        style={{ maxHeight: isModal ? '1200px' : '800px' }}
       >
         {/* Enhanced definitions */}
         <defs>
@@ -431,7 +436,7 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
               <text
                 x={layer.x - 10}
                 y={layer.y - 18}
-                fontSize="14"
+                fontSize={isModal ? "18" : "14"}
                 textAnchor="start"
                 fill="white"
                 className="font-bold"
@@ -443,7 +448,7 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
               <text
                 x={layer.x + 10}
                 y={layer.y - 18}
-                fontSize="12"
+                fontSize={isModal ? "16" : "12"}
                 fontWeight="600"
                 textAnchor="start"
                 fill="white"
@@ -498,7 +503,7 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
                 <text
                   x={connection.from.x + connection.from.width/2}
                   y={connection.from.y + connection.from.height + 27}
-                  fontSize="9"
+                  fontSize={isModal ? "12" : "9"}
                   fontWeight="500"
                   textAnchor="middle"
                   fill={isDark ? '#d1d5db' : '#374151'}
@@ -578,7 +583,7 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
               <text
                 x={component.x + 13}
                 y={component.y + 18}
-                fontSize="9"
+                fontSize={isModal ? "12" : "9"}
                 fontWeight="600"
                 fill={layerStyle.color}
                 className="font-semibold"
@@ -590,7 +595,7 @@ const ArchitectureDiagram = ({ architecture, isDark }) => {
               <text
                 x={component.x + component.width - 25}
                 y={component.y + 25}
-                fontSize="16"
+                fontSize={isModal ? "20" : "16"}
                 textAnchor="middle"
                 fill={layerStyle.color}
                 opacity="0.7"
@@ -726,7 +731,37 @@ const Projects = () => {
   const { isDark } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
+  const [expandedTechs, setExpandedTechs] = useState({});
+  const [expandedFeatures, setExpandedFeatures] = useState({});
+  const [expandedDiagram, setExpandedDiagram] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState('All');
+
+  // Toggle technology expansion
+  const toggleTechExpansion = (projectId) => {
+    setExpandedTechs(prev => ({
+      ...prev,
+      [projectId]: !prev[projectId]
+    }));
+  };
+
+  // Toggle features expansion
+  const toggleFeaturesExpansion = (projectId) => {
+    setExpandedFeatures(prev => ({
+      ...prev,
+      [projectId]: !prev[projectId]
+    }));
+  };
+
+  // Toggle architecture diagram modal
+  const openDiagramModal = (project) => {
+    setExpandedDiagram(project);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  };
+
+  const closeDiagramModal = () => {
+    setExpandedDiagram(null);
+    document.body.style.overflow = 'unset'; // Restore scrolling
+  };
 
   const projects = skillsData.projects || [];
 
@@ -1050,7 +1085,9 @@ const Projects = () => {
                       Technology Stack
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {(project.technologies || []).slice(0, 6).map((tech) => (
+                      {(project.technologies || [])
+                        .slice(0, expandedTechs[project.id] ? undefined : 6)
+                        .map((tech) => (
                         <motion.span
                           key={tech}
                           whileHover={{ scale: 1.05 }}
@@ -1064,11 +1101,21 @@ const Projects = () => {
                         </motion.span>
                       ))}
                       {(project.technologies || []).length > 6 && (
-                        <span className={`px-3 py-2 rounded-xl text-xs font-medium ${
-                          isDark ? 'text-gray-400 bg-gray-800' : 'text-gray-500 bg-gray-100'
-                        }`}>
-                          +{(project.technologies || []).length - 6} more
-                        </span>
+                        <motion.button
+                          onClick={() => toggleTechExpansion(project.id)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={`px-3 py-2 rounded-xl text-xs font-medium transition-all duration-200 cursor-pointer ${
+                            isDark 
+                              ? 'text-blue-400 bg-gray-800/60 border border-gray-600/50 hover:border-blue-500/50 hover:bg-gray-700/60' 
+                              : 'text-blue-600 bg-gray-100 border border-gray-200 hover:border-blue-300 hover:bg-blue-50'
+                          }`}
+                        >
+                          {expandedTechs[project.id] 
+                            ? '− Show Less' 
+                            : `+${(project.technologies || []).length - 6} More`
+                          }
+                        </motion.button>
                       )}
                     </div>
                   </div>
@@ -1082,7 +1129,9 @@ const Projects = () => {
                       Key Highlights
                     </h4>
                     <div className="space-y-3">
-                      {(project.features || []).slice(0, 3).map((feature, idx) => (
+                      {(project.features || [])
+                        .slice(0, expandedFeatures[project.id] ? undefined : 3)
+                        .map((feature, idx) => (
                         <motion.div
                           key={idx}
                           initial={{ opacity: 0, x: -20 }}
@@ -1105,11 +1154,21 @@ const Projects = () => {
                         </motion.div>
                       ))}
                       {(project.features && project.features.length > 3) && (
-                        <div className={`text-xs font-medium ${
-                          isDark ? 'text-gray-400' : 'text-gray-500'
-                        }`}>
-                          +{project.features.length - 3} additional features
-                        </div>
+                        <motion.button
+                          onClick={() => toggleFeaturesExpansion(project.id)}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`text-xs font-medium transition-all duration-200 cursor-pointer px-3 py-2 rounded-lg border ${
+                            isDark 
+                              ? 'text-emerald-400 bg-gray-800/60 border-gray-600/50 hover:border-emerald-500/50 hover:bg-gray-700/60' 
+                              : 'text-emerald-600 bg-emerald-50 border-emerald-200 hover:border-emerald-300 hover:bg-emerald-100'
+                          }`}
+                        >
+                          {expandedFeatures[project.id] 
+                            ? '− Show Less Features' 
+                            : `+${project.features.length - 3} Additional Features`
+                          }
+                        </motion.button>
                       )}
                     </div>
                   </div>
@@ -1127,12 +1186,30 @@ const Projects = () => {
                       }`}>
                         <Database className="w-4 h-4" />
                         System Architecture
+                        <span className={`text-xs px-2 py-1 rounded-md ${
+                          isDark ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-600'
+                        }`}>
+                          Click to expand
+                        </span>
                       </h4>
-                      <div className={`relative rounded-2xl overflow-hidden border ${
-                        isDark ? 'border-gray-700/50 bg-gray-900/30' : 'border-gray-200/50 bg-gray-50/30'
-                      }`}>
+                      <motion.button
+                        onClick={() => openDiagramModal(project)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className={`relative w-full rounded-2xl overflow-hidden border transition-all duration-200 cursor-pointer group ${
+                          isDark 
+                            ? 'border-gray-700/50 bg-gray-900/30 hover:border-gray-600/70 hover:bg-gray-800/40' 
+                            : 'border-gray-200/50 bg-gray-50/30 hover:border-gray-300/70 hover:bg-gray-100/40'
+                        }`}
+                      >
+                        {/* Zoom overlay indicator */}
+                        <div className={`absolute top-4 right-4 z-10 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
+                          isDark ? 'bg-gray-800/90 text-blue-400' : 'bg-white/90 text-blue-600'
+                        }`}>
+                          <ZoomIn className="w-4 h-4" />
+                        </div>
                         <ArchitectureDiagram architecture={project.architecture} isDark={isDark} />
-                      </div>
+                      </motion.button>
                     </motion.div>
                   )}
 
@@ -1203,6 +1280,114 @@ const Projects = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Architecture Diagram Modal */}
+      <AnimatePresence>
+        {expandedDiagram && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+            onClick={closeDiagramModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className={`relative w-full max-w-7xl max-h-[90vh] overflow-auto rounded-2xl border ${
+                isDark 
+                  ? 'bg-gray-900 border-gray-700' 
+                  : 'bg-white border-gray-200'
+              }`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className={`sticky top-0 z-10 flex items-center justify-between p-6 border-b ${
+                isDark 
+                  ? 'bg-gray-900/95 backdrop-blur border-gray-700' 
+                  : 'bg-white/95 backdrop-blur border-gray-200'
+              }`}>
+                <div>
+                  <h3 className={`text-xl font-bold ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {expandedDiagram.title} - System Architecture
+                  </h3>
+                  <p className={`text-sm mt-1 ${
+                    isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}>
+                    {expandedDiagram.architecture?.overview}
+                  </p>
+                </div>
+                <motion.button
+                  onClick={closeDiagramModal}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`p-2 rounded-lg transition-colors ${
+                    isDark 
+                      ? 'hover:bg-gray-800 text-gray-400 hover:text-gray-300' 
+                      : 'hover:bg-gray-100 text-gray-600 hover:text-gray-700'
+                  }`}
+                >
+                  <X className="w-6 h-6" />
+                </motion.button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6">
+                <div className={`rounded-xl overflow-hidden border ${
+                  isDark ? 'border-gray-700 bg-gray-800/30' : 'border-gray-200 bg-gray-50/30'
+                }`}>
+                  <ArchitectureDiagram 
+                    architecture={expandedDiagram.architecture} 
+                    isDark={isDark}
+                    isModal={true}
+                  />
+                </div>
+                
+                {/* Additional Architecture Information */}
+                {expandedDiagram.architecture?.components && (
+                  <div className="mt-6">
+                    <h4 className={`text-lg font-semibold mb-4 ${
+                      isDark ? 'text-gray-200' : 'text-gray-800'
+                    }`}>
+                      System Components
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {expandedDiagram.architecture.components.map((component, index) => (
+                        <div key={index} className={`p-4 rounded-lg border ${
+                          isDark 
+                            ? 'bg-gray-800/50 border-gray-700' 
+                            : 'bg-gray-50 border-gray-200'
+                        }`}>
+                          <h5 className={`font-semibold mb-1 ${
+                            isDark ? 'text-gray-200' : 'text-gray-800'
+                          }`}>
+                            {component.name}
+                          </h5>
+                          <p className={`text-xs mb-2 ${
+                            isDark ? 'text-blue-400' : 'text-blue-600'
+                          }`}>
+                            {component.tech}
+                          </p>
+                          <p className={`text-sm ${
+                            isDark ? 'text-gray-400' : 'text-gray-600'
+                          }`}>
+                            {component.responsibility}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
