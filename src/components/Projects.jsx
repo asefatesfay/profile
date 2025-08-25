@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 import { 
   ExternalLink, 
   Github, 
@@ -20,7 +20,15 @@ import {
   TrendingUp,
   Users,
   Clock,
-  Tag
+  Tag,
+  ChevronDown,
+  ChevronUp,
+  Settings,
+  TestTube,
+  Rocket,
+  GitBranch,
+  Cpu,
+  Shield
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
 import { useTheme } from '../contexts/ThemeContext';
@@ -732,6 +740,308 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
   );
 };
 
+// Advanced Timeline Component with Animation and Interactivity
+const TimelineComponent = ({ timeline, isDark }) => {
+  const [expandedPhases, setExpandedPhases] = useState({});
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Animate the timeline line as user scrolls
+  const lineProgress = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Milestone type configurations
+  const milestoneIcons = {
+    development: { icon: Code, color: '#3b82f6', bgColor: '#dbeafe' },
+    testing: { icon: TestTube, color: '#f59e0b', bgColor: '#fef3c7' },
+    deployment: { icon: Rocket, color: '#10b981', bgColor: '#d1fae5' },
+    design: { icon: Layout, color: '#8b5cf6', bgColor: '#ede9fe' },
+    planning: { icon: Target, color: '#ec4899', bgColor: '#fce7f3' },
+    optimization: { icon: TrendingUp, color: '#06b6d4', bgColor: '#cffafe' },
+    integration: { icon: GitBranch, color: '#84cc16', bgColor: '#ecfccb' },
+    infrastructure: { icon: Cpu, color: '#f97316', bgColor: '#fed7aa' },
+    security: { icon: Shield, color: '#dc2626', bgColor: '#fee2e2' },
+    monitoring: { icon: Settings, color: '#6b7280', bgColor: '#f3f4f6' }
+  };
+
+  const togglePhaseExpansion = (phaseIndex) => {
+    setExpandedPhases(prev => ({
+      ...prev,
+      [phaseIndex]: !prev[phaseIndex]
+    }));
+  };
+
+  const getMilestoneConfig = (type) => {
+    return milestoneIcons[type] || milestoneIcons.development;
+  };
+
+  if (!timeline || !timeline.phases) return null;
+
+  return (
+    <div 
+      ref={timelineRef}
+      className={`mt-8 p-6 rounded-xl border ${
+        isDark 
+          ? 'bg-gray-800/50 border-gray-700/50' 
+          : 'bg-gray-50/50 border-gray-200/50'
+      } backdrop-blur-sm`}
+    >
+      {/* Timeline Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <Clock className={`w-6 h-6 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+        <h4 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          Project Timeline
+        </h4>
+        <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+          isDark 
+            ? 'bg-blue-900/30 text-blue-300 border border-blue-700/30' 
+            : 'bg-blue-100 text-blue-700 border border-blue-200'
+        }`}>
+          {timeline.totalDuration}
+        </div>
+      </div>
+
+      {/* Timeline Overview Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className={`p-3 rounded-lg ${
+          isDark ? 'bg-gray-700/50' : 'bg-white/70'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
+          <div className={`text-2xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+            {timeline.phases.length}
+          </div>
+          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Phases
+          </div>
+        </div>
+        <div className={`p-3 rounded-lg ${
+          isDark ? 'bg-gray-700/50' : 'bg-white/70'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
+          <div className={`text-2xl font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+            {timeline.phases.reduce((acc, phase) => acc + (phase.milestones?.length || 0), 0)}
+          </div>
+          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Milestones
+          </div>
+        </div>
+        <div className={`p-3 rounded-lg ${
+          isDark ? 'bg-gray-700/50' : 'bg-white/70'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
+          <div className={`text-2xl font-bold ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
+            {timeline.teamSize || 'Solo'}
+          </div>
+          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Team Size
+          </div>
+        </div>
+        <div className={`p-3 rounded-lg ${
+          isDark ? 'bg-gray-700/50' : 'bg-white/70'
+        } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'}`}>
+          <div className={`text-2xl font-bold ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>
+            {timeline.methodology || 'Agile'}
+          </div>
+          <div className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Methodology
+          </div>
+        </div>
+      </div>
+
+      {/* Animated Timeline */}
+      <div className="relative">
+        {/* Animated Timeline Line */}
+        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 to-gray-300 opacity-30"></div>
+        <motion.div 
+          className={`absolute left-6 top-0 w-0.5 bg-gradient-to-b ${
+            isDark 
+              ? 'from-blue-400 via-purple-400 to-green-400' 
+              : 'from-blue-500 via-purple-500 to-green-500'
+          } shadow-lg`}
+          style={{
+            height: `${lineProgress.get()}%`,
+            transition: 'height 0.3s ease-out'
+          }}
+          initial={{ height: '0%' }}
+          animate={{ height: `${lineProgress.get()}%` }}
+        />
+
+        {/* Timeline Phases */}
+        <div className="space-y-8">
+          {timeline.phases.map((phase, phaseIndex) => {
+            const isExpanded = expandedPhases[phaseIndex];
+            
+            return (
+              <motion.div
+                key={phaseIndex}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: phaseIndex * 0.1 }}
+                className="relative pl-16"
+              >
+                {/* Phase Circle */}
+                <div className={`absolute -left-1 top-2 w-8 h-8 rounded-full border-4 ${
+                  isDark 
+                    ? 'bg-gray-800 border-blue-400' 
+                    : 'bg-white border-blue-500'
+                } flex items-center justify-center shadow-lg`}>
+                  <div className={`w-3 h-3 rounded-full ${
+                    isDark ? 'bg-blue-400' : 'bg-blue-500'
+                  }`} />
+                </div>
+
+                {/* Phase Header */}
+                <div 
+                  className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+                    isDark 
+                      ? 'bg-gray-700/30 border-gray-600/50 hover:bg-gray-700/50' 
+                      : 'bg-white/70 border-gray-200/50 hover:bg-white/90'
+                  } backdrop-blur-sm`}
+                  onClick={() => togglePhaseExpansion(phaseIndex)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <h5 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        Phase {phaseIndex + 1}: {phase.name}
+                      </h5>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        isDark 
+                          ? 'bg-blue-900/30 text-blue-300' 
+                          : 'bg-blue-100 text-blue-700'
+                      }`}>
+                        {phase.duration}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {phase.milestones && (
+                        <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {phase.milestones.length} milestones
+                        </span>
+                      )}
+                      {isExpanded ? (
+                        <ChevronUp className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+                      ) : (
+                        <ChevronDown className={`w-5 h-5 ${isDark ? 'text-gray-400' : 'text-gray-600'}`} />
+                      )}
+                    </div>
+                  </div>
+                  
+                  <p className={`mt-2 text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {phase.description}
+                  </p>
+                </div>
+
+                {/* Expandable Milestones */}
+                <AnimatePresence>
+                  {isExpanded && phase.milestones && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 ml-4 space-y-3 overflow-hidden"
+                    >
+                      {phase.milestones.map((milestone, milestoneIndex) => {
+                        const config = getMilestoneConfig(milestone.type);
+                        const IconComponent = config.icon;
+
+                        return (
+                          <motion.div
+                            key={milestoneIndex}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: milestoneIndex * 0.05 }}
+                            className={`flex items-start gap-3 p-3 rounded-lg ${
+                              isDark 
+                                ? 'bg-gray-800/50 border border-gray-700/50' 
+                                : 'bg-gray-50/70 border border-gray-200/50'
+                            }`}
+                          >
+                            {/* Milestone Icon */}
+                            <div 
+                              className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+                              style={{ 
+                                backgroundColor: isDark ? config.color + '20' : config.bgColor,
+                                color: config.color 
+                              }}
+                            >
+                              <IconComponent className="w-4 h-4" />
+                            </div>
+
+                            {/* Milestone Content */}
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <h6 className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                                  {milestone.name}
+                                </h6>
+                                <span 
+                                  className="px-2 py-0.5 rounded text-xs font-medium"
+                                  style={{ 
+                                    backgroundColor: isDark ? config.color + '20' : config.bgColor,
+                                    color: config.color 
+                                  }}
+                                >
+                                  {milestone.type}
+                                </span>
+                              </div>
+                              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                                {milestone.description}
+                              </p>
+                              {milestone.deliverables && (
+                                <div className="mt-2 flex flex-wrap gap-1">
+                                  {milestone.deliverables.map((deliverable, idx) => (
+                                    <span 
+                                      key={idx}
+                                      className={`px-2 py-0.5 rounded text-xs ${
+                                        isDark 
+                                          ? 'bg-gray-700 text-gray-300' 
+                                          : 'bg-gray-100 text-gray-700'
+                                      }`}
+                                    >
+                                      {deliverable}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Timeline Completion */}
+        <div className="relative pl-16 mt-8">
+          <div className={`absolute -left-1 top-2 w-8 h-8 rounded-full border-4 ${
+            isDark 
+              ? 'bg-gray-800 border-green-400' 
+              : 'bg-white border-green-500'
+          } flex items-center justify-center shadow-lg`}>
+            <CheckCircle className={`w-4 h-4 ${isDark ? 'text-green-400' : 'text-green-500'}`} />
+          </div>
+          
+          <div className={`p-4 rounded-lg border ${
+            isDark 
+              ? 'bg-green-900/20 border-green-700/50' 
+              : 'bg-green-50/70 border-green-200/50'
+          }`}>
+            <h5 className={`font-semibold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+              Project Completed
+            </h5>
+            <p className={`text-sm mt-1 ${isDark ? 'text-green-300' : 'text-green-700'}`}>
+              All phases successfully delivered within timeline
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Projects = () => {
   const { isDark } = useTheme();
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -1221,7 +1531,7 @@ const Projects = () => {
 
                   {/* Quick Stats */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className={`p-4 rounded-2xl ${
+                    <div className={`p-4 rounded-lg ${
                       isDark ? 'bg-gray-800/50 border border-gray-700/50' : 'bg-gray-50/50 border border-gray-200/50'
                     }`}>
                       <div className="flex items-center gap-2 mb-1">
@@ -1235,7 +1545,7 @@ const Projects = () => {
                       </span>
                     </div>
                     
-                    <div className={`p-4 rounded-2xl ${
+                    <div className={`p-4 rounded-lg ${
                       isDark ? 'bg-gray-800/50 border border-gray-700/50' : 'bg-gray-50/50 border border-gray-200/50'
                     }`}>
                       <div className="flex items-center gap-2 mb-1">
@@ -1602,145 +1912,10 @@ const Projects = () => {
 
                 {/* Project Timeline */}
                 {expandedDiagram.projectTimeline && (
-                  <div className="mt-8">
-                    <div className={`flex items-center gap-3 mb-6 p-4 rounded-lg border ${
-                      isDark ? 'bg-gradient-to-r from-purple-900/20 to-blue-900/20 border-purple-500/30' 
-                             : 'bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200'
-                    }`}>
-                      <Calendar className={`w-6 h-6 ${
-                        isDark ? 'text-purple-400' : 'text-purple-600'
-                      }`} />
-                      <div>
-                        <h4 className={`text-xl font-bold ${
-                          isDark ? 'text-gray-100' : 'text-gray-900'
-                        }`}>
-                          Project Timeline
-                        </h4>
-                        <p className={`text-sm ${
-                          isDark ? 'text-purple-300' : 'text-purple-700'
-                        }`}>
-                          Total Duration: {expandedDiagram.projectTimeline.totalDuration} • {expandedDiagram.projectTimeline.phases.length} Phases
-                        </p>
-                      </div>
-                    </div>
-                    
-                    {/* Timeline Phases */}
-                    <div className="relative">
-                      {/* Timeline Line */}
-                      <div className={`absolute left-6 top-0 bottom-0 w-0.5 ${
-                        isDark ? 'bg-gradient-to-b from-purple-500 via-blue-500 to-green-500' 
-                               : 'bg-gradient-to-b from-purple-400 via-blue-400 to-green-400'
-                      }`}></div>
-                      
-                      <div className="space-y-6">
-                        {expandedDiagram.projectTimeline.phases.map((phase, phaseIndex) => (
-                          <div key={phase.id} className="relative">
-                            {/* Phase Number Circle */}
-                            <div className={`absolute left-3 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold z-10 ${
-                              isDark ? 'bg-gradient-to-br from-purple-500 to-blue-500 text-white shadow-lg' 
-                                     : 'bg-gradient-to-br from-purple-400 to-blue-400 text-white shadow-md'
-                            }`}>
-                              {phaseIndex + 1}
-                            </div>
-                            
-                            {/* Phase Content */}
-                            <div className={`ml-12 border rounded-xl overflow-hidden shadow-lg ${
-                              isDark ? 'border-gray-700/50 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm' 
-                                     : 'border-gray-200 bg-gradient-to-br from-white to-gray-50/50 backdrop-blur-sm'
-                            }`}>
-                              {/* Phase Header */}
-                              <div className={`p-5 border-b ${
-                                isDark ? 'border-gray-700/50 bg-gray-800/30' : 'border-gray-100 bg-gray-50/30'
-                              }`}>
-                                <div className="flex items-start justify-between mb-3">
-                                  <div className="flex-1">
-                                    <h6 className={`text-lg font-bold mb-1 ${
-                                      isDark ? 'text-gray-100' : 'text-gray-900'
-                                    }`}>
-                                      {phase.title}
-                                    </h6>
-                                    <p className={`text-sm leading-relaxed ${
-                                      isDark ? 'text-gray-300' : 'text-gray-600'
-                                    }`}>
-                                      {phase.description}
-                                    </p>
-                                  </div>
-                                  <div className={`ml-4 px-3 py-1.5 rounded-full text-xs font-semibold ${
-                                    phase.status === 'completed' 
-                                      ? isDark ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
-                                               : 'bg-green-100 text-green-700 border border-green-200'
-                                      : isDark ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' 
-                                               : 'bg-yellow-100 text-yellow-700 border border-yellow-200'
-                                  }`}>
-                                    ✓ {phase.status}
-                                  </div>
-                                </div>
-                                <div className={`flex items-center gap-4 text-xs font-medium ${
-                                  isDark ? 'text-gray-400' : 'text-gray-500'
-                                }`}>
-                                  <span className="flex items-center gap-1">
-                                    <Clock className="w-3 h-3" />
-                                    {phase.duration}
-                                  </span>
-                                  <span>•</span>
-                                  <span>{phase.startDate} → {phase.endDate}</span>
-                                </div>
-                              </div>
-                              
-                              {/* Phase Milestones */}
-                              <div className="p-5">
-                                <div className="space-y-3">
-                                  {phase.milestones.map((milestone, milestoneIndex) => (
-                                    <div key={milestoneIndex} className={`group flex items-start gap-4 p-4 rounded-lg transition-all duration-200 hover:scale-[1.01] ${
-                                      isDark ? 'bg-gray-800/40 hover:bg-gray-800/60 border border-gray-700/30' 
-                                             : 'bg-white/60 hover:bg-white/80 border border-gray-200/50 hover:shadow-md'
-                                    }`}>
-                                      <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-all duration-200 ${
-                                        milestone.status === 'completed'
-                                          ? isDark ? 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg' 
-                                                   : 'bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-md'
-                                          : isDark ? 'bg-gray-700 text-gray-300 border border-gray-600' 
-                                                   : 'bg-gray-100 text-gray-500 border border-gray-300'
-                                      }`}>
-                                        {milestone.week}
-                                      </div>
-                                      <div className="flex-1 min-w-0">
-                                        <div className={`font-semibold text-sm mb-1 ${
-                                          isDark ? 'text-gray-100' : 'text-gray-900'
-                                        }`}>
-                                          Week {milestone.week}: {milestone.title}
-                                        </div>
-                                        <div className={`text-xs leading-relaxed ${
-                                          isDark ? 'text-gray-400' : 'text-gray-600'
-                                        }`}>
-                                          {milestone.deliverables.map((deliverable, idx) => (
-                                            <span key={idx} className={`inline-block mr-2 mb-1 px-2 py-0.5 rounded text-xs ${
-                                              isDark ? 'bg-gray-700/50 text-gray-300' : 'bg-gray-100 text-gray-600'
-                                            }`}>
-                                              {deliverable}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      </div>
-                                      <div className={`flex-shrink-0 transition-all duration-200 ${
-                                        milestone.status === 'completed' ? 'text-green-500' : 'text-gray-400'
-                                      }`}>
-                                        {milestone.status === 'completed' ? (
-                                          <CheckCircle className="w-5 h-5" />
-                                        ) : (
-                                          <Circle className="w-5 h-5" />
-                                        )}
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <TimelineComponent 
+                    timeline={expandedDiagram.projectTimeline} 
+                    isDark={isDark} 
+                  />
                 )}
               </div>
             </motion.div>
