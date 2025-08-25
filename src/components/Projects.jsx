@@ -36,10 +36,39 @@ import {
   AlertTriangle,
   Info,
   BarChart3,
-  Network
+  Network,
+  DollarSign
 } from 'lucide-react';
 import { skillsData } from '../data/skillsData';
 import { useTheme } from '../contexts/ThemeContext';
+
+// Add this as a style tag at the top of the component or in your CSS file
+const floatingAnimation = `
+  @keyframes subtle-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(1deg); }
+    50% { transform: translateY(-5px) rotate(0deg); }
+    75% { transform: translateY(-15px) rotate(-1deg); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  .cost-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .cost-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+`;
 
 // Professional Architecture Diagram Component with Enterprise Features
 const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
@@ -1205,134 +1234,224 @@ const CostBreakdownComponent = ({ architecture, timeline, isDark }) => {
   const grandTotal = categoryTotals.reduce((sum, category) => sum + category.total, 0);
 
   return (
-    <div className={`mt-8 p-8 rounded-2xl border-2 ${
+    <div className={`mt-8 p-8 rounded-3xl border-2 ${
       isDark 
-        ? 'bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/50' 
-        : 'bg-gradient-to-br from-gray-50/50 to-white/50 border-gray-200/50'
-    } backdrop-blur-lg shadow-xl relative overflow-hidden`}>
+        ? 'bg-gradient-to-br from-gray-800/60 to-gray-900/80 border-gray-700/60' 
+        : 'bg-gradient-to-br from-white/80 to-gray-50/90 border-gray-200/60'
+    } backdrop-blur-xl shadow-2xl relative overflow-hidden group`}>
       
-      {/* Subtle background pattern */}
-      <div className={`absolute inset-0 opacity-5 ${
-        isDark ? 'bg-gradient-to-br from-green-400 to-blue-400' : 'bg-gradient-to-br from-green-500 to-blue-500'
-      }`} style={{
-        backgroundImage: `radial-gradient(circle at 25% 25%, currentColor 2px, transparent 2px),
-                         radial-gradient(circle at 75% 75%, currentColor 2px, transparent 2px)`,
-        backgroundSize: '24px 24px'
-      }} />
+      {/* Enhanced background pattern with subtle animation */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className={`w-full h-full ${
+          isDark ? 'bg-gradient-to-br from-emerald-400 via-blue-400 to-purple-400' : 'bg-gradient-to-br from-emerald-500 via-blue-500 to-purple-500'
+        }`} style={{
+          backgroundImage: `radial-gradient(circle at 20% 20%, currentColor 3px, transparent 3px),
+                           radial-gradient(circle at 80% 80%, currentColor 2px, transparent 2px),
+                           radial-gradient(circle at 40% 60%, currentColor 1px, transparent 1px)`,
+          backgroundSize: '60px 60px, 40px 40px, 20px 20px',
+          animation: 'subtle-float 20s ease-in-out infinite'
+        }} />
+      </div>
+
+      {/* Floating orbs for visual interest */}
+      <div className="absolute top-4 right-4 w-32 h-32 bg-gradient-to-br from-emerald-400/10 to-blue-400/10 rounded-full blur-2xl animate-pulse" />
+      <div className="absolute bottom-4 left-4 w-24 h-24 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-xl animate-pulse delay-1000" />
       
       <div className="relative z-10">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className={`p-2 rounded-lg ${isDark ? 'bg-green-900/30' : 'bg-green-100'}`}>
-            <BarChart3 className={`w-6 h-6 ${isDark ? 'text-green-400' : 'text-green-600'}`} />
+        {/* Enhanced Header with better spacing and typography */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            <div className={`p-3 rounded-2xl ${
+              isDark 
+                ? 'bg-gradient-to-br from-emerald-900/40 to-emerald-800/40 border border-emerald-700/30' 
+                : 'bg-gradient-to-br from-emerald-100/80 to-emerald-50/80 border border-emerald-200/50'
+            } shadow-lg backdrop-blur-sm`}>
+              <BarChart3 className={`w-7 h-7 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+            </div>
+            <div>
+              <h4 className={`text-2xl font-bold tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Project Cost Analysis
+              </h4>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                Comprehensive financial breakdown and ROI analysis
+              </p>
+            </div>
           </div>
-          <h4 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Project Cost Breakdown
-          </h4>
-          <div className={`px-4 py-2 rounded-full text-sm font-bold ${
+          <div className={`px-6 py-3 rounded-2xl text-base font-bold shadow-lg ${
             isDark 
-              ? 'bg-green-900/30 text-green-300 border border-green-700/30' 
-              : 'bg-green-100 text-green-700 border border-green-200'
-          }`}>
-            ${grandTotal.toLocaleString()}/month total
+              ? 'bg-gradient-to-r from-emerald-900/50 to-emerald-800/50 text-emerald-300 border border-emerald-700/30' 
+              : 'bg-gradient-to-r from-emerald-100/90 to-emerald-50/90 text-emerald-700 border border-emerald-200/50'
+          } backdrop-blur-sm`}>
+            <span className="text-sm opacity-75">Total Budget</span>
+            <div className="text-xl">${grandTotal.toLocaleString()}<span className="text-sm opacity-75">/mo</span></div>
           </div>
         </div>
 
-        {/* Cost Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+        {/* Enhanced Cost Summary Cards with improved animations and styling */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {categoryTotals.map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className={`p-4 rounded-xl border ${
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: index * 0.15,
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -8,
+                transition: { duration: 0.2 }
+              }}
+              className={`relative p-6 rounded-2xl border overflow-hidden group cursor-pointer ${
                 isDark 
-                  ? 'bg-gray-700/40 border-gray-600/50 backdrop-blur-sm' 
-                  : 'bg-white/80 border-gray-200/50 backdrop-blur-sm'
-              } shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
+                  ? 'bg-gradient-to-br from-gray-700/60 to-gray-800/60 border-gray-600/40 hover:border-gray-500/60' 
+                  : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-gray-200/40 hover:border-gray-300/60'
+              } backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300`}
             >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl">{category.icon}</span>
-                <div>
-                  <div className={`text-2xl font-bold mb-1`} style={{ color: category.color }}>
+              {/* Animated background gradient on hover */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                style={{
+                  background: `linear-gradient(135deg, ${category.color}20, ${category.color}05)`
+                }}
+              />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`p-3 rounded-xl shadow-md ${
+                    isDark ? 'bg-gray-600/40' : 'bg-white/80'
+                  }`}>
+                    <span className="text-3xl filter drop-shadow-sm">{category.icon}</span>
+                  </div>
+                  <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                    isDark ? 'bg-gray-600/50 text-gray-300' : 'bg-gray-100/80 text-gray-600'
+                  }`}>
+                    {((category.total / grandTotal) * 100).toFixed(1)}%
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className={`text-3xl font-black tracking-tight`} style={{ color: category.color }}>
                     ${category.total.toLocaleString()}
                   </div>
-                  <div className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <div className={`text-sm font-semibold leading-tight ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     {category.name}
+                  </div>
+                  <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                    per month
+                  </div>
+                </div>
+
+                {/* Enhanced progress bar with animation */}
+                <div className="mt-4">
+                  <div className={`w-full h-2 rounded-full overflow-hidden ${
+                    isDark ? 'bg-gray-600/40' : 'bg-gray-200/60'
+                  }`}>
+                    <motion.div 
+                      className="h-full rounded-full shadow-sm"
+                      style={{ backgroundColor: category.color }}
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(category.total / grandTotal) * 100}%` }}
+                      transition={{ 
+                        delay: index * 0.15 + 0.5,
+                        duration: 0.8,
+                        ease: "easeOut"
+                      }}
+                    />
                   </div>
                 </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
-                  className="h-2 rounded-full transition-all duration-500"
-                  style={{ 
-                    width: `${(category.total / grandTotal) * 100}%`,
-                    backgroundColor: category.color 
-                  }}
-                />
-              </div>
-              <div className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-                {((category.total / grandTotal) * 100).toFixed(1)}% of total
-              </div>
+              
+              {/* Subtle corner accent */}
+              <div 
+                className="absolute top-0 right-0 w-20 h-20 rounded-bl-full opacity-5"
+                style={{ backgroundColor: category.color }}
+              />
             </motion.div>
           ))}
         </div>
 
-        {/* Detailed Breakdown */}
-        <div className="space-y-6">
+        {/* Enhanced Detailed Breakdown with improved layout */}
+        <div className="space-y-8">
           {categoryTotals.filter(cat => cat.items.length > 0).map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: categoryIndex * 0.1 }}
-              className={`p-6 rounded-xl border ${
+              transition={{ delay: categoryIndex * 0.15 }}
+              className={`p-8 rounded-3xl border ${
                 isDark 
-                  ? 'bg-gray-800/30 border-gray-700/50' 
-                  : 'bg-white/70 border-gray-200/50'
-              } backdrop-blur-sm`}
+                  ? 'bg-gradient-to-br from-gray-800/40 to-gray-900/40 border-gray-700/40' 
+                  : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/40'
+              } backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group`}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl">{category.icon}</span>
-                <h5 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {category.name}
-                </h5>
-                <div 
-                  className="px-3 py-1 rounded-full text-sm font-bold text-white"
-                  style={{ backgroundColor: category.color }}
-                >
-                  ${category.total.toLocaleString()}/mo
+              {/* Enhanced category header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-4">
+                  <div className={`p-4 rounded-2xl shadow-md ${
+                    isDark ? 'bg-gray-700/50' : 'bg-white/90'
+                  } group-hover:scale-110 transition-transform duration-300`}>
+                    <span className="text-2xl filter drop-shadow-sm">{category.icon}</span>
+                  </div>
+                  <div>
+                    <h5 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      {category.name}
+                    </h5>
+                    <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                      {category.items.length} items • Monthly cost breakdown
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div 
+                    className="px-5 py-3 rounded-2xl text-lg font-bold text-white shadow-lg"
+                    style={{ backgroundColor: category.color }}
+                  >
+                    ${category.total.toLocaleString()}
+                    <span className="text-sm opacity-80 ml-1">/mo</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid gap-3">
+              {/* Enhanced item grid */}
+              <div className="grid gap-4">
                 {category.items.map((item, itemIndex) => (
                   <motion.div
                     key={itemIndex}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (categoryIndex * 0.1) + (itemIndex * 0.05) }}
-                    className={`flex items-center justify-between p-3 rounded-lg ${
+                    transition={{ delay: (categoryIndex * 0.15) + (itemIndex * 0.08) }}
+                    className={`flex items-center justify-between p-5 rounded-2xl border ${
                       isDark 
-                        ? 'bg-gray-700/30 border border-gray-600/30' 
-                        : 'bg-gray-50/70 border border-gray-200/30'
-                    }`}
+                        ? 'bg-gradient-to-r from-gray-700/30 to-gray-800/30 border-gray-600/30 hover:border-gray-500/50' 
+                        : 'bg-gradient-to-r from-gray-50/80 to-white/80 border-gray-200/30 hover:border-gray-300/50'
+                    } hover:shadow-md transition-all duration-300 group/item`}
                   >
-                    <div className="flex-1">
-                      <div className={`font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-semibold text-base ${isDark ? 'text-white' : 'text-gray-900'} group-hover/item:text-blue-600 transition-colors duration-200`}>
                         {item.name}
                       </div>
-                      <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <div className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-600'} leading-relaxed`}>
                         {item.description}
                       </div>
+                      <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mt-2 ${
+                        isDark ? 'bg-gray-600/50 text-gray-300' : 'bg-gray-100/80 text-gray-600'
+                      }`}>
+                        {item.category}
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className={`text-lg font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
+                    <div className="text-right ml-6">
+                      <div className={`text-2xl font-black ${isDark ? 'text-emerald-400' : 'text-emerald-600'} group-hover/item:scale-110 transition-transform duration-200`}>
                         ${item.monthlyCost.toLocaleString()}
                       </div>
-                      <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-                        /month
+                      <div className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'} font-medium`}>
+                        per month
+                      </div>
+                      <div className={`text-xs mt-1 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
+                        {((item.monthlyCost / category.total) * 100).toFixed(1)}% of category
                       </div>
                     </div>
                   </motion.div>
@@ -1342,42 +1461,112 @@ const CostBreakdownComponent = ({ architecture, timeline, isDark }) => {
           ))}
         </div>
 
-        {/* ROI and Business Value */}
-        <div className={`mt-8 p-6 rounded-xl border ${
-          isDark 
-            ? 'bg-gradient-to-r from-blue-900/20 to-green-900/20 border-blue-700/50' 
-            : 'bg-gradient-to-r from-blue-50/80 to-green-50/80 border-blue-200/50'
-        } backdrop-blur-sm`}>
-          <h5 className={`font-bold text-lg mb-4 ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
-            💡 Investment Analysis
-          </h5>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/70'}`}>
-              <div className={`text-sm font-medium mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Development ROI
+        {/* Enhanced ROI and Business Value with modern card design */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className={`mt-10 p-8 rounded-3xl border-2 ${
+            isDark 
+              ? 'bg-gradient-to-br from-blue-900/30 via-purple-900/20 to-emerald-900/30 border-blue-700/40' 
+              : 'bg-gradient-to-br from-blue-50/90 via-purple-50/70 to-emerald-50/90 border-blue-200/50'
+          } backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden`}
+        >
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-br from-emerald-400/10 to-blue-400/10 rounded-full blur-2xl animate-pulse delay-1000" />
+          
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-8">
+              <div className={`p-4 rounded-2xl ${
+                isDark 
+                  ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border border-blue-700/30' 
+                  : 'bg-gradient-to-br from-blue-100/80 to-purple-100/80 border border-blue-200/50'
+              } shadow-lg backdrop-blur-sm group-hover:scale-110 transition-transform duration-300`}>
+                <span className="text-3xl">💡</span>
               </div>
-              <div className={`text-xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'}`}>
-                {Math.floor(Math.random() * 200) + 150}%
+              <div>
+                <h5 className={`font-black text-2xl ${isDark ? 'text-blue-400' : 'text-blue-600'} tracking-tight`}>
+                  Investment Analysis
+                </h5>
+                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                  ROI projections and business value assessment
+                </p>
               </div>
             </div>
-            <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/70'}`}>
-              <div className={`text-sm font-medium mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Break-even Period
-              </div>
-              <div className={`text-xl font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
-                {Math.floor(Math.random() * 8) + 6} months
-              </div>
-            </div>
-            <div className={`p-4 rounded-lg ${isDark ? 'bg-gray-800/50' : 'bg-white/70'}`}>
-              <div className={`text-sm font-medium mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Operational Savings
-              </div>
-              <div className={`text-xl font-bold ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
-                ${Math.floor(Math.random() * 50000) + 25000}/mo
-              </div>
+            
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.2 }}
+                className={`p-6 rounded-2xl ${
+                  isDark ? 'bg-gradient-to-br from-emerald-900/40 to-emerald-800/40' : 'bg-gradient-to-br from-emerald-100/80 to-emerald-50/80'
+                } backdrop-blur-sm shadow-lg border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`p-2 rounded-lg ${isDark ? 'bg-emerald-800/50' : 'bg-emerald-200/50'}`}>
+                    <TrendingUp className={`w-5 h-5 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                  </div>
+                  <div className={`text-sm font-semibold ${isDark ? 'text-emerald-300' : 'text-emerald-700'}`}>
+                    Development ROI
+                  </div>
+                </div>
+                <div className={`text-4xl font-black ${isDark ? 'text-emerald-400' : 'text-emerald-600'} mb-2`}>
+                  {Math.floor(Math.random() * 200) + 150}%
+                </div>
+                <div className={`text-xs ${isDark ? 'text-emerald-500' : 'text-emerald-600'} font-medium`}>
+                  Expected return on investment
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.2 }}
+                className={`p-6 rounded-2xl ${
+                  isDark ? 'bg-gradient-to-br from-blue-900/40 to-blue-800/40' : 'bg-gradient-to-br from-blue-100/80 to-blue-50/80'
+                } backdrop-blur-sm shadow-lg border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`p-2 rounded-lg ${isDark ? 'bg-blue-800/50' : 'bg-blue-200/50'}`}>
+                    <Clock className={`w-5 h-5 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+                  </div>
+                  <div className={`text-sm font-semibold ${isDark ? 'text-blue-300' : 'text-blue-700'}`}>
+                    Break-even Period
+                  </div>
+                </div>
+                <div className={`text-4xl font-black ${isDark ? 'text-blue-400' : 'text-blue-600'} mb-2`}>
+                  {Math.floor(Math.random() * 8) + 6}
+                </div>
+                <div className={`text-xs ${isDark ? 'text-blue-500' : 'text-blue-600'} font-medium`}>
+                  months to profitability
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.2 }}
+                className={`p-6 rounded-2xl ${
+                  isDark ? 'bg-gradient-to-br from-purple-900/40 to-purple-800/40' : 'bg-gradient-to-br from-purple-100/80 to-purple-50/80'
+                } backdrop-blur-sm shadow-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 sm:col-span-2 lg:col-span-1`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`p-2 rounded-lg ${isDark ? 'bg-purple-800/50' : 'bg-purple-200/50'}`}>
+                    <DollarSign className={`w-5 h-5 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+                  </div>
+                  <div className={`text-sm font-semibold ${isDark ? 'text-purple-300' : 'text-purple-700'}`}>
+                    Operational Savings
+                  </div>
+                </div>
+                <div className={`text-4xl font-black ${isDark ? 'text-purple-400' : 'text-purple-600'} mb-2`}>
+                  ${Math.floor(Math.random() * 50000) + 25000}
+                </div>
+                <div className={`text-xs ${isDark ? 'text-purple-500' : 'text-purple-600'} font-medium`}>
+                  monthly cost reduction
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -1458,7 +1647,7 @@ const TimelineComponent = ({ timeline, isDark }) => {
 
       {/* Timeline Overview Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        <div className={`p-4 rounded-xl ${
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
           isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
         } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
           <div className={`text-3xl font-bold ${isDark ? 'text-green-400' : 'text-green-600'} mb-1`}>
@@ -1468,7 +1657,7 @@ const TimelineComponent = ({ timeline, isDark }) => {
             Development Phases
           </div>
         </div>
-        <div className={`p-4 rounded-xl ${
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
           isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
         } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
           <div className={`text-3xl font-bold ${isDark ? 'text-blue-400' : 'text-blue-600'} mb-1`}>
@@ -1478,7 +1667,7 @@ const TimelineComponent = ({ timeline, isDark }) => {
             Key Milestones
           </div>
         </div>
-        <div className={`p-4 rounded-xl ${
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
           isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
         } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
           <div className={`text-3xl font-bold ${isDark ? 'text-purple-400' : 'text-purple-600'} mb-1`}>
@@ -1488,7 +1677,7 @@ const TimelineComponent = ({ timeline, isDark }) => {
             Team Size
           </div>
         </div>
-        <div className={`p-4 rounded-xl ${
+        <div className={`flex items-center gap-2 px-4 py-2 rounded-xl ${
           isDark ? 'bg-gray-700/40 backdrop-blur-sm' : 'bg-white/80 backdrop-blur-sm'
         } border ${isDark ? 'border-gray-600/50' : 'border-gray-200/50'} shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}>
           <div className={`text-3xl font-bold ${isDark ? 'text-orange-400' : 'text-orange-600'} mb-1`}>
@@ -1708,6 +1897,17 @@ const Projects = () => {
   const [expandedTechs, setExpandedTechs] = useState({});
   const [expandedFeatures, setExpandedFeatures] = useState({});
   const [expandedDiagram, setExpandedDiagram] = useState(null);
+
+  // Inject the CSS animations for cost breakdown
+  useEffect(() => {
+    const styleId = 'cost-breakdown-animations';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = floatingAnimation;
+      document.head.appendChild(style);
+    }
+  }, []);
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTechnology, setSelectedTechnology] = useState('All');
@@ -1839,7 +2039,7 @@ const Projects = () => {
           >
             <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full mb-6 ${
               isDark ? 'bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-800/30' 
-                     : 'bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50'
+                     : 'bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200'
             }`}>
               <Briefcase className={`w-5 h-5 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
               <span className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-blue-700'}`}>
@@ -2401,37 +2601,18 @@ const Projects = () => {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {/* Empty State */}
-        {sortedProjects.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center py-16"
-          >
-            <Circle className={`w-16 h-16 mx-auto mb-4 ${
-              isDark ? 'text-gray-700' : 'text-gray-300'
-            }`} />
-            <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              No projects found
-            </h3>
-            <p className={`text-gray-500 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Try adjusting your filters or search terms.
-            </p>
-          </motion.div>
-        )}
       </div>
 
-      {/* Project Details Modal */}
-      <AnimatePresence>
-        {expandedDiagram && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setExpandedDiagram(null)}
-          >
+        {/* Modal for expanded diagram */}
+        <AnimatePresence>
+          {expandedDiagram && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setExpandedDiagram(null)}
+            >
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -2536,9 +2717,9 @@ const Projects = () => {
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+          )}
+        </AnimatePresence>
+      </section>
   );
 };
 
