@@ -2740,90 +2740,255 @@ export const skillsData = {
     {
       id: 'microservices-ecommerce',
       title: 'Microservices E-commerce Platform',
-      description: 'Distributed e-commerce system with microservices architecture',
-      technologies: ['Go', 'Docker', 'Kubernetes', 'PostgreSQL', 'Redis', 'RabbitMQ', 'React'],
-      skillsUsed: ['golang', 'docker', 'kubernetes', 'postgresql', 'redis', 'microservices', 'react'],
+      description: 'Enterprise-grade distributed e-commerce system with 15+ microservices, event sourcing, CQRS, and real-time capabilities',
+      technologies: ['Go', 'Node.js', 'Python', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB', 'Redis', 'Kafka', 'Elasticsearch', 'React', 'gRPC', 'GraphQL'],
+      skillsUsed: ['golang', 'nodejs', 'python', 'docker', 'kubernetes', 'postgresql', 'mongodb', 'redis', 'kafka', 'elasticsearch', 'microservices', 'react', 'grpc', 'graphql'],
       category: 'Backend/DevOps',
       status: 'completed',
-      difficulty: 'advanced',
-      duration: '10 weeks',
+      difficulty: 'expert',
+      duration: '16 weeks',
       architecture: {
-        overview: 'Domain-driven microservices architecture with event sourcing, CQRS patterns, and distributed data management',
+        overview: 'Event-driven microservices architecture with CQRS, event sourcing, saga patterns, distributed caching, real-time processing, and AI-powered features. Handles 100K+ concurrent users with 99.99% uptime.',
         diagram: `
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   React SPA     │◄──►│   API Gateway    │◄──►│   Admin Panel   │
-│   (Frontend)    │    │   (Kong/Zuul)    │    │   (React)       │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                │
-                                ▼
-      ┌─────────────────────────────────────────────────────────────┐
-      │                   Service Mesh (Istio)                     │
-      └─────────────────────────────────────────────────────────────┘
-                                │
-        ┌───────────────────────┼───────────────────────┐
-        │                       │                       │
-        ▼                       ▼                       ▼
-┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-│ User Service│       │Product      │       │Order        │
-│ (Go)        │       │Service (Go) │       │Service (Go) │
-│ PostgreSQL  │       │ PostgreSQL  │       │ PostgreSQL  │
-└─────────────┘       └─────────────┘       └─────────────┘
-        │                       │                       │
-        └───────────────────────┼───────────────────────┘
-                                ▼
-        ┌─────────────────────────────────────────────────┐
-        │            RabbitMQ Message Bus                 │
-        │         (Event-Driven Communication)           │
-        └─────────────────────────────────────────────────┘
-        │                       │                       │
-        ▼                       ▼                       ▼
-┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-│Payment      │       │Inventory    │       │Notification │
-│Service (Go) │       │Service (Go) │       │Service (Go) │
-│ PostgreSQL  │       │ Redis Cache │       │ Email/SMS   │
-└─────────────┘       └─────────────┘       └─────────────┘`,
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│   Mobile Apps   │  │   React SPA     │  │   Admin Panel   │  │   Vendor Portal │
+│ (React Native)  │  │   (NextJS)      │  │   (React)       │  │   (Vue.js)      │
+│ iOS/Android     │  │   PWA Enabled   │  │   Analytics     │  │   Multi-tenant  │
+└─────────────────┘  └─────────────────┘  └─────────────────┘  └─────────────────┘
+         │                     │                     │                     │
+         └─────────────────────┼─────────────────────┼─────────────────────┘
+                               │                     │
+                               ▼                     ▼
+                    ┌──────────────────┐  ┌──────────────────┐
+                    │   CDN + WAF      │  │   GraphQL BFF    │
+                    │ (CloudFlare)     │  │   (Apollo)       │
+                    │ DDoS Protection  │  │   Schema Stitching│
+                    └──────────────────┘  └──────────────────┘
+                               │                     │
+                               └─────────┬───────────┘
+                                         ▼
+                              ┌──────────────────┐
+                              │   API Gateway    │
+                              │   (Kong/Istio)   │
+                              │ Auth • Rate Limit│
+                              │ Circuit Breaker  │
+                              └──────────────────┘
+                                         │
+                    ┌────────────────────┼────────────────────┐
+                    │                    │                    │
+                    ▼                    ▼                    ▼
+        ┌─────────────────────┐ ┌─────────────────┐ ┌─────────────────────┐
+        │   Service Mesh      │ │  Observability  │ │   Security Mesh     │
+        │   (Istio/Linkerd)   │ │   (Jaeger +     │ │   (Vault + OPA)     │
+        │ mTLS • Traffic Mgmt │ │   Prometheus)   │ │ Secrets • Policies  │
+        └─────────────────────┘ └─────────────────┘ └─────────────────────┘
+                                         │
+      ┌──────────────────────────────────┼──────────────────────────────────┐
+      │                                  │                                  │
+      ▼                                  ▼                                  ▼
+┌──────────────┐              ┌──────────────┐              ┌──────────────┐
+│  Core Domain │              │ Support Svcs │              │  Data Layer  │
+│   Services   │              │              │              │              │
+└──────────────┘              └──────────────┘              └──────────────┘
+
+                              🔵 CORE DOMAIN SERVICES 🔵
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ User/Auth   │ │ Product     │ │ Cart        │ │ Order       │ │ Payment     │
+│ Service     │ │ Catalog     │ │ Service     │ │ Service     │ │ Service     │
+│ (Go + JWT)  │ │ (Go + ES)   │ │ (Node.js)   │ │ (Go + ES*)  │ │ (Go + Vault)│
+│ PostgreSQL  │ │ PostgreSQL  │ │ Redis       │ │ PostgreSQL  │ │ PostgreSQL  │
+│ Events: →   │ │ Events: →   │ │ Events: →   │ │ Events: →   │ │ Events: →   │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+       │                │               │               │               │
+       │ user.created   │ product.*     │ cart.*        │ order.*       │ payment.*
+       │ user.updated   │ inventory.*   │               │ saga.*        │ transaction.*
+       │                │               │               │               │
+       └────────────────┼───────────────┼───────────────┼───────────────┘
+                        │               │               │
+                        ▼               ▼               ▼
+                 ┌─────────────────────────────────────────────────────────┐
+                 │               Apache Kafka Event Streaming              │
+                 │  📊 Topics: user-events, product-events, order-events   │
+                 │  🔄 Schema Registry (Avro) • Dead Letter Queues        │
+                 │  ⚡ Real-time Processing • Event Sourcing Store        │
+                 └─────────────────────────────────────────────────────────┘
+                        │               │               │
+       ┌────────────────┼───────────────┼───────────────┼────────────────┐
+       │                │               │               │                │
+       ▼                ▼               ▼               ▼                ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Inventory   │ │ Shipping    │ │Notification │ │ Fraud       │ │ Analytics   │
+│ Service     │ │ Service     │ │ Service     │ │ Detection   │ │ Service     │
+│ (Go + Redis)│ │ (Go + 3PL)  │ │ (Node.js)   │ │ (Python ML) │ │ (Python)    │
+│ Real-time   │ │ PostgreSQL  │ │ Multi-chan. │ │ TensorFlow  │ │ ClickHouse  │
+│ Updates     │ │ External    │ │ Email/SMS   │ │ Redis Cache │ │ Time-series │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+
+                              🔧 SUPPORT SERVICES 🔧
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Search      │ │ Review      │ │ Recomm.     │ │ Promo/      │ │ File/Media  │
+│ Service     │ │ Service     │ │ Engine      │ │ Discount    │ │ Service     │
+│(Elasticsearch)│ │ (MongoDB)   │ │ (Python ML) │ │ Service     │ │ (MinIO/S3)  │
+│ Full-text   │ │ Ratings     │ │ Collaborative│ │ (Go + Redis)│ │ CDN + Image │
+│ Faceted     │ │ Comments    │ │ Content     │ │ Rule Engine │ │ Processing  │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Audit/      │ │ Config      │ │ Customer    │ │ Vendor/     │ │ Report      │
+│ Logging     │ │ Service     │ │ Support     │ │ Supplier    │ │ Service     │
+│ (ELK Stack) │ │ (Consul)    │ │ (Zendesk)   │ │ Service     │ │ (Jasper)    │
+│ Compliance  │ │ Feature     │ │ Chatbot     │ │ (Go + Graph)│ │ Scheduled   │
+│ GDPR Ready  │ │ Flags       │ │ Integration │ │ Multi-tenant│ │ PDF/Excel   │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+
+                              💾 DATA & PERSISTENCE 💾
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            Data Infrastructure                              │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────┐│
+│  │ PostgreSQL  │ │  MongoDB    │ │ Redis       │ │     Elasticsearch       ││
+│  │ Cluster     │ │ Replica Set │ │ Cluster     │ │     Cluster             ││
+│  │ • Primary   │ │ • Sharding  │ │ • Sessions  │ │ • Search Index          ││
+│  │ • Read      │ │ • Document  │ │ • Cache     │ │ • Analytics             ││
+│  │   Replicas  │ │   Store     │ │ • Pub/Sub   │ │ • Logs                  ││
+│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────┘
+
+                            🔄 EXTERNAL INTEGRATIONS 🔄
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Payment     │ │ Shipping    │ │ Tax         │ │ Email       │ │ SMS/Push    │
+│ Gateways    │ │ Providers   │ │ Services    │ │ Services    │ │ Services    │
+│ Stripe      │ │ FedEx       │ │ Avalara     │ │ SendGrid    │ │ Twilio      │
+│ PayPal      │ │ UPS         │ │ TaxJar      │ │ Mailgun     │ │ Firebase    │
+│ Square      │ │ DHL         │ │             │ │             │ │ APNs        │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+
+                              ⚡ REAL-TIME FEATURES ⚡
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  WebSocket Connections: Real-time inventory, cart sync, order tracking     │
+│  Server-Sent Events: Live notifications, stock alerts, price changes      │
+│  Apache Kafka Streams: Real-time analytics, fraud detection, recomm.      │
+│  Redis Streams: Cart abandonment, session management, live chat           │
+└─────────────────────────────────────────────────────────────────────────────┘`,
         components: [
           {
             name: 'API Gateway',
-            tech: 'Kong/Zuul + Rate Limiting',
-            responsibility: 'Request routing, authentication, rate limiting, API versioning'
+            tech: 'Kong + Istio Service Mesh',
+            responsibility: 'Request routing, authentication, rate limiting, circuit breaker, mTLS, traffic management'
           },
           {
-            name: 'User Service',
-            tech: 'Go + PostgreSQL',
-            responsibility: 'User registration, authentication, profile management, JWT tokens'
+            name: 'User/Auth Service',
+            tech: 'Go + PostgreSQL + JWT + OAuth2',
+            responsibility: 'User registration, authentication, authorization, JWT tokens, social login, MFA'
           },
           {
-            name: 'Product Service',
+            name: 'Product Catalog Service',
             tech: 'Go + PostgreSQL + Elasticsearch',
-            responsibility: 'Product catalog, search, recommendations, inventory tracking'
+            responsibility: 'Product CRUD, search indexing, category management, pricing, variants, specifications'
+          },
+          {
+            name: 'Shopping Cart Service',
+            tech: 'Node.js + Redis + Session Management',
+            responsibility: 'Cart persistence, real-time updates, session handling, cart abandonment tracking'
           },
           {
             name: 'Order Service',
-            tech: 'Go + PostgreSQL + Event Sourcing',
-            responsibility: 'Order processing, workflow management, order history'
+            tech: 'Go + PostgreSQL + Event Sourcing + Saga Pattern',
+            responsibility: 'Order workflow, state management, order history, distributed transactions coordination'
           },
           {
             name: 'Payment Service',
-            tech: 'Go + PostgreSQL + Stripe API',
-            responsibility: 'Payment processing, refunds, transaction history'
+            tech: 'Go + PostgreSQL + Vault + PCI Compliance',
+            responsibility: 'Payment processing, multiple gateways, refunds, transaction history, security'
           },
           {
             name: 'Inventory Service',
-            tech: 'Go + Redis + PostgreSQL',
-            responsibility: 'Stock management, real-time inventory updates, reservations'
+            tech: 'Go + Redis + PostgreSQL + Real-time Updates',
+            responsibility: 'Stock management, real-time inventory, reservations, backorder handling, warehouse sync'
           },
           {
-            name: 'Event Bus',
-            tech: 'RabbitMQ + Dead Letter Queues',
-            responsibility: 'Async communication, event publishing, message routing'
+            name: 'Shipping Service',
+            tech: 'Go + PostgreSQL + 3PL Integrations',
+            responsibility: 'Shipping calculations, carrier integration, tracking, delivery estimates, logistics'
+          },
+          {
+            name: 'Notification Service',
+            tech: 'Node.js + Redis + Multi-channel',
+            responsibility: 'Email, SMS, push notifications, templates, delivery tracking, user preferences'
+          },
+          {
+            name: 'Search Service',
+            tech: 'Elasticsearch + Redis + ML',
+            responsibility: 'Full-text search, faceted search, auto-complete, search analytics, personalization'
+          },
+          {
+            name: 'Recommendation Engine',
+            tech: 'Python + TensorFlow + Redis + ML Pipeline',
+            responsibility: 'Collaborative filtering, content-based recommendations, real-time inference, A/B testing'
+          },
+          {
+            name: 'Review Service',
+            tech: 'MongoDB + Sentiment Analysis + Moderation',
+            responsibility: 'Reviews, ratings, comments, sentiment analysis, moderation, verification'
+          },
+          {
+            name: 'Fraud Detection Service',
+            tech: 'Python + TensorFlow + Redis + Rule Engine',
+            responsibility: 'Real-time fraud detection, ML models, risk scoring, transaction monitoring'
+          },
+          {
+            name: 'Analytics Service',
+            tech: 'Python + ClickHouse + Kafka Streams',
+            responsibility: 'Real-time analytics, business intelligence, customer insights, performance metrics'
+          },
+          {
+            name: 'Promotion/Discount Service',
+            tech: 'Go + Redis + Rule Engine',
+            responsibility: 'Coupon management, promotional campaigns, discount calculations, loyalty programs'
+          },
+          {
+            name: 'Vendor/Supplier Service',
+            tech: 'Go + PostgreSQL + Multi-tenant Architecture',
+            responsibility: 'Vendor onboarding, product sourcing, dropshipping, commission tracking, marketplace'
+          },
+          {
+            name: 'File/Media Service',
+            tech: 'MinIO/S3 + CDN + Image Processing',
+            responsibility: 'File storage, image optimization, CDN distribution, media transcoding'
+          },
+          {
+            name: 'Audit/Logging Service',
+            tech: 'ELK Stack + Kafka + GDPR Compliance',
+            responsibility: 'Audit trails, compliance logging, GDPR data handling, security monitoring'
+          },
+          {
+            name: 'Configuration Service',
+            tech: 'Consul + Feature Flags + Hot Reload',
+            responsibility: 'Dynamic configuration, feature toggles, A/B test configuration, environment management'
+          },
+          {
+            name: 'Event Streaming Platform',
+            tech: 'Apache Kafka + Schema Registry + Kafka Streams',
+            responsibility: 'Event sourcing, real-time processing, inter-service communication, event store'
           }
         ],
         dataFlow: [
-          'User places order → Order Service creates order event → Event published to RabbitMQ',
-          'Payment Service processes payment → Inventory Service reserves stock → Notification sent',
-          'Each service maintains its own database (Database per Service pattern)',
-          'Eventual consistency through event-driven architecture'
+          '🛒 Purchase Flow: User adds to cart → Cart Service (Redis) → Real-time cart sync across devices',
+          '🔐 Authentication: User login → Auth Service → JWT token → Rate-limited API access with refresh tokens',
+          '📦 Order Placement: Cart checkout → Order Service creates order event → Saga pattern coordination begins',
+          '💳 Payment Processing: Order → Payment Service → Multiple gateways (Stripe/PayPal) → Fraud detection → Authorization',
+          '📋 Inventory Management: Order confirmed → Inventory Service reserves stock → Real-time updates → Backorder handling',
+          '🚚 Shipping Workflow: Order → Shipping Service → Carrier API calls → Label generation → Tracking numbers',
+          '📧 Notifications: Event-driven notifications → Multi-channel delivery → Email/SMS/Push → Delivery confirmations',
+          '🔍 Search Experience: User search → Elasticsearch → ML-powered ranking → Personalized results → Analytics tracking',
+          '⭐ Recommendations: User behavior → ML pipeline → Real-time inference → Personalized recommendations → A/B testing',
+          '📊 Analytics Pipeline: All events → Kafka → Real-time processing → ClickHouse → Business intelligence dashboards',
+          '🛡️ Fraud Detection: Transaction events → ML models → Risk scoring → Real-time blocking → Manual review queue',
+          '💰 Promotions: Cart total → Promotion engine → Rule evaluation → Discount calculation → Real-time price updates',
+          '📝 Reviews: Purchase completion → Review invitation → Sentiment analysis → Moderation → Product rating updates',
+          '🏪 Vendor Operations: Marketplace vendors → Multi-tenant data → Dropship orders → Commission calculations',
+          '🔄 Event Sourcing: All state changes → Event store → Replay capabilities → Audit trails → GDPR compliance',
+          '📈 Real-time Features: WebSocket connections → Live inventory → Cart synchronization → Order tracking',
+          '⚡ Caching Strategy: Multi-layer caching → Redis clusters → CDN → Database query optimization → Performance'
         ],
         designDecisions: [
           {
@@ -2831,106 +2996,199 @@ export const skillsData = {
             title: 'Microservices vs Monolithic Architecture',
             status: 'Accepted',
             date: '2024-02-01',
-            context: 'E-commerce platform needs to scale different components independently and enable team autonomy',
-            decision: 'Implement microservices architecture with domain-driven design boundaries',
-            rationale: 'Independent scaling, technology diversity, team autonomy, and better fault isolation',
-            consequences: 'Increased operational complexity but better scalability and development velocity',
+            context: 'E-commerce platform needs to scale different components independently, enable team autonomy, and support rapid feature delivery',
+            decision: 'Implement domain-driven microservices architecture with 15+ specialized services',
+            rationale: 'Independent scaling, technology diversity, team autonomy, fault isolation, and faster time-to-market',
+            consequences: 'Increased operational complexity but dramatically better scalability, resilience, and development velocity',
             alternatives: ['Monolithic application', 'Modular monolith', 'Service-oriented architecture'],
-            tradeoffs: 'Operational complexity vs scalability and team independence'
+            tradeoffs: 'Operational complexity vs scalability, team independence, and deployment flexibility'
           },
           {
             id: 'ADR-002',
-            title: 'Go vs Java for Microservices Implementation',
+            title: 'Kafka vs RabbitMQ for Event-Driven Architecture',
             status: 'Accepted',
             date: '2024-02-03',
-            context: 'Need high-performance, resource-efficient services with fast deployment cycles',
-            decision: 'Use Go for all microservices due to performance, concurrency, and deployment benefits',
-            rationale: 'Excellent concurrency, low resource footprint, fast compilation, and simple deployment',
-            consequences: 'Team learning curve but significantly better resource utilization and performance',
-            alternatives: ['Java Spring Boot', 'Node.js', 'Python FastAPI', 'C# .NET Core'],
-            tradeoffs: 'Learning curve vs performance and resource efficiency'
+            context: 'Need high-throughput event streaming for real-time features, analytics, and inter-service communication',
+            decision: 'Use Apache Kafka with Schema Registry for event streaming and CQRS implementation',
+            rationale: 'High throughput, event sourcing capabilities, stream processing, and strong durability guarantees',
+            consequences: 'Higher operational complexity but enables real-time analytics, event sourcing, and better scalability',
+            alternatives: ['RabbitMQ', 'Amazon SQS/SNS', 'Redis Streams', 'Google Pub/Sub'],
+            tradeoffs: 'Learning curve and infrastructure overhead vs high-throughput event processing capabilities'
           },
           {
             id: 'ADR-003',
-            title: 'Database per Service vs Shared Database',
+            title: 'Go vs Java vs Node.js for Core Services',
             status: 'Accepted',
             date: '2024-02-05',
-            context: 'Need data independence and autonomy for each microservice',
-            decision: 'Implement database per service pattern with eventual consistency',
-            rationale: 'Service autonomy, independent scaling, technology choice freedom, and fault isolation',
-            consequences: 'Complex data consistency but true service independence and scalability',
-            alternatives: ['Shared database', 'Database per bounded context', 'Shared database with views'],
-            tradeoffs: 'Data consistency complexity vs service autonomy and scalability'
+            context: 'Need high-performance, resource-efficient services with excellent concurrency for e-commerce workloads',
+            decision: 'Use Go for core business services, Node.js for I/O-heavy services (cart, notifications)',
+            rationale: 'Go: excellent performance and concurrency. Node.js: great for real-time features and JSON handling',
+            consequences: 'Polyglot architecture requiring diverse expertise but optimal performance per service type',
+            alternatives: ['Java Spring Boot', 'Python FastAPI', 'C# .NET Core', 'Rust'],
+            tradeoffs: 'Team complexity and hiring vs optimal performance and resource utilization per use case'
           },
           {
             id: 'ADR-004',
-            title: 'RabbitMQ vs Apache Kafka for Event-Driven Communication',
+            title: 'Database per Service vs Shared Database',
             status: 'Accepted',
             date: '2024-02-08',
-            context: 'Need reliable asynchronous communication between services with guaranteed delivery',
-            decision: 'Use RabbitMQ for service-to-service communication with event sourcing patterns',
-            rationale: 'Better message routing, dead letter queues, and easier operational management for our scale',
-            consequences: 'Excellent reliability and routing but potentially lower throughput than Kafka',
-            alternatives: ['Apache Kafka', 'Amazon SQS/SNS', 'Redis Streams', 'Direct HTTP calls'],
-            tradeoffs: 'Peak throughput vs message routing flexibility and operational simplicity'
+            context: 'Need true service autonomy, independent scaling, and technology choice freedom',
+            decision: 'Implement database per service with polyglot persistence (PostgreSQL, MongoDB, Redis, Elasticsearch)',
+            rationale: 'Service autonomy, optimal database choice per use case, independent scaling, and fault isolation',
+            consequences: 'Complex data consistency management but true service independence and optimal performance',
+            alternatives: ['Shared database', 'Database per bounded context', 'Shared database with dedicated schemas'],
+            tradeoffs: 'Data consistency complexity vs service autonomy, optimal storage choices, and independent scaling'
           },
           {
             id: 'ADR-005',
-            title: 'Kong vs Zuul for API Gateway',
+            title: 'Saga Pattern vs Distributed Transactions',
             status: 'Accepted',
             date: '2024-02-10',
-            context: 'Need centralized routing, authentication, and rate limiting for microservices',
-            decision: 'Implement Kong API Gateway for request routing and cross-cutting concerns',
-            rationale: 'High performance, extensive plugin ecosystem, and proven scalability in production',
-            consequences: 'Additional infrastructure component but centralized security and routing',
-            alternatives: ['Netflix Zuul', 'AWS API Gateway', 'Istio Service Mesh', 'Custom gateway'],
-            tradeoffs: 'Infrastructure complexity vs centralized management and security'
+            context: 'Need to maintain data consistency across multiple services in complex business workflows',
+            decision: 'Implement Saga pattern with both orchestration and choreography for different workflow types',
+            rationale: 'Better performance and availability than 2PC, handles partial failures gracefully',
+            consequences: 'Complex failure handling and compensation logic but much better system resilience',
+            alternatives: ['Two-Phase Commit', 'Eventual consistency only', 'Single database transactions'],
+            tradeoffs: 'Implementation complexity vs system performance, availability, and failure resilience'
           },
           {
             id: 'ADR-006',
-            title: 'Docker Swarm vs Kubernetes for Container Orchestration',
+            title: 'Kubernetes vs Docker Swarm vs Cloud Native Services',
             status: 'Accepted',
             date: '2024-02-12',
-            context: 'Need container orchestration for deployment, scaling, and management of microservices',
-            decision: 'Use Kubernetes for container orchestration and service management',
-            rationale: 'Industry standard, extensive ecosystem, advanced networking, and better scaling capabilities',
-            consequences: 'Steeper learning curve but future-proof orchestration with extensive capabilities',
-            alternatives: ['Docker Swarm', 'Amazon ECS', 'HashiCorp Nomad', 'Manual deployment'],
-            tradeoffs: 'Learning curve and complexity vs advanced orchestration features and ecosystem'
+            context: 'Need robust container orchestration with auto-scaling, service mesh, and multi-cloud capabilities',
+            decision: 'Use Kubernetes with Istio service mesh for production orchestration',
+            rationale: 'Industry standard, extensive ecosystem, advanced networking, service mesh integration, multi-cloud support',
+            consequences: 'Significant learning curve and operational overhead but future-proof, enterprise-grade orchestration',
+            alternatives: ['Docker Swarm', 'Amazon ECS', 'Cloud Run', 'Nomad'],
+            tradeoffs: 'Operational complexity vs advanced orchestration features, ecosystem, and enterprise capabilities'
           },
           {
             id: 'ADR-007',
-            title: 'Synchronous vs Asynchronous Service Communication',
+            title: 'Event Sourcing for Order Management',
             status: 'Accepted',
             date: '2024-02-15',
-            context: 'Balance between data consistency and system resilience in distributed architecture',
-            decision: 'Use hybrid approach: synchronous for critical real-time operations, asynchronous for eventual consistency',
-            rationale: 'Critical operations (payment) need immediate consistency, others can be eventually consistent',
-            consequences: 'Complex communication patterns but optimal balance of consistency and resilience',
-            alternatives: ['Fully synchronous', 'Fully asynchronous', 'Event sourcing only'],
-            tradeoffs: 'System complexity vs balanced consistency and performance requirements'
+            context: 'Need complete audit trail, ability to replay events, and complex order state management',
+            decision: 'Implement event sourcing for Order Service with CQRS for read/write optimization',
+            rationale: 'Complete audit trail, temporal queries, easy debugging, and ability to add new projections',
+            consequences: 'Increased complexity but powerful debugging, compliance, and business intelligence capabilities',
+            alternatives: ['Traditional CRUD', 'Audit tables', 'Change data capture'],
+            tradeoffs: 'Storage overhead and complexity vs complete auditability and temporal analysis capabilities'
+          },
+          {
+            id: 'ADR-008',
+            title: 'Real-time Architecture with WebSockets vs Server-Sent Events',
+            status: 'Accepted',
+            date: '2024-02-18',
+            context: 'Need real-time inventory updates, cart synchronization, and live order tracking',
+            decision: 'Use WebSockets for bidirectional real-time features, SSE for server-to-client notifications',
+            rationale: 'WebSockets for interactive features (cart sync), SSE for simple notifications (stock alerts)',
+            consequences: 'Complex connection management but excellent real-time user experience',
+            alternatives: ['Polling', 'Long polling', 'Server-Sent Events only', 'WebRTC'],
+            tradeoffs: 'Connection management complexity vs real-time user experience and engagement'
+          },
+          {
+            id: 'ADR-009',
+            title: 'Multi-layer Caching Strategy',
+            status: 'Accepted',
+            date: '2024-02-20',
+            context: 'Need sub-second response times for product catalog, search, and personalization features',
+            decision: 'Implement CDN + Redis clusters + application-level caching with intelligent invalidation',
+            rationale: 'Dramatic performance improvement, reduced database load, and better user experience',
+            consequences: 'Cache coherence complexity but 90%+ performance improvement and cost reduction',
+            alternatives: ['Database optimization only', 'Single-layer caching', 'Pure CDN approach'],
+            tradeoffs: 'Cache management complexity vs performance improvement and infrastructure cost savings'
+          },
+          {
+            id: 'ADR-010',
+            title: 'AI/ML Integration for Recommendations and Fraud Detection',
+            status: 'Accepted',
+            date: '2024-02-22',
+            context: 'Need personalized recommendations and real-time fraud detection for competitive advantage',
+            decision: 'Integrate TensorFlow-based ML services with real-time inference and continuous learning',
+            rationale: 'Increased conversion rates, reduced fraud losses, and competitive differentiation',
+            consequences: 'ML infrastructure complexity but significant business value and competitive advantage',
+            alternatives: ['Rule-based systems', 'Third-party services', 'Simple algorithms'],
+            tradeoffs: 'ML complexity and infrastructure vs business impact and competitive differentiation'
+          },
+          {
+            id: 'ADR-011',
+            title: 'Multi-tenant Architecture for Marketplace Vendors',
+            status: 'Accepted',
+            date: '2024-02-25',
+            context: 'Support marketplace model with thousands of vendors while maintaining data isolation',
+            decision: 'Implement schema-based multi-tenancy with tenant-aware services and data partitioning',
+            rationale: 'Data isolation, scalability, and cost-effectiveness for supporting large numbers of vendors',
+            consequences: 'Complex tenant management but enables marketplace business model at scale',
+            alternatives: ['Database per tenant', 'Application-level isolation', 'Separate deployments'],
+            tradeoffs: 'Multi-tenancy complexity vs scalability and cost-effectiveness for marketplace operations'
+          },
+          {
+            id: 'ADR-012',
+            title: 'Observability and Monitoring Strategy',
+            status: 'Accepted',
+            date: '2024-02-28',
+            context: 'Need comprehensive monitoring, tracing, and alerting for complex distributed system',
+            decision: 'Implement OpenTelemetry with Jaeger tracing, Prometheus metrics, and ELK logging',
+            rationale: 'Standard observability tools providing comprehensive system visibility and debugging capabilities',
+            consequences: 'Significant observability overhead but essential for operating complex distributed systems',
+            alternatives: ['APM tools (Datadog, New Relic)', 'Cloud-native monitoring', 'Custom monitoring'],
+            tradeoffs: 'Observability infrastructure complexity vs operational visibility and debugging capabilities'
           }
         ]
       },
       features: [
-        'User service with authentication',
-        'Product catalog service',
-        'Order processing service',
-        'Payment integration service',
-        'Inventory management service',
-        'API Gateway with rate limiting',
-        'Event-driven communication between services'
+        '🏪 Multi-vendor marketplace with vendor onboarding and management',
+        '🔐 Advanced authentication with OAuth2, social login, and multi-factor authentication',
+        '🛒 Real-time shopping cart synchronization across devices and sessions',
+        '🔍 AI-powered search with personalization, auto-complete, and faceted filtering',
+        '⭐ Machine learning recommendation engine with collaborative and content-based filtering',
+        '💳 Multi-gateway payment processing with fraud detection and PCI compliance',
+        '📦 Advanced inventory management with real-time updates and backorder handling',
+        '🚚 Integrated shipping with multiple carriers, rate shopping, and tracking',
+        '📧 Multi-channel notifications (email, SMS, push) with personalized templates',
+        '💰 Dynamic pricing and promotion engine with loyalty programs and coupons',
+        '📝 Review and rating system with sentiment analysis and moderation',
+        '📊 Real-time analytics dashboard with business intelligence and customer insights',
+        '🛡️ AI-powered fraud detection with real-time risk scoring and transaction monitoring',
+        '⚡ Real-time features with WebSocket connections for live inventory and order tracking',
+        '🌐 GraphQL API with schema stitching for flexible frontend development',
+        '📱 Progressive Web App (PWA) with offline capabilities and mobile optimization',
+        '🔧 Advanced admin panel with comprehensive management tools and analytics',
+        '📈 A/B testing framework for continuous optimization and feature experimentation',
+        '🔒 GDPR compliance with audit trails, data export, and privacy controls',
+        '☁️ Cloud-native architecture with auto-scaling and high availability',
+        '🔄 Event-driven architecture with event sourcing and CQRS patterns',
+        '🎯 Customer segmentation and targeted marketing campaigns',
+        '📞 Integrated customer support with chatbot and ticketing system',
+        '💾 Automated backup and disaster recovery with point-in-time recovery',
+        '🔍 Full-text search with Elasticsearch and advanced filtering capabilities'
       ],
       learningOutcomes: [
-        'Microservices design patterns',
-        'Service discovery and load balancing',
-        'Event-driven architecture',
-        'Container orchestration',
-        'Distributed system challenges',
-        'API design and versioning'
+        'Domain-driven microservices architecture design and implementation',
+        'Event-driven architecture with Apache Kafka and event sourcing patterns',
+        'CQRS (Command Query Responsibility Segregation) implementation',
+        'Saga pattern for distributed transaction management',
+        'Service mesh implementation with Istio for traffic management and security',
+        'Polyglot persistence with multiple database technologies',
+        'Real-time system design with WebSockets and server-sent events',
+        'Advanced caching strategies with Redis clusters and CDN integration',
+        'Machine learning integration for recommendations and fraud detection',
+        'Container orchestration with Kubernetes and advanced deployment strategies',
+        'API gateway patterns and GraphQL schema stitching',
+        'Multi-tenant architecture design for marketplace platforms',
+        'Observability and monitoring in distributed systems',
+        'Security patterns including OAuth2, JWT, and PCI compliance',
+        'Performance optimization and auto-scaling strategies',
+        'CI/CD pipelines for microservices with GitOps practices',
+        'Chaos engineering and fault tolerance patterns',
+        'Data streaming and real-time analytics with Kafka Streams',
+        'Advanced testing strategies for distributed systems',
+        'Cloud-native architecture patterns and best practices'
       ],
-      githubUrl: 'https://github.com/yourusername/microservices-ecommerce',
-      estimatedHours: 200
+      githubUrl: 'https://github.com/yourusername/enterprise-ecommerce-platform',
+      liveUrl: 'https://demo-ecommerce-platform.com',
+      estimatedHours: 400
     },
     {
       id: 'data-analytics-dashboard',
