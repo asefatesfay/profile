@@ -445,79 +445,170 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
   };
 
   return (
-    <div className={`rounded-lg border shadow-inner transition-colors duration-300 ${
-      isDark ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'
+    <div className={`rounded-xl border shadow-lg transition-colors duration-300 overflow-hidden ${
+      isDark 
+        ? 'bg-gradient-to-br from-gray-900 to-gray-800 border-gray-700/50' 
+        : 'bg-gradient-to-br from-white to-gray-50 border-gray-200/50'
     }`}>
       <svg 
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         className="w-full h-auto block"
         preserveAspectRatio="xMidYMid meet"
+        style={{
+          background: isDark 
+            ? 'linear-gradient(135deg, #1f2937 0%, #111827 100%)' 
+            : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
+        }}
       >
-        {/* Enhanced definitions */}
+        {/* Enhanced definitions with theme-aware gradients */}
         <defs>
-          {/* Enhanced gradients */}
-          <linearGradient id="presentationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.95" />
-            <stop offset="30%" stopColor="#1d4ed8" stopOpacity="0.85" />
-            <stop offset="70%" stopColor="#1e40af" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#1e3a8a" stopOpacity="0.65" />
-          </linearGradient>
-          <linearGradient id="gatewayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#d97706" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#b45309" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="businessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#047857" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#064e3b" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#6d28d9" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#581c87" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="infraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ef4444" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#dc2626" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#b91c1c" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="externalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6b7280" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#4b5563" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#374151" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="cdnGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#0f766e" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#134e4a" stopOpacity="0.75" />
-          </linearGradient>
-          <linearGradient id="messagingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f97316" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#ea580c" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#c2410c" stopOpacity="0.75" />
-          </linearGradient>
+          {/* Theme-aware gradients for light mode */}
+          {!isDark && (
+            <>
+              <linearGradient id="presentationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#1d4ed8" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#1e40af" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="gatewayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#d97706" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#b45309" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="businessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#047857" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#064e3b" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#6d28d9" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#581c87" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="infraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ef4444" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#dc2626" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#b91c1c" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="externalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#6b7280" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#4b5563" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#374151" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="cdnGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#14b8a6" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#0f766e" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#134e4a" stopOpacity="0.7" />
+              </linearGradient>
+              <linearGradient id="messagingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f97316" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#ea580c" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#c2410c" stopOpacity="0.7" />
+              </linearGradient>
+            </>
+          )}
+          
+          {/* Theme-aware gradients for dark mode */}
+          {isDark && (
+            <>
+              <linearGradient id="presentationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#2563eb" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="gatewayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#d97706" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="businessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#34d399" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#10b981" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#059669" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#a78bfa" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="infraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#f87171" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#ef4444" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#dc2626" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="externalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#9ca3af" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#6b7280" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#4b5563" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="cdnGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#5eead4" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#14b8a6" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#0f766e" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="messagingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#fb923c" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#f97316" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.6" />
+              </linearGradient>
+            </>
+          )}
 
-          {/* Enhanced filters */}
+          {/* Enhanced filters with theme awareness */}
           <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="2" dy="4" stdDeviation="3" floodOpacity="0.3"/>
+            <feDropShadow 
+              dx="2" 
+              dy="4" 
+              stdDeviation="3" 
+              floodOpacity={isDark ? "0.6" : "0.3"}
+              floodColor={isDark ? "#000000" : "#1f2937"}
+            />
+          </filter>
+          
+          <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow 
+              dx="1" 
+              dy="1" 
+              stdDeviation="1" 
+              floodOpacity={isDark ? "0.8" : "0.5"}
+              floodColor={isDark ? "#000000" : "#1f2937"}
+            />
           </filter>
         </defs>
 
-        {/* Background */}
+        {/* Theme-aware background with subtle pattern */}
+        <defs>
+          <pattern id="gridPattern" patternUnits="userSpaceOnUse" width="20" height="20">
+            <path 
+              d="M 20 0 L 0 0 0 20" 
+              fill="none" 
+              stroke={isDark ? "#374151" : "#e5e7eb"} 
+              strokeWidth="0.5"
+              opacity="0.3"
+            />
+          </pattern>
+        </defs>
+        
         <rect 
           width="100%" 
           height="100%" 
-          fill={isDark ? '#1f2937' : '#f9fafb'}
+          fill={isDark ? '#111827' : '#f8fafc'}
           className="transition-colors duration-300"
         />
+        
+        <rect 
+          width="100%" 
+          height="100%" 
+          fill="url(#gridPattern)"
+          opacity="0.4"
+        />
 
-        {/* Enhanced layer backgrounds */}
+        {/* Enhanced layer backgrounds with better theme adaptation */}
         {layerBounds.map((layer, idx) => {
           const layerStyle = getLayerStyle(layer.type);
           return (
             <g key={`layer-bg-${idx}`}>
-              {/* Layer background with better gradient */}
+              {/* Layer background with theme-aware styling */}
               <rect
                 x={layer.x - 25}
                 y={layer.y - 15}
@@ -525,97 +616,97 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
                 height={layer.height + 30}
                 fill={`url(#${layerStyle.gradient})`}
                 rx="15"
-                opacity="0.15"
+                opacity={isDark ? "0.2" : "0.15"}
                 filter="url(#cardShadow)"
                 className="transition-all duration-300"
               />
               
-              {/* Layer border with glow */}
+              {/* Layer border with improved visibility */}
               <rect
                 x={layer.x - 25}
                 y={layer.y - 15}
                 width={layer.width + 50}
                 height={layer.height + 30}
                 fill="none"
-                stroke={layerStyle.borderColor}
-                strokeWidth="1.5"
+                stroke={isDark ? layerStyle.color : layerStyle.borderColor}
+                strokeWidth={isDark ? "2" : "1.5"}
                 strokeDasharray="8,4"
                 rx="15"
-                opacity="0.6"
+                opacity={isDark ? "0.8" : "0.6"}
                 className="transition-all duration-300"
                 filter="url(#cardShadow)"
               />
               
-              {/* Subtle inner glow */}
+              {/* Subtle inner highlight for depth */}
               <rect
                 x={layer.x - 20}
                 y={layer.y - 10}
                 width={layer.width + 40}
                 height={layer.height + 20}
                 fill="none"
-                stroke={layerStyle.color}
+                stroke={isDark ? '#ffffff' : layerStyle.color}
                 strokeWidth="0.5"
                 rx="12"
-                opacity="0.3"
+                opacity={isDark ? "0.1" : "0.3"}
               />
             </g>
           );
         })}
 
-        {/* Enhanced layer labels */}
+        {/* Enhanced layer labels with theme adaptation */}
         {layerBounds.map((layer, idx) => {
           const layerStyle = getLayerStyle(layer.type);
           const labelWidth = Math.max(layer.label.length * 8 + 50, 140);
           return (
             <g key={`layer-label-${idx}`}>
-              {/* Label background with gradient */}
+              {/* Label background with better theme support */}
               <rect
                 x={layer.x - 20}
                 y={layer.y - 40}
                 width={labelWidth}
                 height="28"
-                fill={`url(#${layerStyle.gradient})`}
+                fill={isDark ? '#1f2937' : '#ffffff'}
                 rx="14"
                 opacity="0.95"
                 filter="url(#cardShadow)"
+                stroke={layerStyle.color}
+                strokeWidth="2"
               />
               
-              {/* Label border */}
+              {/* Label gradient overlay */}
               <rect
-                x={layer.x - 20}
-                y={layer.y - 40}
-                width={labelWidth}
-                height="28"
-                fill="none"
-                stroke={layerStyle.borderColor}
-                strokeWidth="1"
-                rx="14"
-                opacity="0.8"
+                x={layer.x - 18}
+                y={layer.y - 38}
+                width={labelWidth - 4}
+                height="24"
+                fill={`url(#${layerStyle.gradient})`}
+                rx="12"
+                opacity={isDark ? "0.3" : "0.15"}
               />
               
-              {/* Layer icon */}
+              {/* Layer icon with better visibility */}
               <text
                 x={layer.x - 5}
                 y={layer.y - 20}
                 fontSize={isModal ? "16" : "12"}
                 textAnchor="start"
-                fill="white"
+                fill={layerStyle.color}
                 className="font-bold"
-                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
+                filter="url(#textShadow)"
               >
                 {layerStyle.icon}
               </text>
               
-              {/* Label text */}
+              {/* Label text with theme-aware coloring */}
               <text
                 x={layer.x + 15}
                 y={layer.y - 20}
                 fontSize={isModal ? "14" : "11"}
                 fontWeight="700"
                 textAnchor="start"
-                fill="white"
+                fill={isDark ? '#f3f4f6' : '#1f2937'}
                 className="font-bold"
-                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
+                filter="url(#textShadow)"
               >
                 {layer.label}
               </text>
@@ -623,69 +714,74 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
           );
         })}
 
-        {/* Static connection lines (no flying dots or animations) */}
+        {/* Enhanced connection lines with theme awareness */}
         {connections.map((connection, idx) => {
           const style = connectionStyles[connection.type] || connectionStyles.internal;
           
           return (
             <g key={`connection-${idx}`}>
-              {/* Clean connection path */}
+              {/* Connection path with enhanced styling */}
               <path
                 d={`M ${connection.from.x + connection.from.width/2} ${connection.from.y + connection.from.height} 
                    Q ${connection.from.x + connection.from.width/2} ${connection.from.y + connection.from.height + 30}
                    ${connection.to.x + connection.to.width/2} ${connection.to.y - 30}
                    T ${connection.to.x + connection.to.width/2} ${connection.to.y}`}
                 fill="none"
-                stroke={style.color}
-                strokeWidth={style.width}
+                stroke={isDark ? style.color : style.color}
+                strokeWidth={isDark ? style.width + 0.5 : style.width}
                 strokeDasharray={style.dashArray}
-                opacity={style.opacity}
+                opacity={isDark ? style.opacity + 0.2 : style.opacity}
                 className="transition-all duration-300"
               />
               
-              {/* Professional arrowhead */}
+              {/* Enhanced arrowhead */}
               <polygon
                 points={`${connection.to.x + connection.to.width/2},${connection.to.y} 
                          ${connection.to.x + connection.to.width/2 - 6},${connection.to.y - 12} 
                          ${connection.to.x + connection.to.width/2 + 6},${connection.to.y - 12}`}
                 fill={style.color}
-                opacity={style.opacity * 0.9}
+                opacity={isDark ? style.opacity + 0.1 : style.opacity * 0.9}
               />
 
-              {/* Connection protocol label */}
+              {/* Protocol label with theme-aware styling */}
               <g>
                 <rect
                   x={connection.from.x + connection.from.width/2 - connection.protocol.length * 3}
                   y={connection.from.y + connection.from.height + 15}
                   width={connection.protocol.length * 6 + 10}
                   height="18"
-                  fill={isDark ? '#374151' : '#f3f4f6'}
+                  fill={isDark ? '#1f2937' : '#ffffff'}
+                  stroke={isDark ? '#4b5563' : '#e5e7eb'}
+                  strokeWidth="1"
                   rx="8"
-                  opacity="0.9"
+                  opacity="0.95"
+                  filter="url(#cardShadow)"
                 />
                 <text
                   x={connection.from.x + connection.from.width/2}
                   y={connection.from.y + connection.from.height + 27}
                   fontSize={isModal ? "12" : "9"}
-                  fontWeight="500"
+                  fontWeight="600"
                   textAnchor="middle"
-                  fill={isDark ? '#d1d5db' : '#374151'}
+                  fill={isDark ? '#e5e7eb' : '#374151'}
                   className="font-medium"
                 >
                   {connection.protocol}
                 </text>
               </g>
 
-              {/* Data type indicator */}
+              {/* Data type indicator with better theme support */}
               <g>
                 <rect
                   x={connection.to.x + connection.to.width/2 - connection.data.length * 2.5}
                   y={connection.to.y - 25}
                   width={connection.data.length * 5 + 8}
                   height="15"
-                  fill={style.color}
+                  fill={isDark ? style.color : style.color}
+                  stroke={isDark ? '#ffffff' : '#1f2937'}
+                  strokeWidth="0.5"
                   rx="7"
-                  opacity="0.8"
+                  opacity={isDark ? "0.9" : "0.8"}
                 />
                 <text
                   x={connection.to.x + connection.to.width/2}
@@ -693,7 +789,7 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
                   fontSize="8"
                   fontWeight="600"
                   textAnchor="middle"
-                  fill="white"
+                  fill={isDark ? '#ffffff' : '#ffffff'}
                   className="font-semibold"
                 >
                   {connection.data}
@@ -703,47 +799,61 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
           );
         })}
 
-        {/* Professional components */}
+        {/* Enhanced components with superior theme adaptation */}
         {layout.map((component, idx) => {
           const layerStyle = getLayerStyle(component.layer);
           
           return (
             <g key={`component-${idx}`}>
-              {/* Component shadow */}
+              {/* Enhanced component shadow */}
               <rect
-                x={component.x + 2}
-                y={component.y + 2}
+                x={component.x + 3}
+                y={component.y + 3}
                 width={component.width}
                 height={component.height}
-                fill="rgba(0,0,0,0.1)"
+                fill={isDark ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.1)"}
                 rx="8"
+                opacity={isDark ? "0.6" : "1"}
               />
               
-              {/* Component background */}
+              {/* Component background with theme-aware styling */}
               <rect
                 x={component.x}
                 y={component.y}
                 width={component.width}
                 height={component.height}
-                fill={`url(#${layerStyle.gradient})`}
-                stroke={layerStyle.borderColor}
-                strokeWidth="2"
+                fill={isDark ? '#1f2937' : '#ffffff'}
+                stroke={layerStyle.color}
+                strokeWidth={isDark ? "3" : "2"}
                 rx="8"
                 filter="url(#cardShadow)"
                 className="transition-all duration-300"
+                opacity={isDark ? "0.95" : "1"}
+              />
+              
+              {/* Gradient overlay for visual appeal */}
+              <rect
+                x={component.x + 1}
+                y={component.y + 1}
+                width={component.width - 2}
+                height={component.height - 2}
+                fill={`url(#${layerStyle.gradient})`}
+                rx="7"
+                opacity={isDark ? "0.25" : "0.15"}
+                className="transition-all duration-300"
               />
 
-              {/* Tech badge */}
+              {/* Enhanced tech badge */}
               <rect
                 x={component.x + 8}
                 y={component.y + 8}
                 width={Math.min(component.tech.length * 6 + 16, component.width - 16)}
                 height="18"
-                fill={isDark ? '#1f2937' : 'white'}
-                stroke={layerStyle.borderColor}
+                fill={isDark ? layerStyle.color : '#ffffff'}
+                stroke={isDark ? '#ffffff' : layerStyle.color}
                 strokeWidth="1"
                 rx="9"
-                opacity="0.95"
+                opacity={isDark ? "0.2" : "0.95"}
                 filter="url(#cardShadow)"
               />
               <text
@@ -751,188 +861,94 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
                 y={component.y + 19}
                 fontSize={isModal ? "11" : "9"}
                 fontWeight="600"
-                fill={layerStyle.color}
+                fill={isDark ? layerStyle.color : layerStyle.color}
                 className="font-semibold"
+                filter="url(#textShadow)"
               >
                 {component.tech.length > 20 ? component.tech.substring(0, 17) + '...' : component.tech}
               </text>
 
-              {/* Component icon */}
+              {/* Component icon with enhanced theme visibility */}
               <text
                 x={component.x + component.width - 20}
                 y={component.y + 22}
                 fontSize={isModal ? "18" : "14"}
                 textAnchor="middle"
-                fill="white"
+                fill={isDark ? layerStyle.color : '#ffffff'}
                 opacity="0.9"
-                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
+                filter="url(#textShadow)"
               >
                 {layerStyle.icon}
               </text>
 
-              {/* Component name */}
+              {/* Component name with theme-aware styling */}
               <text
                 x={component.x + component.width/2}
                 y={component.y + component.height/2 + 5}
                 fontSize={isModal ? "13" : "11"}
                 fontWeight="700"
                 textAnchor="middle"
-                fill="white"
+                fill={isDark ? '#f3f4f6' : '#1f2937'}
                 className="font-bold"
-                style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
+                filter="url(#textShadow)"
               >
                 {component.name.length > 18 ? component.name.substring(0, 15) + '...' : component.name}
               </text>
 
-              {/* System health indicators */}
-              <g>
-                {/* Health status */}
-                <circle
-                  cx={component.x + 12}
-                  cy={component.y + component.height - 12}
-                  r="4"
-                  fill={component.health === 'healthy' ? '#10b981' : component.health === 'warning' ? '#f59e0b' : '#ef4444'}
-                />
-                
-                {/* Load indicator */}
-                <rect
-                  x={component.x + 25}
-                  y={component.y + component.height - 16}
-                  width="30"
-                  height="8"
-                  fill={isDark ? '#374151' : '#e5e7eb'}
-                  rx="4"
-                />
-                <rect
-                  x={component.x + 25}
-                  y={component.y + component.height - 16}
-                  width={30 * (component.load || 0.5)}
-                  height="8"
-                  fill={component.load > 0.8 ? '#ef4444' : component.load > 0.6 ? '#f59e0b' : '#10b981'}
-                  rx="4"
-                />
-              </g>
 
-              {/* Instance count */}
-              {component.instances && (
-                <g>
-                  <rect
-                    x={component.x + component.width - 35}
-                    y={component.y + component.height - 18}
-                    width="25"
-                    height="12"
-                    fill={layerStyle.color}
-                    rx="6"
-                    opacity="0.8"
-                  />
-                  <text
-                    x={component.x + component.width - 22.5}
-                    y={component.y + component.height - 9}
-                    fontSize="8"
-                    fontWeight="600"
-                    textAnchor="middle"
-                    fill="white"
-                    className="font-semibold"
-                  >
-                    ×{component.instances}
-                  </text>
-                </g>
-              )}
 
-              {/* Professional Security Indicator */}
-              {isModal && component.security && (
-                <g>
-                  <circle
-                    cx={component.x + component.width - 15}
-                    cy={component.y + 15}
-                    r="6"
-                    fill={component.security === 'critical' ? '#ef4444' : component.security === 'high' ? '#f59e0b' : '#10b981'}
-                    opacity="0.9"
-                  />
-                  <text
-                    x={component.x + component.width - 15}
-                    y={component.y + 18}
-                    fontSize="8"
-                    fontWeight="700"
-                    textAnchor="middle"
-                    fill="white"
-                  >
-                    {component.security === 'critical' ? '🔒' : component.security === 'high' ? '🛡️' : '✅'}
-                  </text>
-                </g>
-              )}
 
-              {/* Performance Metrics (Modal Only) */}
+
+
+
+              {/* Performance Metrics (Modal Only) - Response Time & P99 Only */}
               {isModal && component.metrics && (
                 <g>
-                  {/* Latency indicator */}
+                  {/* Response Time indicator - Green color */}
                   <rect
                     x={component.x + 5}
                     y={component.y + component.height - 35}
-                    width="60"
+                    width="50"
                     height="12"
-                    fill={isDark ? '#374151' : '#f3f4f6'}
+                    fill="#10b981"
                     rx="6"
                     opacity="0.9"
                   />
                   <text
-                    x={component.x + 8}
+                    x={component.x + 30}
                     y={component.y + component.height - 27}
-                    fontSize="7"
+                    fontSize="8"
                     fontWeight="600"
-                    fill={isDark ? '#d1d5db' : '#374151'}
+                    textAnchor="middle"
+                    fill="white"
                   >
                     {component.metrics.latency}ms
                   </text>
 
-                  {/* Availability indicator */}
+                  {/* P99 Latency indicator - Orange color */}
                   <rect
-                    x={component.x + component.width - 65}
+                    x={component.x + component.width - 55}
                     y={component.y + component.height - 35}
-                    width="55"
+                    width="50"
                     height="12"
-                    fill={component.metrics.availability > 99.9 ? '#10b981' : component.metrics.availability > 99.5 ? '#f59e0b' : '#ef4444'}
+                    fill="#f59e0b"
                     rx="6"
                     opacity="0.9"
                   />
                   <text
-                    x={component.x + component.width - 62}
+                    x={component.x + component.width - 30}
                     y={component.y + component.height - 27}
-                    fontSize="7"
-                    fontWeight="600"
-                    fill="white"
-                  >
-                    {component.metrics.availability.toFixed(1)}%
-                  </text>
-                </g>
-              )}
-
-              {/* Scalability Indicator */}
-              {isModal && component.scalability && (
-                <g>
-                  <rect
-                    x={component.x + component.width - 25}
-                    y={component.y + 30}
-                    width="20"
-                    height="12"
-                    fill={layerStyle.color}
-                    rx="6"
-                    opacity="0.8"
-                  />
-                  <text
-                    x={component.x + component.width - 15}
-                    y={component.y + 38}
                     fontSize="8"
                     fontWeight="600"
                     textAnchor="middle"
                     fill="white"
                   >
-                    {component.scalability === 'horizontal' ? '↔️' : 
-                     component.scalability === 'vertical' ? '↕️' : 
-                     component.scalability === 'load-balanced' ? '⚖️' : '🔄'}
+                    {Math.round((component.metrics.latency || 50) * 2.5)}ms
                   </text>
                 </g>
               )}
+
+
             </g>
           );
         })}
@@ -941,7 +957,7 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
         <g transform="translate(20, 20)">
           <rect
             width="200"
-            height={isModal ? "280" : "180"}
+            height="180"
             fill={isDark ? '#374151' : '#f9fafb'}
             stroke={isDark ? '#4b5563' : '#d1d5db'}
             strokeWidth="1"
@@ -997,130 +1013,144 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
             </g>
           ))}
 
-          {/* Professional Indicators (Modal Only) */}
-          {isModal && (
-            <g>
-              <text
-                x="15"
-                y="140"
-                fontSize="10"
-                fontWeight="600"
-                fill={isDark ? '#d1d5db' : '#4b5563'}
-                className="font-semibold"
-              >
-                Professional Indicators:
-              </text>
-              
-              {/* Security Levels */}
-              <g transform="translate(15, 155)">
-                <circle cx="6" cy="0" r="4" fill="#ef4444" opacity="0.9" />
-                <text x="15" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Critical Security</text>
-              </g>
-              <g transform="translate(15, 170)">
-                <circle cx="6" cy="0" r="4" fill="#f59e0b" opacity="0.9" />
-                <text x="15" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>High Security</text>
-              </g>
-              <g transform="translate(15, 185)">
-                <circle cx="6" cy="0" r="4" fill="#10b981" opacity="0.9" />
-                <text x="15" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Standard Security</text>
-              </g>
+          {/* Scalability Types */}
+          <text
+            x="15"
+            y="135"
+            fontSize="10"
+            fontWeight="600"
+            fill={isDark ? '#d1d5db' : '#4b5563'}
+            className="font-semibold"
+          >
+            Scalability:
+          </text>
+          <g transform="translate(15, 150)">
+            <text x="0" y="3" fontSize="12">↔️</text>
+            <text x="20" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Horizontal</text>
+          </g>
+          <g transform="translate(15, 165)">
+            <text x="0" y="3" fontSize="12">↕️</text>
+            <text x="20" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Vertical</text>
+          </g>
 
-              {/* Scalability Types */}
-              <text
-                x="15"
-                y="215"
-                fontSize="10"
-                fontWeight="600"
-                fill={isDark ? '#d1d5db' : '#4b5563'}
-                className="font-semibold"
-              >
-                Scalability:
-              </text>
-              <g transform="translate(15, 230)">
-                <text x="0" y="3" fontSize="12">↔️</text>
-                <text x="20" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Horizontal</text>
-              </g>
-              <g transform="translate(15, 245)">
-                <text x="0" y="3" fontSize="12">↕️</text>
-                <text x="20" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Vertical</text>
-              </g>
-              <g transform="translate(15, 260)">
-                <text x="0" y="3" fontSize="12">⚖️</text>
-                <text x="20" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>Load Balanced</text>
-              </g>
-            </g>
-          )}
+
         </g>
 
-        {/* Architecture Metrics Panel (Modal Only) */}
+        {/* Enhanced System Overview Panel (Modal Only) */}
         {isModal && (
-          <g transform={`translate(${svgWidth - 220}, 20)`}>
+          <g transform={`translate(${svgWidth - 240}, 20)`}>
+            <defs>
+              <linearGradient id="overviewBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={isDark ? '#374151' : '#f8fafc'} stopOpacity="0.95" />
+                <stop offset="100%" stopColor={isDark ? '#1f2937' : '#e2e8f0'} stopOpacity="0.95" />
+              </linearGradient>
+            </defs>
+            
             <rect
-              width="200"
-              height="160"
-              fill={isDark ? '#374151' : '#f9fafb'}
-              stroke={isDark ? '#4b5563' : '#d1d5db'}
-              strokeWidth="1"
-              rx="8"
-              opacity="0.95"
+              width="220"
+              height="200"
+              fill="url(#overviewBg)"
+              stroke={isDark ? '#4b5563' : '#cbd5e1'}
+              strokeWidth="1.5"
+              rx="12"
               filter="url(#cardShadow)"
             />
             
-            <text
-              x="15"
-              y="20"
-              fontSize="12"
-              fontWeight="700"
-              fill={isDark ? '#f9fafb' : '#1f2937'}
-              className="font-bold"
-            >
-              System Overview
-            </text>
-            
-            {/* Total Components */}
-            <g transform="translate(15, 40)">
-              <rect width="50" height="20" fill="#3b82f6" rx="4" opacity="0.8" />
-              <text x="5" y="13" fontSize="9" fontWeight="600" fill="white">
-                {layout.length} Components
+            {/* Header with icon */}
+            <g transform="translate(15, 25)">
+              <circle cx="8" cy="-5" r="6" fill="#3b82f6" opacity="0.2" />
+              <text x="0" y="0" fontSize="10">📊</text>
+              <text
+                x="25"
+                y="0"
+                fontSize="13"
+                fontWeight="700"
+                fill={isDark ? '#f9fafb' : '#1e293b'}
+                className="font-bold"
+              >
+                System Overview
               </text>
             </g>
             
-            {/* Active Connections */}
-            <g transform="translate(75, 40)">
-              <rect width="50" height="20" fill="#10b981" rx="4" opacity="0.8" />
-              <text x="5" y="13" fontSize="9" fontWeight="600" fill="white">
-                {connections.length} Connections
-              </text>
+            {/* Enhanced Stats Grid */}
+            <g transform="translate(15, 50)">
+              {/* Components Count */}
+              <g>
+                <rect width="90" height="28" fill="#3b82f6" rx="6" opacity="0.1" />
+                <rect width="90" height="28" fill="none" stroke="#3b82f6" strokeWidth="1" rx="6" opacity="0.3" />
+                <text x="8" y="12" fontSize="10" fill="#3b82f6">📦</text>
+                <text x="25" y="12" fontSize="10" fontWeight="600" fill={isDark ? '#93c5fd' : '#3b82f6'}>
+                  {layout.length} Components
+                </text>
+                <text x="25" y="22" fontSize="8" fill={isDark ? '#9ca3af' : '#64748b'}>
+                  Active Services
+                </text>
+              </g>
+              
+              {/* Connections Count */}
+              <g transform="translate(100, 0)">
+                <rect width="90" height="28" fill="#10b981" rx="6" opacity="0.1" />
+                <rect width="90" height="28" fill="none" stroke="#10b981" strokeWidth="1" rx="6" opacity="0.3" />
+                <text x="8" y="12" fontSize="10" fill="#10b981">🔗</text>
+                <text x="25" y="12" fontSize="10" fontWeight="600" fill={isDark ? '#6ee7b7' : '#059669'}>
+                  {connections.length} Links
+                </text>
+                <text x="25" y="22" fontSize="8" fill={isDark ? '#9ca3af' : '#64748b'}>
+                  Data Flow
+                </text>
+              </g>
             </g>
-            
-            {/* Architecture Health */}
-            <g transform="translate(135, 40)">
-              <rect width="50" height="20" fill="#f59e0b" rx="4" opacity="0.8" />
-              <text x="8" y="13" fontSize="9" fontWeight="600" fill="white">
-                98.5% Health
+
+            {/* System Health Indicator */}
+            <g transform="translate(15, 90)">
+              <text
+                x="0"
+                y="0"
+                fontSize="11"
+                fontWeight="600"
+                fill={isDark ? '#d1d5db' : '#475569'}
+                className="font-semibold"
+              >
+                🏥 System Health
               </text>
+              
+              <g transform="translate(0, 15)">
+                <rect width="190" height="8" fill={isDark ? '#374151' : '#e2e8f0'} rx="4" />
+                <rect width="176" height="8" fill="#10b981" rx="4" />
+                <text x="180" y="6" fontSize="9" fontWeight="600" fill="#10b981">92%</text>
+              </g>
             </g>
 
             {/* Technology Stack Summary */}
-            <text
-              x="15"
-              y="80"
-              fontSize="10"
-              fontWeight="600"
-              fill={isDark ? '#d1d5db' : '#4b5563'}
-              className="font-semibold"
-            >
-              Technology Stack:
-            </text>
-            
-            {architecture.components.slice(0, 4).map((comp, idx) => (
-              <g key={idx} transform={`translate(15, ${95 + idx * 15})`}>
-                <circle cx="4" cy="0" r="2" fill="#6b7280" />
-                <text x="12" y="3" fontSize="8" fill={isDark ? '#d1d5db' : '#374151'}>
-                  {comp.tech.length > 25 ? comp.tech.substring(0, 22) + '...' : comp.tech}
-                </text>
-              </g>
-            ))}
+            <g transform="translate(15, 125)">
+              <text
+                x="0"
+                y="0"
+                fontSize="11"
+                fontWeight="600"
+                fill={isDark ? '#d1d5db' : '#475569'}
+                className="font-semibold"
+              >
+                🛠️ Tech Stack
+              </text>
+              
+              {architecture.components.slice(0, 3).map((comp, idx) => (
+                <g key={idx} transform={`translate(0, ${20 + idx * 16})`}>
+                  <rect width="6" height="6" fill="#6366f1" rx="1" opacity="0.7" />
+                  <text x="12" y="5" fontSize="9" fontWeight="500" fill={isDark ? '#cbd5e1' : '#475569'}>
+                    {comp.tech.length > 28 ? comp.tech.substring(0, 25) + '...' : comp.tech}
+                  </text>
+                </g>
+              ))}
+              
+              {architecture.components.length > 3 && (
+                <g transform={`translate(0, ${20 + 3 * 16})`}>
+                  <text x="12" y="5" fontSize="8" fill={isDark ? '#9ca3af' : '#64748b'} fontStyle="italic">
+                    +{architecture.components.length - 3} more technologies
+                  </text>
+                </g>
+              )}
+            </g>
           </g>
         )}
       </svg>
