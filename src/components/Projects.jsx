@@ -160,7 +160,9 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
       } else if (name.includes('cdn') || name.includes('cloudflare') || tech.includes('cdn') || tech.includes('s3')) {
         layers.cdn.push(enhancedComponent);
       } else if (name.includes('gateway') || name.includes('load balancer') || name.includes('proxy') || name.includes('nginx') ||
-                 tech.includes('nginx') || tech.includes('kong') || tech.includes('api gateway')) {
+                 name.includes('istio') || name.includes('mesh') || name.includes('envoy') ||
+                 tech.includes('nginx') || tech.includes('kong') || tech.includes('api gateway') || 
+                 tech.includes('istio') || tech.includes('envoy')) {
         layers.gateway.push(enhancedComponent);
       } else if (name.includes('message') || name.includes('event') || name.includes('queue') || name.includes('kafka') ||
                  name.includes('redis') || name.includes('pub/sub') ||
@@ -168,13 +170,19 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
         layers.messaging.push(enhancedComponent);
       } else if (name.includes('database') || name.includes('storage') || name.includes('cache') ||
                  tech.includes('postgresql') || tech.includes('mongodb') || tech.includes('redis') ||
-                 tech.includes('elasticsearch') || tech.includes('clickhouse') || tech.includes('mysql')) {
+                 tech.includes('elasticsearch') || tech.includes('clickhouse') || tech.includes('mysql') ||
+                 name.includes('aws managed') || tech.includes('rds') || tech.includes('elasticache')) {
         layers.data.push(enhancedComponent);
       } else if (name.includes('monitoring') || name.includes('logging') || name.includes('observability') ||
-                 tech.includes('prometheus') || tech.includes('jaeger') || tech.includes('elk')) {
+                 name.includes('metrics') || name.includes('tracing') ||
+                 tech.includes('prometheus') || tech.includes('jaeger') || tech.includes('elk') ||
+                 tech.includes('grafana')) {
         layers.monitoring.push(enhancedComponent);
       } else if (name.includes('service') || name.includes('api') || name.includes('engine') || name.includes('auth') ||
-                 tech.includes('go') || tech.includes('node.js') || tech.includes('python') || tech.includes('jwt')) {
+                 name.includes('kubernetes') || name.includes('cluster') || name.includes('pipeline') ||
+                 name.includes('gitops') || name.includes('infrastructure') ||
+                 tech.includes('go') || tech.includes('node.js') || tech.includes('python') || tech.includes('jwt') ||
+                 tech.includes('eks') || tech.includes('argocd') || tech.includes('terraform')) {
         layers.services.push(enhancedComponent);
       } else {
         layers.external.push(enhancedComponent);
@@ -297,27 +305,45 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
 
   const { layers, connections } = parseArchitecture(architecture.components);
   
-  // Define SVG dimensions at component level
-  const svgWidth = isModal ? 1600 : 1200; // Larger width for modal
-  
-  // Create sophisticated layout
+  // Create sophisticated layout with dynamic width
   const generateLayout = () => {
     const layout = [];
     let currentY = 60;
     const layerOrder = ['cdn', 'frontend', 'gateway', 'services', 'messaging', 'data', 'monitoring', 'external'];
     const layerBounds = [];
+    let maxWidth = 0;
 
+    // First pass: calculate dimensions and find max width needed
+    const layerData = [];
     layerOrder.forEach(layerType => {
       const layerComponents = layers[layerType];
       if (layerComponents.length === 0) return;
 
-      const layerHeight = isModal ? 120 : 100; // Taller layers for modal
-      const componentWidth = Math.min(isModal ? 250 : 200, (svgWidth - 100) / Math.max(1, layerComponents.length));
-      const componentHeight = isModal ? 100 : 80; // Taller components for modal
-      const spacing = isModal ? 30 : 20; // More spacing for modal
+      const layerHeight = isModal ? 120 : 100;
+      const componentWidth = isModal ? 250 : 200; // Fixed width per component
+      const componentHeight = isModal ? 100 : 80;
+      const spacing = isModal ? 30 : 20;
       
       const totalWidth = layerComponents.length * componentWidth + (layerComponents.length - 1) * spacing;
-      const startX = (svgWidth - totalWidth) / 2;
+      maxWidth = Math.max(maxWidth, totalWidth);
+      
+      layerData.push({
+        layerType,
+        layerComponents,
+        layerHeight,
+        componentWidth,
+        componentHeight,
+        spacing,
+        totalWidth
+      });
+    });
+
+    // Add padding to max width
+    const svgWidth = Math.max(isModal ? 1200 : 1000, maxWidth + 100);
+    
+    // Second pass: position components with proper centering
+    layerData.forEach(({ layerType, layerComponents, layerHeight, componentWidth, componentHeight, spacing, totalWidth }) => {
+      const startX = Math.max(50, (svgWidth - totalWidth) / 2); // Ensure minimum left margin
 
       // Store layer boundaries for background styling
       layerBounds.push({
@@ -346,10 +372,10 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
       currentY += layerHeight + 40;
     });
 
-    return { layout, layerBounds, svgHeight: currentY + 20 };
+    return { layout, layerBounds, svgHeight: currentY + 20, svgWidth };
   };
 
-  const { layout, layerBounds, svgHeight } = generateLayout();
+  const { layout, layerBounds, svgHeight, svgWidth } = generateLayout();
 
   // Enhanced styling for different layer types
   const getLayerStyle = (type) => {
@@ -424,8 +450,8 @@ const ArchitectureDiagram = ({ architecture, isDark, isModal = false }) => {
     }`}>
       <svg 
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-        className="w-full h-auto"
-        style={{ maxHeight: isModal ? '1200px' : '800px' }}
+        className="w-full h-auto block"
+        preserveAspectRatio="xMidYMid meet"
       >
         {/* Enhanced definitions */}
         <defs>
@@ -1897,6 +1923,7 @@ const Projects = () => {
   const [expandedTechs, setExpandedTechs] = useState({});
   const [expandedFeatures, setExpandedFeatures] = useState({});
   const [expandedDiagram, setExpandedDiagram] = useState(null);
+  const [diagramZoom, setDiagramZoom] = useState(1);
 
   // Inject the CSS animations for cost breakdown
   useEffect(() => {
@@ -1932,13 +1959,28 @@ const Projects = () => {
   // Toggle architecture diagram modal
   const openDiagramModal = (project) => {
     setExpandedDiagram(project);
+    setDiagramZoom(1); // Reset zoom when opening
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
   };
 
   const closeDiagramModal = () => {
     setExpandedDiagram(null);
-    document.body.style.overflow = 'unset'; // Restore scrolling
+    setDiagramZoom(1); // Reset zoom when closing
+    document.body.style.overflow = ''; // Restore scrolling by removing the style
   };
+
+  // Cleanup body scroll on component unmount or modal state change
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = ''; // Cleanup on unmount
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!expandedDiagram) {
+      document.body.style.overflow = ''; // Ensure scroll is restored when modal closes
+    }
+  }, [expandedDiagram]);
 
   const projects = skillsData.projects || [];
 
@@ -2611,15 +2653,15 @@ const Projects = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setExpandedDiagram(null)}
+              onClick={() => closeDiagramModal()}
             >
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className={`w-full max-w-7xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl ${
+              className={`w-full max-w-[95vw] max-h-[95vh] overflow-hidden rounded-2xl shadow-2xl ${
                 isDark ? 'bg-gray-900' : 'bg-white'
-              }`}
+              } flex flex-col`}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
@@ -2637,33 +2679,120 @@ const Projects = () => {
                       {expandedDiagram.description}
                     </p>
                   </div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setExpandedDiagram(null)}
-                    className={`p-2 rounded-lg transition-colors ${
-                      isDark 
-                        ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
-                        : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
-                    }`}
-                  >
-                    <X className="w-6 h-6" />
-                  </motion.button>
+                  <div className="flex items-center gap-2">
+                    {/* Zoom Controls */}
+                    <div className="flex items-center gap-1 mr-4">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setDiagramZoom(Math.max(0.5, diagramZoom - 0.25))}
+                        disabled={diagramZoom <= 0.5}
+                        className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                          isDark 
+                            ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                            : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                        }`}
+                        title="Zoom Out"
+                      >
+                        <ZoomIn className="w-4 h-4 rotate-180" />
+                      </motion.button>
+                      <span className={`text-sm px-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {Math.round(diagramZoom * 100)}%
+                      </span>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setDiagramZoom(Math.min(2, diagramZoom + 0.25))}
+                        disabled={diagramZoom >= 2}
+                        className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                          isDark 
+                            ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                            : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                        }`}
+                        title="Zoom In"
+                      >
+                        <ZoomIn className="w-4 h-4" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setDiagramZoom(1)}
+                        className={`p-2 rounded-lg transition-colors ${
+                          isDark 
+                            ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                            : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                        }`}
+                        title="Reset Zoom"
+                      >
+                        <Maximize2 className="w-4 h-4" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setDiagramZoom(0.75)}
+                        className={`p-2 rounded-lg transition-colors ${
+                          isDark 
+                            ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                            : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                        }`}
+                        title="Fit to View"
+                      >
+                        <Search className="w-4 h-4" />
+                      </motion.button>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => closeDiagramModal()}
+                      className={`p-2 rounded-lg transition-colors ${
+                        isDark 
+                          ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                          : 'hover:bg-gray-100 text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.button>
+                  </div>
                 </div>
               </div>
 
               {/* Modal Content */}
-              <div className="p-6 space-y-8">
+              <div className="flex-1 overflow-y-auto p-6 space-y-8">
                 {/* Architecture Diagram */}
                 {expandedDiagram.architecture && (
                   <div className={`p-6 rounded-xl border ${
                     isDark ? 'border-gray-700 bg-gray-800/30' : 'border-gray-200 bg-gray-50/30'
                   }`}>
-                    <ArchitectureDiagram 
-                      architecture={expandedDiagram.architecture} 
-                      isDark={isDark}
-                      isModal={true}
-                    />
+                    <h3 className={`text-lg font-semibold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      🏗️ System Architecture
+                    </h3>
+                    <div className="relative">
+                      <div className={`w-full border rounded-lg overflow-auto max-h-[60vh] ${
+                        isDark ? 'bg-gray-800/20 border-gray-600' : 'bg-gray-50/50 border-gray-300'
+                      }`}>
+                        <div 
+                          className="transition-transform duration-300 origin-top-left"
+                          style={{ 
+                            transform: `scale(${diagramZoom})`,
+                            transformOrigin: 'top left',
+                            width: `${100 / diagramZoom}%`,
+                            height: `${100 / diagramZoom}%`
+                          }}
+                        >
+                          <ArchitectureDiagram 
+                            architecture={expandedDiagram.architecture} 
+                            isDark={isDark}
+                            isModal={true}
+                          />
+                        </div>
+                      </div>
+                      {/* Scroll hint */}
+                      <div className={`absolute bottom-2 right-2 text-xs px-2 py-1 rounded ${
+                        isDark ? 'bg-gray-700 text-gray-300' : 'bg-white text-gray-600'
+                      } shadow-sm opacity-75`}>
+                        Scroll to explore • Use zoom controls
+                      </div>
+                    </div>
                   </div>
                 )}
 
