@@ -494,10 +494,10 @@ const PortfolioExport = () => {
           <!-- Footer -->
           <div style="text-align: center; margin-top: 40px; padding: 25px; background: linear-gradient(135deg, #ecf0f1, #bdc3c7); border-radius: 12px; border-top: 4px solid #3498db;">
             <div style="font-size: 14px; color: #7f8c8d; font-weight: 500;">
-              <strong style="color: #2c3e50;">Ready to make an impact</strong> • Available for new opportunities
+              <strong style="color: #2c3e50;">Making an impact</strong> • Senior Engineer @Nordstrom
             </div>
             <div style="margin-top: 10px; font-size: 13px; color: #95a5a6;">
-              This resume was generated with modern web technologies
+              This profile was generated with modern web technologies
             </div>
           </div>
         </div>
